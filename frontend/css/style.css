@@ -12,6 +12,9 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
         /*HEADER*/
@@ -73,6 +76,7 @@ body {
 }
 
 .about_us {
+    position: absolute;
     background-color: rgb(255, 255, 255);
     width: 40rem;
     height: 25rem;
@@ -82,7 +86,7 @@ body {
     -webkit-box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.52); 
     box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.52);
     font-size: 20px;
-    border-radius: 20px;
+    border-radius: 30px;
     margin-top: 0rem;
 }
 
@@ -121,3 +125,41 @@ body {
     border: none;
     box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
 }
+
+.opcao {
+    overflow: hidden;
+}
+
+
+.slide {
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    width: 40rem;
+    height: 25rem;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 5%;
+    -webkit-box-shadow: -1px 1px 5px 9px rgba(0, 0, 0, 0.10);
+    -moz-box-shadow: -1px 1px 5px 9px rgba(0,0,0,0.10);
+    box-shadow: -1px 1px 5px 9px rgba(0,0,0,0.10);
+    font-size: 20px;
+    border-radius: 30px;
+    margin-top: 0rem;
+}
+
+.slide > p {
+    text-align: center;
+    margin: 4%;
+    padding: 1%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    padding-top: 5rem;
+    font-size: 32px;
+    color: rgba(54, 54, 54, 1);
+}
+
+.slides > input {
+    display: none;
+}
+
+
