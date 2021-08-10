@@ -8,82 +8,116 @@
 
 body {
     background-image: url("../img/background.jpg");
-    background-size: 100%;
-
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
         /*HEADER*/
 
 .header {
-  height: 1px;
+    height: 1px;
 }
 
 .header > button {
-  float: right;
-  margin-right: 5%;
-  margin-top: 2.5%;
-  font-size: 20px;
-  border-radius: 20px;
-  background: transparent;
-  border-style: solid;
-  border-color: white;
-  padding: 0.5rem 0.5rem;
-  color: white;
-  font-family: 'Roboto', sans-serif;
+    float: right;
+    margin-right: 5%;
+    margin-top: 2.5%;
+    font-size: 20px;
+    border-radius: 20px;
+    background: transparent;
+    border-style: solid;
+    border-color: white;
+    padding: 0.5rem 0.5rem;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
 }
 
 .header > button:last-of-type{
     margin-right: 1%;
-    width: 5rem;
+    width: 6.5rem;
 }
 
-.header > button:hover {
-  border-color: white;
+.header > button:first-of-type{
   background-color: white;
-  cursor: pointer;
-}
-
-
-
-.header > button:first-of-type:hover{
   color: rgba(83, 174, 222, 1);
 }
 
+.header > button:hover {
+    border-color: white;
+    background-color: white;
+    cursor: pointer;
+    transform: 5,2s;
+    transition: 0.5s;
+}
+
+.header > button:first-of-type:hover{
+    color: rgba(83, 174, 222, 1);
+    background-color: rgba(245, 245, 245, 1);
+    transform: 5,2s;
+    transition: 0.5s;
+}
+
 .header > button:last-of-type:hover{
-  color: rgba(74, 154, 184, 1);
+    color: rgba(83, 174, 222, 1);
 }
 
 /*DIV E BOTAO HOME*/
 
+.logo {
+    display: block;
+    margin: 0 auto;
+    width: 10rem;
+}
+
 .about_us {
-    width: 40%;
-    height: 30%;
-    max-width: 500px;
+    background-color: rgb(255, 255, 255);
+    width: 40rem;
+    height: 25rem;
     margin: 0 auto;
     text-align: center;
-    border: 1px solid rgba(0, 0, 0, 1);
-    margin-top: 18%;
-    box-shadow: 5px 5px 5px rgba(130, 130, 130, 0.5);
+    margin-top: 5%;
+    -webkit-box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.52); 
+    box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.52);
     font-size: 20px;
+    border-radius: 20px;
+    margin-top: 0rem;
 }
+
 
 .about_us > p {
     text-align: center;
     margin: 4%;
     padding: 1%;
-    
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    padding-top: 5rem;
+    font-size: 32px;
+    color: rgba(54, 54, 54, 1);
 }
 
 .about_us > button {
-    width: 25%;
-    height: 5%;
+    width: 8rem;
+    height: 3rem;
     background: rgb(255, 255, 255);
     float: center;
-    border: 1px solid black;
-    border-radius: 20px;
-    font-size: 20px;
-    margin-top: 2.5%;
-    padding: 0.5rem 0.5rem;
+    border: 1px solid rgba(54, 54, 54, 1);
+    border-radius: 10px;
+    font-size: 2rem; 
     font-weight: bold;
     margin-bottom: 5%;
+    font-family: 'Roboto', sans-serif;
+    color: rgba(54, 54, 54, 1);
+}
+
+.about_us > button:hover {
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    background-image: url("../img/botao.jpg");
+    background-size: 100%;
+    transition: 0.5s;
+    border: none;
+    box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
 }
