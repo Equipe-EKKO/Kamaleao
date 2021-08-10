@@ -126,7 +126,7 @@
     @media screen and (max-width: 800px) {
         
         .header{
-            margin-right: 2%;
+            margin-right: 1vw;
             float: right;
             display: grid;
         }
@@ -134,7 +134,6 @@
         .header > button{
             margin-top: 0.5rem;
             width: 100%;
-            float: left;
         }
 
         .about_us{
@@ -143,7 +142,7 @@
         }
 
         .about_us > p{
-            font-size: 22px;
+            font-size: 26px;
             padding-top: 5rem;
         }
     }
