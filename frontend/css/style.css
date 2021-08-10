@@ -125,13 +125,20 @@
 
     @media screen and (max-width: 800px) {
         
-        body{
-            /* background-position-x: -10rem;
-            background-position-y: 0rem;
-            background-size: 100%; */
+        .header{
+            margin-right: 2%;
+            float: right;
+            display: grid;
         }
+
+        .header > button{
+            margin-top: 0.5rem;
+            width: 100%;
+            float: left;
+        }
+
         .about_us{
-            width: 20rem;
+            width: 25rem;
             font-size: 1px;
         }
 
