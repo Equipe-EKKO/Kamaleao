@@ -32,7 +32,7 @@
         border-color: white;
         padding: 0.5rem 0.5rem;
         color: white;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Urbanist', sans-serif;
         font-weight: 900;
     }
     
@@ -70,9 +70,11 @@
     /*DIV E BOTAO HOME*/
     
     .logo {
-        display: inline-block;
-        /* margin: 0 auto; */
-        width: 10rem;
+        width: 12.5rem;
+        position: absolute;
+        margin-left: 14.25rem;
+        top: 4.5rem;
+        display: block;
     }
     
     .about_us {
@@ -84,7 +86,7 @@
         -webkit-box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.52); 
         box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.52);
         border-radius: 30px;
-        margin-top: -2.5rem;
+        margin-top: 10rem;
     }
     
     
@@ -92,16 +94,16 @@
         text-align: center;
         margin: 4%;
         padding: 1%;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Urbanist', sans-serif;
         font-weight: 400;
-        padding-top: 5rem;
         font-size: 32px;
         color: rgba(54, 54, 54, 1);
+        padding-top: 6rem;
     }
     
     .about_us > button {
-        width: 8rem;
-        height: 3rem;
+        width: 9rem;
+        height: 4rem;
         background: rgb(255, 255, 255);
         float: center;
         border: 1px solid rgba(54, 54, 54, 1);
@@ -109,7 +111,7 @@
         font-size: 2rem; 
         font-weight: bold;
         margin-bottom: 5%;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Urbanist', sans-serif;
         color: rgba(54, 54, 54, 1);
     }
     
@@ -135,6 +137,10 @@
             margin-right: -7rem;
             width: 7rem;
             margin-top: 4rem;
+        }
+
+        .logo{
+            margin-left: 7rem;
         }
 
         .about_us{
