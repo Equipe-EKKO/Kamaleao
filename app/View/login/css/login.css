@@ -5,7 +5,7 @@
 }
 
 body {
-    background-image: url("../img/background.jpg");
+    background-image: url("../../img/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -18,27 +18,28 @@ body {
     margin: 0 auto;
     width: 90%;
     max-width: 500px;
-    height: 100%;
-    max-height: 500px;
+}
+
+.logo {
+    width: 10rem;
+    position: absolute;
+    margin-left: 2rem;
+    top: 1.5rem;
+    display: block;
 }
 
 form {
-    margin-top: 7rem;
+    margin-top: 7.5rem;
     text-align: center;
-
 }
 
 fieldset {
-    padding: 6rem;
+    padding: 3rem;
     border: 1px;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
     background-color: white;
-}
-
-fieldset h1 {
-    margin-bottom: 6rem;
-
+    height: 25rem;
 }
 
 fieldset p {
@@ -86,7 +87,7 @@ form input[type=text], input[type=password]:focus{
     max-width: 200px;
     background-color: transparent;
     border-radius: 15px;
-    margin-top: 5rem;
+    margin-top: 2rem;
     margin-bottom: 1rem;
     padding: 2px;
     cursor: pointer;
@@ -95,7 +96,13 @@ form input[type=text], input[type=password]:focus{
 }
 
 .botao:hover {
-    background-color: rgb(216, 216, 216);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    background-image: url("../../img/botao.jpg");
+    background-size: 100%;
+    transition: 0.5s;
+    border: none;
+    box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
 }
 
 /*esqueci negocio*/
@@ -111,7 +118,7 @@ form input[type=text], input[type=password]:focus{
 
 #checkbox {
     cursor: pointer;
-    margin-top: 1vh;
+    margin-top: 1rem;
     margin-right: 1vh;
 }
 

@@ -5,7 +5,7 @@
 }
 
 body {
-    background-image: url("../img/background.jpg");
+    background-image: url("../../img/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -13,8 +13,6 @@ body {
 
     overflow-x: hidden;
 }
-
-/*form*/
 
 .form_cadastro {
     margin: 0 auto;
@@ -31,7 +29,7 @@ form {
 }
 
 fieldset {
-    padding: 4rem;
+    padding: 2rem;
     border: 1px;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
@@ -83,7 +81,13 @@ form input[type=text], input[type=password]:focus{
 }
 
 .botao:hover {
-    background-color: rgb(216, 216, 216);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    background-image: url("../../img/botao.jpg");
+    background-size: 100%;
+    transition: 0.5s;
+    border: none;
+    box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
 }
 
 /*esqueci negocio*/
