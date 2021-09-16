@@ -85,7 +85,7 @@ body {
     height: 200px;
 }
 
-.texto1 {
+.texto:first-of-type {
     margin-top: 8rem;
     display:inline-block;
     width: 400px;
@@ -210,3 +210,16 @@ body {
     transition: 0.5s;
 }
 
+/* media queries */
+
+@media screen and (max-width: 1440px) {
+    .infos {
+        height: 1300px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        margin-top: 1rem;
+    }
+}
