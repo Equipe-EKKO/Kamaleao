@@ -1,7 +1,7 @@
 <?php
-require_once 'classes/clConexao.php';
-
-Conexao::tentaConexao();
+require_once 'classes/clConexaoBanco.classe.php';
+//Atual arquivo para testes
+ConexaoBanco::abreConexao();
 
 
 ?>
