@@ -3,8 +3,6 @@
 
 Namespace Core; 
 
-
-
 class ConfigController 
 {
     public function __construct() {

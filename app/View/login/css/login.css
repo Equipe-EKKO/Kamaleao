@@ -93,6 +93,7 @@ form input[type=text], input[type=password]:focus{
     cursor: pointer;
     font-size: 30px;
     color: #363636;
+    font-family: 'Urbanist', sans-serif;
 }
 
 .botao:hover {
