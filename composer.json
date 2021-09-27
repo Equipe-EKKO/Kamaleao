@@ -12,5 +12,7 @@
       "Core\\": "core"
     }
   },
-  "require": {}
+  "require": {
+    "respect/validation": "^2.2"
+  }
 }

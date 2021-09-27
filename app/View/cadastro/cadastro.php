@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="form_cadastro" action="">
+    <div class="form_cadastro" action="../controller/ControllerCadastro.php">
         <form method="POST">
             <fieldset>
                 <h1>Cadastro</h1>
