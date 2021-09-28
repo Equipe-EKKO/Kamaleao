@@ -18,7 +18,7 @@
 
     <div class="banner">
         <img src="../assets/img/EKKO.png" class="ekko" />
-        <img src="../img/kamalelogo.png" class="kamaleao" />
+        <img src="../assets/img/LogoKamaleao2.png" class="kamaleao" />
     </div>
 
     <div class="arrow">

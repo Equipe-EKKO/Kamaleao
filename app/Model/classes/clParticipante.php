@@ -8,7 +8,7 @@ abstract class Participante {
 
     #Metódos abstratos que serão declarados nas subclasses
     abstract function cadastrarConta(string $email, string $username, string $senha); //método para cadastrar conta (disponível apenas para usuário)
-    abstract function logarConta(string $email, string $username, string $senha); //método para cadastrar conta (disponível para todos)
+    abstract function logarConta(string $email, string $senha); //método para cadastrar conta (disponível para todos)
     abstract function excluirConta(); //método para exluir conta (disponível apenas para usuário)
     abstract function atualizarEmail(); //método para atualizar email da conta (disponível apenas para usuário)
     abstract function atualizarSenha(); //método para atualizar senha da conta (disponível apenas para usuário)

@@ -13,8 +13,8 @@
 </head>
 
 <body>
-    <div class="form_cadastro" action="../controller/ControllerCadastro.php">
-        <form method="POST">
+    <div class="form_cadastro">
+        <form method="POST" action="../../Controller/ControllerCadastro.php">
             <fieldset>
                 <h1>Cadastro</h1>
                 <p>Nome</p>
@@ -23,8 +23,14 @@
                 <p>Sobrenome</p>
                 <input type="text" id="sobrenome" name="sobrenome" />
 
+                <p>Nome de usuário</p>
+                <input type="text" id="username" name="username" />
+
+                <p>Data de nascimento</p>
+                <input type="date" id="dt_nascimento" name="dt_nascimento" />
+
                 <p>CPF</p>
-                <input type="text" id="cpf" name="CPF" maxlength="14" onkeyup="mascara_cpf()" />
+                <input type="text" id="cpf" name="cpf" maxlength="14" onkeyup="mascara_cpf()" />
 
                 <p>E-mail</p>
                 <!--email-->

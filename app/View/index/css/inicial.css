@@ -10,7 +10,7 @@ html {
 }
 
 body {
-    background-image: url("../img/background.jpg");
+    background-image: url("../../assets/img/background2.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -217,7 +217,7 @@ body {
 .about_us > button:hover {
     color: rgb(255, 255, 255);
     cursor: pointer;
-    background-image: url("../img/botao.jpg");
+    background-image: url("../../assets/img/botao.jpg");
     background-size: 100%;
     border: none;
     box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);

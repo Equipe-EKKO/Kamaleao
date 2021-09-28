@@ -10,7 +10,7 @@ class Administrador extends Participante {
         echo $retorno;
         return $retorno;
     }
-    function logarConta(string $email, string $username, string $senha):bool {
+    function logarConta(string $email, string $senha):bool {
         $banco = ConexaoBanco::abreConexao();
         $stmt = $banco->prepare("SELECT nm_email, nm_senha, ic_is_administrador FROM tb_login WHERE nm_email = :email AND nm_senha = :senha AND ic_is_administrador = true");
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);
@@ -21,7 +21,8 @@ class Administrador extends Participante {
             if ($contaLinha > 0 ) {
                 echo "Login realizado. 'Ai nesse ponto teria q redirecionar pra home né'";
             } else {
-                echo "Este usuário não está cadastrado no sistema";
+                echo "Este usuário não está cadastrado no sistema. <hr>";
+                return false;
             }
             return true;
         } catch (\PDOException $e) {
