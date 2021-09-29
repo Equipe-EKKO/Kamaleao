@@ -18,13 +18,13 @@ class Administrador extends Participante {
         try {
             $stmt->execute();
             $contaLinha = $stmt->rowCount();
-            if ($contaLinha > 0 ) {
-                echo "Login realizado. 'Ai nesse ponto teria q redirecionar pra home né'";
+            if ($contaLinha == 1 ) {
+                #echo "Login realizado. 'Ai nesse ponto teria q redirecionar pra home né' <hr>";
+                return true;
             } else {
-                echo "Este usuário não está cadastrado no sistema. <hr>";
+                /*echo "Este usuário não está cadastrado no sistema. <hr>";*/
                 return false;
             }
-            return true;
         } catch (\PDOException $e) {
             exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage());
             return false;

@@ -5,7 +5,7 @@ class ConexaoBanco {
     //Seta constantes para a classe que servirão como parametros a serem passados quando a classe PDO for instanciada, sendo:
     private const bd_dns = "mysql:host=localhost; dbname=db_kamaleao; charset=utf8"; #parte do dns
     private const bd_user = "root"; #usuário
-    private const bd_pword = "Gab@101203"; # senha
+    private const bd_pword = ""; # senha - Gab@101203
     //Atributo estático que tem dois valores possíveis = um objeto PDO || valor nulo
     private static $instance;
 

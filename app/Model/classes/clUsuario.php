@@ -42,11 +42,12 @@ class Usuario extends Participante {
                 return false;
             }
 
-            $sql2 = "INSERT INTO tb_usuario (nm_nome, nm_sobrenome, cd_cpf, cd_login) VALUES (:nome, :sobrenome, :cpf, :cd_login)";
+            $sql2 = "INSERT INTO tb_usuario (nm_nome, nm_sobrenome, cd_cpf, dt_nascimento, cd_login) VALUES (:nome, :sobrenome, :cpf, :dtNasc, :cd_login)";
             $stmt2 = $banco->prepare($sql2);
             $stmt2->bindValue(':nome', $nome);
             $stmt2->bindValue(':sobrenome', $sobrenome);
             $stmt2->bindValue(':cpf', $cpf);
+            $stmt2->bindValue(':dtNasc', $dataNasc);
             $stmt2->bindValue(':cd_login', $cd_login);
 
             try {
@@ -69,10 +70,10 @@ class Usuario extends Participante {
         try {
             $stmt->execute();
             $contaLinha = $stmt->rowCount();
-            if ($contaLinha > 0 ) {
+            if ($contaLinha == 1 ) {
                 return true;
             } else {
-                echo "Este usuário não está cadastrado no sistema. <hr>";
+                /*echo "Este usuário não está cadastrado no sistema. <hr>";*/
                 return false;
             }
         } catch (\PDOException $e) {

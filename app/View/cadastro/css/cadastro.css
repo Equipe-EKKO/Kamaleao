@@ -14,12 +14,12 @@ body {
 }
 
 .form_cadastro {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 500px;
-    height: 25rem;
-    max-height: 500px;
-    background-color: #ccc;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8rem;
 }
 
 form {
@@ -47,13 +47,31 @@ fieldset p {
     text-align: left;
 }
 
-form input[type=text], input[type=password] {
-    width: 25rem;
+.grid_cadastro{
+    display: grid;
+    grid-template-columns: 23rem 23rem;
+    margin-bottom: 1rem;
+    margin-left: 1.5rem;
+
+  }
+form input[type=date]{
+    width: 19rem;
     height: 2.5rem;
     font-size: 18px;
     border-radius: 15px;
     border: 1px solid #363636;
-    padding-left: 10px;
+    padding-left: 15px;
+    padding-right: 17px;
+    margin-left: -30px;
+}
+form input[type=text], input[type=password] {
+    width: 20rem;
+    height: 2.5rem;
+    font-size: 18px;
+    border-radius: 15px;
+    border: 1px solid #363636;
+    padding-left: 15px;
+    margin-left: -30px;
 }
 
 form input[type=text], input[type=password]:focus{
@@ -81,7 +99,7 @@ form input[type=text], input[type=password]:focus{
 .botao:hover {
     color: rgb(255, 255, 255);
     cursor: pointer;
-    background-image: url("../../img/botao.jpg");
+    background-image: url("../../assets/img/botao.jpg");
     background-size: 100%;
     transition: 0.5s;
     border: none;

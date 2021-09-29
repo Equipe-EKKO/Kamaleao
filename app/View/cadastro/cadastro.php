@@ -14,54 +14,55 @@
 
 <body>
     <div class="form_cadastro">
-        <form method="POST" action="../../Controller/ControllerCadastro.php">
+        <form method="POST" action="../../Controller/controllerCadastro.php">
             <fieldset>
                 <h1>Cadastro</h1>
-                <p>Nome</p>
-                <input type="text" id="nome" name="nome" />
+                <div class ="grid_cadastro">
+                    <div>
+                        <p>Nome</p>
+                        <input type="text" id="nome" name="nome" />
+                    </div>
 
-                <p>Sobrenome</p>
-                <input type="text" id="sobrenome" name="sobrenome" />
+                    <div>
+                        <p>Sobrenome</p>
+                        <input type="text" id="sobrenome" name="sobrenome" />
+                    </div>
 
-                <p>Nome de usuário</p>
-                <input type="text" id="username" name="username" />
+                    <div>
+                        <p>Nome de usuário</p>
+                        <input type="text" id="username" name="username" />
+                    </div>
 
-                <p>Data de nascimento</p>
-                <input type="date" id="dt_nascimento" name="dt_nascimento" />
+                    <div>
+                        <p>Data de nascimento</p>
+                    <input type="date" id="dt_nascimento" name="dt_nascimento" /></div>
 
-                <p>CPF</p>
-                <input type="text" id="cpf" name="cpf" maxlength="14" onkeyup="mascara_cpf()" />
+                    <div>
+                        <p>CPF</p>
+                        <input type="text" id="cpf" name="cpf" maxlength="14" onkeyup="mascara_cpf()" />
+                    </div>
 
-                <p>E-mail</p>
-                <!--email-->
-                <div>
-                    <input type="text" id="email" name="email" />
-                </div>
-                <!--email-->
+                    <div>
+                        <p>E-mail</p>
+                        <input type="text" id="email" name="email" />
+                    </div>
+                    
+                    <!--email-->
 
-                <p>Senha</p>
-                <div>
+                    <div class="grid">
+                        <p>Insira uma senha</p>
+                        <!--senha-->
+                        <input type="password" id="senha" name="senha" /><br />
+                    </div>
                     <!--senha-->
-                    <input type="password" id="senha" name="senha" /><br />
-                </div>
-                <!--senha-->
 
-                <p>Confirme sua senha</p>
+                    <div>
+                        <p>Confirme sua senha</p>
+                        <input type="password" id="confsenha" name="confsenha" />
+                    </div>
                 <!--conf senha-->
-                <div>
-                    <input type="password" id="confsenha" name="confsenha" />
                 </div>
-                <!--conf senha-->
-
-                <input type="checkbox" id="checkbox" name="manter_conectado" value="" /><span>Eu concordo com os termos
-                    de serviço.</span>
-
-                <div>
-                    <!--botao-->
-                    <input type="submit" class="botao" name="acao" value="Cadastrar" /><br />
-                </div>
-                <!--botao-->
-
+                <input type="submit" class="botao" name="acao" value="Cadastrar" />
             </fieldset>
         </form>
     </div>
