@@ -6,7 +6,7 @@ function recebeLogPosts(string $email, string $senha) {
     $usuario = new \Usuario(null, null, null, null);
     $administrador = new \Administrador();
     if ($usuario->logarConta($email, $senha) == false && $administrador->logarConta($email, $senha) == false){
-        echo "Usuário não cadastrado. Se cadastre antes de logar ! <hr>";
+        echo "Não encontramos nenhum usuário com estas credenciais, tente novamente! <hr>";
     } elseif($usuario->logarConta($email, $senha) && $administrador->logarConta($email, $senha) == false) {
         echo "Logou como usuario! Parabéns! <hr>";
     } else {

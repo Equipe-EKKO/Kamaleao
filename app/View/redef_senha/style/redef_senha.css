@@ -13,7 +13,7 @@ body {
     overflow-x: hidden;
 }
 
-.form_cadastro {
+.form_refinicao {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -36,8 +36,7 @@ fieldset {
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
     background-color: white;
-    margin-top:-2.5rem;
-    margin-left: -10rem;
+    margin-top:5rem;
 }
 
 fieldset h1 {
@@ -51,23 +50,12 @@ fieldset p {
     text-align: left;
 }
 
-.grid_cadastro{
-    display: grid;
-    grid-template-columns: 23rem 23rem;
+.redefinicao{
     margin-bottom: 1rem;
     margin-left: 1.5rem;
 
   }
-form input[type=date]{
-    width: 19rem;
-    height: 2.5rem;
-    font-size: 18px;
-    border-radius: 15px;
-    border: 1px solid #363636;
-    padding-left: 15px;
-    padding-right: 17px;
-    margin-left: -30px;
-}
+
 form input[type=text], input[type=password] {
     width: 20rem;
     height: 2.5rem;
@@ -85,7 +73,7 @@ form input[type=text], input[type=password]:focus{
 
 /*botao*/
 
-.form_cadastro .botao {
+.botao {
     border: 1px solid #363636;
     width: 90%;
     height: 2.5rem;
@@ -108,27 +96,6 @@ form input[type=text], input[type=password]:focus{
     transition: 0.5s;
     border: none;
     box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
-}
-
-/*esqueci negocio*/
-
-.esqueci {
-    text-decoration: none;
-    font-size: 12px;
-    color: #363636BF;
-    margin-bottom: 5rem;
-}
-
-/*flexbox matenha*/
-
-#checkbox {
-    cursor: pointer;
-    margin-top: 1vh;
-    margin-right: 1vh;
-}
-
-.pass span {
-    font-size: 12px;
 }
 
 @media screen and (max-width: 1400px) {

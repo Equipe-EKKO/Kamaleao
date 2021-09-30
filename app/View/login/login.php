@@ -17,14 +17,13 @@
                 <h1>Login</h1>
                 <p>E-mail</p>
                 <input type="text" id="email" name="email" />
+                <h3>EMAIL TA ERRADO BOÇAL</h3>
                 <p>Senha</p>
                 <input type="password" id="senha" name="senha" /><br />
+                <h3>SENHA TA ERRADA BOÇAL</h3>
                 <button type="submit" class="botao" name="acao">Login</button>
                 <br />
-                <a href="#" class="esqueci">Esqueci minha senha</a>
-                <?
-
-                ?>
+                <a href="../rec_senha/rec_senha.php" class="esqueci">Esqueci minha senha</a>
             </fieldset>
         </form>
     </div>

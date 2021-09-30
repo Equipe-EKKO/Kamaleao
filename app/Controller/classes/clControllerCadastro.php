@@ -11,7 +11,11 @@ class ControllerCadastro{
     }else if (v::email()->validate($this->email) == false){
       echo "<span> Digite o email corretamente!</span>";
       return false;
-    }else if (v::cpf()->validate($this->cpf) == false){
+    }else if (v::maxAge(15, 'Y-m-d')->validate($this->dt_nascimento)){
+      echo "<span> Você precisa ser maior de 15 anos!</span>";
+      return false;
+    }
+    else if (v::cpf()->validate($this->cpf) == false){
       echo "<span> Digite o cpf corretamente!</span>";
       return false;
     }else if (v::stringType()->length(7, null)->validate($this->senha) == false ){
@@ -20,7 +24,6 @@ class ControllerCadastro{
     }else if ($this->senha != $this->confsenha){
       echo "<span> Sua senhas devem coincidir!</span>";
       return false;
-      # falta uma validação para idade
     }
     return true;
   }
@@ -41,7 +44,6 @@ class ControllerCadastro{
     if ($this->validaCadastro()) {
       require_once '../Model/main-Cadastro.php';
       recebeCadPosts($this->nome, $this->sobrenome, $this->dt_nascimento, $this->cpf, $this->email, $this->username, $this->senha);
-      /* kamaleaoctt@gmail.com   GabrielzinhoLindo1012  */
     }
   }
 }

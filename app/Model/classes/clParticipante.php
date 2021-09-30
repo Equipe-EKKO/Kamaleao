@@ -1,19 +1,21 @@
 <?php
 /* escrita por: Carolina Sena, no dia 24.09.2021*/
+//Classe abstrata cuja função é servir de modelo para suas subclasses, combinando os métodos que elas têm em comum
 abstract class Participante {
-    #Atributos da classe
-    private $senha; //tipo: string. 
-    protected $email; //tipo: string. 
-    public $username; //tipo: string. 
+    //Atributos da classe
+    private $senha; # tipo: string. 
+    protected $email; # tipo: string. 
+    public $username; # tipo: string. 
 
-    #Metódos abstratos que serão declarados nas subclasses
-    abstract function cadastrarConta(string $email, string $username, string $senha); //método para cadastrar conta (disponível apenas para usuário)
-    abstract function logarConta(string $email, string $senha); //método para cadastrar conta (disponível para todos)
-    abstract function excluirConta(); //método para exluir conta (disponível apenas para usuário)
-    abstract function atualizarEmail(); //método para atualizar email da conta (disponível apenas para usuário)
-    abstract function atualizarSenha(); //método para atualizar senha da conta (disponível apenas para usuário)
+    //Metódos abstratos que serão declarados nas subclasses
+    abstract function cadastrarConta(string $email, string $username, string $senha); # método para cadastrar conta (disponível apenas para usuário)
+    abstract function logarConta(string $email, string $senha); # método para cadastrar conta (disponível para todos)
+    abstract function excluirConta(); # método para exluir conta (disponível apenas para usuário)
+    abstract function atualizarEmail(); # método para atualizar email da conta (disponível apenas para usuário)
+    abstract function atualizarSenha(); # método para atualizar senha da conta (disponível apenas para usuário)
+    abstract function recuperarSenha(string $email, string $novaSenha);  # método para recuperação de senha quando o usuário não tiver como inserir a anterior (disponível apenas para usuários)
 
-    #Métodos Especias - Getter e Setters para os atributos
+    //Métodos Especias - Getter e Setters para os atributos
     /*Getters*/
     public function getSenha() {
         return $this->senha; #retorna o valor da senha
