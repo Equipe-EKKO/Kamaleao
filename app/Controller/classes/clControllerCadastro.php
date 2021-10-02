@@ -1,5 +1,6 @@
 <?php
-require('../../vendor/autoload.php');
+require_once '../Model/main-Cadastro.php';
+require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 use Respect\Validation\Validator as v;
 
 class ControllerCadastro{
@@ -42,7 +43,6 @@ class ControllerCadastro{
 
   private function chamaModel() {
     if ($this->validaCadastro()) {
-      require_once '../Model/main-Cadastro.php';
       recebeCadPosts($this->nome, $this->sobrenome, $this->dt_nascimento, $this->cpf, $this->email, $this->username, $this->senha);
     }
   }

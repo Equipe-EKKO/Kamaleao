@@ -2,6 +2,7 @@
 #requere as classes necessárias para o funcionamento (Conexão para fazer o CRUD e Participante para herdar da classe mãe)
 require_once 'clConexaoBanco.php';
 require_once 'clParticipante.php';
+require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 //Subclasse de Participante cuja função é lidar com as funcionalidades CRUD da partição do Administrador do sistema
 class Administrador extends Participante {
     //Classe não tera atributos próprios
@@ -35,24 +36,28 @@ class Administrador extends Participante {
             return false;
         }
     }
+    /*Função para impedir que um administrador (que é essencial para o sistema) seja excluído*/
     function excluirConta() {
-        $retorno = "Erro!. Não deve-se excluir a conta Administrador";
-        echo $retorno;
-        return $retorno;
+        $retorno = "Erro!. Não deve-se excluir a conta Administrador"; # registra um erro, caso a função seja chamada, dentro de uma variável
+        echo $retorno; # exibe o erro
+        return $retorno; # retorna a mensagem como saída da função
     }
+    /*Função para impedir que um administrador (que é essencial para o sistema) tenha seu email de login alterado*/
     function atualizarEmail() {
-        $retorno = "Erro!. Não deve-se atualizar o email da conta Administrador";
-        echo $retorno;
-        return $retorno;
+        $retorno = "Erro!. Não deve-se atualizar o email da conta Administrador"; # registra um erro, caso a função seja chamada, dentro de uma variável
+        echo $retorno; # exibe o erro
+        return $retorno; # retorna a mensagem como saída da função
     }
+    /*Função para impedir que um administrador (que é essencial para o sistema) tenha sua senha de login alterada*/
     function atualizarSenha() {
-        $retorno = "Erro!. Não deve-se atualizar a senha da conta Administrador";
-        echo $retorno;
-        return $retorno;
+        $retorno = "Erro!. Não deve-se atualizar a senha da conta Administrador"; # registra um erro, caso a função seja chamada, dentro de uma variável
+        echo $retorno; # exibe o erro
+        return $retorno; # retorna a mensagem como saída da função
     }
+    /*Função para impedir que um administrador (que é essencial para o sistema) tenha sua senha de login alterada via email*/
     function recuperarSenha(string $email, string $novaSenha) {
-        $retorno = "Erro!. Não deve-se recuperar a senha da conta Administrador";
-        echo $retorno;
-        return $retorno;
+        $retorno = "Erro!. Não deve-se recuperar a senha da conta Administrador"; # registra um erro, caso a função seja chamada, dentro de uma variável
+        echo $retorno; # exibe o erro
+        return $retorno; # retorna a mensagem como saída da função
     }
 }

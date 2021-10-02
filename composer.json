@@ -2,8 +2,8 @@
   "description": "Project EKKO MVC",
   "authors": [
     {
-      "name": "students",
-      "email": "luiz.silva1176@etec.sp.gov.br"
+      "name": "Carolina Sena",
+      "email": "carolina.se@etec.sp.gov.br"
     }
   ],
   "autoload": {
@@ -13,6 +13,7 @@
     }
   },
   "require": {
-    "respect/validation": "^2.2"
+    "respect/validation": "^2.2",
+    "phpmailer/phpmailer": "^6.5"
   }
 }

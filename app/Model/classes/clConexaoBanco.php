@@ -1,4 +1,5 @@
 <?php
+require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 /* escrita por: Carolina Sena, no dia 24.09.2021*/
 //Classe cuja função é requisitar uma conexão com o banco de dados. Exclusivamente.
 class ConexaoBanco {

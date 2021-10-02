@@ -1,21 +1,24 @@
 <?php
-require('../../vendor/autoload.php');
+define('DIR_ROOT', $_SERVER['DOCUMENT_ROOT']);  //   E:/xampp/htdocs
+require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 use Respect\Validation\Validator as v;
 
 class ControllerLogin{
   private $email, $senha;
   private function validaLogin():bool{
-    $erro = false;
     if ($this->email == null || $this->senha == null) {
-      echo "Verifique se todos os campos estão inseridos corretamente!";
+      $_SESSION["error"] = 'Verifique se todos os campos estão inseridos corretamente!';
+      header("location: ../public/view/login/login.php");
       return false;
     }else if (v::email()->validate($this->email) == false){
-      echo "Digite o email corretamente!";
+      $_SESSION["error"] = 'Digite o email corretamente!';
+      header("location: ../public/view/login/login.php");
       return false;
     }else if (v::stringType()->length(7, null)->validate($this->senha) == false ){
-      echo "Sua senha deve conter pelo menos 7 caracteres!";
+      $_SESSION["error"] = 'Sua senha deve conter pelo menos 7 caracteres!';
+      header("location: ../public/view/login/login.php");
       return false;
-    }else {
+    }else { 
       return true;
     }
   }

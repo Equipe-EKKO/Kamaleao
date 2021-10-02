@@ -2,6 +2,11 @@
 #requere as classes necessárias para o funcionamento (Conexão para fazer o CRUD e Participante para herdar da classe mãe)
 require_once 'clConexaoBanco.php';
 require_once 'clParticipante.php';
+require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 //Subclasse de Participante cuja função é lidar com as funcionalidades CRUD da partição do usuário comum
 class Usuario extends Participante {
     #Atributos
@@ -111,6 +116,7 @@ class Usuario extends Participante {
     }
     function recuperarSenha(string $email, string $novaSenha) {
 
+
     }
 
     #Métodos da classe Usuario em si
@@ -157,15 +163,108 @@ class Usuario extends Participante {
         }
     }
 
-    private function enviaConfirmacao()/*:bool*/ {
+    public function enviaEmailRecuperacao(string $endemail):bool {
+        $this->setEmail($endemail);
 
+        /*select pra ver se o email existe e ta cadastrado*/
+        $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL 
+        $stmt = $banco->prepare("SELECT nm_email, ic_is_administrador FROM tb_login WHERE nm_email = :email AND ic_is_administrador = false"); # prepara para a execução um select que verificará se as informações inseridas correspondem com o que está registrado no database na categoria usuário (ic_is_administrador = falso)
+        /*Substitui os placeholders da query preparada*/
+        $stmt->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
+        /*Try catch que tentará executar o select, registrar quantas linhas ele retornou e então, abrir uma estrutura de decisão para logar ou não*/
+        try {
+            $stmt->execute(); # tenta executar o select preparado 
+            $contaLinha = $stmt->rowCount();  # armazena numa variável o valor de quantas linhas existem no retorno desse select
+            if ($contaLinha == 1 ) { # estrutura condicional que verifica se o valor retornado no select corresponde a apenas e somente 1, e se sim...
+                /*código para realizar o email*/
+
+                $email = new PHPMailer();
+
+                $email-> isSMTP(true);
+
+                $email->CharSet = 'UTF-8';
+        
+                $email->setLanguage('pt-br', DIR_ROOT . '/GitHub/Kamaleao/vendor/phpmailer/phpmailer/language/phpmailer.lang-pt_br.php');
+
+                $email->SMTPDebug = 2;
+
+                $email->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for GMail
+                $email->SMTPAutoTLS = false;
+
+                $email->Host = 'smtp.gmail.com';
+
+                $email->Port = 587;
+
+                //Whether to use SMTP authentication
+                $email->SMTPAuth = true;
+
+                $email->Username = 'kamaleaoctt@gmail.com';
+                $email->Password = 'GabrielzinhoLindo1012';
+
+                $email->setFrom($email->Username, 'Equipe Kamaleao');
+
+                $email->addAddress($endemail);
+
+                $email->addReplyTo('naoresponda@kamaleao.com', 'Informa Kamaleão');
+
+                $email->Subject = "Solicitação de Recuperação de Senha";
+
+                $conteudo = "<div style='font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: justify;'>
+                <h1>Olá, aqui é a Equipe Kamaleão!</h1>
+                
+                <h3>Fomos informados sobre uma solicitação de recuperação de senha.</h3>
+            
+                <p>Para cadastrar uma nova senha e poder desfrutar dos benefícios da plataforma, por favor, click no link abaixo para que você seja redirecionado.</p>
+            
+                <p style='padding-left: 25%;'><a href='http://localhost:8080/Github/Kamaleao/app/public/View/redef_senha/redef_senha.html' style='color:dodgerblue;'>Cadastrar nova senha.</a></p>
+            
+                <p><span style='color:rgb(241, 72, 53);'>ATENÇÃO: A solicitação possui um prazo de 15 minutos. Caso o tempo seja excedido, é necessário uma nova solicitação na plataforma.</span> <br>
+            
+                Caso você não tenha solicitado alteração de senha na Kamaleão recentemente, por favor, ignore este email.</p>
+            
+                <p style='font-style: italic;'>Atenciosamente, <br>
+            
+                    <span style='padding-left: 25px;'>A equipe Kamaleão </span>
+                </p>
+                </div>";
+
+                $email->Priority = 1;
+
+                $email->Body = $conteudo;
+
+                $email->isHTML(true);
+
+                $email->AltBody = $email->html2text($conteudo);    
+
+                if (!$email->send()) {
+                    echo 'Houve um erro no envio: ' . $email->ErrorInfo;
+                    return false; # seta o retorno da função como falso
+                } else {
+                    /* Espaço de sessao */
+                    if (!isset($_SESSION['tempo_sessao']) && !isset($_SESSION['emailinfo'])) {
+                        $_SESSION['tempo_sessao'] = time();
+                        $_SESSION['emailinfo'] = $endemail;
+                    }
+                    /*Fim sessão*/
+                    return true;
+                }
+                /*finalização do código de email*/
+            } else { #se o valor armazenado for diferente de 1...
+                echo "O email inserido não pertence a nenhuma conta cadastrada no sistema. <hr>";
+                return false; # seta o retorno da função como falso
+            }
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+            return false;
+        }
+        /*finalização do select que foi iniciado*/
     }
 
     #Métodos Especias - Getter e Setters para os atributos e Construct
-    /*Construtor*/
-    public function __construct(string $nome, string $sobrenome, string $cpf, string $data_nascimento) {
-        $this->setNome($nome);
-        $this->setFoto_perfil(null);
+    /* Construtor -- A função que é chamada automaticamente ao instanciar */
+    public function __construct(string $nome, string $sobrenome, string $cpf, string $data_nascimento) { # declara que os dados a serem inseridos devem ser obrigatoriamente strings
+        $this->setNome($nome); 
+        $this->setFoto_perfil(null); # aqui o atributo foto de perfil recebe nulo pois não é necessária ao criar uma conta
         $this->setSobrenome($sobrenome);
         $this->setCpf($cpf);
         $this->setData_nascimento($data_nascimento);
