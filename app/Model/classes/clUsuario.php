@@ -4,8 +4,6 @@ require_once 'clConexaoBanco.php';
 require_once 'clParticipante.php';
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
 
 //Subclasse de Participante cuja função é lidar com as funcionalidades CRUD da partição do usuário comum
 class Usuario extends Participante {
@@ -114,9 +112,34 @@ class Usuario extends Participante {
         echo $retorno;
         return $retorno;*/
     }
-    function recuperarSenha(string $email, string $novaSenha) {
+    function recuperarSenha(string $email, string $novaSenha):bool {
+        $banco = ConexaoBanco::abreConexao();
+        $espstmt = $banco->prepare("SELECT cd_login FROM tb_login WHERE nm_email = :email AND ic_is_administrador = false"); # prepara um select que irá recuperar o cd_login (chave primária da tabela login) inserido anteriormente, para que possa ser usado no próximo insert (como chave estrangeira)
+        $espstmt->bindValue(':email', $email); #substituiu o placeholder email pelo parametro
+        /*Faz um try catch para tentar executar o select ou pegar o erro se der errado*/
+        try {
+            $espstmt->execute(); # executa o select
+            $cd_login = $espstmt->fetchColumn(); # pega o primeiro resultado da primeira linha (o cd_login)
+            if (!isset($cd_login) || empty($cd_login) || $cd_login == "" || $cd_login == null) {
+                echo "ERRO! Não há nenhuma conta registrada com o email inserido. <hr>";
+                return false;
+            }
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+            return false;
+        }
+        $sql = "UPDATE tb_login SET nm_senha = :novaSenha WHERE cd_login = :cd_login";
+        $stmt = $banco->prepare($sql);
+        $stmt->bindValue(':novaSenha', $novaSenha);
+        $stmt->bindValue('cd_login', $cd_login);
 
-
+        try {
+            $stmt->execute();
+            return true;
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+            return false;
+        }
     }
 
     #Métodos da classe Usuario em si
@@ -165,7 +188,6 @@ class Usuario extends Participante {
 
     public function enviaEmailRecuperacao(string $endemail):bool {
         $this->setEmail($endemail);
-
         /*select pra ver se o email existe e ta cadastrado*/
         $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL 
         $stmt = $banco->prepare("SELECT nm_email, ic_is_administrador FROM tb_login WHERE nm_email = :email AND ic_is_administrador = false"); # prepara para a execução um select que verificará se as informações inseridas correspondem com o que está registrado no database na categoria usuário (ic_is_administrador = falso)
@@ -180,7 +202,7 @@ class Usuario extends Participante {
 
                 $email = new PHPMailer();
 
-                $email-> isSMTP(true);
+                $email->isSMTP(true);
 
                 $email->CharSet = 'UTF-8';
         
@@ -189,7 +211,7 @@ class Usuario extends Participante {
                 $email->SMTPDebug = 2;
 
                 $email->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for GMail
-                $email->SMTPAutoTLS = false;
+                $email->SMTPAutoTLS = true;
 
                 $email->Host = 'smtp.gmail.com';
 

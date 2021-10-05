@@ -1,24 +1,30 @@
 <?php
 ob_start();
 define('DIR_ROOT', $_SERVER['DOCUMENT_ROOT']);  //   E:/xampp/htdocs
-require_once (DIR_ROOT . '/GitHub/Kamaleao/app/Model/main-RecuperaSenha.php');
+require_once (DIR_ROOT . '/GitHub/Kamaleao/app/Model/\main-RedefineSenha.php');
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 use Respect\Validation\Validator as v;
 
 class ControllerRedSenha{
-  private $senha, $confsenha;
-  private function validaRedefinicao()/*:bool*/{
-    /*if ($this->senha == null) {
-      echo "<span> Verifique se o campo de senha está inserido corretamente!</span>";
+  private $email, $senha, $confsenha;
+  private function validaRedefinicao():bool{
+    if ($this->email == null || $this->senha == null || $this->confsenha == null) {
+      echo "<span> Verifique se os campos de senha estão inseridos corretamente!</span>";
       return false;
-    }else if (v::senha()->validate($this->senha) == false){
-      echo "<span> Digite o senha corretamente!</span>";
+    }else if (v::stringType()->length(7, null)->validate($this->senha) == false ){
+      echo "<span> Sua senha deve conter pelo menos 7 caracteres!</span>";
       return false;
-    } else {
-        return true;
-    }*/
+    }else if ($this->senha != $this->confsenha){
+      echo "<span> Sua senhas devem coincidir!</span>";
+      return false;
+    }else if (v::email()->validate($this->email) == false){
+      echo "<span> Erro na inserção do email! (não é um erro do usuário btw)</span>";
+      return false;
+    }
+    return true;
   }
-  public function __construct(string $senha, string $confsenha) {
+  public function __construct(string $email, string $senha, string $confsenha) {
+    $this->email = $email;
     $this->senha = $senha;
     $this->confsenha = $confsenha;
     $this->validaRedefinicao();
@@ -27,17 +33,11 @@ class ControllerRedSenha{
 
   private function chamaModel() {
     if ($this->validaRedefinicao()) {
-      //if (recebeSenhaRedPost($this->senha)) {
-        while (ob_get_status()) {
-          ob_end_clean();# RELAXA EH UM TESTE!!!
-          #to relaxado!
-          # DEU CERTO NUNCA FUI TRISTE
-        }
-        sleep(1);
-        //header( "Location: http://localhost:8080/Github/Kamaleao/app/public/View/aviso_senha/aviso_senha.html" );
+      if (recebeSenhaRedPost($this->email, $this->senha)) {
+        echo 'Senha redefinida com sucesso! <hr>';
       }
     }
   }
-//}
+}
 
 ?>

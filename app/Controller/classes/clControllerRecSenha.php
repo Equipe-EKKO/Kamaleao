@@ -28,9 +28,7 @@ class ControllerRecSenha{
     if ($this->validaRecuperacao()) {
       if (recebeEmailRecPost($this->email)) {
         while (ob_get_status()) {
-          ob_end_clean();# RELAXA EH UM TESTE!!!
-          #to relaxado!
-          # DEU CERTO NUNCA FUI TRISTE
+          ob_end_clean();
         }
         sleep(1);
         header( "Location: http://localhost:8080/Github/Kamaleao/app/public/View/aviso_email/aviso_email.html" );

@@ -105,19 +105,19 @@ form h3 {
     box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
 }
 
-.msg {
-    background-color: #ffcccc;
+.msg{
+    background-color:#f44336;
     border-radius: 20px;
     width: 100%;
 }
 
 .form-message {
-    margin-top: 2rem;
     padding-left: 10px;
     text-align: center;
     width: 90%;
     font-size: 1rem;
-    color: red;
+    color: #f44336;
+    font-family: 'Urbanist', sans-serif;
 }
 
 

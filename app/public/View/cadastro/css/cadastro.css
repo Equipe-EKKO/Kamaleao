@@ -25,9 +25,7 @@ body {
 }
 
 form {
-    margin-top: 2rem;
     text-align: center;
-
 }
 
 fieldset {
@@ -36,8 +34,6 @@ fieldset {
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
     background-color: white;
-    margin-top:-2.5rem;
-    margin-left: -10rem;
 }
 
 fieldset h1 {
@@ -121,20 +117,33 @@ form input[type=text], input[type=password]:focus{
 
 /*flexbox matenha*/
 
-#checkbox {
-    cursor: pointer;
-    margin-top: 1vh;
-    margin-right: 1vh;
-}
-
 .pass span {
     font-size: 12px;
 }
 
-@media screen and (max-width: 1400px) {
-    form {
-        width: 100%;
-        max-width: 500px;
-        max-height: 100px;
+/* .form-message {
+    padding-left: 10px;
+    text-align: center;
+    width: 90%;
+    font-size: 1rem;
+    color: #f44336;
+    font-family: 'Urbanist', sans-serif;
+} */
+
+@media screen and (max-height: 800px) {
+    fieldset {
+        margin-top: -4rem;
     }
 }
+    
+
+@media screen and (max-width: 850px) {
+    .grid_cadastro {
+        display: block;
+    }
+
+    fieldset {
+        margin-top: -10rem;
+    }
+}
+

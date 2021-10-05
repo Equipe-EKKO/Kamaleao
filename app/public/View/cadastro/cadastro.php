@@ -1,3 +1,6 @@
+ <?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -63,11 +66,21 @@
                     </div>
                 <!--conf senha-->
                 </div>
-                <input type="submit" class="botao" name="acao" value="Cadastrar" />
+                <input type="submit" class="botao" name="acao" value="Cadastrar" /> <br>
+                <p class="form-message">
+                    <?php
+                        if(isset($_SESSION["error"])){
+                            $error = $_SESSION["error"];
+                            echo $error;
+                        }
+                    ?>  
+                </p>
             </fieldset>
         </form>
     </div>
 </body>
-
-
 </html>
+
+<?php
+    unset($_SESSION["error"]);
+?>

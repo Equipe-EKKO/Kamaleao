@@ -1,0 +1,115 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+  }
+  
+  body{
+    font-family: sans-serif;
+    overflow: hidden;
+    user-select: none;
+  }
+
+
+  .logo{
+    color: #363636;
+    font-size: 33px;
+    font-weight: bold;
+    line-height: 70px;
+    margin-left: 50px;
+  }
+  
+  nav{
+    height: 70px;
+    background: #ffffff;
+    box-shadow: 0 3px 15px rgba(0,0,0,.4);
+  }
+  
+  ul{
+    float: right;
+    margin-right: 50px;
+  }
+  
+  li{
+    display: inline-block;
+  }
+  
+  .opt{
+    color: #363636;
+    display: block;
+    padding: 0 5px;
+    line-height: 35px;
+    font-size: 13px;
+    background: #ffffff;
+    transition: .5s;
+    box-shadow: 0 5px 5px rgba(0,0,0,.4);
+  }
+  
+  a:hover, a.active{
+    color: #F99752;
+  }
+  
+  nav ul ul{
+    position: absolute;
+    top: 80px;
+    border-top: 3px solid #F53446;
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  li:hover > ul{
+    top: 70px;
+    opacity: 1;
+    visibility: visible;
+    transition: .3s linear;
+  }
+  
+  ul ul li{
+    width: 120px;
+    display: list-item;
+    position: relative;
+    border-top: none;  
+  }
+  
+  i {
+      color: #363636;
+      font-size: 20px;
+      display: block;
+      padding: 22.5px;
+      line-height: 70px;
+      font-size: 25px;
+      transition: .5s;
+  }
+  
+  i:hover,
+  i.active{
+    background-image: url("../../assets/img/botao.jpg");
+    background: #f1f1f1;
+  }
+  
+  .search {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 20rem;
+    display: inline-block;
+    margin-top: 1rem;
+    margin-right: 10rem;
+  }
+  
+  .search input[type=text] {
+    border: none;
+    padding: 0.5rem;
+    font-size: 16px;
+    text-align: left;
+}
+  
+  button {
+    display: inline-block;
+    color: #cc33ff;
+    font-size: 1.5rem;
+    background-color: #fff;
+    border: none;
+    margin-bottom: 10px;
+  }
+  
