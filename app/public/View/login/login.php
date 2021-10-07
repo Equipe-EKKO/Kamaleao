@@ -1,5 +1,6 @@
-<?php
-session_start();
+<?php 
+define('DIR_ROOT', $_SERVER['DOCUMENT_ROOT']); # essa constante serve pra pegar qual é a raiz do documento e evitar erros independente do local de acesso
+require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php'); #chama o arquivo que faz todas as configurações do
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,12 +12,13 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@500&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="../assets/img/LogoKamaleao1.png" />
     <script src="https://kit.fontawesome.com/684a277949.js" crossorigin="anonymous"></script>
-    <meta charset="utf-8" />
+    <script src="https://kit.fontawesome.com/c5e517703f.js" crossorigin="anonymous"></script>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 </head>
 
 <body>
     <div class="form_login">
-        <form method="POST" action="../../../Controller/controllerLogin.php">
+        <form method="POST" action="/GitHub/Kamaleao/app/Controller/controllerLogin.php">
             <fieldset>
                 <h1>Login</h1>
                 <p>E-mail</p>
@@ -30,7 +32,7 @@ session_start();
                     <?php
                         if(isset($_SESSION["error"])){
                             $error = $_SESSION["error"];
-                            echo $error;
+                            echo "<i class='fas fa-exclamation-triangle'></i>&nbsp; $error";
                         }
                     ?>  
                 </p>

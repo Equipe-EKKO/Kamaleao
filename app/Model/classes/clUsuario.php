@@ -71,8 +71,9 @@ class Usuario extends Participante {
                 return false;
             }
         } else {
-            return false; #retorna falso caso o resultado de verificaDados seja false
-            /*OBS::::: toda vez que há um erro, o retorno é falso*/
+            header('Location /Github/Kamaleao/app/public/view/cadastro/cadastro.php'); # recarrega a pagina de cadastro, exibindo o erro, caso o resultado de verificaDados seja falso
+            return false;
+            
         }    
     }
     //Método que irá realizar o login do Usuário
@@ -89,7 +90,7 @@ class Usuario extends Participante {
             if ($contaLinha == 1 ) { # estrutura condicional que verifica se o valor retornado no select corresponde a apenas e somente 1, e se sim...
                 return true; # seta o retorno da função como verdadeiro
             } else { #se o valor armazenado for diferente de 1...
-                /*echo "Este usuário não está cadastrado no sistema. <hr>";*/
+                /*Retorna que não há nenhum usuário com essas credenciais cadastrado no sistema*/
                 return false; # seta o retorno da função como falso
             }
         } catch (\PDOException $e) {
@@ -114,14 +115,14 @@ class Usuario extends Participante {
     }
     function recuperarSenha(string $email, string $novaSenha):bool {
         $banco = ConexaoBanco::abreConexao();
-        $espstmt = $banco->prepare("SELECT cd_login FROM tb_login WHERE nm_email = :email AND ic_is_administrador = false"); # prepara um select que irá recuperar o cd_login (chave primária da tabela login) inserido anteriormente, para que possa ser usado no próximo insert (como chave estrangeira)
+        $espstmt = $banco->prepare("SELECT cd_login FROM tb_login WHERE nm_email = :email AND ic_is_administrador = false"); # prepara um select que irá recuperar o cd_login (chave primária da tabela login), para que possa ser usado como referência no update
         $espstmt->bindValue(':email', $email); #substituiu o placeholder email pelo parametro
         /*Faz um try catch para tentar executar o select ou pegar o erro se der errado*/
         try {
             $espstmt->execute(); # executa o select
             $cd_login = $espstmt->fetchColumn(); # pega o primeiro resultado da primeira linha (o cd_login)
-            if (!isset($cd_login) || empty($cd_login) || $cd_login == "" || $cd_login == null) {
-                echo "ERRO! Não há nenhuma conta registrada com o email inserido. <hr>";
+            if (!isset($cd_login) || empty($cd_login) || $cd_login == "" || $cd_login == null) { # condicional que verifica que se o select retornou, se não tiver retornado...
+                echo "ERRO! Não há nenhuma conta registrada com o email inserido. <hr>"; #exibe o erro para o usuário
                 return false;
             }
         } catch (\PDOException $e) {
@@ -161,7 +162,7 @@ class Usuario extends Participante {
         }
 
         if ($contaLinha > 0) { # estrutura condicional que irá verificar se o valor de linhas do select anterior é maior que zero, ou seja, se o select retornou algo, e caso tenha retornado...
-            echo "Esse email já foi cadastrado no sistema. Tente outro."; # exibe ao usuário que o email escolhido já foi cadastrado.
+            $_SESSION['erroemail'] = "Esse email já foi cadastrado no sistema. Tente outro."; # exibe ao usuário que o email escolhido já foi cadastrado.
             return false; 
         } else { # caso não, prepara outro select para mais uma verificação
             $sql = "SELECT nm_username, ic_is_administrador FROM tb_login WHERE nm_username = :username "; # declara query do select que irá verificar se o username escolhido já foi cadastrado anteriormente numa conta (tanto como usuário ou como administrador)
@@ -178,7 +179,7 @@ class Usuario extends Participante {
             }
 
             if ($contaLinha > 0) { # estrutura condicional que irá verificar se o valor de linhas do select anterior é maior que zero, ou seja, se o select retornou algo, e caso tenha retornado...
-                echo "Esse username está em uso. Tente outro.";  # exibe ao usuário que o username escolhido já foi cadastrado.
+                $_SESSION['errousername'] = "Esse username está em uso. Tente outro.";  # exibe ao usuário que o username escolhido já foi cadastrado.
                 return false; # retorna a saída como falsa
             } else { # caso não...
                 return true; # retorna a saída do método como verdadeira para que o processo de inserção prossiga
@@ -187,99 +188,83 @@ class Usuario extends Participante {
     }
 
     public function enviaEmailRecuperacao(string $endemail):bool {
-        $this->setEmail($endemail);
+        $this->setEmail($endemail); # seta o atributo email (da classe Usuario) com o valor recebido pelo parametro
         /*select pra ver se o email existe e ta cadastrado*/
         $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL 
         $stmt = $banco->prepare("SELECT nm_email, ic_is_administrador FROM tb_login WHERE nm_email = :email AND ic_is_administrador = false"); # prepara para a execução um select que verificará se as informações inseridas correspondem com o que está registrado no database na categoria usuário (ic_is_administrador = falso)
         /*Substitui os placeholders da query preparada*/
         $stmt->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
-        /*Try catch que tentará executar o select, registrar quantas linhas ele retornou e então, abrir uma estrutura de decisão para logar ou não*/
+        /*Try catch que tentará executar o select, registrar quantas linhas ele retornou e então, abrir uma estrutura de decisão para enviar o email ou não*/
         try {
             $stmt->execute(); # tenta executar o select preparado 
             $contaLinha = $stmt->rowCount();  # armazena numa variável o valor de quantas linhas existem no retorno desse select
             if ($contaLinha == 1 ) { # estrutura condicional que verifica se o valor retornado no select corresponde a apenas e somente 1, e se sim...
                 /*código para realizar o email*/
-
-                $email = new PHPMailer();
-
-                $email->isSMTP(true);
-
-                $email->CharSet = 'UTF-8';
-        
-                $email->setLanguage('pt-br', DIR_ROOT . '/GitHub/Kamaleao/vendor/phpmailer/phpmailer/language/phpmailer.lang-pt_br.php');
-
-                $email->SMTPDebug = 2;
-
-                $email->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for GMail
-                $email->SMTPAutoTLS = true;
-
-                $email->Host = 'smtp.gmail.com';
-
-                $email->Port = 587;
-
-                //Whether to use SMTP authentication
-                $email->SMTPAuth = true;
-
+                $email = new PHPMailer(); #instancia a Classe PHPMailer da Biblioteca
+                /*Configurações para enviar o email corretamente*/
+                $email->isSMTP(true); #define que o método vai ser usar um servidor SMTP
+                $email->CharSet = 'UTF-8'; #define o charset como utf-8
+                $email->setLanguage('pt-br', DIR_ROOT . '/GitHub/Kamaleao/vendor/phpmailer/phpmailer/language/phpmailer.lang-pt_br.php'); #seta a linguagem de erro como português
+                $email->SMTPDebug = 2; # define que o debug só vai exibir mensagens
+                $email->SMTPSecure = 'tls'; # define que o secure transfer está habilitado, função REQUIRED para SMTP GMail
+                $email->SMTPAutoTLS = true; # define o tls como automático, para questões de segurança
+                $email->Host = 'smtp.gmail.com'; #servidor host de SMTP que vai ser usado é o do google
+                $email->Port = 587; # a porta de comunicação é 587 que precisa de configurações manuais
+                $email->SMTPAuth = true; #autenticação de SMTP setada como true
+                /*Informações de Login da Kamaleão*/
                 $email->Username = 'kamaleaoctt@gmail.com';
                 $email->Password = 'GabrielzinhoLindo1012';
-
-                $email->setFrom($email->Username, 'Equipe Kamaleao');
-
-                $email->addAddress($endemail);
-
-                $email->addReplyTo('naoresponda@kamaleao.com', 'Informa Kamaleão');
-
-                $email->Subject = "Solicitação de Recuperação de Senha";
-
+                /*Configurações referentes ao envio do Email em si*/
+                $email->setFrom($email->Username, 'Equipe Kamaleao'); # define o remetente como a Kamaleão
+                $email->addAddress($endemail); #define o destinatário como a pessoa que pediu a redefinição
+                $email->addReplyTo('naoresponda@kamaleao.com', 'Informa Kamaleão'); #adiciona um email inexistente chamado 'não responda', para que o destinatário entenda que é um processo automático
+                $email->Subject = "Solicitação de Recuperação de Senha"; # define o assunto
+                /*Corpo do Email a ser enviado que foi escrito com HTML e CSS*/
                 $conteudo = "<div style='font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: justify;'>
                 <h1>Olá, aqui é a Equipe Kamaleão!</h1>
-                
                 <h3>Fomos informados sobre uma solicitação de recuperação de senha.</h3>
             
                 <p>Para cadastrar uma nova senha e poder desfrutar dos benefícios da plataforma, por favor, click no link abaixo para que você seja redirecionado.</p>
             
-                <p style='padding-left: 25%;'><a href='http://localhost:8080/Github/Kamaleao/app/public/View/redef_senha/redef_senha.html' style='color:dodgerblue;'>Cadastrar nova senha.</a></p>
+                <p style='padding-left: 25%;'><a href='http://localhost:80/Github/Kamaleao/app/public/View/redef_senha/redef_senha.php' style='color:dodgerblue;'>Cadastrar nova senha.</a></p>
             
                 <p><span style='color:rgb(241, 72, 53);'>ATENÇÃO: A solicitação possui um prazo de 15 minutos. Caso o tempo seja excedido, é necessário uma nova solicitação na plataforma.</span> <br>
-            
                 Caso você não tenha solicitado alteração de senha na Kamaleão recentemente, por favor, ignore este email.</p>
             
                 <p style='font-style: italic;'>Atenciosamente, <br>
-            
-                    <span style='padding-left: 25px;'>A equipe Kamaleão </span>
-                </p>
+                    <span style='padding-left: 25px;'>A equipe Kamaleão </span></p>
                 </div>";
+                /*Fim do Corpo*/
+                /*Configutações adicionais*/
+                $email->Priority = 1; #prioridade 1 significa que é um email importante, para não cair no spam
+                $email->Body = $conteudo; #define o corpo do email como o que foi digitado acima
+                $email->isHTML(true); #define que o email terá um corpo escrito em html
+                $email->AltBody = $email->html2text($conteudo); #tentativa de transformar o HTML em plain text para servidores de email que não leem HTML
 
-                $email->Priority = 1;
-
-                $email->Body = $conteudo;
-
-                $email->isHTML(true);
-
-                $email->AltBody = $email->html2text($conteudo);    
-
-                if (!$email->send()) {
-                    echo 'Houve um erro no envio: ' . $email->ErrorInfo;
+                if (!$email->send()) { # estrutura condicional que verifica se o email foi enviado e se não...
+                    $_SESSION["error"] = 'Houve um erro no envio: ' . $email->ErrorInfo; # exibe que houve um erro no envio, e concatena o erro oferecido pelo PHPMailer
+                    header("Location: /Github/Kamaleao/app/public/view/rec_senha/rec_senha.php"); #redireciona para a mesma página, mas exibindo a mensagem de erro.
                     return false; # seta o retorno da função como falso
-                } else {
-                    /* Espaço de sessao */
+                } else { #agora caso tenha sido enviado...
+                    /* Espaço para que as váriaveis da sessão sejam armazenados */
                     if (!isset($_SESSION['tempo_sessao']) && !isset($_SESSION['emailinfo'])) {
-                        $_SESSION['tempo_sessao'] = time();
-                        $_SESSION['emailinfo'] = $endemail;
+                        $_SESSION['tempo_sessao'] = time(); # armazena o tempo em segundos desde 1970 até atualmente
+                        $_SESSION['emailinfo'] = $endemail; # armazena o email inserido para que seja usado na redefinição
                     }
                     /*Fim sessão*/
-                    return true;
+                    return true; # retorna resultado positivo
                 }
                 /*finalização do código de email*/
             } else { #se o valor armazenado for diferente de 1...
-                echo "O email inserido não pertence a nenhuma conta cadastrada no sistema. <hr>";
+                $_SESSION["error"] = 'O email inserido não pertence a nenhuma conta cadastrada no sistema.'; # exibe que o email não existe no banco de dados
+                header("Location: /Github/Kamaleao/app/public/view/rec_senha/rec_senha.php");
                 return false; # seta o retorno da função como falso
             }
         } catch (\PDOException $e) {
             exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
-            return false;
+            return false; # seta o retorno da função como falso
         }
-        /*finalização do select que foi iniciado*/
+        /*finalização do select que foi iniciado para verificar os dados inseridos*/
     }
 
     #Métodos Especias - Getter e Setters para os atributos e Construct

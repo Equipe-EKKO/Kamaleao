@@ -1,115 +1,215 @@
 *{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-decoration: none;
-  }
-  
-  body{
-    font-family: sans-serif;
-    overflow: hidden;
-    user-select: none;
-  }
-
-
-  .logo{
-    color: #363636;
-    font-size: 33px;
-    font-weight: bold;
-    line-height: 70px;
-    margin-left: 50px;
-  }
-  
-  nav{
-    height: 70px;
-    background: #ffffff;
-    box-shadow: 0 3px 15px rgba(0,0,0,.4);
-  }
-  
-  ul{
-    float: right;
-    margin-right: 50px;
-  }
-  
-  li{
-    display: inline-block;
-  }
-  
-  .opt{
-    color: #363636;
-    display: block;
-    padding: 0 5px;
-    line-height: 35px;
-    font-size: 13px;
-    background: #ffffff;
-    transition: .5s;
-    box-shadow: 0 5px 5px rgba(0,0,0,.4);
-  }
-  
-  a:hover, a.active{
-    color: #F99752;
-  }
-  
-  nav ul ul{
-    position: absolute;
-    top: 80px;
-    border-top: 3px solid #F53446;
-    opacity: 0;
-    visibility: hidden;
-  }
-  
-  li:hover > ul{
-    top: 70px;
-    opacity: 1;
-    visibility: visible;
-    transition: .3s linear;
-  }
-  
-  ul ul li{
-    width: 120px;
-    display: list-item;
-    position: relative;
-    border-top: none;  
-  }
-  
-  i {
-      color: #363636;
-      font-size: 20px;
-      display: block;
-      padding: 22.5px;
-      line-height: 70px;
-      font-size: 25px;
-      transition: .5s;
-  }
-  
-  i:hover,
-  i.active{
-    background-image: url("../../assets/img/botao.jpg");
-    background: #f1f1f1;
-  }
-  
-  .search {
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    width: 20rem;
-    display: inline-block;
-    margin-top: 1rem;
-    margin-right: 10rem;
-  }
-  
-  .search input[type=text] {
-    border: none;
-    padding: 0.5rem;
-    font-size: 16px;
-    text-align: left;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
 }
-  
-  button {
-    display: inline-block;
-    color: #cc33ff;
-    font-size: 1.5rem;
-    background-color: #fff;
-    border: none;
-    margin-bottom: 10px;
+
+body{
+  background-image: url("../../assets/img/background2.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: sans-serif;
+}
+
+.logo{
+  width: 4rem;
+  height: 4rem;
+  margin-left: 2rem;
+  cursor: pointer;
+}
+
+.header{
+  justify-content: space-between;
+  height: 80px;
+  background: #ffffff;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  width: 100%;
+  position: relative;
+}
+
+ul{
+  height: 80px;
+}
+
+.noti {
+  right: 9.3rem;
+}
+.perfil {
+  right: 4.6rem;
+}
+.menu {
+  right: 0;
+}
+.icone{
+  height: 80px;
+}
+
+li{
+  display: inline-block;
+}
+
+.opt{
+  color: #363636;
+  display: block;
+  padding: 0 5px;
+  line-height: 35px;
+  font-size: 13px;
+  background: #ffffff;
+  transition: .5s;
+  box-shadow: 0 5px 5px rgba(0,0,0,.4);
+}
+
+a:hover,
+a.active{
+  color: #F99752;
+}
+
+.header ul ul{
+  position: absolute;
+  top: 80px;
+  border-top: 3px solid #F53446;
+  opacity: 0;
+  visibility: hidden;
+}
+
+li:hover > ul{
+  margin-top: 10px;
+  top: 70px;
+  opacity: 1;
+  visibility: visible;
+  transition: .3s linear;
+}
+
+ul ul li{
+  width: 120px;
+  display: list-item;
+  position: relative;
+  border-top: none;  
+}
+
+i {
+  color: #363636;
+  font-size: 20px;
+  display: block;
+  padding: 22.5px;
+  height: 30.5px;
+  font-size: 25px;
+  transition: .3s;
+  padding-top: 27px;
+}
+
+i:hover,
+i.active{
+  color: #F53446;
+  background: #f1f1f1;
+  height: 30.5px;
+}
+
+.search {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  width: 20rem;
+  height: 1.5rem;
+  display: inline-block;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.search input[type=text] {
+  width: 96%;
+  height: 100%;
+  border: none;
+  font-size: 16px;
+  text-align: left;
+  margin-bottom: 10px;
+  background-color: transparent;
+
+}
+
+input:focus {
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+}
+
+section {
+  height: 5000px;
+  background-color: rgb(211, 211, 211);
+}
+
+.negocio {
+  height: 50px;
+}
+ img {
+  margin-top: 6px;
+ }
+
+.filtro {
+  background-color: #fff;
+  width: 100%;
+  height: 3.5rem;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
+}
+
+.filtro select {
+  margin: 0.5rem 5rem;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  border-radius: 30px;
+}
+
+.filtro select:focus {
+  box-shadow: 0 0 0 0;
+  outline: 0;
+}
+
+.container {
+  position: relative;
+  z-index: -1;
+  margin: 0 auto;
+  background-color: #fff;
+  width: 100%;
+  max-width: 85rem;
+  height: 100vh;
+}
+
+@media screen and (max-width:800px) {
+
+  .logo {
+    margin-left: 0;
+  }
+
+  .header {
+    box-shadow: 0 0 0 0;
   }
   
+  .filtro {
+    box-shadow: 0;
+  }
+
+  .filtro select{
+    margin-left: 0.5rem;
+  }
+
+  ul {
+    background-color: #fff;
+    height: 100vh;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
+  }
+
+  li {
+    display: block;
+  }
+
+}
+
+/*.tudo {
+  width: 100%;
+  position: fixed;
+} */
+

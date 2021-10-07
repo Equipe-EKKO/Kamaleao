@@ -68,6 +68,15 @@ input[type=text] {
     box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
 }
 
+.form-message {
+    margin-top: 0.5rem;
+    padding-left: 10px;
+    text-align: center;
+    width: 90%;
+    font-size: 1.10rem;
+    font-family: 'Urbanist', sans-serif;
+}
+
 p {
     padding: 3em 0rem 1rem 0rem;
     font-size: 22px;

@@ -21,7 +21,7 @@ body {
     justify-content: center;
     position: relative;
     top: 50%;
-    transform: translateY(30%); 
+    margin-top: 10rem;
 }
 
 form {
@@ -34,6 +34,7 @@ fieldset {
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
     background-color: white;
+    height: 35rem;
 }
 
 fieldset h1 {
@@ -88,12 +89,12 @@ form input[type=text], input[type=password]:focus{
     max-width: 200px;
     background-color: transparent;
     border-radius: 15px;
-    margin-top: 1rem;
-    padding: 2px;
+    padding: 1px;
     cursor: pointer;
     font-size: 28px;
     color: #363636;
     font-family: 'Urbanist', sans-serif;
+    margin-bottom: 10px;
 }
 
 .botao:hover {
@@ -121,18 +122,20 @@ form input[type=text], input[type=password]:focus{
     font-size: 12px;
 }
 
-/* .form-message {
+.form-message {
+    margin-top: 0.5rem;
     padding-left: 10px;
     text-align: center;
-    width: 90%;
-    font-size: 1rem;
+    width: 100%;
+    font-size: 1.25rem;
     color: #f44336;
     font-family: 'Urbanist', sans-serif;
-} */
+    
+}
 
 @media screen and (max-height: 800px) {
     fieldset {
-        margin-top: -4rem;
+        margin-top: -5rem;
     }
 }
     
@@ -147,3 +150,9 @@ form input[type=text], input[type=password]:focus{
     }
 }
 
+@media screen and (max-width: 1400px) {
+    fieldset {
+        margin-top: -6rem;
+        padding: 5px;
+    }
+}

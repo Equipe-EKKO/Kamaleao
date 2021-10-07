@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@500&display=swap" rel="stylesheet">
@@ -52,9 +52,9 @@
         </div>
     </div>
 
-    <div class="index">
-        <button onclick="window.location.href='../cadastro/cadastro.php'">Cadastre-se</button>
-        <button onclick="window.location.href='../login/login.php'">Login</button>
+    <div class="index"></div>div>
+        <button onclick="window.location.href='/GitHub/Kamaleao/app/public/View/cadastro/cadastro.php'">Cadastre-se</button>
+        <button onclick="window.location.href='/GitHub/Kamaleao/app/public/View//login/login.php'">Login</button>
     </div>
 
     <div class="about_us">

@@ -2,20 +2,11 @@
 require_once 'classes/clControllerRedSenha.php';
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 
-if (!empty($_POST)) {
-    if (isset($_SESSION['tempo_sessao']) && isset($_SESSION['emailinfo'])) {
-        if (time() - $_SESSION['tempo_sessao'] <= 900) {
-            $ControllerLogin = new ControllerRedSenha($_SESSION['emailinfo'], $_POST['r_senha'], $_POST['r_confsenha']);
-        } else {
-            echo "O tempo para redefinição foi excedido. Tente novamente, pedindo uma nova solicitação de redefinição";
-            session_unset();
-            session_destroy();
-        }
-    } else {
-        echo "Houve um erro no processo. Realize todo o processo de redefinição no mesmo aparelho e mesmo navegador, por favor.";
-    }
+if (!empty($_POST) && isset($_POST)) { #verifica se o formulário está enviando algo ao controller
+    $ControllerLogin = new ControllerRedSenha($_SESSION['emailinfo'], $_POST['r_senha'], $_POST['r_confsenha']); #Se estiver ele aciona a função
 } else {
-    echo "Nada foi enviado";
+    $_SESSION["error"] = 'Nada foi enviado';
+    header("Location: /Github/Kamaleao/app/public/view/red_senha/red_senha.php"); #Caso contrário ele retorna o erro 
 }
 
 

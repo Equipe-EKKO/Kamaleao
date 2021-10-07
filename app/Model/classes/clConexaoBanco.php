@@ -37,7 +37,7 @@ class ConexaoBanco {
     }
     /*Clone*/
     private function __clone() {  //setado como private para impedir clonagem da classe
-        die("Erro! Esta classe não deve ser instanciada."); #Quando é tentado o clone, sai do script e exibe uma mensagem
+        die("Erro! Esta classe não deve ser clonada."); #Quando é tentado o clone, sai do script e exibe uma mensagem
     } 
 
 }

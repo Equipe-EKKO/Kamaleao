@@ -1,7 +1,7 @@
 <?php
 ob_start();
 define('DIR_ROOT', $_SERVER['DOCUMENT_ROOT']);  //   E:/xampp/htdocs
-require_once (DIR_ROOT . '/GitHub/Kamaleao/app/Model/main-RecuperaSenha.php');
+require_once (DIR_ROOT . '/Github/Kamaleao/app/Model/main-ProcessosLogin.php');
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 use Respect\Validation\Validator as v;
 
@@ -9,10 +9,12 @@ class ControllerRecSenha{
   private $email;
   private function validaRecuperacao():bool{
     if ($this->email == null) {
-      echo "<span> Verifique se o campo de email está inserido corretamente!</span>";
+      $_SESSION["error"] = 'Verifique se o campo de email está inserido corretamente!';
+      header("Location: /Github/Kamaleao/app/public/view/rec_senha/rec_senha.php");
       return false;
     }else if (v::email()->validate($this->email) == false){
-      echo "<span> Digite o email corretamente!</span>";
+      $_SESSION["error"] = 'Digite o email corretamente!';
+      header("Location: /Github/Kamaleao/app/public/view/rec_senha/rec_senha.php");
       return false;
     } else {
         return true;
@@ -31,7 +33,8 @@ class ControllerRecSenha{
           ob_end_clean();
         }
         sleep(1);
-        header( "Location: http://localhost:8080/Github/Kamaleao/app/public/View/aviso_email/aviso_email.html" );
+        $_SESSION['sucess'] = "Pronto! Foi enviado um email com um link para que você recupere sua senha";
+        header( "Location: /Github/Kamaleao/app/public/View/rec_senha/rec_senha.php" );
       }
     }
   }
