@@ -1,0 +1,241 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: arial;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 3rem;
+}
+
+body {
+    background-image: url("/GitHub/Kamaleao/app/public/View/assets/img/background2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.banner {
+    margin: 0 auto;
+    padding: 0 auto;
+    width: 100%;
+    height: 10vh;
+}
+
+.kamaleao {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40rem;
+}
+
+.arrow {
+    margin: 0 auto;
+    padding: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+.arrow i {
+    color: rgb(255, 255, 255);
+    font-size: 70px;
+    margin-bottom: 15rem;
+}
+
+.arrow i:hover {
+    color: rgb(225, 225, 225);
+}
+
+.infos {
+    background-color: white;
+    height: 70rem;
+    display: grid;
+    grid-template-areas: 
+        "texto1 texto1 texto1"
+        "texto2 . texto3"
+        "texto4 texto4 texto4";
+}
+
+.infos p {
+    text-align: center;
+}
+
+.texto1 {
+    margin: auto;
+    width: 50%;
+    display: inline-block;
+    width: 400px;
+    height: fit-content;
+    grid-area: texto1;
+}
+
+.texto2 {
+    margin: auto;
+    width: 50%;
+    display: inline-block;
+    width: 400px;
+    height: fit-content;
+    grid-area: texto2;
+}
+
+.texto3 {
+    margin: auto;
+    width: 50%;
+    display: inline-block;
+    width: 400px;
+    height: fit-content;
+    grid-area: texto3;
+}
+
+.texto4 {
+    margin: auto;
+    width: 50%;
+    display: inline-block;
+    width: 400px;
+    height: fit-content;
+    grid-area: texto4;
+}
+
+
+.exemplo {
+    height: 12.5rem;
+    margin-top: -5%;
+    
+}
+
+.index {
+    background-color: none;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+}
+
+.index > button {
+    float: right;
+    margin-right: 5%;
+    margin-top: 2.5rem;
+    font-size: 20px;
+    border-radius: 20px;
+    background: transparent;
+    border-style: solid;
+    border-color: white;
+    padding: 0.5rem 0.5rem;
+    color: white;
+    font-weight: 900;
+}
+
+.index > button:last-of-type{
+    margin-right: 1%;
+    width: 6.5rem;
+}
+
+.index > button:first-of-type{
+  background-color: white;
+  color: rgba(83, 174, 222, 1);
+}
+
+.index > button:hover {
+    border-color: white;
+    background-color: white;
+    cursor: pointer;
+    transform: 3.0s;
+    transition: 0.5s;
+}
+
+.index > button:first-of-type:hover{
+    color: rgba(83, 174, 222, 1);
+    background-color: rgba(230, 230, 230, 1);
+    border-color: rgba(230, 230, 230, 1);
+    transform: 3.0s;
+    transition: 0.3s;
+    
+}
+
+.index > button:last-of-type:hover{
+    color: rgba(83, 174, 222, 1);
+}
+
+.logo {
+    width: 12.5rem;
+    position: absolute;
+    margin-left: 14.25rem;
+    top: 4.5rem;
+    display: block;
+}
+
+
+
+.about_us {
+    background-color: rgb(255, 255, 255);
+    width: 40rem;
+    height: 22rem;
+    margin: 0 auto;
+    text-align: center;
+    -webkit-box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.52); 
+    box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.52);
+    border-radius: 30px;
+    margin-top: 10rem;
+}
+
+
+.about_us > p {
+    text-align: center;
+    margin: 4%;
+    padding: 1%;
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 400;
+    font-size: 32px;
+    color: rgba(54, 54, 54, 1);
+    padding-top: 3rem;
+}
+
+.about_us > button {
+    position: relative;
+    width: 9rem;
+    height: 3rem;
+    background: rgb(255, 255, 255);
+    float: center;
+    border: 1px solid rgba(54, 54, 54, 1);
+    border-radius: 20px;
+    font-size: 2rem; 
+    font-weight: bold;
+    margin-bottom: 5%;
+    font-family: 'Urbanist', sans-serif;
+    color: rgba(54, 54, 54, 1);
+}
+
+.about_us > button:hover {
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    background-image: url('/GitHub/Kamaleao/app/public/View/assets/img/botao.jpg');
+    background-size: 100%;
+    border: none;
+    box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
+    transform: 3.0s;
+    transition: 0.5s;
+}
+
+@media only screen and (max-width: 800px) {
+
+    .infos {
+        background-color: white;
+        height: 80vp;
+        display: grid;
+        grid-template-areas: 
+            "texto1"
+            "texto2"
+            "texto3"
+            "texto4";
+    }
+
+
+    .about_us{
+        width: 25rem;
+    }
+
+    .about_us p{
+        font-size: 22px;
+    }
+}
