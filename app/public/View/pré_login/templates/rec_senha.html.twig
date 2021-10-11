@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+{% block def %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    {% block title %}Recuperação de Senha{% endblock %}
+    {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pré_login/rec_senha/style/rec_senha.css"{% endblock hrefcss %}
+</head>
+{% endblock def %}
+{% block body %}
+<body>
+    {% block form_name %}"rec_senha"{% endblock form_name %}
+        {% block action_path %}"/GitHub/Kamaleao/app/private/Controller/controllerRecuperaSenha.php"{% endblock action_path %}
+            {% block conteudo %}
+            <h1>Esqueceu sua senha?</h1>
+            <p>Não se preocupe! Enviaremos um e-mail para que você possa redefinir sua senha. Basta escrever o e-mail usado no cadastro logo abaixo:</p>
+            <input type="text" id="r_email" name="r_email" /><br />
+            <button type="submit" class="botao" name="acao">Enviar e-mail</button>
+            {% endblock conteudo %}
+            {% block erro %}
+            <div class="form-message">
+                {% if erro is defined %}
+                    {% if erro == "Pronto! Foi enviado um email com um link para que você recupere sua senha" %}
+                        <p style='color: #04AA6D;'><i class='fas fa-exclamation-triangle'></i>{{ erro }}</p>
+                    {% else %}
+                        <p style='color: #f44336;'><i class='fas fa-exclamation-triangle'></i> {{ erro }} </p>
+                    {% endif %}
+                {% endif %}
+            </div>
+            {% endblock erro %}
+</body>
+</html>
+{% endblock body %}

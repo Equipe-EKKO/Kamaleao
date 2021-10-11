@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title>Kamaleao - Refinição de Senha</title>
-    <link rel="stylesheet" href="style/redef_senha.css">
+    <title>Kamaleao - Refinição de Senha </title>
+    <link rel="stylesheet" href="/GitHub/Kamaleao/app/public/View/pré_login/redef_senha/style/redef_senha.css"> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@500&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="/GitHub/Kamaleao/app/public/View/assets/img/LogoKamaleao1.png" />
-    <script type="text/javascript" src="js/script.js"></script>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <script src="https://kit.fontawesome.com/684a277949.js" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/c5e517703f.js" crossorigin="anonymous"></script>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 </head>
 <?php session_start(); ob_start(); ?>
 <body>
@@ -35,6 +34,7 @@
         </form>
     </div>
 </body>
+</html>
 <?php 
 if (isset($_SESSION['tempo_sessao']) && isset($_SESSION['emailinfo'])) {
     if (time() - $_SESSION['tempo_sessao'] <= 900) {
@@ -79,5 +79,3 @@ if (isset($_SESSION['tempo_sessao']) && isset($_SESSION['emailinfo'])) {
         </html>";
 }
 ?>
-</html>
-    

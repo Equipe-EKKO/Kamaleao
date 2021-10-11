@@ -39,7 +39,7 @@ button {
   display: inline-flex;
   width: 100%;
   position: relative;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid #ccc;
 }
 
 ul{
@@ -132,7 +132,6 @@ ul ul li{
   text-align: left;
   margin-bottom: 10px;
   background-color: transparent;
-
 }
 
 input:focus {
@@ -161,7 +160,7 @@ section {
 }
 
 .filtro select {
-  margin: 0.5rem 5rem;
+  margin: 0.6rem 5rem;
   border: 1px solid #ccc;
   padding: 0.5rem;
   border-radius: 30px;

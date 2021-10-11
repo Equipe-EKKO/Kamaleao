@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+{% block def %}
+<!DOCTYPE html>
+<html>
+<head>
+    {% block title %}Login{% endblock %}
+    {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pré_login/login/style/login.css"{% endblock hrefcss %}
+</head>
+{% endblock def %}
+{% block body %}
+<body>
+    {% block form_name %}"form_login"{% endblock form_name %}
+        {% block action_path %}"/GitHub/Kamaleao/app/private/Controller/controllerLogin.php"{% endblock action_path %}
+            {% block conteudo %}
+                <h1>Login</h1>
+                <p>E-mail</p>
+                <input type="text" id="email" name="email" />
+                <p>Senha</p>
+                <input type="password" id="senha" name="senha" /><br />
+                <button type="submit" class="botao" name="submit" id="mail-submit">Login</button>
+                <br />
+                <a href="../rec_senha/rec_senha.php" class="esqueci">Esqueci minha senha</a>
+            {% endblock conteudo %}
+</body>
+</html>
+{% endblock body %}

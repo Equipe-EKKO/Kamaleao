@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+    <title>Kamaleao - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href={% block hrefcss %}{% endblock hrefcss %}> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@500&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="/GitHub/Kamaleao/app/public/View/assets/img/LogoKamaleao1.png" />
+    <script src="https://kit.fontawesome.com/684a277949.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/c5e517703f.js" crossorigin="anonymous"></script>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    {% endblock head %}
+</head>
+<body>
+    {% block form %}
+    <div class={% block form_name %}{% endblock form_name %}>
+        <form method="POST" action={% block action_path %}{% endblock action_path %}>
+            <fieldset>
+            {% block conteudo %} {% endblock conteudo %}
+            {% block erro %}
+                {% if erro is defined %}  
+                    <p class="form-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        {{ erro }}
+                    </p>
+                {% endif %}
+            {% endblock erro %}
+            </fieldset>
+        </form>
+    </div>
+    {% endblock form %}
+</body>
+</html>

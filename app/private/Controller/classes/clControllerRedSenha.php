@@ -1,7 +1,7 @@
 <?php
 ob_start();
 define('DIR_ROOT', $_SERVER['DOCUMENT_ROOT']);  //   E:/xampp/htdocs
-require_once (DIR_ROOT . '/Github/Kamaleao/app/Model/main-ProcessosLogin.php');
+require_once (DIR_ROOT . '/Github/Kamaleao/app/private/Model/main-ProcessosLogin.php');
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 use Respect\Validation\Validator as v;
 

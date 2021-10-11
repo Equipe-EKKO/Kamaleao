@@ -33,7 +33,7 @@ class ControllerRecSenha{
           ob_end_clean();
         }
         sleep(1);
-        $_SESSION['sucess'] = "Pronto! Foi enviado um email com um link para que você recupere sua senha";
+        $_SESSION['error'] = "Pronto! Foi enviado um email com um link para que você recupere sua senha";
         header( "Location: /Github/Kamaleao/app/public/View/pré_login/rec_senha/rec_senha.php" );
       }
     }

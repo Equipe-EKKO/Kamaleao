@@ -6,7 +6,7 @@ if (!empty($_POST)) {#verifica se o formulário está enviando algo ao controlle
     $ControllerLogin = new ControllerRecSenha($_POST['r_email']);#Se estiver ele aciona a função
 } else {
     $_SESSION["error"] = 'Nada foi enviado';
-      header("Location: /Github/Kamaleao/app/public/View/pré_login/rec_senha/rec_senha.php");#Caso contrário ele retorna o erro 
+    header("Location: /Github/Kamaleao/app/public/View/pré_login/rec_senha/rec_senha.php");#Caso contrário ele retorna o erro 
 }
 
 
