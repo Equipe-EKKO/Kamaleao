@@ -1,5 +1,4 @@
-/*DEFINICOES GERAIS*/
-
+/*DEFINICOES GERAIS PRESENTES EM TODAS AS PAGINAS!*/
 *{
     margin: 0;
     padding: 0;
@@ -40,6 +39,7 @@
     width: 100%;
     position: relative;
     border-bottom: 1px solid #ccc;
+    
   }
   
   ul{
