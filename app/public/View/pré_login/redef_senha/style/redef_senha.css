@@ -31,6 +31,9 @@ form {
 
 
 fieldset {
+    text-align: center;
+    width: 25rem;
+    height: 25rem;
     padding: 2rem;
     border: 1px;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
@@ -44,8 +47,8 @@ fieldset h1 {
 }
 
 fieldset p {
-    font-size: 18px;
-    margin-top: 2rem;
+    font-size: 20px;
+    margin-top: 4rem;
     margin-bottom: 0.5rem;
     text-align: center;
 }
