@@ -1,8 +1,6 @@
 <?php
 #requere as classes necessárias para o funcionamento (Conexão para fazer o CRUD e Participante para herdar da classe mãe)
-require_once 'clConexaoBanco.php';
 require_once 'clParticipante.php';
-require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 use PHPMailer\PHPMailer\PHPMailer;
 
 //Subclasse de Participante cuja função é lidar com as funcionalidades CRUD da partição do usuário comum
