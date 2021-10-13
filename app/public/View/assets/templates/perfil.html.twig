@@ -1,9 +1,9 @@
-{% extends "base_perfil.html.twig" %}
+{% extends "base_home.html.twig" %}
 {% block perfil %}
 {# document #}
    {# head #}
       {% block title %} Perfil {% endblock title %}
-      {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/perfil/style/perfil.css"{% endblock hrefcss %}
+      {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/perfil.css"{% endblock hrefcss %}
    {# endhead #}
    {# body #}
       <!-- header da página definida em base_perfil -->
@@ -21,9 +21,24 @@
       <!-- fim filtro de pesquisa -->
 
       <!-- conteudo de perfil -->
+      {% block perfil_icon %}
+
+      <div class="perfil_icon">
+         <a href="#" class="icone_perf"><i class='bx bxs-user-circle'></i></a>
+         <h1>Tivitin</h1>
+      </div>
+
+      {% endblock perfil_icon %}
+
+
       {% block div_container %}
       <div class="container">
-      
+         <div class="abas">
+            <a href="#">Inventário</a>
+            <a href="#">Sobre</a>
+            <a href="#">Anúncios</a>
+            <a href="#">Comissões</a>
+         </div>
       </div>
       {% endblock div_container %}
       <!-- fim conteudo de perfil -->   

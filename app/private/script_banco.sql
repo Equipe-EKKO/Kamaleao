@@ -78,7 +78,8 @@ CREATE table IF NOT EXISTS `tb_serviço`(
 	-- atributos
     `cd_serviço` INT UNSIGNED NOT NULL AUTO_INCREMENT, -- chave primaria
 	`nm_serviço` VARCHAR(50) NOT NULL,
-	`ds_serviço` VARCHAR(200),
+	`ds_serviço` VARCHAR(280) NOT NULL,
+	`qt_versão` INT(1) NOT NULL DEFAULT 1s,
 	`dt_criação` TIMESTAMP NOT NULL,
 	cd_usuario INT UNSIGNED NOT NULL, -- chave estrangeira
     -- definicao das chaves
@@ -142,7 +143,7 @@ CREATE table IF NOT EXISTS `tb_versão`(
 	-- atributos
     `cd_versão` INT UNSIGNED NOT NULL, -- chave primaria
     `nm_versão` VARCHAR(50) NOT NULL,
-    cd_num_qt INT NOT NULL DEFAULT 1, -- pra saber qual número de versão é. se o serviço tiver apenas uma versão será definido por padrão como 1
+	`ds_versão` VARCHAR(280),
     `vl_preço` DECIMAL(10,2) NOT NULL,
     `cd_serviço` INT UNSIGNED NOT NULL, -- chave estrangeira
     -- definicao das chaves
@@ -201,7 +202,6 @@ CREATE table IF NOT EXISTS tb_imagem (
 	-- atributos
 	cd_imagem INT  NOT NULL AUTO_INCREMENT, -- chave primaria
 	im_serviço BLOB NOT NULL,
-	`cd_serviço` INT UNSIGNED NOT NULL, -- chave estrangeira
 	`cd_versão` INT UNSIGNED NOT NULL, -- chave estrangeira
     -- definicao das chaves
     -- primaria
@@ -210,10 +210,6 @@ CREATE table IF NOT EXISTS tb_imagem (
 	-- cd_versao como chave única para garantir relacionamento um pra um
     constraint un_cd_versao
 		unique index (`cd_versão`),
-	-- chave estrangeira
-	constraint fk_serviço_imagem
-		foreign key (`cd_serviço`)
-			references `tb_serviço`(`cd_serviço`),
 	-- chave estrangeira
 	constraint fk_versao_imagem
 		foreign key (`cd_versão`)

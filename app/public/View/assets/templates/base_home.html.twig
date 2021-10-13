@@ -16,7 +16,8 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
       <script src="https://kit.fontawesome.com/39478fd21b.js" crossorigin="anonymous"></script>
       <script src="https://kit.fontawesome.com/881bb3d101.js" crossorigin="anonymous"></script>
-      <script src="https://code.jquery.com/jquery-3.3.1.js "></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+      <script src="/Github/Kamaleao/app/public/View/pós_login/js/bootstrap.js" type="text/javascript"></script>
       {% endblock head %}
    </head>
    <body>
@@ -31,8 +32,8 @@
                {% block menu %}
                   <ul class="dropdown"> <!--ENGLOBA TD-->
                      <li class="icone">
-                        <button><i class='bx bx-bell' id="icon_nav"></i></button>
-                        <ul id="noti" class="active">
+                        <a onclick="mostra('noti')" class="dropbtn"><i class='bx bx-bell' id="icon_nav"></i></a>
+                        <ul id="noti" class="notificacao">
                            <li><a href="#" class="opt">notificacao 1</a></li>
                            <li><a href="#" class="opt">notificacao 2</a></li>
                            <li><a href="#" class="opt">notificacao 3</a></li>
@@ -40,8 +41,8 @@
                      </li>
 
                      <li class="icone">
-                        <i class='bx bx-user-circle' id="icon_nav"></i>
-                        <ul class="perfil">
+                        <a onclick="mostra('perf')" class="bt2"><i class='bx bx-user-circle' id="icon_nav"></i></a>
+                        <ul id="perf" class="perfil">
                            <li><a href="#" class="opt">Ver perfil</a></li>
                            <li><a href="#" class="opt">Configurar conta</a></li>
                            <li><a href="#" class="opt">Adicionar conta +</a></li>
@@ -50,8 +51,8 @@
                      </li>
 
                      <li class="icone">
-                        <i class='bx bx-menu' id="icon_nav"></i>
-                        <ul class="menu">
+                        <a onclick="mostra('menu')" class="bt3"><i class='bx bx-menu' id="icon_nav"></i></a>
+                        <ul id="menu" class="menu">
                            <li><a href="#" class="opt">Sobre o Kamaleão</a></li>
                            <li><a href="#" class="opt">Configurações</a></li>
                            <li><a href="#" class="opt">Contato</a></li>
@@ -79,7 +80,8 @@
          {% endblock nav_filtro %}
       </div> <!--tudo-->         
       {% endblock topo %}
-      
+
+         {% block perfil_icon %}{% endblock perfil_icon %}
 
          {% block div_container %}{% endblock div_container %}
 

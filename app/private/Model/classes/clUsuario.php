@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 //Subclasse de Participante cuja função é lidar com as funcionalidades CRUD da partição do usuário comum
 class Usuario extends Participante {
     #Atributos
-    public $nome, $foto_perfil; // nome: string || foto_perfil: blob
+    public $nome, $perfil; // nome: string || perfil: classe perfil?
     private $sobrenome; // sobrenome: string
     protected $cpf, $data_nascimento; //ambos tipo string
 
@@ -63,6 +63,7 @@ class Usuario extends Participante {
             /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
             try {
                 $stmt2->execute(); # executa a query preparada anteriormente
+                $this->setPerfil(new PerfilProprio($this->getUsername()));
                 return true; # retorna true se o processo dos dois inserts forem verdadeiros
             } catch (\PDOException $e) {
                 exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
@@ -269,7 +270,6 @@ class Usuario extends Participante {
     /* Construtor -- A função que é chamada automaticamente ao instanciar */
     public function __construct(string $nome, string $sobrenome, string $cpf, string $data_nascimento) { # declara que os dados a serem inseridos devem ser obrigatoriamente strings
         $this->setNome($nome); 
-        $this->setFoto_perfil(null); # aqui o atributo foto de perfil recebe nulo pois não é necessária ao criar uma conta
         $this->setSobrenome($sobrenome);
         $this->setCpf($cpf);
         $this->setData_nascimento($data_nascimento);
@@ -278,12 +278,12 @@ class Usuario extends Participante {
     public function getNome(){
         return $this->nome;
     }
-    public function getFoto_perfil(){
-        return $this->foto_perfil;
-    }
     public function getSobrenome(){
         return $this->sobrenome;
-    } 
+    }
+    public function getPerfil() {
+        return $this->perfil;
+    }
     public function getCpf(){
         return $this->cpf;
     }
@@ -294,8 +294,8 @@ class Usuario extends Participante {
     public function setNome(string $nome) {
         $this->nome = $nome;
     }
-    public function setFoto_perfil($foto_perfil) {
-        $this->foto_perfil = $foto_perfil;
+    public function setPerfil(Perfil $perfil) {
+        $this->perfil = $perfil;
     }
     public function setSobrenome(string $sobrenome) {
         $this->sobrenome = $sobrenome;

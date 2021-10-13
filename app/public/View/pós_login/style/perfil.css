@@ -1,0 +1,39 @@
+/* Header de Perfil */
+
+.perfil_icon {
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 25%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.4) 75%, rgba(0,0,0,0) 100%);
+    max-width: 85rem;
+    height: 250px;
+    margin: auto;
+    text-align: center;
+    padding-top:  150px;
+  }
+  
+  .icone_perf {
+    color: #fff;
+    font-size: 150px;
+  }
+
+  .icone_perf:hover {
+    color: #ccc;
+  }
+
+   .perfil_icon h1 {
+     color: #fff;
+     font-size: 40px;
+  }
+
+  /* Abas do Container */
+
+  .abas {
+      width: 100%;
+  }
+
+
+  .abas a {
+      font-size: 20px;
+      background-color: #ccc;
+      padding:20px;
+      width: 20%;
+  }
