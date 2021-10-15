@@ -32,7 +32,7 @@ function recebeLogPosts(string $email, string $senha) { # define que os parametr
         $_SESSION["error"] = 'Não encontramos nenhum usuário com estas credenciais, tente novamente!';# exibe que o resultado caso as duas tentativas de login sejam falsas é que os dados que o cliente inseriu não estão registrados no banco de dados
         header("Location: /Github/Kamaleao/app/public/view/pré_login/login/login.php"); # o redireciona para a mesma página ao enviar outra header com http
     } elseif($usuario->logarConta($email, $senha) && $administrador->logarConta($email, $senha) == false) { # se apenas a tentativa no objeto Administrador for falsa...
-        header("Location: /Github/Kamaleao/app/public/view/home/home.html"); # o resultado caso o Usuário seja positivo e o Administrador falso, é que os dados que o cliente inseriu são referentes ao Usuário, portanto, ele carrega a página home do usuário
+        header("Location: /Github/Kamaleao/app/public/view/acesso_livre/home/home.php"); # o resultado caso o Usuário seja positivo e o Administrador falso, é que os dados que o cliente inseriu são referentes ao Usuário, portanto, ele carrega a página home do usuário
     } else { # se a tentativa for falsa no objeto Usuário, mas verdadeira em Administrador...
         echo "Logou como administrador LOL, XD. Parabéns! <hr>"; # o resultado caso o Usuário seja falso e o Administrador verdadeiro, é que os dados que o cliente inseriu são referentes ao Adm, portanto, ele carrega a página home do adm
     }

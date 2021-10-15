@@ -1,8 +1,9 @@
 <?php
 #requere as classes necessárias para o funcionamento (Conexão para fazer o CRUD e Participante para herdar da classe mãe)
 require_once 'clParticipante.php';
+require_once 'clPerfilProprio.php';
 use PHPMailer\PHPMailer\PHPMailer;
-
+use PerfilProprio;
 //Subclasse de Participante cuja função é lidar com as funcionalidades CRUD da partição do usuário comum
 class Usuario extends Participante {
     #Atributos
@@ -87,7 +88,24 @@ class Usuario extends Participante {
             $stmt->execute(); # tenta executar o select preparado 
             $contaLinha = $stmt->rowCount();  # armazena numa variável o valor de quantas linhas existem no retorno desse select
             if ($contaLinha == 1 ) { # estrutura condicional que verifica se o valor retornado no select corresponde a apenas e somente 1, e se sim...
-                return true; # seta o retorno da função como verdadeiro
+                $this->setEmail($email);
+                $this->setSenha($senha);
+                $stmt = $banco->prepare("SELECT l.nm_username, im_foto_perfil/*, ds_usuario*/ FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login WHERE l.nm_email = :email");
+                /*Substitui os placeholders da query preparada*/
+                $stmt->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
+                /*Tem q fazer o select funcionar depois q já tiver bagulhado - mas agora vai ser gambiarra*/
+                try {
+                    $stmt->execute(); # tenta executar o select preparado 
+                    $username = $stmt->fetchColumn(); /*Tem que troca isto aki depois*/
+                    $this->setUsername($username);
+                    $this->setPerfil(new PerfilProprio($this->getUsername()));
+                    $_SESSION['usernameProprio'] = $this->perfil->getUsername();
+                    return true; # seta o retorno da função como verdadeiro
+                } catch (\PDOException $e) {
+                    exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+                    return false;
+                }
+                
             } else { #se o valor armazenado for diferente de 1...
                 /*Retorna que não há nenhum usuário com essas credenciais cadastrado no sistema*/
                 return false; # seta o retorno da função como falso

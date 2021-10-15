@@ -27,7 +27,7 @@ CREATE table IF NOT EXISTS tb_categoria(
 	-- atributos
     cd_categoria INT UNSIGNED NOT NULL auto_increment, -- chave primaria
     nm_cateogoria VARCHAR(40) NOT NULL,
-    `dt_criação` timestamp NOT NULL,
+    `dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     -- definicao das chaves
     -- primaria
     constraint pk_categoria
@@ -39,7 +39,7 @@ CREATE table IF NOT EXISTS tb_status_pagamento(
 	-- atributos
     cd_status INT UNSIGNED NOT NULL AUTO_INCREMENT, -- chave primaria
     nm_status VARCHAR(20) NOT NULL,
-    `dt_criação` timestamp NOT NULL,
+    `dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     -- definicao das chaves
     -- primaria
     constraint pk_status_pagamento
@@ -56,7 +56,7 @@ CREATE table IF NOT EXISTS tb_usuario (
     im_foto_perfil BLOB,
 	ds_usuario VARCHAR(280),
 	`dt_nascimento` DATE NOT NULL,
-    `dt_criação` TIMESTAMP NOT NULL,
+    `dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     cd_login INT UNSIGNED NOT NULL, -- chave estrangeira
     -- definicao das chaves
     -- primaria
@@ -79,8 +79,8 @@ CREATE table IF NOT EXISTS `tb_serviço`(
     `cd_serviço` INT UNSIGNED NOT NULL AUTO_INCREMENT, -- chave primaria
 	`nm_serviço` VARCHAR(50) NOT NULL,
 	`ds_serviço` VARCHAR(280) NOT NULL,
-	`qt_versão` INT(1) NOT NULL DEFAULT 1s,
-	`dt_criação` TIMESTAMP NOT NULL,
+	`qt_versão` INT(1) NOT NULL DEFAULT 1,
+	`dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	cd_usuario INT UNSIGNED NOT NULL, -- chave estrangeira
     -- definicao das chaves
     -- primaria
@@ -97,7 +97,7 @@ CREATE table IF NOT EXISTS `tb_avaliação`(
 	-- atributos
     `cd_avaliação` INT UNSIGNED NOT NULL auto_increment, -- chave primaria
 	`vl_avaliação` DECIMAL(3,2) NOT NULL DEFAULT 0,
-    `dt_criação` TIMESTAMP NOT NULl,
+    `dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	cd_usuario INT UNSIGNED NOT NULL, -- chave estrangeira
 	`cd_serviço` INT UNSIGNED NOT NULL, -- chave estrangeira
     -- definicao das chaves
@@ -121,7 +121,7 @@ CREATE table IF NOT EXISTS `tb_denúncia`(
     `nm_denúncia` VARCHAR(45) NOT NULL,
     `ds_denúncia` VARCHAR(1200),
     ic_avaliado BOOLEAN NOT NULL DEFAULT 0,
-    `dt_criação` TIMESTAMP NOT NULL,
+    `dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     cd_usuario INT UNSIGNED NOT NULL, -- chave estrangeira
 	`cd_serviço` INT UNSIGNED NOT NULL, -- chave estrangeira
      -- definicao das chaves
@@ -222,7 +222,7 @@ CREATE table IF NOT EXISTS tb_produto (
 	cd_produto INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	nm_produto VARCHAR(45) NOT NULL,
 	im_produto BLOB NOT NULL,
-	`dt_criação` TIMESTAMP NOT NULL,
+	`dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	cd_pedido INT UNSIGNED NOT NULL,
     -- definicao das chaves
     -- primaria
@@ -245,7 +245,7 @@ CREATE table IF NOT EXISTS tb_pagamento (
 	cd_produto INT UNSIGNED NOT NULL,
 	cd_usuario INT UNSIGNED NOT NULL,
     vl_pagamento DECIMAL(10,2) NOT NULL,
-	`dt_criação` TIMESTAMP NOT NULL,
+	`dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     -- definicao das chaves
     -- primaria
     constraint pk_pagamento

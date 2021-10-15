@@ -7,4 +7,10 @@ use Twig\Loader\FilesystemLoader;
 $loader = new FilesystemLoader(DIR_ROOT . '/GitHub/Kamaleao/app/public/View/assets/templates/', '/templates');
 $twig = new Environment($loader);
 
-echo $twig->render('perfil.html.twig');
+if (isset($_SESSION['usernameProprio'])) {
+    $username = $_SESSION['usernameProprio'];
+} else {
+    $username = "userIndefinido";
+}
+
+echo $twig->render('perfil.html.twig', ['Usuario' => $username]);
