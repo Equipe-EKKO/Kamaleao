@@ -1,0 +1,52 @@
+.anuncio {
+    width: 90%;
+    height: 50vh;
+    margin: 0 auto;
+    display: flex;
+    flex: wrap;
+
+}
+
+main {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    width: 50%;
+    height: 80%;
+    margin: 20px;
+    padding: 20px;
+    background-image: url("/GitHub/Kamaleao/app/public/View/assets/img/background2.jpg");
+}
+
+  aside {
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    width: 50%;
+    height: 80%;
+    margin: 20px;
+    padding: 20px;
+}
+
+.info {
+    width: 90%;
+    height: 50vh;
+    margin: 0 auto;
+
+}
+
+.info h1 {
+    margin-left: 40px;
+}
+
+.info div {
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    width: 95%;
+    height: 10vh;
+    margin: 20px auto;
+    padding: 30px;
+}
+
+.info p {
+    font-size: 18pt;
+    text-align: justify;
+}

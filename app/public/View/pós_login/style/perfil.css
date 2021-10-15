@@ -22,18 +22,17 @@
    .perfil_icon h1 {
      color: #fff;
      font-size: 40px;
+
   }
 
   /* Abas do Container */
 
-  .abas {
-      width: 100%;
+  .abas { 
+    width: 100%;
   }
 
-
-  .abas a {
-      font-size: 20px;
-      background-color: #ccc;
-      padding:20px;
-      width: 20%;
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
   }

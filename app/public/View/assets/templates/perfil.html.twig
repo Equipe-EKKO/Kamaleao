@@ -4,6 +4,7 @@
    {# head #}
       {% block title %} Perfil {% endblock title %}
       {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/perfil.css"{% endblock hrefcss %}
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
    {# endhead #}
    {# body #}
       <!-- header da página definida em base_perfil -->
@@ -25,21 +26,27 @@
 
       <div class="perfil_icon">
          <a href="#" class="icone_perf"><i class='bx bxs-user-circle'></i></a>
-         <h1>Tivitin</h1>
+         <h1>Usuario</h1>
       </div>
 
       {% endblock perfil_icon %}
 
 
       {% block div_container %}
-      <div class="container">
-         <div class="abas">
-            <a href="#">Inventário</a>
-            <a href="#">Sobre</a>
-            <a href="#">Anúncios</a>
-            <a href="#">Comissões</a>
-         </div>
-      </div>
+      
+         <nav class="listinha">
+            <div class="portfolio"><a href="Github/Kamelao/app/public/View/assets/templates/conteudo/inventario.html">inventario</a></div>
+            <div class="sobre"><a href="Github/Kamelao/app/public/View/assets/templates/conteudo/sobre.html">sobre</a></div>
+            <div class="anuncio"><a href="Github/Kamelao/app/public/View/assets/templates/conteudo/anuncios.html">anuncios</a></div>
+            <div class="comissoes"><a href="Github/Kamelao/app/public/View/assets/templates/conteudo/comissoes.html">comissoes</a></div>
+         </nav>
+
+         <div class="conteudo" id="conteudo">
+            <div class="dentro">
+            </div> <!--dentro-->
+         </div> <!--conteudo-->
+
+      
       {% endblock div_container %}
       <!-- fim conteudo de perfil -->   
 
@@ -47,6 +54,8 @@
       {# block div_footer #}
       {# end div_footer #}
       <!-- fim footer -->
+      
+      <script src="Github/Kamelao/app/public/View/pós_login/js/function.js"></script>
    {# end body #}
 {# end document #}
 {% endblock perfil %}

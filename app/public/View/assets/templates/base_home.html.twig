@@ -18,6 +18,8 @@
       <script src="https://kit.fontawesome.com/881bb3d101.js" crossorigin="anonymous"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
       <script src="/Github/Kamaleao/app/public/View/pós_login/js/bootstrap.js" type="text/javascript"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+      <script src="/Github/Kamaleao/app/public/View/pós_login/js/function.js" type="text/javascript"></script>
       {% endblock head %}
    </head>
    <body>
@@ -32,7 +34,7 @@
                {% block menu %}
                   <ul class="dropdown"> <!--ENGLOBA TD-->
                      <li class="icone">
-                        <a onclick="mostra('noti')" class="dropbtn"><i class='bx bx-bell' id="icon_nav"></i></a>
+                        <a onclick="mostra('noti')" onmouseout="esconde('noti')" class="dropbtn"><i class='bx bx-bell' id="icon_nav"></i></a>
                         <ul id="noti" class="notificacao">
                            <li><a href="#" class="opt">notificacao 1</a></li>
                            <li><a href="#" class="opt">notificacao 2</a></li>
@@ -41,7 +43,7 @@
                      </li>
 
                      <li class="icone">
-                        <a onclick="mostra('perf')" class="bt2"><i class='bx bx-user-circle' id="icon_nav"></i></a>
+                        <a onclick="mostra('perf')" onmouseout="esconde('perf')" class="bt2"><i class='bx bx-user-circle' id="icon_nav"></i></a>
                         <ul id="perf" class="perfil">
                            <li><a href="#" class="opt">Ver perfil</a></li>
                            <li><a href="#" class="opt">Configurar conta</a></li>
@@ -51,7 +53,7 @@
                      </li>
 
                      <li class="icone">
-                        <a onclick="mostra('menu')" class="bt3"><i class='bx bx-menu' id="icon_nav"></i></a>
+                        <a onclick="mostra('menu')" onmouseout="esconde('menu')" class="bt3"><i class='bx bx-menu' id="icon_nav"></i></a>
                         <ul id="menu" class="menu">
                            <li><a href="#" class="opt">Sobre o Kamaleão</a></li>
                            <li><a href="#" class="opt">Configurações</a></li>

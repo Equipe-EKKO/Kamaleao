@@ -7,4 +7,4 @@ use Twig\Loader\FilesystemLoader;
 $loader = new FilesystemLoader(DIR_ROOT . '/GitHub/Kamaleao/app/public/View/assets/templates/', '/templates');
 $twig = new Environment($loader);
 
-echo $twig->render('home.html.twig');
+echo $twig->render('criar_anuncio.html.twig');
