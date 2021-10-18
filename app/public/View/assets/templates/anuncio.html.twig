@@ -1,5 +1,5 @@
 {% extends "base_home.html.twig" %}
-{% block perfil %}
+{% block anuncio %}
 {# document #}
    {# head #}
       {% block title %} Anúncio {% endblock title %}
@@ -20,23 +20,29 @@
       {# end nav-filtro #}
       <!-- fim filtro de pesquisa -->
 
-      <!-- conteudo de perfil -->
+      <!-- conteudo do container -->
       {% block div_container %}
       <div class="container">
          <div class="anuncio">
             <main>
             </main>
             <aside>
-                <h1>Login</h1>
-                <p>E-mail</p>
-                <input type="text" id="email" name="email" />
-                <p>Senha</p>
-                <input type="password" id="senha" name="senha" /><br />
+               <h1>Título do Serviço</h1>
+               <h2>Preço: R$50,00</h2>
+               <h2>Licenças:</h2>
+               <div class="lic">
+                  <ul class="licencas">
+                     <li class="li-coluna"><a href="#">Licença de uso Não-Comercial</a></li>
+                     <li class="li-coluna"><a href="#">Licença de uso Comercial</a></li>
+                     <li class="li-coluna"><a href="#">Licença de Download</a></li>
+                  </ul>
+               </div>
+               <button type="submit">Solicitar Serviço</button>
             </aside>
             
          </div> 
          <div class="info">
-            <h1>Sobre o Criador</h1>
+            <h1>Descrição do Serviço</h1>
                <div class="sobre">
                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing."</p>
                </div>
@@ -46,12 +52,14 @@
          </div>     
       </div>
       {% endblock div_container %}
-      <!-- fim conteudo de perfil -->   
 
-      <!-- footer da página definida em base_perfil -->
+      
+      <!-- fim conteudo do container -->   
+
+      <!-- footer da página definida em base_home -->
       {# block div_footer #}
       {# end div_footer #}
       <!-- fim footer -->
    {# end body #}
 {# end document #}
-{% endblock perfil %}
+{% endblock anuncio %}

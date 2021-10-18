@@ -1,87 +1,49 @@
 {% extends "base.html.twig" %}
 {% block def %}
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    {% block title %}Criar Aúncio{% endblock %}
+    {% block title %}Anunciar{% endblock %}
     {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/criar_anuncio.css"{% endblock hrefcss %}
 </head>
 {% endblock def %}
 {% block body %}
 <body>
     {% block form_name %}"form_anuncio"{% endblock form_name %}
-        {% block action_path %}"/GitHub/Kamaleao/app/private/Controller/controllerLogin.php"{% endblock action_path %}
+        {% block action_path %}{% endblock action_path %}
             {% block conteudo %}
-            <h1>Cadastro</h1>
+                <h1>Anunciar</h1>
                 <div class ="grid_anuncio">
-                    <div>
+                    <div class="left">
                         <p>Título</p>
-                        <input type="text" id="nome" name="nome" />
+                        <input type="text" id="titulo" name="titulo" />
+                        <p>Descrição do Produto</p>
+                        <textarea id="descricao" name="descricao" rows="5"></textarea>
+                        <p>Escolha uma imagem para o Anúncio:</p>
+                            <label for="imagem">Escolher arquivo</label>
+                            <input type="file" id="imagem" name="imagem" accept="image/png, image/jpeg"></br>
+                        
+                        
                     </div>
-
-                    <div>
-                        <p>Descrição do Serviço</p>
-                        <input type="text" id="sobrenome" name="sobrenome" />
-                    </div>
-
-                    <div>
-                        <p></p>
-                        <input type="text" id="username" name="username" />
-                    </div>
-
-                    <div>
-                        <p>Data de nascimento</p>
-                    <input type="date" id="dt_nascimento" name="dt_nascimento" /></div>
-
-                    <div>
-                        <p>CPF</p>
-                        <input type="text" id="cpf" name="cpf" maxlength="14" onkeyup="mascara_cpf()" />
-                    </div>
-
-                    <div>
-                        <p>E-mail</p>
-                        <input type="text" id="email" name="email" />
-                    </div>
-                    
-                    <!--email-->
-
-                    <div class="grid">
-                        <p>Insira uma senha</p>
-                        <!--senha-->
-                        <input type="password" id="senha" name="senha" /><br />
-                    </div>
-                    <!--senha-->
-
-                    <div>
-                        <p>Confirme sua senha</p>
-                        <input type="password" id="confsenha" name="confsenha" />
-                    </div>
-                <!--conf senha-->
+                    <div clas="rigth">
+                        <p>Preço mínimo para o serviço</p>
+                        <input type="number" min="0" max="10000" id="preco" name="preco" />
+                        <p>Preço máximo para o serviço</p>
+                        <input type="number" min="0" max="10000" id="preco" name="preco" />
+                        <p>Tipos de Licenças</p> 
+                        <div class="check"><!-- checkbox para as licencas -->
+                            <input type="checkbox" id="licenca1" name="licenca1" value="n_comercial">
+                            <label for="licenca1">Licença de uso Não-Comercial</label><br>
+                            <input type="checkbox" id="licenca2" name="licenca2" value="comercial">
+                            <label for="licenca2">Licença de uso Comercial</label><br>
+                            <input type="checkbox" id="licenca3" name="licenca3" value="download">
+                            <label for="licenca3">Licença de Download</label><br>
+                        </div>
+                    </div>                              
                 </div>
-
-                <div>
-                <h1>Login</h1>
-                <p>E-mail</p>
-                <input type="text" id="email" name="email" />
-                <p>Senha</p>
-                <input type="password" id="senha" name="senha" /><br />
-                <p>E-mail</p>
-                <input type="text" id="email" name="email" />
-                <p>Senha</p>
-                <input type="password" id="senha" name="senha" /><br />
-                <p>E-mail</p>
-                <input type="text" id="email" name="email" />
-                <p>Senha</p>
-                <input type="password" id="senha" name="senha" /><br />
-                <p>E-mail</p>
-                <input type="text" id="email" name="email" />
-                <p>Senha</p>
-                <input type="password" id="senha" name="senha" /><br />
-                <button type="submit" class="botao" name="submit" id="mail-submit">Login</button>
-                <br />
-                <a href="../rec_senha/rec_senha.php" class="esqueci">Esqueci minha senha</a>
-                </div>
-            {% endblock conteudo %}
+                
+                <input type="submit" class="botao" name="acao" value="Anunciar" /> <br>
+                {% endblock conteudo %}
 </body>
 </html>
 {% endblock body %}

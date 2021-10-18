@@ -1,9 +1,10 @@
 .anuncio {
-    width: 90%;
-    height: 50vh;
+    width: 80%;
+    height: 45vh;
     margin: 0 auto;
     display: flex;
     flex: wrap;
+    margin-bottom: 50px;
 
 }
 
@@ -12,41 +13,100 @@ main {
     border-radius: 10px;
     width: 50%;
     height: 80%;
-    margin: 20px;
+    margin: 30px;
     padding: 20px;
     background-image: url("/GitHub/Kamaleao/app/public/View/assets/img/background2.jpg");
 }
 
-  aside {
+aside {
     border: 2px solid #ccc;
     border-radius: 30px;
-    width: 50%;
+    width: 30%;
     height: 80%;
-    margin: 20px;
+    margin: 30px;
     padding: 20px;
 }
 
 .info {
-    width: 90%;
+    width: 80%;
     height: 50vh;
     margin: 0 auto;
-
 }
 
 .info h1 {
     margin-left: 40px;
+    font-size: 18pt;
+    color: #363636;
 }
 
 .info div {
     border: 2px solid #ccc;
     border-radius: 30px;
-    width: 95%;
+    width: 90%;
     height: 10vh;
     margin: 20px auto;
     padding: 30px;
 }
 
 .info p {
-    font-size: 18pt;
+    font-size: 15pt;
     text-align: justify;
+}
+
+.lic .licencas {
+    height: 100px;
+}
+
+.lic .licencas li {
+    display: block;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.lic .licencas a {
+    cursor: pointer;
+    color: #000;
+    transition: .5s;
+}
+
+.lic .licencas a:hover {
+    margin-left: 10px;
+    color: #F53446;
+    
+}
+
+aside h1 {
+    font-size: 18pt;
+    margin: 20px;
+    color: #363636;
+}
+
+aside h2 {
+    font-size: 15pt;
+    margin: 20px;
+    color: #363636;
+    
+
+}
+
+button {
+    border: 1px solid #363636;
+    width: 60%;
+    margin-left: 65px;
+    height: 3rem;
+    background-color: transparent;
+    border-radius: 15px;
+    margin-top: 0.5rem;
+    padding: 2px;
+    font-size: 25px;
+    color: #363636;
+}
+
+button:hover {
+    color: rgb(255, 255, 255);
+    background-image: url("/GitHub/Kamaleao/app/public/View/assets/img/botao.jpg");
+    background-size: 100%;
+    transition: 0.3s;
+    border: none;
+    box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.1);
 }

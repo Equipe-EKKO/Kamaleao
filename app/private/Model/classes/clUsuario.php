@@ -64,7 +64,6 @@ class Usuario extends Participante {
             /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
             try {
                 $stmt2->execute(); # executa a query preparada anteriormente
-                $this->setPerfil(new PerfilProprio($this->getUsername()));
                 return true; # retorna true se o processo dos dois inserts forem verdadeiros
             } catch (\PDOException $e) {
                 exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
@@ -90,16 +89,21 @@ class Usuario extends Participante {
             if ($contaLinha == 1 ) { # estrutura condicional que verifica se o valor retornado no select corresponde a apenas e somente 1, e se sim...
                 $this->setEmail($email);
                 $this->setSenha($senha);
-                $stmt = $banco->prepare("SELECT l.nm_username, im_foto_perfil/*, ds_usuario*/ FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login WHERE l.nm_email = :email");
+                $stmt = $banco->prepare("SELECT l.nm_username, im_foto_perfil, ds_usuario FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login WHERE l.nm_email = :email");
                 /*Substitui os placeholders da query preparada*/
                 $stmt->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
                 /*Tem q fazer o select funcionar depois q já tiver bagulhado - mas agora vai ser gambiarra*/
                 try {
-                    $stmt->execute(); # tenta executar o select preparado 
-                    $username = $stmt->fetchColumn(); /*Tem que troca isto aki depois*/
-                    $this->setUsername($username);
-                    $this->setPerfil(new PerfilProprio($this->getUsername()));
-                    $_SESSION['usernameProprio'] = $this->perfil->getUsername();
+                    $stmt->execute(); # tenta executar o select preparado
+                    $resultados = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $this->setUsername($resultados['nm_username']);
+                    if ($resultados['ds_usuario'] == "" || $resultados['ds_usuario'] == null) {
+                        $sobre = "";
+                    }else {
+                        $sobre = $resultados['ds_usuario'];
+                    }
+                    $this->setPerfil(new PerfilProprio($this->getUsername(), $sobre));
+                    $this->perfil->exibeInformacao();
                     return true; # seta o retorno da função como verdadeiro
                 } catch (\PDOException $e) {
                     exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema

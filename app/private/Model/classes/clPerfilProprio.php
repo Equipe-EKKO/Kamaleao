@@ -1,4 +1,5 @@
 <?php
+require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 #requere as classes necessárias para o funcionamento (Conexão para fazer o CRUD e Perfil para herdar da classe mãe)
 require_once 'clPerfil.php';
 use Anuncio;
@@ -23,6 +24,10 @@ class PerfilProprio extends Perfil {
     function updateDescricao() {
 
     }
+    public function exibeInformacao():void {
+        Session::setSession('usernameProprio', $this->getUsername());
+        Session::setSession('descProprio', $this->getDescricao());
+    }
     function criarAnuncio() {
 
     }
@@ -35,9 +40,10 @@ class PerfilProprio extends Perfil {
 
     #Métodos Especias - Getter e Setters para os atributos
     /* Construtor */
-    public function __construct(string $user) {
+    public function __construct(string $user, string $desc) {
         $this->setUsername($user);
         $this->setFotoPerfil(null);
+        $this->setDescricao($desc);
     }
     /*GETTERS*/
     public function getAnuncio() {

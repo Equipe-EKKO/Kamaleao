@@ -1,8 +1,1 @@
-explicacao do que vai acontecer no desenvolvimento pra vocês do frontend a partir de hoje:
-    => foi observado durante a ultima semana a necessidade de transformar as páginas da view, num geral, de acordo com um conteúdo gerado dinamicamente. Exemplo: as mensagens de erro que aparecem nas páginas de login e cadastro, ou a página redef senha, que tem a exibição completa do body como conteúdo dinâmico. 
-    => a solucao adotada foi o uso do php nessas páginas e o problema foi resolvido, contudo, essa solucao não
-    é a melhor, pois pode ser que o php seja exibido na tela do cliente, por exemplo, se houver um erro. Sem contar que o código das páginas em html fica bagunçado e confuso
-    => outra coisa é que as próximas páginas em desenvolvimento vão precisar de um fluxo de conteúdo dinamico bem maior doq oq foi utilizado até agora. Ou seja, se nós continuarmos com o mesmo método, vai ficar tudo caótico e bem mais dificil.
-    => por isso a gnt do backend decidiu usar um tipo de tecnologia chamado Template Engine, que vai facilitar o desenvolvimento do código de vocês, mas pra ser aplicado, vai precisar de uma separação melhor dos arquivos, então conto com vocês pra organizar as telas por pastas que dividam a funcionalidade que elas apresentam. Exemplo: deixar todas as telas relacionadas a login-cadastro numa pasta só, pra facilitar.
-    => não vai ser necessário que vocês aprendam o Template Engine em si. oq vai acontecer é uma adaptação do código que vocês digitaram. o máximo que vai exigir é que vocês começem a usar placeholders onde o conteúdo precisar ser dinâmico. Depois vou subir exemplos no discord de como funciona, não é dificil
-    => pode  ser que a pasta da view saia do diretório public, que vai ficar só com os arquivos que o browser vai ler, pra esconder essas coisas. Mas não sei ainda, to lendo como organizar.
+quando for subir o tcc pra online, essa será a unica pasta visivel pelo usuário.

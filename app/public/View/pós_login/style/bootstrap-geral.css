@@ -42,10 +42,20 @@ button {
 
 ul{
   height: 80px;
+  width: 250px;
+  padding-right: 5px;
 }
 
 #noti {
-  right: 9.3rem;
+  right: 11.2rem;
+}
+
+#perf {
+  right: 6rem;
+}
+
+#menu {
+  right: 0.75rem;
 }
 
 .perfil {
@@ -54,12 +64,13 @@ ul{
 .menu {
   right: 0;
 }
-.icone{
+li .icone{
   height: 80px;
 }
 
 li{
   display: inline-block;
+  margin: 0% 5px 0% 5px;
 }
 
 .notificacao, .perfil, .menu {
@@ -79,7 +90,7 @@ li{
   display: block;
   padding: 0 5px;
   line-height: 35px;
-  font-size: 13px;
+  font-size: 16px;
   background: #ffffff;
   transition: .5s;
   box-shadow: 0 5px 5px rgba(0,0,0,.2);
@@ -92,15 +103,18 @@ a.active{
 
 .header ul ul{
   position: absolute;
-  top: 80px;
-  border-top: 3px solid #F53446;
+  top: 79px;
 }
 
 ul ul li{
-  width: 120px;
+  width: 250px;
   display: list-item;
   position: relative;
-  border-top: none;  
+  top: -0.5px;
+}
+
+ul ul li:first-of-type {
+  border-top: 5px solid #F53446;
 }
 
 #icon_nav {
@@ -118,7 +132,7 @@ ul ul li{
 #icon_nav.active{
   color: #F53446;
   background: #f1f1f1;
-  height: 30.5px;
+  height: 30px;
   cursor: pointer;
 } 
 
@@ -154,13 +168,10 @@ section {
   background-color: rgb(211, 211, 211);
 }
 
-.negocio {
-  height: 50px;
-}
 
- img {
+img {
   margin-top: 6px;
- }
+}
 
 .filtro {
   background-color: #fff;
@@ -179,17 +190,16 @@ section {
 .filtro select:focus {
   box-shadow: 0 0 0 0;
   outline: 0;
-}
+} 
 
 /*CONTEUDO MIDIATICO*/
 .container {
-  position: relative;
   z-index: -1;
   margin: 0 auto;
   background-color: #fff;
   width: 100%;
-  max-width: 85rem;
-  height: 100vh;
+  max-width: 70rem;
+  height: 120vh;
   padding-top:160px;
 }
 
@@ -295,6 +305,10 @@ hr:last-of-type {
     box-shadow: 0 0 0 0;
   }
   
+  ul{
+    padding: 0;
+  }
+
   .filtro {
     box-shadow: 0;
   }
@@ -303,10 +317,12 @@ hr:last-of-type {
     margin-left: 0.5rem;
   }
 
-  ul {
+  .dropdown {
     background-color: #fff;
     height: 100vh;
+    width: 5rem;
     box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
+    padding: 0;
   }
 
   li {
@@ -320,42 +336,4 @@ hr:last-of-type {
   position: fixed;
 } 
 
-.listinha {
-  background: rgb(0,0,0);
-  background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 25%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.4) 75%, rgba(0,0,0,0) 100%);
-  border-radius: 30px 30px 0px 0px;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 85rem;
-  line-height: 3rem;
-  text-align: center;
-}
 
-.listinha div{
-  cursor: pointer;
-  display: inline-block;
-  margin-right: -4px;
-  background-color: rgb(245, 245, 245);
-  border-radius: 30px 30px 0px 0px;
-  width: 15%;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-}
-
-.listinha div:hover {
-  background-color: #ccc;
-}
-
-.listinha a {
-  color: #363636;
-  font-size: 23px;
-  text-transform: uppercase;
-}
-
-.conteudo {
-  border-radius: 40px 40px 0px 0px;
-  margin: 0 auto;
-  background-color: #fff;
-  width: 100%;
-  max-width: 85rem;
-  height: 120vh;
-}

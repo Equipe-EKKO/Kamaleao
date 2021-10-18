@@ -53,7 +53,7 @@ CREATE table IF NOT EXISTS tb_usuario (
     nm_nome VARCHAR(60) NOT NULL,
     nm_sobrenome VARCHAR(200) NOT NULL,
     cd_cpf VARCHAR(11) NOT NULL, -- chave unica index
-    im_foto_perfil BLOB,
+    im_foto_perfil LONGBLOB,
 	ds_usuario VARCHAR(280),
 	`dt_nascimento` DATE NOT NULL,
     `dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -201,7 +201,7 @@ CHARACTER SET utf8mb4;
 CREATE table IF NOT EXISTS tb_imagem (
 	-- atributos
 	cd_imagem INT  NOT NULL AUTO_INCREMENT, -- chave primaria
-	im_serviço BLOB NOT NULL,
+	im_serviço LONGBLOB NOT NULL,
 	`cd_versão` INT UNSIGNED NOT NULL, -- chave estrangeira
     -- definicao das chaves
     -- primaria
@@ -221,7 +221,7 @@ CREATE table IF NOT EXISTS tb_produto (
 	-- atributos
 	cd_produto INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	nm_produto VARCHAR(45) NOT NULL,
-	im_produto BLOB NOT NULL,
+	im_produto LONGBLOB NOT NULL,
 	`dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	cd_pedido INT UNSIGNED NOT NULL,
     -- definicao das chaves

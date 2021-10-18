@@ -8,13 +8,13 @@ $loader = new FilesystemLoader(DIR_ROOT . '/GitHub/Kamaleao/app/public/View/asse
 $twig = new Environment($loader);
 
 if ($_SESSION['error'] == null || !isset($_SESSION['error'])){
-    $_SESSION['error'] = "";
+    $_SESSION['error'] = " ";
     $error = $_SESSION['error'];
     echo $twig->render('login.html.twig', ['erro' => $error]);
 }else {
     $error = $_SESSION['error'];
     echo $twig->render('login.html.twig', ['erro' => $error]);
     session_unset();
-    $_SESSION['error'] = "";
+    $_SESSION['error'] = " ";
 }
 ?>

@@ -21,7 +21,7 @@ class ControllerCadastro{
       return false;
     }
     else if (v::cpf()->validate($this->cpf) == false){ #verifica se o cpf está correto
-      $_SESSION["error"] = 'Digite o cpf corretamente!';
+      $_SESSION["error"] = 'Digite o CPF corretamente!';
       header("Location: /Github/Kamaleao/app/public/view/pré_login/cadastro/cadastro.php");
       return false;
     }else if (v::stringType()->length(7, null)->validate($this->senha) == false ){ #verifica se a senha contém no mínimo 7 caracteres
