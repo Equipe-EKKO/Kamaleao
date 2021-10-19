@@ -24,9 +24,10 @@
       {% block div_container %}
       <div class="container">
          <div class="anuncio">
-            <main>
-            </main>
-            <aside>
+            <div class="desenho">
+            </div>
+            
+            <div class="float">
                <h1>Título do Serviço</h1>
                <h2>Preço: R$50,00</h2>
                <h2>Licenças:</h2>
@@ -38,18 +39,22 @@
                   </ul>
                </div>
                <button type="submit">Solicitar Serviço</button>
-            </aside>
+
+               </div><!--float--> 
+               
+            </div><!--anuncio--> 
             
-         </div> 
+         
+
          <div class="info">
             <h1>Descrição do Serviço</h1>
                <div class="sobre">
-               <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing."</p>
+               <p></p>
                </div>
             <h1>Outros Anúncios</h1>   
                <div class="anun">
                </div>
-         </div>     
+         </div>  <!--info-->   
       </div>
       {% endblock div_container %}
 

@@ -12,24 +12,24 @@
     {% block form_name %}"form_anuncio"{% endblock form_name %}
         {% block action_path %}{% endblock action_path %}
             {% block conteudo %}
-                <h1>Anunciar</h1>
+                <h1>Anunciar um Serviço</h1>
                 <div class ="grid_anuncio">
                     <div class="left">
-                        <p>Título</p>
-                        <input type="text" id="titulo" name="titulo" />
-                        <p>Descrição do Produto</p>
-                        <textarea id="descricao" name="descricao" rows="5"></textarea>
+                        <p>Título do anúncio</p>
+                        <input type="text" id="titulo" name="titulo" placeholder="Título para o seu anúncio"/>
+                        <p>Descrição do serviço</p>
+                        <textarea id="descricao" name="descricao" rows="5" placeholder="Descreva detalhadamente o serviço que será oferecido..."></textarea>
                         <p>Escolha uma imagem para o Anúncio:</p>
                             <label for="imagem">Escolher arquivo</label>
-                            <input type="file" id="imagem" name="imagem" accept="image/png, image/jpeg"></br>
-                        
+                            <input type="file" id="imagem" name="imagem" accept="image/png, image/jpeg"></br></br>
+                            <span id="file-name"></span>                        
                         
                     </div>
                     <div clas="rigth">
-                        <p>Preço mínimo para o serviço</p>
-                        <input type="number" min="0" max="10000" id="preco" name="preco" />
-                        <p>Preço máximo para o serviço</p>
-                        <input type="number" min="0" max="10000" id="preco" name="preco" />
+                        <p>Preço mínimo</p>
+                        <input type="number" min="0" max="10000" id="preco" name="preco" placeholder="Preço mínimo para o serviço"/>
+                        <p>Preço máximo</p>
+                        <input type="number" min="0" max="10000" id="preco" name="preco" placeholder="Preço máximo para o serviço"/>
                         <p>Tipos de Licenças</p> 
                         <div class="check"><!-- checkbox para as licencas -->
                             <input type="checkbox" id="licenca1" name="licenca1" value="n_comercial">
@@ -43,6 +43,14 @@
                 </div>
                 
                 <input type="submit" class="botao" name="acao" value="Anunciar" /> <br>
+                <script>
+                    var $input = document.getElementById('imagem'),
+                    $fileName = document.getElementById('file-name');
+
+                    $input.addEventListener('change', function(){
+                    $fileName.textContent = this.value;
+                    });
+                </script>
                 {% endblock conteudo %}
 </body>
 </html>

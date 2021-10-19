@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+{% block def %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    {% block title %}Solicitar{% endblock %}
+    {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/solicitar.css"{% endblock hrefcss %}
+</head>
+{% endblock def %}
+{% block body %}
+<body>
+    {% block form_name %}"form_solicitar"{% endblock form_name %}
+        {% block action_path %}{% endblock action_path %}
+            {% block conteudo %}
+                <h1>Solicitar serviço</h1>
+                <div class ="grid_solicitar">
+                    <div class="left">
+                        <p>Título do serviço</p> <!-- titulo do anuncio que o comprador solicitou -->
+                        <div class="imagem">
+                        </div>
+                        <p>Nome do Artista</p>
+                        <p>Descrição do serviço</p> 
+                        <div class="desc">
+                            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna."</p>
+                        </div>
+                                                    
+                    </div>
+                    <div class="right">
+                        <p>Descrição do pedido</p>
+                        <textarea id="descricao" name="descricao" rows="5" placeholder="Descreva detalhadamente o serviço que será solicitado..."></textarea>
+                        <p>Data limite para a entrega</p>
+                        <input type="date" id="data_entrega" name="data_entrega" />
+                        <p>Tipo de Licença</p>
+                        <select name="select_filtro" id="select_filtro">
+                            <option value="" selected="true" disabled="disabled">Licença</option>
+                            <option value="">Uso Não-Comercial</option>
+                            <option value="">Uso Comercial</option>
+                            <option value="">De Download</option>
+                        </select>  
+
+                    </div>                              
+                </div>
+
+                <input type="submit" class="botao" name="acao" value="Solicitar" /> <br>
+            <script>
+                var $input = document.getElementById('imagem'),
+                 $fileName = document.getElementById('file-name');
+
+                $input.addEventListener('change', function(){
+                $fileName.textContent = this.value;
+                });
+            </script>
+                {% endblock conteudo %}
+</body>
+</html>
+{% endblock body %}
