@@ -89,7 +89,7 @@ class Usuario extends Participante {
             if ($contaLinha == 1 ) { # estrutura condicional que verifica se o valor retornado no select corresponde a apenas e somente 1, e se sim...
                 $this->setEmail($email);
                 $this->setSenha($senha);
-                $stmt = $banco->prepare("SELECT l.nm_username, im_foto_perfil, ds_usuario FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login WHERE l.nm_email = :email");
+                $stmt = $banco->prepare("SELECT l.nm_username, us.im_foto_perfil, us.ds_usuario, us.nm_nome, us.nm_sobrenome, us.cd_cpf, us.dt_nascimento FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login WHERE l.nm_email = :email");
                 /*Substitui os placeholders da query preparada*/
                 $stmt->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
                 /*Tem q fazer o select funcionar depois q já tiver bagulhado - mas agora vai ser gambiarra*/
@@ -102,6 +102,10 @@ class Usuario extends Participante {
                     }else {
                         $sobre = $resultados['ds_usuario'];
                     }
+                    $this->setNome($resultados['nm_nome']);
+                    $this->setSobrenome($resultados['nm_sobrenome']);
+                    $this->setCpf($resultados['cd_cpf']);
+                    $this->setData_nascimento($resultados['dt_nascimento']);
                     $this->setPerfil(new PerfilProprio($this->getUsername(), $sobre));
                     $this->perfil->exibeInformacao();
                     return true; # seta o retorno da função como verdadeiro
@@ -295,6 +299,17 @@ class Usuario extends Participante {
         $this->setSobrenome($sobrenome);
         $this->setCpf($cpf);
         $this->setData_nascimento($data_nascimento);
+    }
+    /* Destructor -- A função que é chamada automaticamente ao unset/set null um objeto desta classe */
+    public function __destruct() {
+        $this->setEmail("");
+        $this->setCpf("");
+        $this->setData_nascimento("");
+        $this->setNome("");
+        unset($this->perfil);
+        $this->setSenha("");
+        $this->setSobrenome("");
+        $this->setUsername("");
     }
     /*GETTERS*/
     public function getNome(){

@@ -20,7 +20,7 @@ function recebeCadPosts(string $nome, string $sobrenome, string $dtNascimento, s
 }
 
 // Função chamada no controller para realizar o login de usuário/administrador
-function recebeLogPosts(string $email, string $senha) { # define que os parametros a serem passados devem ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller
+function recebeLogPosts(string $email, string $senha):void { # define que os parametros a serem passados devem ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller
     /* De uma maneira geral, o programa segue a seguinte lógica:
         => Instanciar as duas classes possíveis que fazem login
         => Estrutura condicional onde a primeira situação possível é tentar chamar o método que realiza o login, nos dois objetos instanciados, e verificar se ambos os resultados serão falsos
@@ -32,6 +32,7 @@ function recebeLogPosts(string $email, string $senha) { # define que os parametr
         $_SESSION["error"] = 'Não encontramos nenhum usuário com estas credenciais, tente novamente!';# exibe que o resultado caso as duas tentativas de login sejam falsas é que os dados que o cliente inseriu não estão registrados no banco de dados
         header("Location: /Github/Kamaleao/app/public/view/pré_login/login/login.php"); # o redireciona para a mesma página ao enviar outra header com http
     } elseif($usuario->logarConta($email, $senha) && $administrador->logarConta($email, $senha) == false) { # se apenas a tentativa no objeto Administrador for falsa...
+        $_SESSION['usuario'] = serialize($usuario);
         header("Location: /Github/Kamaleao/app/public/view/acesso_livre/home/home.php"); # o resultado caso o Usuário seja positivo e o Administrador falso, é que os dados que o cliente inseriu são referentes ao Usuário, portanto, ele carrega a página home do usuário
     } else { # se a tentativa for falsa no objeto Usuário, mas verdadeira em Administrador...
         echo "Logou como administrador LOL, XD. Parabéns! <hr>"; # o resultado caso o Usuário seja falso e o Administrador verdadeiro, é que os dados que o cliente inseriu são referentes ao Adm, portanto, ele carrega a página home do adm
@@ -72,5 +73,11 @@ function recebeSenhaRedPost(string $endemail, string $newSenha):bool {
         # exibe para o cliente que o email de recuperação de senha NÃO foi enviado e que houve um erro, retornando a função como false
         return false;
     endif;
+}
+// Função chamada no controller para realizar o LogOff
+function fazLogOff(object $objUsuario) {
+    unset($objUsuario);
+    unset($usuario);
+    header("Location: /Github/Kamaleao/app/public/view/acesso_livre/index/index"); # envia header que redireciona a pessoa para a header
 }
 ?>

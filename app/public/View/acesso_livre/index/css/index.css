@@ -21,7 +21,7 @@ body {
     margin: 0 auto;
     padding: 0 auto;
     width: 100%;
-    height: 10vh;
+    height: 38.7rem;
 }
 
 .kamaleao {
@@ -32,16 +32,17 @@ body {
 }
 
 .arrow {
+    position: absolute;
     margin: 0 auto;
     padding: 0 auto;
     width: 100%;
     text-align: center;
+    top: 180px;
 }
 
 .arrow i {
     color: rgb(255, 255, 255);
     font-size: 70px;
-    margin-bottom: 15rem;
 }
 
 .arrow i:hover {
@@ -50,7 +51,7 @@ body {
 
 .infos {
     background-color: white;
-    height: 70rem;
+    height: 75rem;
     display: grid;
     grid-template-areas: 
         "texto1 texto1 texto1"
@@ -59,7 +60,9 @@ body {
 }
 
 .infos p {
-    text-align: center;
+    text-align: justify;
+    font-family:  Calibri, 'Gill Sans', 'Gill Sans MT','Trebuchet MS', sans-serif;
+    font-size: 18px;
 }
 
 .texto1 {
@@ -102,7 +105,7 @@ body {
 .exemplo {
     height: 12.5rem;
     margin-top: -5%;
-    
+    margin-left: 100px;
 }
 
 .index {
@@ -165,8 +168,6 @@ body {
     display: block;
 }
 
-
-
 .about_us {
     background-color: rgb(255, 255, 255);
     width: 40rem;
@@ -188,7 +189,7 @@ body {
     font-weight: 400;
     font-size: 32px;
     color: rgba(54, 54, 54, 1);
-    padding-top: 3rem;
+    padding-top: 2rem;
 }
 
 .about_us > button {
@@ -214,7 +215,7 @@ body {
     border: none;
     box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
     transform: 3.0s;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 @media only screen and (max-width: 800px) {

@@ -1,10 +1,8 @@
-.filtro {
+.nav_filtro {
   display: none;
 }
-/* Header de Perfil */
 
-
-.container {
+/* .container {
   position: relative;
   z-index: -1;
   margin: 0 auto;
@@ -13,66 +11,60 @@
   max-width: 85rem;
   height: 100vh;
   padding-top:160px;
-}
+} */
 
 .perfil_icon {
-    background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 25%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.4) 75%, rgba(0,0,0,0) 100%);
-    max-width: 85rem;
-    height: 250px;
-    margin: auto;
+    text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+    width: 60%;
+    height: 225px;
+    margin:auto;
+    padding-bottom: 3rem;
     text-align: center;
-    padding-top:  150px;
+    padding-top:  80px;
+    font-family: 'Urbanist';
   }
   
   .icone_perf {
     color: #fff;
-    font-size: 150px;
+    font-size: 125px;
   }
 
   .icone_perf:hover {
-    color: #ccc;
+    color: #fff;
   }
 
    .perfil_icon h1 {
      color: #fff;
      font-size: 40px;
-
+     text-transform: lowercase;
   }
 
-  /* Abas do Container */
-
-  .abas { 
-    width: 100%;
+  .perfil_icon p {
+    padding: 1rem 0rem 2rem 0rem;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
   }
-
-  .all {
-    margin: 0 auto;
-    background-color: #fff;
-    width: 100%;
-    max-width: 85rem;
-    height: 120vh;
+  
+  main {
+    margin-top: 5rem;
+    z-index: inherit;
+    margin-bottom: 4rem;
   }
 
   .tab {
-    background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 25%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.4) 75%, rgba(0,0,0,0) 100%);
     margin: auto;
-    width: 85rem;
-    line-height: 5rem;
+    width: 80%;
+    max-width: 85rem;
+    display:grid;
+    grid-template-columns: auto auto auto;
   }
-
+  
   .tab div {
     display: inline-block;
     cursor: pointer;
-    margin-right: -3.5px;
     background-color: rgb(245, 245, 245);
     border-radius: 30px 30px 0px 0px;
-    width: 33.30%;
-  }
-
-  .tab div:last-child {
-    margin-left: 0.25px;
   }
   
   /* Style the buttons inside the tab */
@@ -98,16 +90,30 @@
   .tab button.active {
     background-color: #ccc;
   }
+  .tab button:focus {
+    background-color: #ccc;
+  }
+  
+  .all {
+    margin: 0 auto;
+    padding-top: 1rem;
+    background-color: #fff;
+    width: 80%;
+    max-width: 85rem;
+    height: 120vh;
+    border-radius: 0px 0px 30px 30px;
+  }
   
   /* Style the tab content */
   .tabcontent {
     float: left;
     padding: 0px 12px;
-    width: 70%;
+    width: 80%;
     border-left: none;
     height: 300px;
     display: none;
   }
+
   
   /* Clear floats after the tab */
   .clearfix::after {
@@ -141,14 +147,15 @@
   }
 
   @media screen and (max-width: 800px) {
+    
     .tab div {
       display:block;
     }
 
     .tab {
+      display: block;
       background: none;
       text-align: center;
-      width: 85rem;
     }
 
     #bt1, #bt2, #bt3 {

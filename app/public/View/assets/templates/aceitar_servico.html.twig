@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+{% block def %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    {% block title %}Solicitação de Serviço{% endblock %}
+    {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/aceitar_servico.css"{% endblock hrefcss %}
+</head>
+{% endblock def %}
+{% block body %}
+<body>
+    {% block form_name %}"form_aceitar"{% endblock form_name %}
+        {% block action_path %}{% endblock action_path %}
+            {% block conteudo %}
+                <h1>Informações do Pedido</h1>
+                <div class ="div_aceitar">
+                        <p>Título do pedido:</p>
+                        <div class="variavel">
+                            <p>Desenho legal de um macaco</p>
+                        </div>  
+                        <p>Data limite para a entrega:</p>
+                        <div class="variavel">
+                            <p>15/11/2021</p>
+                        </div>
+                        <p>Tipo de Licença:</p>
+                        <div class="variavel">
+                            <p>Licença de uso não-comercial</p>
+                        </div>  
+                        <p>Descrição do pedido:</p>
+                        <div class="descricao">
+                            <p>Queria um desenho de um macaco bem legal</p>
+                        </div>
+                         
+                </div>
+
+                <input type="submit" class="botao1" name="acao" value="Aceitar" />
+                <input type="submit" class="botao2" name="acao" value="Negar" />
+            <script>
+                var $input = document.getElementById('imagem'),
+                 $fileName = document.getElementById('file-name');
+
+                $input.addEventListener('change', function(){
+                $fileName.textContent = this.value;
+                });
+            </script>
+                {% endblock conteudo %}
+</body>
+</html>
+{% endblock body %}

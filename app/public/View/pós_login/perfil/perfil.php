@@ -11,7 +11,7 @@ $twig = new Environment($loader);
 if (isset($_SESSION['usernameProprio'])) {
     $username = $_SESSION['usernameProprio'];
     if (!isset($_SESSION['descProprio']) || empty($_SESSION['descProprio']) || $_SESSION['descProprio'] == "" || $_SESSION['descProprio'] == null) {
-        $sobre = "O usuário ainda não adicionou uma descrição ao perfil.";
+        $sobre = "";
     }
     else {
         $sobre = $_SESSION['descProprio'];

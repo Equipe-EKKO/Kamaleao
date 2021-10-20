@@ -32,8 +32,8 @@
                {% block menu %}
                   <ul class="dropdown"> <!--ENGLOBA TD-->
                      <li class="icone">
-                        <a class="dropbtn"><i onmouseup="mostra('noti')" onmouseout="esconde('noti')" class='bx bx-bell' id="icon_nav"></i></a>
-                        <ul id="noti" class="notificacao">
+                        <a onclick="esconde('perf'); esconde('menu'); mostra('noti');" class="dropbtn"><i class='bx bx-bell' id="icon_nav"></i></a>
+                        <ul id="noti" class="noti">
                            <li><a href="#" class="opt">notificacao 1</a></li>
                            <li><a href="#" class="opt">notificacao 2</a></li>
                            <li><a href="#" class="opt">notificacao 3</a></li>
@@ -41,17 +41,16 @@
                      </li>
 
                      <li class="icone">
-                        <a class="bt2"><i onmouseup="mostra('perf')" onmouseout="esconde('perf')" class='bx bx-user-circle' id="icon_nav"></i></a>
+                        <a onclick="esconde('noti'); esconde('menu'); mostra('perf');" class="bt2"><i class='bx bx-user-circle' id="icon_nav"></i></a>
                         <ul id="perf" class="perfil">
-                           <li><a href="/Github/Kamaleao/app/public/view/pós_login/perfil/perfil.php" class="opt">Ver perfil</a></li>
+                           <li><a href="/Github/Kamaleao/app/private/Controller/controllerChamaPerfil.php" class="opt">Ver perfil</a></li>
                            <li><a href="#" class="opt">Configurar conta</a></li>
-                           <li><a href="#" class="opt">Adicionar conta +</a></li>
-                           <li><a href="#" class="opt">Sair</a></li>
+                           <li><a href="/Github/Kamaleao/app/private/Controller/controllerLogOff.php" class="opt">Sair</a></li>
                         </ul>
                      </li>
 
                      <li class="icone">
-                        <a class="bt3"><i onmouseup="mostra('menu')" onmouseout="esconde('menu')" class='bx bx-menu' id="icon_nav"></i></a>
+                        <a onclick="esconde('noti'); esconde('perf'); mostra('menu');" class="bt3"><i class='bx bx-menu' id="icon_nav"></i></a>
                         <ul id="menu" class="menu">
                            <li><a href="#" class="opt">Sobre o Kamaleão</a></li>
                            <li><a href="#" class="opt">Configurações</a></li>
@@ -66,15 +65,17 @@
          {% endblock nav_menu %}
          
          {% block nav_filtro %}
-         <nav class="filtro">  <!--filtro-->
+         <nav class="nav_filtro">  <!--filtro-->
             <select name="select_filtro" id="select_filtro">
+            <div class="filtro_items">
                <option value="" selected="true" disabled="disabled">Filtro</option>
                <option value="">Arte Digital</option>
                <option value="">Design</option>
                <option value="">Logos</option>
                <option value="">Concept Arts</option>
-               <option value="">Uso pessoal</option>
                <option value="">Uso comercial</option>
+               <option value="">Uso não-comercial</option>
+            </div>
             </select>
          </nav> <!--filtro-->
          {% endblock nav_filtro %}
@@ -124,8 +125,6 @@
             </div> <!--container-footer-->
          </footer>
          {% endblock footer %}
-
-         <script src="Github/Kamelao/app/public/View/pós_login/js/function.js"></script>
    {% endblock body %}
    </body>
 </html>

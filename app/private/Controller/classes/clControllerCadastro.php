@@ -24,6 +24,10 @@ class ControllerCadastro{
       $_SESSION["error"] = 'Digite o CPF corretamente!';
       header("Location: /Github/Kamaleao/app/public/view/pré_login/cadastro/cadastro.php");
       return false;
+    }else if (v::noWhitespace()->validate($this->username) == false){ #verifica se o username não tem espacos ou /n
+      $_SESSION["error"] = 'Seu username não pode conter espaços!';
+      header("Location: /Github/Kamaleao/app/public/view/pré_login/cadastro/cadastro.php");
+      return false;
     }else if (v::stringType()->length(7, null)->validate($this->senha) == false ){ #verifica se a senha contém no mínimo 7 caracteres
       $_SESSION["error"] = 'Sua senha deve conter pelo menos 7 caracteres!';
       header("Location: /Github/Kamaleao/app/public/view/pré_login/cadastro/cadastro.php");

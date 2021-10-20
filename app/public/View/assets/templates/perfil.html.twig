@@ -25,51 +25,67 @@
       <!-- conteudo de perfil -->
       {% block perfil_icon %}
       <div class="perfil_icon">
-         <a href="#" class="icone_perf"><i class='bx bxs-user-circle'></i></a>
-         <h1> {{Usuario}} </h1>
+         <a class="icone_perf"><i class='bx bxs-user-circle'></i></a>
+        
+         <h1> @{{Usuario}} </h1>
+
+         {% if Descricao != "" %}
+         <p>{{Descricao}}</p>
+         {% endif %}
+
       </div>
       {% endblock perfil_icon %}
 
       {% block div_container %}
-      <div class="tab">
-        <div><button id="bt1" class="tablinks" onclick="openTab(event, 'Inventário')"> <strong>inventário</strong> </button></div>
-        <div><button id="bt2" class="tablinks" onclick="openTab(event, 'Sobre')"> <strong>sobre</strong> </button></div>
-        <div><button id="bt3" class="tablinks" onclick="openTab(event, 'Comissao')"> <strong>comissões</strong></button></div>
-      </div>
-
-      <div class="all">
-        <div id="Inventário" class="tabcontent">
-          <p> Conteúdo do Inventário </p>
+      <main>
+        <div class="tab">
+          <div><button id="bt1" class="tablinks" onclick="openTab(event, 'Inventário', 'bt1')" autofocus> <strong>inventário</strong> </button></div>
+          <div><button id="bt2" class="tablinks" onclick="openTab(event, 'Serviços', 'bt2')"> <strong>Serviços</strong></button></div>
+          <div><button id="bt3" class="tablinks" onclick="openTab(event, 'Comissao', 'bt3')"> <strong>comissões</strong></button></div>
         </div>
 
-        <div id="Sobre" class="tabcontent">
-          <h1> Sobre <i class="fas fa-pen"></i> </h1>
-            <p>{{Descricao}}</p>
-        </div>
+        <div class="all">
+          <div id="Inventário" class="tabcontent">
+            <p> Conteúdo do Inventário </p>
+          </div>
 
-        <div id="Comissao" class="tabcontent">
-          <p> Conteúdo da Comissão </p> 
-        </div>
+          <div id="Sobre" class="tabcontent">
+            <h1> Sobre <i class="fas fa-pen"></i> </h1>
+              <p>{{Descricao}}</p>
+          </div>
 
-        <div class="clearfix"></div>
+          <div id="Serviços" class="tabcontent">
+            <p> Conteúdo dos Serviços </p>
+          </div>
 
-        <script>
-        function openTab(evt, contentName) {
-          var i, tabcontent, tablinks;
-          tabcontent = document.getElementsByClassName("tabcontent");
-          for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-          }
-          tablinks = document.getElementsByClassName("tablinks");
-          for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-          }
-          document.getElementById(contentName).style.display = "block";
-          evt.currentTarget.className += " active";
-        }  
-        </script>
+          <div id="Comissao" class="tabcontent">
+            <p> Conteúdo da Comissão </p> 
+          </div>
 
-      </div> <!--all-->
+          <div class="clearfix"></div>
+
+          <script>
+            function openTab(evt, contentName, idName) {
+              var i, tabcontent, tablinks;
+              tabcontent = document.getElementsByClassName("tabcontent");
+              for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+              }
+              tablinks = document.getElementsByClassName("tablinks");
+              for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+              }
+              document.getElementById(contentName).style.display = "block";
+              evt.currentTarget.className += " active";
+              document.getElementById(idName).focus();
+            }
+            window.onload = function() {
+              document.getElementById('bt1').click();
+            }
+          </script>
+
+        </div> <!--all-->
+      </main>
       {% endblock div_container %}
     
       <!-- fim conteudo de perfil -->   
