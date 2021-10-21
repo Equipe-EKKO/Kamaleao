@@ -107,7 +107,7 @@ class Usuario extends Participante {
                     $this->setCpf($resultados['cd_cpf']);
                     $this->setData_nascimento($resultados['dt_nascimento']);
                     $this->setPerfil(new PerfilProprio($this->getUsername(), $sobre));
-                    $this->perfil->exibeInformacao();
+                    $_SESSION['userinfo'] = serialize($resultados);
                     return true; # seta o retorno da função como verdadeiro
                 } catch (\PDOException $e) {
                     exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema

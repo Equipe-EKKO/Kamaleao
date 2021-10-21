@@ -5,7 +5,6 @@ require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-
 $loader = new FilesystemLoader(DIR_ROOT . '/GitHub/Kamaleao/app/public/View/assets/templates/', '/templates');
 $twig = new Environment($loader);
 
@@ -28,6 +27,6 @@ if ($username === "userIndefinido"):
     $_SESSION["error"] = 'Você precisa estar logado para acessar esta página!';
     header("Location: /Github/Kamaleao/app/public/view/pré_login/login/login.php");
 else:
-    echo $twig->render('perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre]);
+    echo $twig->render('config_perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre]);
     ob_end_flush();
 endif;

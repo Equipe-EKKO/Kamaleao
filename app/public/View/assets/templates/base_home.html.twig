@@ -8,6 +8,7 @@
       <!-- Esse primeiro CSS é referente ás configurações gerais, o segundo é o css espefico que cada página terá -->
       <link rel="stylesheet" href="/GitHub/Kamaleao/app/public/View/pós_login/style/bootstrap-geral.css">
       <link rel="stylesheet" href={% block hrefcss %}{% endblock hrefcss %}>
+      <link rel="stylesheet" href="/GitHub/Kamaleao/app/public/View/pós_login/style/modal.css">
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@500&display=swap" rel="stylesheet">
@@ -16,8 +17,10 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
       <script src="https://kit.fontawesome.com/39478fd21b.js" crossorigin="anonymous"></script>
       <script src="https://kit.fontawesome.com/881bb3d101.js" crossorigin="anonymous"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
       <script src="/Github/Kamaleao/app/public/View/pós_login/js/bootstrap.js" type="text/javascript"></script>
+      <script src={% block srcjs %}{% endblock srcjs %} type="text/javascript"></script>
+      <script src="https://kit.fontawesome.com/d50c327cc4.js" crossorigin="anonymous"></script>
       {% endblock head %}
    </head>
    <body>
@@ -28,12 +31,12 @@
          <header>
             <nav class="header"> <!--<i class='bx bx-bell' id="icon_nav"></i>-->
                <img class="logo" src="/GitHub/Kamaleao/app/public/View/assets/img/LogoKamaleao1.png" alt="logo">
-               <div class="search"><input type="text" placeholder="Pesquisar..."/></div>
+               <div class="search"><input type="text" placeholder="Pesquisar..." /></div>
                {% block menu %}
                   <ul class="dropdown"> <!--ENGLOBA TD-->
                      <li class="icone">
-                        <a onclick="esconde('perf'); esconde('menu'); mostra('noti');" class="dropbtn"><i class='bx bx-bell' id="icon_nav"></i></a>
-                        <ul id="noti" class="noti">
+                        <a onclick="mostraNoti()" onmouseover="escondePerf()" class="dropbtn"><i class='bx bx-bell' id="icon_nav"></i></a>
+                        <ul onmouseleave="escondeNoti()" id="noti" class="noti">
                            <li><a href="#" class="opt">notificacao 1</a></li>
                            <li><a href="#" class="opt">notificacao 2</a></li>
                            <li><a href="#" class="opt">notificacao 3</a></li>
@@ -41,17 +44,17 @@
                      </li>
 
                      <li class="icone">
-                        <a onclick="esconde('noti'); esconde('menu'); mostra('perf');" class="bt2"><i class='bx bx-user-circle' id="icon_nav"></i></a>
-                        <ul id="perf" class="perfil">
+                        <a onclick="mostraPerf()" class="bt2"><i class='bx bx-user-circle' id="icon_nav"></i></a>
+                        <ul onmouseleave="escondePerf()" id="perf" class="perfil">
                            <li><a href="/Github/Kamaleao/app/private/Controller/controllerChamaPerfil.php" class="opt">Ver perfil</a></li>
-                           <li><a href="#" class="opt">Configurar conta</a></li>
+                           <li><a href="/Github/Kamaleao/app/public/view/pós_login/config_perfil/config_perfil.php" class="opt">Configurar conta</a></li>
                            <li><a href="/Github/Kamaleao/app/private/Controller/controllerLogOff.php" class="opt">Sair</a></li>
                         </ul>
                      </li>
 
                      <li class="icone">
-                        <a onclick="esconde('noti'); esconde('perf'); mostra('menu');" class="bt3"><i class='bx bx-menu' id="icon_nav"></i></a>
-                        <ul id="menu" class="menu">
+                        <a onclick="mostraMenu()" class="bt3"><i class='bx bx-menu' id="icon_nav"></i></>
+                        <ul onmouseleave="escondeMenu()" id="menu" class="menu">
                            <li><a href="#" class="opt">Sobre o Kamaleão</a></li>
                            <li><a href="#" class="opt">Configurações</a></li>
                            <li><a href="#" class="opt">Contato</a></li>
@@ -94,7 +97,7 @@
             <div class="container-footer">
                <div class="linha">
                   <div class="coluna">
-                     <h4>Kameleão</h3>
+                     <h4>Kamaleão</h4>
                      <hr/>
                         <ul class="ul-coluna">
                            <li class="li-coluna"><a href="#">Sobre nós</a></li>
@@ -103,7 +106,7 @@
                         </ul>
                   </div> <!--coluna-->
                   <div class="coluna">
-                     <h4>Ajuda</h3>
+                     <h4>Ajuda</h4>
                      <hr/>
                         <ul class="ul-coluna">
                            <li class="li-coluna"><a href="#">FAQ</a></li>
@@ -112,7 +115,7 @@
                         </ul>
                   </div> <!--coluna-->
                   <div class="coluna">
-                     <h4>Contato</h3>
+                     <h4>Contato</h4>
                      <hr/>
                         <ul class="ul-icons">
                            <li class="li-icons"><i class='bx bxl-instagram'></i></li>

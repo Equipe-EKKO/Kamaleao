@@ -85,10 +85,6 @@ li{
   display: block;
 }
 
-.esconde {
-  display: none;
-}
-
 .opt{
   color: #363636;
   display: block;
@@ -318,8 +314,22 @@ hr:last-of-type {
 
 @media screen and (max-width:800px) {
 
-  .logo {
-    margin-left: 0;
+
+
+  #noti, #perf, #menu {
+    right: 5.3rem;
+  }
+
+  #noti {
+    top: 0;
+  }
+
+  #perf {
+    top: 5rem;
+  }
+
+  #menu {
+    top: 10rem;
   }
 
   .header {
@@ -346,8 +356,30 @@ hr:last-of-type {
     padding: 0;
   }
 
+  footer {
+    height: 20rem;
+  }
+
   li {
     display: block;
+  }
+
+  .coluna {
+    padding-right: 4rem;
+    margin-top: 1rem;
+  }
+
+  .coluna:last-of-type {
+    margin: 0 auto;
+    margin-top: 2rem;
+  }
+
+  .ul-icons {
+    margin-left: -3rem;
+  }
+
+  .li-icons {
+    display: inline-block;
   }
 
 }

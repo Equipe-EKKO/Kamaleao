@@ -24,10 +24,6 @@ class PerfilProprio extends Perfil {
     function updateDescricao() {
 
     }
-    public function exibeInformacao():void {
-        Session::setSession('usernameProprio', $this->getUsername());
-        Session::setSession('descProprio', $this->getDescricao());
-    }
     function criarAnuncio() {
 
     }

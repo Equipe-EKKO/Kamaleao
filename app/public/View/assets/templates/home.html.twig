@@ -1,36 +1,30 @@
 {% extends "base_home.html.twig" %}
-{% block perfil %}
+{% block home %}
 {# document #}
    {# head #}
       {% block title %} Home {% endblock title %}
-      {% block hrefcss %}{% endblock hrefcss %}
+      {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/home.css"{% endblock hrefcss %}
    {# endhead #}
    {# body #}
       <!-- header da página definida em base_perfil -->
-      {# nav-menu #}
-         {# menu #}
-         
-         {# end menu #}
-      
-      {# end nav-menu #}  
-      <!-- fim header -->
-      <!-- filtro de pesquisa -->
-      {# nav-filtro #}
-      
-      {# end nav-filtro #}
-      <!-- fim filtro de pesquisa -->
-
-      <!-- conteudo de perfil -->
+      <!-- conteudo da home -->
       {% block div_container %}
       <div class="container">
+         <section class="grid_home">
+            <div class="item">
+               <div class="anuncio_img">
+               </div>
+               <div class="anuncio_text">
+               <h1>Título do anúncio</h1>
+               <i id="icone_anun" class='bx bxs-user-circle'></i>
+               <p>Artista</p>
+               </div> <!--anuncio_text-->
+            </div> 
+         </section>
       </div>
       {% endblock div_container %}
-      <!-- fim conteudo de perfil -->   
+      <!-- fim conteudo-->   
 
-      <!-- footer da página definida em base_perfil -->
-      {# block div_footer #}
-      {# end div_footer #}
-      <!-- fim footer -->
    {# end body #}
 {# end document #}
-{% endblock perfil %}
+{% endblock home %}

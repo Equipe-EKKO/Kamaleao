@@ -1,0 +1,57 @@
+{% extends "base_home.html.twig" %}
+{% block config_perfil %}
+{# document #}
+   {# head #}
+      {% block title %} Configuração de Perfil {% endblock title %}
+      {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/config_perfil.css"{% endblock hrefcss %}
+      {% block srcjs %}"/GitHub/Kamaleao/app/public/View/pós_login/js/config_perfil.js"{% endblock srcjs %}
+   {# endhead #}
+   {# body #}
+      <!-- header da página definida em base_perfil -->
+
+
+      <!-- conteudo da pagina -->
+      {% block div_container %}
+        <div class="container">
+          <h1>Configurações de Perfil</h1>
+            <div class="box">
+              <h2>Nome de Usuário</h>
+              <div class="box_info">
+              <p>{{Usuario}}</p>
+              </div>
+              <h2>E-mail</h>
+              <div class="box_info">
+              <p>tivitin14ae@gmail.c</p>
+              </div>
+              <h2>Senha</h>
+              <div class="box_info">
+              <p>****</p>
+              </div>
+              <h2>Chave pix para o recebimento:</h>
+              <div class="box_info">
+              <p>chave</p>
+              </div>
+            </div>
+          <button class="modal_button" id="modalEdita">Editar</button>
+        </div>
+        <div class ="modal_background">
+          <fieldset id="modal" class="modal">
+            <form method="POST" action="">
+              <h2>Editar informações</h2>
+              <p>Nome de usuário:</p>
+              <input type="text" id="username" name="username" value={{Usuario}}>
+              <p>Descrição:</p>
+                <textarea id="descricao" name="descricao" rows="5" maxlength="280">{{Descricao}}</textarea>
+              <p>Email:</p>
+              <input type="text" id="username" name="username" value={{Email}}>
+              <p>Senha:</p>
+              <input type="text" id="username" name="username" value={{Senha}}>
+              <p>Chave pix:</p>
+              <input type="text" id="username" name="username" value={{Chave}}>
+              <button type="submit" class="botao" name="submit" id="">Alterar</button>
+             </form>
+          </fieldset>
+        </div>
+
+      {% endblock div_container %}
+{% endblock config_perfil %}

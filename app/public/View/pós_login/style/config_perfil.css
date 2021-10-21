@@ -1,0 +1,130 @@
+*{
+  font-family: Arial;
+}
+
+.nav_filtro {
+  display: none;
+}
+
+h1{
+  text-align: center;
+}
+
+button{
+  border: 1px solid #363636;
+  width: 90%;
+  height: 3rem;
+  max-width: 200px;
+  background-color: transparent;
+  border-radius: 15px;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding: 2px;
+  cursor: pointer;
+  font-size: 30px;
+  color: #363636;
+  margin-left:42.5%;
+}
+
+button:hover{
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  background-image: url("/GitHub/Kamaleao/app/public/View/assets/img/botao.jpg");
+  background-size: 100%;
+  transition: 0.3s;
+  border: none;
+  box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
+}
+
+.modal_background{
+  position: fixed;
+  width:100%;
+  height: 100vh;
+  top: 0;
+  left:0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  visibility: hidden;
+  /*transition: visibility 0s ,opacity 0.5s;*/
+}
+/*
+.modal_background_mostrar{
+  visibility: visible;
+  opacity:0;
+}*/
+
+.modal{
+  display:none;
+  width: 25rem;
+  height: 26rem;
+  padding: 4rem 4rem 2rem 4rem;
+  border: 1px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  background-color: white;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
+.modal::-webkit-scrollbar, textarea::-webkit-scrollbar { 
+  width: 20px;
+}
+.modal::-webkit-scrollbar-thumb, textarea::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #1D2671, #C33764); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border-radius: 100px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+.modal::-webkit-scrollbar-thumb:hover, textarea::-webkit-scrollbar-thumb:hover{
+  background: linear-gradient(0deg, #fdc830, #f37335);
+  border-radius: 100px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}  
+
+.modal::-webkit-scrollbar-track, textarea::-webkit-scrollbar-track {
+  box-shadow: 0 0 0 transparent;
+  border-radius: 100px;
+  height: 5px;
+}
+.modal::-webkit-scrollbar-track-piece{
+    background-color: transparent;
+    border-radius: 6px;
+}
+
+.modal h2{
+  text-align: center;
+}
+
+.modal p{
+  font-size: 22px;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.modal input[type="text"], .modal textarea{
+  width: 100%;
+  height: 2.5rem;
+  font-size: 18px;
+  border-radius: 15px;
+  border: 1px solid #363636;
+  padding-left: 10px;
+}
+
+.modal textarea{
+  resize: none;
+  padding: 0.5rem;
+  width: 100%;
+  height: 5rem;
+  font-size: 18px;
+  border-radius: 15px;
+  border: 1px solid #363636;
+}
+
+.modal button{
+  margin-left:27.5%;
+}
+

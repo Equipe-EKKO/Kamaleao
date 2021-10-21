@@ -53,6 +53,7 @@ CREATE table IF NOT EXISTS tb_usuario (
     nm_nome VARCHAR(60) NOT NULL,
     nm_sobrenome VARCHAR(200) NOT NULL,
     cd_cpf VARCHAR(11) NOT NULL, -- chave unica index
+		cd_pix VARCHAR(32),
     im_foto_perfil LONGBLOB,
 	ds_usuario VARCHAR(280),
 	`dt_nascimento` DATE NOT NULL,
