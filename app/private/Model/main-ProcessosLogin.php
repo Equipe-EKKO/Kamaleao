@@ -75,9 +75,19 @@ function recebeSenhaRedPost(string $endemail, string $newSenha):bool {
     endif;
 }
 // Função chamada no controller para realizar o LogOff
-function fazLogOff(object $objUsuario) {
+function fazLogOff(object $objUsuario):void {
     unset($objUsuario);
     unset($usuario);
     header("Location: /Github/Kamaleao/app/public/view/acesso_livre/index/index"); # envia header que redireciona a pessoa para a header
+}
+// Função chamada no controller para validar a senha, que posteriormente permitirá edição de dados
+function confirmaSenha(string $senha):bool {
+    $usuario = unserialize($_SESSION['usuario']);
+    $senhaReal = $usuario->getSenha();
+    if ($senha === $senhaReal) {
+        return true;
+    } else {
+        return false;
+    }
 }
 ?>
