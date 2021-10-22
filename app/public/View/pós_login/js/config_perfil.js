@@ -1,11 +1,21 @@
-// var modalbutton = document.querySelector('.modal_button');
-// var modalbackground = document.querySelector('.modal_background');
+$(document).ready(function () {
+    /* AJAX PRA MANDAR OS RESULTADOS.... SÓ DEUS NA CAUSA */
 
-// modalbutton.addEventListener('click', function(){
-//   modalbackground.classList.add('modal_background_mostrar');
-// });
-/* oiiiii */
-$(document).on('click', '#modalEdita', function () { //Ação executada no evento de clique no elemento com ID = "efeito"
-    alert("to morrendo!");
-    $('#modal').css("display", "block" ); //Insere fundo amarelo no elemento com ID = "teste"
+
+
+
+
+
+    function iniciaModal(modalID) {
+        var modal = document.getElementById(modalID);
+        modal.classList.add('show');
+        modal.addEventListener('click', (e) => {
+            if(e.target.id == modalID || e.target.className == 'close') {
+                modal.classList.remove('show');
+            }
+        });
+    }
+    var modalbtn = document.getElementById('modal-btn');
+    modalbtn.addEventListener('click', () => iniciaModal('modal1'));
 });
+

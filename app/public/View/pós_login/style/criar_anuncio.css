@@ -39,6 +39,7 @@ fieldset {
 
 fieldset h1 {
     margin-top: 2rem;
+    color: #363636;
 }
 
 .grid_anuncio p {
@@ -60,6 +61,7 @@ fieldset h1 {
 .check {
     text-align: left;
     margin-left: 1rem;
+    color: #363636;
 }
 
 form input[type=checkbox]{

@@ -12,46 +12,54 @@
 
       <!-- conteudo da pagina -->
       {% block div_container %}
-        <div class="container">
-          <h1>Configurações de Perfil</h1>
-            <div class="box">
-              <h2>Nome de Usuário</h>
-              <div class="box_info">
-              <p>{{Usuario}}</p>
-              </div>
-              <h2>E-mail</h>
-              <div class="box_info">
-              <p>tivitin14ae@gmail.c</p>
-              </div>
-              <h2>Senha</h>
-              <div class="box_info">
-              <p>****</p>
-              </div>
-              <h2>Chave pix para o recebimento:</h>
-              <div class="box_info">
-              <p>chave</p>
-              </div>
-            </div>
-          <button class="modal_button" id="modalEdita">Editar</button>
-        </div>
-        <div class ="modal_background">
-          <fieldset id="modal" class="modal">
-            <form method="POST" action="">
-              <h2>Editar informações</h2>
-              <p>Nome de usuário:</p>
-              <input type="text" id="username" name="username" value={{Usuario}}>
-              <p>Descrição:</p>
-                <textarea id="descricao" name="descricao" rows="5" maxlength="280">{{Descricao}}</textarea>
-              <p>Email:</p>
-              <input type="text" id="username" name="username" value={{Email}}>
-              <p>Senha:</p>
-              <input type="text" id="username" name="username" value={{Senha}}>
-              <p>Chave pix:</p>
-              <input type="text" id="username" name="username" value={{Chave}}>
-              <button type="submit" class="botao" name="submit" id="">Alterar</button>
-             </form>
-          </fieldset>
-        </div>
 
+
+          <div class="container">
+          {# <form>
+          <input type="text" class="input" placeholder="digite aqui seu aaa"/>
+          <input type="text" class="input" placeholder="digite aqui seu email"/>
+          <input type="text" class="input" placeholder="digite aqui seu email"/>
+          <input type="text" class="input" placeholder="digite aqui seu email"/>
+          <input type="text" class="input" placeholder="digite aqui seu email"/>
+          <input type="text" class="input" placeholder="digite aqui seu email"/>
+          <input type="text" class="input" placeholder="digite aqui seu email"/>
+          <input type="text" class="input" placeholder="digite aqui seu email"/> 
+          </form> #}
+          <button id="modal-btn" class="button">Editar</button>
+
+          <div id="md-pr" class="md-ct">
+            <div class="md">
+              <h3>Confirmação de senha</h3>
+              <form method="POST" action="/GitHub/Kamaleao/app/private/Controller/controllerVerificaSenha.php">
+                <p>Digite abaixo sua senha para fazer a confirmação.</p>
+                <input type="password" id="senha" name="senha" />
+                <input type="button" class="button" value="Validar"/>
+                {% block erro %}
+                {% if erro is defined %}  
+                    <p class="form-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        {{ erro }}
+                    </p>
+                {% endif %}
+            {% endblock erro %}
+              </form>
+            </div>
+          </div>
+ 
+          </div> <!--container-->
+
+            <div id="modal1" class="modal-container">
+            <div class="modal1">
+              <button class="close">x</button>
+              <h3>troca suas informacao ai seu merda</h3>
+              <form>
+              <p>ai embaixo so troca porra</p>
+              <input type="text" class="input" placeholder="digite aqui seu email"/>
+              <input type="text" class="input" placeholder="digite aqui sua senha"/>
+              <input type="text" class="input" placeholder="digite aqui qualquer coisa"/>
+              <input type="button" class="button" value="salvar"/>
+              </form> 
+            </div> <!--modal-->
+          </div>
       {% endblock div_container %}
 {% endblock config_perfil %}

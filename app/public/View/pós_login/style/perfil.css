@@ -106,11 +106,11 @@
   
   /* Style the tab content */
   .tabcontent {
-    float: left;
-    padding: 0px 12px;
+    margin: 0 auto;
+    padding-top: 1.5rem;
     width: 80%;
     border-left: none;
-    height: 300px;
+    height: 110vh;
     display: none;
   }
 
@@ -145,6 +145,132 @@
   #bt1:focus, #bt2:focus, #bt3:focus {
     background-color: #fff;
   }
+
+  /* Conteúdo da pagina de serviços */
+  
+  .grid_home {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 25% 25% 25% 25%;
+    background-color: #ffff;
+    width: 100%;
+    height: 100%;
+}
+
+.item {
+	margin: 0 auto;
+	background: #ffff;
+  border-radius: 10px 10px 10px 10px;
+  height: 90%;
+  width: 13rem;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: .5s;
+  display: grid;
+  grid-template-rows: 68% 12% 8% 12%;
+}
+
+.item:hover {
+  box-shadow: 0 3px 10px rgba(0,0,0,.2);
+  height: 95%;
+  width: 15rem;
+}
+
+.item:hover h2 {
+  color: #F53446;
+}
+
+
+.anuncio_img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px 10px 0 0;
+  background-color: powderblue;
+}
+
+.anuncio_text {
+  padding: 0.5rem;
+  width: 93%;
+}
+
+.text_flex {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.7rem;
+}
+
+.anuncio_titulo h1 {
+  font-size: 12pt;
+  color: #363636;
+  margin: 0.5rem;
+}
+
+.anuncio_preço h2 {
+  font-size: 12pt;
+  color: #363636;
+  transition: .4s;
+  margin-right: 0.5rem;
+  float: right;
+}
+
+.anuncio_user h3 {
+  color: #808080;
+  font-size: 10pt;
+  margin: 0.2rem 0.5rem;
+  
+}
+
+.opacidade {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px 10px 0 0;
+  transition: .5s;
+  display: none;
+  align-items: center;
+}
+
+.opacidade i {
+  margin: 0 auto;
+  font-size: 50pt;
+  color: #ffff;
+}
+
+.item:hover .opacidade {
+  display: flex;
+}
+
+#adicionar {
+  margin: 0 auto;
+  border-radius: 10px 10px 10px 10px;
+  height: 90%;
+  width: 13rem;
+  border: 2px dashed #ccc;
+  background-color: #fff;
+  transition: .4s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+#adicionar i {
+  margin: 0 auto;
+  font-size: 60pt;
+  color: #363636;
+  transition: .4s;
+}
+
+#adicionar:hover {
+  background-color: rgb(233, 233, 233);
+  height: 95%;
+  width: 15rem;
+}
+
+#adicionar:hover i {
+  font-size: 75pt;
+}
+
 
   @media screen and (max-width: 800px) {
     

@@ -6,6 +6,33 @@
   text-decoration: none;
 }
 
+::-webkit-scrollbar { 
+  width: 20px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to top, rgb(238,40,73), rgb(122,75,117)); /* background: linear-gradient(to top, #fdc830, #f37335); */
+  border-radius: 100px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to top, rgb(123,77,121), rgb(45,125,158));
+  border-radius: 100px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}  
+
+::-webkit-scrollbar-track {
+  box-shadow: 0 0 0 transparent;
+  border-radius: 100px;
+  height: 5px;
+}
+::-webkit-scrollbar-track-piece{
+    background-image: transparent;
+    border-radius: 6px;
+}
+
+
 body{
   background-image: url("/GitHub/Kamaleao/app/public/View/assets/img/background2.jpg");
   background-repeat: no-repeat;
@@ -17,7 +44,7 @@ body{
 
 button {
   border: none;
-  background-color: #fff;
+  background-image: #fff;
   cursor: pointer;
 }
 
@@ -113,6 +140,7 @@ ul ul li{
   top: -0.5px;
 }
 
+
 ul ul li:first-of-type {
   border-top: 5px solid #F53446;
 }
@@ -154,7 +182,7 @@ ul ul li:first-of-type {
   font-size: 16px;
   text-align: left;
   margin-bottom: 10px;
-  background-color: transparent;
+  background-image: transparent;
 }
 
 input:focus {
@@ -189,6 +217,7 @@ img {
   height: 2rem;
   border-radius: 20px;
   padding: 0.3rem 1rem;
+  color: #363636;
 }
 
 .nav_filtro select:focus {
@@ -240,8 +269,8 @@ footer {
 }
 
 .linha {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
 }
 
 .coluna {

@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     font-family: arial;
+    list-style: none;
+    text-decoration: none;
 }
 
 html {
@@ -120,7 +122,7 @@ body {
 }
 
 .texto2 a:hover, .texto3 a:hover {
-    color: aqua;
+    color: #F53446;
 }
 
 .exemplo {
@@ -132,7 +134,7 @@ body {
 .index {
     background-color: none;
     width: 100%;
-    height: 100vh;
+    height: 72vh;
     position: absolute;
 }
 
@@ -157,7 +159,7 @@ body {
 
 .index > button:first-of-type{
   background-color: white;
-  color: rgba(83, 174, 222, 1);
+  color: #363636;
 }
 
 .index > button:hover {
@@ -169,7 +171,7 @@ body {
 }
 
 .index > button:first-of-type:hover{
-    color: rgba(83, 174, 222, 1);
+    color: #F53446;
     background-color: rgba(230, 230, 230, 1);
     border-color: rgba(230, 230, 230, 1);
     transform: 3.0s;
@@ -178,7 +180,7 @@ body {
 }
 
 .index > button:last-of-type:hover{
-    color: rgba(83, 174, 222, 1);
+    color: #F53446;
 }
 
 .logo {
@@ -256,20 +258,27 @@ footer {
   
   .container-footer {
     width: 70%;
+    height: 12rem;
+    margin-top: 3rem;
   }
   
   .linha {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
   }
   
   .coluna {
-    width: 25%;
+    width: 100%;
+    height: 100%;
     padding: 0 15px;
   }
   
   .ul-coluna {
     list-style: none;
+  }
+
+  .li-icons {
+      display: inline-block;
   }
   
   .li-coluna {
@@ -311,7 +320,7 @@ footer {
     color: #363636;
     border-radius: 50%;
     width: 40px;
-    height: 40px;
+    height: 100%;
     background-color: #f1f1f1;
     font-size: 25px;
     transition:.5s;

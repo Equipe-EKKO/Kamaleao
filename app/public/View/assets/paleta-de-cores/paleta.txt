@@ -1,0 +1,11 @@
+Hover para texto: 
+    color: #F53446;
+
+Cor dos textos e icones
+    color: #363636;
+
+Cor das bordas de divs:
+    color: #ccc;
+
+Cor das bordas de botoes e inputs: 
+    color: #363636;

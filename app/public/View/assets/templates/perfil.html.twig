@@ -34,14 +34,28 @@
           <div id="Inventário" class="tabcontent">
             <p> Conteúdo do Inventário </p>
           </div>
-
-          <div id="Sobre" class="tabcontent">
-            <h1> Sobre <i class="fas fa-pen"></i> </h1>
-              <p>{{Descricao}}</p>
-          </div>
-
           <div id="Serviços" class="tabcontent">
-            <p> Conteúdo dos Serviços </p>
+              <section class="grid_home">
+                <div class="item">
+                  <div class="anuncio_img">
+                    <div class="opacidade">
+                        <i class='bx bxs-pencil'></i><br/>
+                    </div>
+                  </div>
+                  <div class="anuncio_titulo">
+                    <h1>Título do anúncio</h1>
+                  </div> <!--anuncio_titulo-->
+                  <div class="anuncio_user">
+                    <h3>@{{Usuario}}</h3>
+                  </div> <!--user-->
+                  <div class="anuncio_preço">
+                    <h2>R$50.000</h2>
+                  </div> <!-- preço -->
+                </div> <!-- item -->
+                <button id="adicionar">
+                  <i class='bx bx-plus'></i>
+                </button>
+              </section> <!--grid_home-->
           </div>
 
           <div id="Comissao" class="tabcontent">
