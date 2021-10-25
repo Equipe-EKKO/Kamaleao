@@ -49,7 +49,26 @@
           {% else %}
           <p> Você não possui uma chave pix ainda!</p>
           {% endif %}
-          <button class="button">Alterar</button>
+          <button class="modal-button" onclick="abreModal()">Alterar</button>
+          <div class="modal-bg">
+            <div class="modal">
+              <h1> Alterar informações </h1>
+              <form>
+                <p>Nome de usuário:</p>
+                <input type="text" id="username" name="username" value={{Usuario}} />
+                <p>Descrição:</p>
+                <textarea id="descricao" name="descricao" rows="5" maxlength="280">{{Descricao}}</textarea>
+                <p>Email:</p>
+                <input type="text" id="email" name="email" value={{Email}} />
+                <p>Chave pix:</p>
+                <input type="text" id="chavepix" name="chavepix" value={{ChavePix}} />
+                <p>Senha</p>
+                <input type="password" id="confsenha" name="confsenha" />
+                <p>Confirme sua senha</p>
+                <input type="password" id="confsenha" name="confsenha" />
+              </form>
+            </div>
+          </div>
         </main>
       </div>
       {% endblock div_container %}

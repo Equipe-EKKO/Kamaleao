@@ -1,0 +1,19 @@
+.faq {
+    border: 1px solid #ccc;
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    text-align: justify;
+}
+
+.faq h1 {
+    font-size: 15pt;
+}
+
+.faq h2 {
+    font-size: 13pt;
+}
+
+.faq p {
+    font-size: 10pt;
+}

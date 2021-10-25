@@ -1,0 +1,42 @@
+{% extends "base_home.html.twig" %}
+{% block faq %}
+{# document #}
+   {# head #}
+      {% block title %} Perguntas frequentes {% endblock title %}
+      {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/faq.css"{% endblock hrefcss %}
+   {# endhead #}
+   {# body #}
+      <!-- header da página definida em base_perfil -->
+      <!-- conteudo da pagina -->
+      {% block div_container %}
+      <div class="container">
+        <div class="faq">
+            <h1>Perguntas frequentes</h1>
+            <h2>Como o site funciona?</h2>
+            <p>O Kamaleão é um site de compra e venda de serviços online, voltado especificamente para o mundo artístico, nele você pode montar seu próprio portfólio dentro do seu perfil, que funcionará como vitrine para suas vendas. Para vender serviços você deve criar umanúncio desse serviço, com imagens de referência e descrição para o tipo de serviço que você queria anunciar no site. Esse anúncio será exibido na página inicial do site para que algum interessado possa contactá-lo, solicitando um serviço personalizado, onde é possível aceitar ou negar o mesmo.</p>
+            <h2>Por que são necessários meus documentos para utilizar o site?</h2>
+            <p>Como o site funciona como um mercado, é necessário comprovar que você é uma pessoa física ou empresa, para que possa comprar ou vender 
+            dentro dele. O documento também funciona como medida de segurança caso algum usuário quebre as regras do site.</p>
+            <h2>O que posso vender no site?</h2>
+            <p>O site é voltado especificamente para o mercado artístico, você pode anunciar qualquer tipo de serviço que esteja nesse meio, seja ele desenhos digitais, logos, ícones personalizados, artes conceituais e serviços de design.</p>
+            <h2>O que posso comprar no site?</h2>
+            <p>No site não é possível comprar produtos já criados, ele é voltado especificamente para o ramo de comissões, tipo de serviço onde você solicita um tipo de arte ou produto personalizado para o artista, que irá produzir baseado no seu pedido e especificações.</p>
+            <h2>Como funciona o pagamento?</h2>
+            <p>O pagamento deve ser efetuado após a realização do serviço, para que o artista possa entregá-lo por meio do próprio site.</p>
+            <h2>Quais são os meios de pagamento?</p>
+            <p>O site utiliza do meio de pagamento via pix.</p>
+            <h2>Posso vender ou comprar sendo menor de idade?</h2>
+            <p></p>Sim, mas antes é necessária uma autorização feita por algum responsável legal, que será revisada e assim permitindo sua utilização normalmente.</p>
+            <h2>Que tipo de serviço não é permitido no site?</h2>
+            <p>Serviços NSFW (not safe for work), conteúdo explícito ou adulto; qualquer tipo de serviço não-autoral, ou seja, é proibido a venda de produtos de terceirossem consentimento do mesmo; qualquer tipo de serviço que viole as regras de comunidade também é proibido; a quebra dessas regras pode resultar na denúncia e punição de um post ou conta dentro do site.</p>
+            <h2>Que tipo de serviço o site não realiza?</h2>
+            <p>Serviços voltadosa fotografia, vídeos, renderizações 3D e artes físicas (seja elas esculturas ou pinturas tradicionais (importante ressaltar que pinturas tradicionais que sejam digitalizadas podem sim ser vendidas).</p>
+            <h2>Há a devolução de dinheiro mediante algum problema ou golpe?</h2>
+            <p>Sim, você deve solicitar ajuda descrevendo o problema ocorrido e comprovando-o, assim sua solicitação será analisada e caso seja verdadeira seu dinheiro será devolvido.</p>
+
+        </div>
+      </div> <!--container-->
+      {% endblock div_container %}
+   {# end body #}
+{# end document #}
+{% endblock faq %}

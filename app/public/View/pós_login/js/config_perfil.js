@@ -28,16 +28,11 @@ $(document).ready(function () {
     
     });
 
-    function iniciaModal(modalID) {
-        var modal = document.getElementById(modalID);
-        modal.classList.add('show');
-        modal.addEventListener('click', (e) => {
-            if(e.target.id == modalID || e.target.className == 'close') {
-                modal.classList.remove('show');
-            }
-        });
-    }
-    var modalbtn = document.getElementById('modal-btn');
-    modalbtn.addEventListener('click', () => iniciaModal('modal1'));
 });
+}
+
+function abreModal(){
+var modalBg = document.querySelector('.modal-bg');
+
+modalBg.classList.add('bg-active');
 }
