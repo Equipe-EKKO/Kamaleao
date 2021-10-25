@@ -16,13 +16,12 @@ $(document).ready(function () {
                 $("#md-pr").removeClass("md-ct").addClass("md-ct-pos");
                 $("#md-pr").remove();
                 $(conteudo).appendTo("div.container");
+                $("main").removeClass("main-initial").addClass("main");
             } else {
                 $("p.form-message").removeAttr("hidden");
                 var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";
                 $("p.form-message").empty();
                 $(erro).appendTo("p.form-message");
-
-
             }
         });
         

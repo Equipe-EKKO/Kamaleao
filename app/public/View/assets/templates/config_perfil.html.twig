@@ -17,7 +17,6 @@
       </noscript>
       <div id="md-pr" class="md-ct">
         <div class="md">
-
           <h3>Confirmação de senha</h3>
           <form id="confSenha" method="POST" action="">
             <p>Digite abaixo sua senha para fazer a confirmação.</p>
@@ -32,16 +31,25 @@
         </div>
       </div>
       <div class="container">
-        <main>
-          <h1> Altere suas informações pessoais!</h1>
-          <p>Nome de usuário:</p>
-          <input type="text" id="username" name="username" value={{Usuario}} />
-          <p>Descrição:</p>
-          <textarea id="desc" name="desc"> 
-          {% if Descricao != "" %}
-          {{Descricao}}
+        <main class="main-initial">
+          <h1> Informações pessoais!</h1>
+          <h3>Nome de usuário:</h3>
+          <p>@{{Usuario}}</p>
+          <h3>Descrição:</h3>
+          {% if Descricao != null %}
+          <p>{{Descricao}}</p>
+          {% else %}
+          <p> Você não possui uma descrição ainda!</p>
           {% endif %}
-          </textarea>
+          <h3>Email:</h3>
+          <p>{{Email}}</p>
+          <h3>Chave pix:</h3>
+          {% if ChavePix != null %}
+          <p>{{ChavePix}}</p>
+          {% else %}
+          <p> Você não possui uma chave pix ainda!</p>
+          {% endif %}
+          <button class="button">Alterar</button>
         </main>
       </div>
       {% endblock div_container %}
