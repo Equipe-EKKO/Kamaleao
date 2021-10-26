@@ -13,18 +13,23 @@
 .ajuda h1 {
     color: #363636;
     font-size: 31pt;
+    margin-top: 3rem;
 }
 
 .info {
     border: 1px solid #ccc;
     width: 80%;
-    height: 8rem;
+    height: 8rem; 
     margin: 4rem auto;
     border-radius: 30px;
     display: grid;
     grid-template-columns: 25% 75%;
     transition: .4s;
     cursor: pointer;
+}
+
+.info a {
+    color: black;
 }
 
 .info:last-of-type{ 
@@ -49,6 +54,7 @@
     text-align: left;
 }
 
+
 .link h2 {
     margin-top: 2rem;
     font-size: 18pt;
@@ -71,4 +77,21 @@
 
 .info:hover h2 {
     color: #F53446;
+}
+
+@media screen and (max-width:700px) {
+
+    .info {
+        width: 60%;
+        height: 10rem;
+    }
+
+    .info:hover {
+        width: 65%;
+        box-shadow: 0 3px 10px rgba(0,0,0,.2);
+    }
+
+    .faq h2, p {
+        text-align: left;
+    }
 }

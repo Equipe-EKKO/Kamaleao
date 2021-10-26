@@ -54,6 +54,22 @@ button {
 
 /*NAVBAR*/
 
+nav {
+  display: flex;
+}
+
+.mobile-menu {
+  display: none;
+  cursor: pointer;
+}
+
+.mobile-menu div {
+  width: 32px;
+  height: 2px;
+  background: #000;
+  margin: 8px;
+}
+
 .logo{
   width: 4rem;
   height: 4rem;
@@ -296,7 +312,7 @@ footer {
 .coluna a {
   color: #363636;
   font-size: 14px;
-  transition: .3s;
+  transition: .5s;
 }
 
 .coluna a:hover {
@@ -343,10 +359,20 @@ hr:last-of-type {
 
 @media screen and (max-width:800px) {
 
+  #icon_nav {
+    font-size: 23px;
+  }
 
+  #icon_nav:hover {
+    background-color: #fff;
+  }
+
+  .logo {
+    margin: 0;
+  }
 
   #noti, #perf, #menu {
-    right: 5.3rem;
+    right: 3.8rem;
   }
 
   #noti {
@@ -380,7 +406,7 @@ hr:last-of-type {
   .dropdown {
     background-color: #fff;
     height: 100vh;
-    width: 5rem;
+    width: 3.5rem;
     box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
     padding: 0;
   }
@@ -417,5 +443,3 @@ hr:last-of-type {
   width: 100%;
   position: fixed;
 } 
-
-

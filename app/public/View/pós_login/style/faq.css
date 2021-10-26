@@ -1,19 +1,43 @@
+.container {
+    height: fit-content;
+    line-height: 1.5rem;
+}
+
 .faq {
-    border: 1px solid #ccc;
     width: 80%;
     height: 80%;
+    height: 100%;
     margin: 0 auto;
     text-align: justify;
+    padding-bottom: 5rem;
 }
 
 .faq h1 {
     font-size: 15pt;
+    font-size: 20pt;
+    text-align: center;
+    margin: 3rem 0 5rem 0;
+    color: #363636;
 }
 
 .faq h2 {
     font-size: 13pt;
+    margin: 0rem 1.5rem;
+    color: #363636;
 }
 
 .faq p {
-    font-size: 10pt;
+    font-size: 11pt;
+    margin: 2rem 2.5rem;
+}
+
+@media screen and (max-width:700px) {
+
+    .faq {
+        width: 60%;
+    }
+
+    .faq h2, p {
+        text-align: left;
+    }
 }

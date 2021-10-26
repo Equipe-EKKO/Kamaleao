@@ -33,6 +33,11 @@
                <a href="/Github/Kamaleao/app/public/view/acesso_livre/home/home.php"><img class="logo" src="/GitHub/Kamaleao/app/public/View/assets/img/LogoKamaleao1.png" alt="logo"></a>
                <div class="search"><input type="text" placeholder="Pesquisar..." /></div>
                {% block menu %}
+                  <div class="mobile-menu">
+                     <div class="line1"></div>
+                     <div class="line2"></div>
+                     <div class="line3"></div>
+                  </div>
                   <ul class="dropdown"> <!--ENGLOBA TD-->
                      <li class="icone">
                         <a onclick="mostraNoti()" onmouseover="escondePerf()" class="dropbtn"><i class='bx bx-bell' id="icon_nav"></i></a>
@@ -58,7 +63,7 @@
                            <li><a href="#" class="opt">Sobre o Kamaleão</a></li>
                            <li><a href="#" class="opt">Configurações</a></li>
                            <li><a href="#" class="opt">Contato</a></li>
-                           <li><a href="#" class="opt">Ajuda</a></li>
+                           <li><a href="/Github/Kamaleao/app/public/view/acesso_livre/ajuda/ajuda.php" class="opt">Ajuda</a></li>
                         </ul>
                      </li>
                   </ul> <!--ENGLOBA TD-->
@@ -109,7 +114,7 @@
                      <h4>Ajuda</h4>
                      <hr/>
                         <ul class="ul-coluna">
-                           <li class="li-coluna"><a href="#">FAQ</a></li>
+                           <li class="li-coluna"><a href="/Github/Kamaleao/app/public/view/acesso_livre/faq/faq.php">FAQ</a></li>
                            <li class="li-coluna"><a href="#">Compra</a></li>
                            <li class="li-coluna"><a href="#">Venda</a></li>
                         </ul>

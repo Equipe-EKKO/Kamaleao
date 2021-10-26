@@ -32,40 +32,42 @@
       </div>
       <div class="container">
         <main class="main-initial">
-          <h1> Informações pessoais!</h1>
-          <h3>Nome de usuário:</h3>
+          <h1> Informações pessoais:</h1>
+          <a class="icone_perf"><i class='bx bxs-user-circle'></i></a>
+          <a class="cliqueperf" onclick="abreModal()"><h3>Nome de usuário:</h3></a>
           <p>@{{Usuario}}</p>
-          <h3>Descrição:</h3>
+          <a class="cliqueperf" onclick="abreModal()"><h3>Descrição:</h3></a>
           {% if Descricao != null %}
           <p>{{Descricao}}</p>
           {% else %}
           <p> Você não possui uma descrição ainda!</p>
           {% endif %}
-          <h3>Email:</h3>
+          <a class="cliqueperf" onclick="abreModal()"><h3>Email:</h3></a>
           <p>{{Email}}</p>
-          <h3>Chave pix:</h3>
+          <a class="cliqueperf" onclick="abreModal()"><h3>Chave pix:</h3></a>
           {% if ChavePix != null %}
           <p>{{ChavePix}}</p>
           {% else %}
           <p> Você não possui uma chave pix ainda!</p>
           {% endif %}
           <button class="modal-button" onclick="abreModal()">Alterar</button>
-          <div class="modal-bg">
-            <div class="modal">
-              <h1> Alterar informações </h1>
-              <form>
-                <p>Nome de usuário:</p>
+          <div class="modal-bg" id="modal-bg">
+            <div class="md dois">
+              <form method="POST" action="/GitHub/Kamaleao/app/private/Controller/controllerAlterarInformacoes.php">
+                <h1> Alterar informações </h1>
+                <p class="m2">Nome de usuário:</p>
                 <input type="text" id="username" name="username" value={{Usuario}} />
-                <p>Descrição:</p>
+                <p class="m2">Descrição:</p>
                 <textarea id="descricao" name="descricao" rows="5" maxlength="280">{{Descricao}}</textarea>
-                <p>Email:</p>
+                <p class="m2">Email:</p>
                 <input type="text" id="email" name="email" value={{Email}} />
-                <p>Chave pix:</p>
-                <input type="text" id="chavepix" name="chavepix" value={{ChavePix}} />
-                <p>Senha</p>
+                <p class="m2">Chave pix:</p>
+                <input type="text" id="chavepix" name="chavepix" {% if ChavePix != null %} value={{ChavePix}} {% endif %}/>
+                <p class="m2">Senha:</p>
+                <input type="password" id="senha" name="senha" />
+                <p class="m2">Confirme sua senha:</p>
                 <input type="password" id="confsenha" name="confsenha" />
-                <p>Confirme sua senha</p>
-                <input type="password" id="confsenha" name="confsenha" />
+                <button type="submit" class="botao" name="submit" >Alterar</button>
               </form>
             </div>
           </div>

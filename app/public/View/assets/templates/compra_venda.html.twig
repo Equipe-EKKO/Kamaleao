@@ -1,0 +1,25 @@
+{% extends "base_home.html.twig" %}
+{% block compra_venda %}
+{# document #}
+   {# head #}
+      {% block title %} Compra e Venda {% endblock title %}
+      {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/faq.css"{% endblock hrefcss %}
+   {# endhead #}
+   {# body #}
+      <!-- header da página definida em base_perfil -->
+      <!-- conteudo da pagina -->
+      {% block div_container %}
+      <div class="container">
+        <div class="faq">
+            <h1>Compra e Venda no Kamaleão</h1>
+            <h2>Como comprar um serviço personalizado no nosso site:</h2>
+            <p>O Kamaleão é um site de compra e venda de serviços online, voltado especificamente para o mundo artístico, nele você pode montar seu próprio portfólio dentro do seu perfil, que funcionará como vitrine para suas vendas. Para vender serviços você deve criar umanúncio desse serviço, com imagens de referência e descrição para o tipo de serviço que você queria anunciar no site. Esse anúncio será exibido na página inicial do site para que algum interessado possa contactá-lo, solicitando um serviço personalizado, onde é possível aceitar ou negar o mesmo.</p>
+            <h2>Como anunciar e vender seu serviço no nosso site:</h2>
+            <p>Como o site funciona como um mercado, é necessário comprovar que você é uma pessoa física ou empresa, para que possa comprar ou vender 
+            dentro dele. O documento também funciona como medida de segurança caso algum usuário quebre as regras do site.</p>
+        </div>
+      </div> <!--container-->
+      {% endblock div_container %}
+   {# end body #}
+{# end document #}
+{% endblock compra_venda %}

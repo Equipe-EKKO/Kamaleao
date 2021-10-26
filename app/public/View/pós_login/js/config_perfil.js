@@ -35,4 +35,6 @@ function abreModal(){
 var modalBg = document.querySelector('.modal-bg');
 
 modalBg.classList.add('bg-active');
+
 }
+

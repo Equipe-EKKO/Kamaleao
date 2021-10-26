@@ -18,11 +18,26 @@ class PerfilProprio extends Perfil {
     function baixarInventario() {
 
     }
-    function addDescricao() {
+    function updateDescricao(string $desc, int $cdUpdate) {
+        /*Agrupamento dos valores a serem inseridos*/
+        $this->setDescricao($desc);
+        /*Conexão com o Banco*/
+        $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL
 
-    }
-    function updateDescricao() {
+        $sql = "UPDATE tb_usuario SET ds_usuario = :descricao WHERE cd_login = :cdUpdate"; # declara a query do insert na tabela login do banco de dados 
+        $stmt = $banco->prepare($sql); # prepara a query para execução
+        /*Substitui os valores de cada placeholder na query preparada*/
+        $stmt->bindValue(':descricao', $desc); 
+        $stmt->bindValue(':cdUpdate', $cdUpdate);
 
+        /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
+        try {
+            $stmt->execute(); # executa a query preparada anteriormente
+            return true;
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+            return false;
+        }
     }
     function criarAnuncio() {
 

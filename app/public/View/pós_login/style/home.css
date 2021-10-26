@@ -1,10 +1,15 @@
+.container {
+    padding-bottom: 5rem;
+}
+
 .grid_home {
     display: grid;
+    border: 1px solid #ccc;
     background-color: #ffff;
     grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: 25% 25% 25% 25%;
-    margin: 0 3rem 3rem 3rem;
-    height: 115vh;
+    margin: 0 auto;
+    height: 100%;
+    width: 90%;
     padding-top: 0.5rem;
 }
 
@@ -13,7 +18,7 @@
 	background: #ffff;
     border-radius: 10px 10px 10px 10px;
     height: 90%;
-    width: 13rem;
+    width: 80%;
     border: 1px solid #ccc;
     cursor: pointer;
     transition: .5s;
@@ -70,3 +75,38 @@
 
 }
 
+@media screen and (max-width: 1030px) {
+
+    .container {
+        height: 190vh;
+    }
+
+    .grid_home { 
+        width: 80%;
+        grid-template-columns: 33% 33% 33%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+
+    .container {
+        height: 250vh;
+    }
+
+    .grid_home { 
+        grid-template-columns: 50% 50%;
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 680px) {
+
+    .container {
+        height: 500vh;
+    }
+
+    .grid_home { 
+        grid-template-columns: 100%;
+        width: 50%;
+    }
+}
