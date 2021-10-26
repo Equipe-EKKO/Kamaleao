@@ -1,0 +1,48 @@
+{% extends "base_home.html.twig" %}
+{% block ajuda %}
+{# document #}
+   {# head #}
+      {% block title %} Ajuda {% endblock title %}
+      {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/ajuda.css"{% endblock hrefcss %}
+   {# endhead #}
+   {# body #}
+      <!-- header da página definida em base_perfil -->
+      <!-- conteudo da pagina -->
+      {% block div_container %}
+      <div class="container">
+        <div class="ajuda">
+        <h1>Ajuda</h1>
+            <div class="info">
+                <div class="icon">
+                    <i class="far fa-question-circle"></i>
+                </div>
+                <div class="link">
+                    <h2>Perguntas Frequentes</h2>
+                    <p>Respondendo uma série de perguntas e dúvidas frequentes.</p>
+                </div>
+            </div>
+            <div class="info">
+                <div class="icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="link">
+                    <h2>Compre no Kamaleão</h2>
+                    <p>Respondendo uma série de perguntas e dúvidas frequentes.</p>
+                </div>
+            </div>
+            <div class="info">
+                <div class="icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div class="link">
+                    <h2>Venda no Kamaleão</h2>
+                    <p>Respondendo uma série de perguntas e dúvidas frequentes.</p>
+                </div>
+            </div>
+        </div>
+        
+      </div> <!--container-->
+      {% endblock div_container %}
+   {# end body #}
+{# end document #}
+{% endblock ajuda %}

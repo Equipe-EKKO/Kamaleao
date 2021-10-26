@@ -1,0 +1,74 @@
+.container {
+    height: fit-content;
+    padding-bottom: 2rem;
+}
+
+.ajuda {
+    width: 90%;
+    height: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.ajuda h1 {
+    color: #363636;
+    font-size: 31pt;
+}
+
+.info {
+    border: 1px solid #ccc;
+    width: 80%;
+    height: 8rem;
+    margin: 4rem auto;
+    border-radius: 30px;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    transition: .4s;
+    cursor: pointer;
+}
+
+.info:last-of-type{ 
+    margin-bottom: 10rem;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8rem;
+}
+
+.icon i {
+    font-size: 40pt;
+    color: #363636;
+    transition: .4s;
+}
+
+.link {
+    padding-left: 1rem;
+    text-align: left;
+}
+
+.link h2 {
+    margin-top: 2rem;
+    font-size: 18pt;
+    color: #363636;
+    transition: .4s;
+}
+
+.link p {
+    margin-top: 0.5rem;
+}
+
+.info:hover {
+    width: 85%;
+    box-shadow: 0 3px 10px rgba(0,0,0,.2);
+}
+
+.info:hover i {
+    color: #F53446;
+}
+
+.info:hover h2 {
+    color: #F53446;
+}
