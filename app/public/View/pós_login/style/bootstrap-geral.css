@@ -24,12 +24,11 @@
 
 ::-webkit-scrollbar-track {
   box-shadow: 0 0 0 transparent;
-  border-radius: 100px;
-  height: 5px;
+  background-color: transparent;
 }
 ::-webkit-scrollbar-track-piece{
-    background-image: transparent;
-    border-radius: 6px;
+  background: transparent;
+  border-radius: 6px;
 }
 
 

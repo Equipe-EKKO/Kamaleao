@@ -34,7 +34,6 @@ class ControllerLogin{
   private function chamaModel() {
     if ($this->validaLogin()) {
       recebeLogPosts($this->email, $this->senha);
-      /* kamaleaoctt@gmail.com   GabrielzinhoLindo1012  */
     }
   }
 }

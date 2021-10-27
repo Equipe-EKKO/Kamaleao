@@ -141,15 +141,69 @@ class Usuario extends Participante {
         echo $retorno;
         return $retorno;*/
     }
-    function atualizarEmail() {
-        /*$retorno = "Erro!. Não deve-se atualizar o email da conta Administrador";
-        echo $retorno;
-        return $retorno;*/
+    function atualizarEmail(string $email, int $cdUpdate):bool {
+        /*Agrupamento dos valores a serem inseridos*/
+        $this->setEmail($email);
+        /*Verifica se o Email desejado é válido*/
+        /*Conexão com o Banco*/
+        $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL
+
+        $sql = "UPDATE tb_login SET nm_login = :email WHERE cd_login = :cdUpdate"; # declara a query do insert na tabela login do banco de dados 
+        $stmt = $banco->prepare($sql); # prepara a query para execução
+        /*Substitui os valores de cada placeholder na query preparada*/
+        $stmt->bindValue(':email', $email); 
+        $stmt->bindValue(':cdUpdate', $cdUpdate);
+
+        /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
+        try {
+            $stmt->execute(); # executa a query preparada anteriormente
+            return true;
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+            return false;
+        }     
     }
-    function atualizarSenha() {
-        /*$retorno = "Erro!. Não deve-se atualizar a senha da conta Administrador";
-        echo $retorno;
-        return $retorno;*/
+    function atualizarSenha(string $senha, int $cdUpdate):bool {
+        /*Agrupamento dos valores a serem inseridos*/
+        $this->setSenha($senha);
+        /*Conexão com o Banco*/
+        $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL
+
+        $sql = "UPDATE tb_login SET nm_senha = :senha WHERE cd_login = :cdUpdate"; # declara a query do insert na tabela login do banco de dados 
+        $stmt = $banco->prepare($sql); # prepara a query para execução
+        /*Substitui os valores de cada placeholder na query preparada*/
+        $stmt->bindValue(':senha', $senha); 
+        $stmt->bindValue(':cdUpdate', $cdUpdate);
+
+        /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
+        try {
+            $stmt->execute(); # executa a query preparada anteriormente
+            return true;
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+            return false;
+        }
+    }
+    function atualizarUsername(string $username, int $cdUpdate):mixed {
+        /*Agrupamento dos valores a serem inseridos*/
+        $this->setUsername($username);
+        /*Conexão com o Banco*/
+        $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL
+
+        $sql = "UPDATE tb_login SET nm_username = :username WHERE cd_login = :cdUpdate"; # declara a query do insert na tabela login do banco de dados 
+        $stmt = $banco->prepare($sql); # prepara a query para execução
+        /*Substitui os valores de cada placeholder na query preparada*/
+        $stmt->bindValue(':username', $username); 
+        $stmt->bindValue(':cdUpdate', $cdUpdate);
+
+        /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
+        try {
+            $stmt->execute(); # executa a query preparada anteriormente
+            return true;
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+            return false;
+        } 
     }
     function recuperarSenha(string $email, string $novaSenha):bool {
         $banco = ConexaoBanco::abreConexao();
@@ -305,6 +359,72 @@ class Usuario extends Participante {
         /*finalização do select que foi iniciado para verificar os dados inseridos*/
     }
 
+    public function verificaEmail(string $email):bool {
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+
+        $sql = "SELECT nm_email FROM tb_login WHERE nm_email = :email "; # declara query do select que irá verificar se o email escolhido já foi cadastrado anteriormente numa conta (tanto como usuário ou como administrador)
+        $stmt = $banco->prepare($sql); # prepara o select para execução
+        $stmt->bindValue(':email', $email); #substitui o placeholder da query preparada
+
+        /*Try catch que tentará executar o select e contar quantas linhas foram retornadas*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $contaLinha = $stmt->rowCount(); # armazena numa variável o valor de quantas linhas existem no retorno desse select
+            if ($contaLinha > 0) { # estrutura condicional que irá verificar se o valor de linhas do select anterior é maior que zero, ou seja, se o select retornou algo, e caso tenha retornado...
+                return false; 
+            } else { 
+                return true; # retorna a saída do método como verdadeira para que o processo de atualização prossiga.
+            }
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+    }
+
+    public function verificaUsername(string $username):bool {
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+
+        $sql = "SELECT nm_username FROM tb_login WHERE nm_username = :username "; # declara query do select que irá verificar se o email escolhido já foi cadastrado anteriormente numa conta (tanto como usuário ou como administrador)
+        $stmt = $banco->prepare($sql); # prepara o select para execução
+        $stmt->bindValue(':username', $username); #substitui o placeholder da query preparada
+
+        /*Try catch que tentará executar o select e contar quantas linhas foram retornadas*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $contaLinha = $stmt->rowCount(); # armazena numa variável o valor de quantas linhas existem no retorno desse select
+            if ($contaLinha > 0) { # estrutura condicional que irá verificar se o valor de linhas do select anterior é maior que zero, ou seja, se o select retornou algo, e caso tenha retornado...
+                return false; 
+            } else { 
+                return true; # retorna a saída do método como verdadeira para que o processo de atualização prossiga.
+            }
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+    }
+
+    public function setarChavePix(string $chavepix, int $cdUpdate):bool {
+        /*Agrupamento dos valores a serem inseridos*/
+        $this->setChavePix($chavepix);
+        /*Conexão com o Banco*/
+        $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL
+        
+        $sql = "UPDATE tb_usuario SET cd_pix = :chavepix WHERE cd_login = :cdUpdate"; # declara a query do update na tabela usuario do banco de dados 
+        $stmt = $banco->prepare($sql); # prepara a query para execução
+        /*Substitui os valores de cada placeholder na query preparada*/
+        $stmt->bindValue(':chavepix', $this->getCdUpdate()); 
+        $stmt->bindValue(':cdUpdate', $cdUpdate);
+
+        /*Faz um try catch que tentará executar o update e se não der certo, irá capturar o erro*/
+        try {
+            $stmt->execute(); # executa a query preparada anteriormente
+            return true;
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+            return false;
+        }
+    }
+
     #Métodos Especias - Getter e Setters para os atributos e Construct
     /* Construtor -- A função que é chamada automaticamente ao instanciar */
     public function __construct(string $nome, string $sobrenome, string $cpf, string $data_nascimento) { # declara que os dados a serem inseridos devem ser obrigatoriamente strings
@@ -365,9 +485,8 @@ class Usuario extends Participante {
     public function setChavePix($chavePix) {
         $this->chavePix = $chavePix;
     }
-    public function setCdUpdate($cdupt) {
-        $this->cdUpdate = $cdupt
+    public function setCdUpdate($cdUpdate) {
+        $this->cdUpdate = $cdUpdate;
     }
 }
-
 ?>

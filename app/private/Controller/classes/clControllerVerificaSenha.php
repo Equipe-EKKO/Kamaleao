@@ -13,7 +13,6 @@ class ControllerVerificaSenha{
       header("Location: /Github/Kamaleao/app/public/view/pós_login/config_perfil/config_perfil.php");*/
       ob_end_clean();
       echo "Verifique se todos os campos estão inseridos corretamente!";
-      echo false;
       return false;
     }else if (v::stringType()->length(7, null)->validate($this->senha) == false ){
       /*$_SESSION["error"] = 'Sua senha deve conter pelo menos 7 caracteres!';

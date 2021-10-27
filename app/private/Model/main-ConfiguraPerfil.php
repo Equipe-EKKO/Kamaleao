@@ -5,22 +5,100 @@ require_once 'classes/clUsuario.php';
 require_once 'classes/clPerfilProprio.php';
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php'); #arquivo de configuracao
 
-// Função chamada no controller para realizar o envio do email para redefinir senha
-function recebeUpdPerfilPost(string $email):bool { # define que o parametro a ser passado deve ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller
+// Função chamada no controller para verificar se o username e o email escolhido na atualização estão disponíveis
+function atualizaUsuario (string $user) { # define que o parametro a ser passado deve ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller
     /* De uma maneira geral, o programa segue a seguinte lógica:
-        => Não é possível redefinir a senha do email usado para logar o Adm, então caso alguém tente, um erro é exibido.
-        => Só é necessário instanciar a classe Usuário pelo mesmo motivo. Caso o email tenha sido enviado, a função retorna true para exibir mensagem de sucesso, e caso não tenha sido, retorna false para a exibição de um erro ao usuário */
-    if ($email === "kamaleaoctt@gmail.com") { # estrutura condicional que verificará se o email inserido pertence ao que é usado pelo administrador, e se for...
-        $_SESSION['error'] = "Este email é protegido e não pode ter sua senha redefinida"; # registra a ação como erro, e exibe ao usuário
-        header("Location: /Github/Kamaleao/app/public/view/pré_login/rec_senha/rec_senha.php"); # o redirecionando para a mesma página ao enviar outra header com http
+        => Verifica se o username estão disponíveis. Dependendo do caso, uma mensagem diferente será exibida
+        => Utiliza uma instância da Classe usuário serializada no model que realiza o Login */
+    $usuario = unserialize($_SESSION['usuario']);
+    $cdupt = $usuario->getCdUpdate();
+    $message = "";
+    if ((!empty($user) || isset($user) || $user != "" || $user != null)) {
+        if ($usuario->verificaUsername($user)) {
+            //n sei que atualiza
+            $usuario->atualizarUsername($user, $cdupt);
+            return true;
+        } else {
+            /*$message = "Este username não está disponível. Tente novamente!";
+            return $message;*/
+            return false;
+        }
+    } else {
+        $message = "O campo inserido está vazio. Não há como atualizar.";
+        return $message;
+    }
+}
+// Função chamada no controller para verificar se o username e o email escolhido na atualização estão disponíveis
+function atualizaEmail (string $email) { # define que o parametro a ser passado deve ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller
+    /* De uma maneira geral, o programa segue a seguinte lógica:
+        => Verifica se o username estão disponíveis. Dependendo do caso, uma mensagem diferente será exibida
+        => Utiliza uma instância da Classe usuário serializada no model que realiza o Login */
+    $usuario = unserialize($_SESSION['usuario']);
+    $cdupt = $usuario->getCdUpdate();
+    $message = "";
+    if ((!empty($email) || isset($email) || $email != "" || $email != null)) {
+        if ($usuario->verificaEmail($email)) {
+            //n sei que atualiza
+            $usuario->atualizarEmail($email, $cdupt);
+            return true;
+        } else {
+            /*$message = "Este email não está disponível. Tente novamente!";
+            return $message;*/
+            return false;
+        }
+    } else {
+        $message = "O campo inserido está vazio. Não há como atualizar.";
+        return $message;
+    }
+}
+// Função chamada no controller para verificar se o username e o email escolhido na atualização estão disponíveis
+function atualizaSenha (string $senha):bool { # define que o parametro a ser passado deve ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller
+    /* De uma maneira geral, o programa segue a seguinte lógica:
+        => Verifica se o username estão disponíveis. Dependendo do caso, uma mensagem diferente será exibida
+        => Utiliza uma instância da Classe usuário serializada no model que realiza o Login */
+    $usuario = unserialize($_SESSION['usuario']);
+    $cdupt = $usuario->getCdUpdate();
+    if ((!empty($senha) || isset($senha) || $senha != "" || $senha != null)) {
+        $usuario->atualizarSenha($senha, $cdupt);
+        return true;
+    } else {
+        /*$message = "O campo inserido está vazio. Não há como atualizar.";
+        return $message;*/
         return false;
     }
-    $usuario = new \Usuario("", "", "", "");#instancia a classe Usuario, setando os valores requisitados pelo construtor como vazios, já que não são necessários
-    if ($usuario->enviaEmailRecuperacao($email)): # estrutura condicional que setará os valores restantes inseridos nos parametros, irá verificar se a tentativa de cadastro é verdadeira, e se for...
-        # exibe para o cliente que o email de recuperação de senha FOI enviado, retornando a função como true
-        return true;
-    else: # e se não for...
-        # exibe para o cliente que o email de recuperação de senha NÃO foi enviado e que houve um erro, retornando a função como false
-        return false;
-    endif;
 }
+// Função chamada no controller para verificar se o username e o email escolhido na atualização estão disponíveis
+function atualizaChavePix (string $cpix):bool { # define que o parametro a ser passado deve ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller
+    /* De uma maneira geral, o programa segue a seguinte lógica:
+        => Verifica se o username estão disponíveis. Dependendo do caso, uma mensagem diferente será exibida
+        => Utiliza uma instância da Classe usuário serializada no model que realiza o Login */
+    $usuario = unserialize($_SESSION['usuario']);
+    $cdupt = $usuario->getCdUpdate();
+    if ((!empty($cpix) || isset($cpix) || $cpix != "" || $cpix != null)) {
+        $usuario->setarChavePix($cpix, $cdupt);
+        return true;
+    } else {
+        /*$message = "O campo inserido está vazio. Não há como atualizar.";
+        return $message;*/
+        return false;
+    }
+}
+// Função chamada no controller para verificar se o username e o email escolhido na atualização estão disponíveis
+function atualizaDesc (string $desc):bool { # define que o parametro a ser passado deve ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller
+    /* De uma maneira geral, o programa segue a seguinte lógica:
+        => Verifica se o username estão disponíveis. Dependendo do caso, uma mensagem diferente será exibida
+        => Utiliza uma instância da Classe usuário serializada no model que realiza o Login */
+    $usuario = unserialize($_SESSION['usuario']);
+    $cdupt = $usuario->getCdUpdate();
+    if ((!empty($desc) || isset($desc) || $desc != "" || $desc != null)) {
+        $usuario->perfil->updateDescricao($desc, $cdupt);
+        return true;
+    } else {
+        /*$message = "O campo inserido está vazio. Não há como atualizar.";
+        return $message;*/
+        return false;
+    }
+}
+
+
+

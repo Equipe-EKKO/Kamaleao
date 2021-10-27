@@ -7,6 +7,8 @@ use Twig\Loader\FilesystemLoader;
 $loader = new FilesystemLoader(DIR_ROOT . '/GitHub/Kamaleao/app/public/View/assets/templates/', '/templates');
 $twig = new Environment($loader);
 
+error_reporting(E_ALL & ~E_WARNING);
+
 if ($_SESSION['error'] == null || !isset($_SESSION['error'])){
     $_SESSION['error'] = " ";
     $error = $_SESSION['error'];

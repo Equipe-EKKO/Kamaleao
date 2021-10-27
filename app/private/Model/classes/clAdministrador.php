@@ -41,14 +41,20 @@ class Administrador extends Participante {
         return $retorno; # retorna a mensagem como saída da função
     }
     /*Função para impedir que um administrador (que é essencial para o sistema) tenha seu email de login alterado*/
-    function atualizarEmail() {
+    function atualizarEmail(string $email, int $cdUpdate) {
         $retorno = "Erro!. Não deve-se atualizar o email da conta Administrador"; # registra um erro, caso a função seja chamada, dentro de uma variável
         echo $retorno; # exibe o erro
         return $retorno; # retorna a mensagem como saída da função
     }
     /*Função para impedir que um administrador (que é essencial para o sistema) tenha sua senha de login alterada*/
-    function atualizarSenha() {
+    function atualizarSenha(string $senha, int $cdUpdate) {
         $retorno = "Erro!. Não deve-se atualizar a senha da conta Administrador"; # registra um erro, caso a função seja chamada, dentro de uma variável
+        echo $retorno; # exibe o erro
+        return $retorno; # retorna a mensagem como saída da função
+    }
+    /*Função para impedir que um administrador (que é essencial para o sistema) tenha seu username de login alterado*/
+    function atualizarUsername(string $username, int $cdUpdate) {
+        $retorno = "Erro!. Não deve-se atualizar o username da conta Administrador"; # registra um erro, caso a função seja chamada, dentro de uma variável
         echo $retorno; # exibe o erro
         return $retorno; # retorna a mensagem como saída da função
     }

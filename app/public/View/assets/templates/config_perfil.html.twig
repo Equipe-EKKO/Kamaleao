@@ -21,12 +21,12 @@
           <form id="confSenha" method="POST" action="">
             <p>Digite abaixo sua senha para fazer a confirmação.</p>
             <input type="password" id="senha" name="senha" />
-            <button type="submit" class="button" name="submit" id="button">Validar </button>
+            <button type="submit" class="button" name="submit">Validar </button>
             {% block erro %}
                 <p hidden class="form-message">
                     <i class="fas fa-exclamation-triangle"></i>
                 </p>
-        {% endblock erro %}
+            {% endblock erro %}
           </form>
         </div>
       </div>
@@ -34,41 +34,54 @@
         <main class="main-initial">
           <h1> Informações pessoais:</h1>
           <a class="icone_perf"><i class='bx bxs-user-circle'></i></a>
-          <a class="cliqueperf" onclick="abreModal()"><h3>Nome de usuário:</h3></a>
+          <a class="cliqueperf" onclick="abreModal('username')"><h3>Nome de usuário<i class="fas fa-pen"></i></h3></a>
           <p>@{{Usuario}}</p>
-          <a class="cliqueperf" onclick="abreModal()"><h3>Descrição:</h3></a>
-          {% if Descricao != null %}
+          <a class="cliqueperf" onclick="abreModal('desc')"><h3>Descrição<i class="fas fa-pen"></i></h3></h3></a>
+          {% if Descricao != null %}            
           <p>{{Descricao}}</p>
           {% else %}
           <p> Você não possui uma descrição ainda!</p>
           {% endif %}
-          <a class="cliqueperf" onclick="abreModal()"><h3>Email:</h3></a>
+          <a class="cliqueperf" onclick="abreModal('email')"><h3>Email<i class="fas fa-pen"></i></h3></h3></a>
           <p>{{Email}}</p>
-          <a class="cliqueperf" onclick="abreModal()"><h3>Chave pix:</h3></a>
+          <a class="cliqueperf" onclick="abreModal('chavepix')"><h3>Chave pix<i class="fas fa-pen"></i></h3></h3></a>
           {% if ChavePix != null %}
           <p>{{ChavePix}}</p>
           {% else %}
           <p> Você não possui uma chave pix ainda!</p>
           {% endif %}
-          <button class="modal-button" onclick="abreModal()">Alterar</button>
-          <div class="modal-bg" id="modal-bg">
-            <div class="md dois">
-              <form method="POST" action="/GitHub/Kamaleao/app/private/Controller/controllerAlterarInformacoes.php">
-                <h1> Alterar informações </h1>
-                <p class="m2">Nome de usuário:</p>
-                <input type="text" id="username" name="username" value={{Usuario}} />
-                <p class="m2">Descrição:</p>
-                <textarea id="descricao" name="descricao" rows="5" maxlength="280">{{Descricao}}</textarea>
-                <p class="m2">Email:</p>
-                <input type="text" id="email" name="email" value={{Email}} />
-                <p class="m2">Chave pix:</p>
-                <input type="text" id="chavepix" name="chavepix" {% if ChavePix != null %} value={{ChavePix}} {% endif %}/>
-                <p class="m2">Senha:</p>
-                <input type="password" id="senha" name="senha" />
-                <p class="m2">Confirme sua senha:</p>
-                <input type="password" id="confsenha" name="confsenha" />
-                <button type="submit" class="botao" name="submit" >Alterar</button>
-              </form>
+          <button class="modal-button" onclick="abreModal('senha')">Alterar senha</button>
+          <div id="md-pr2" class="md-ct-pos">
+            <i class="fas fa-times-circle" onclick="fechaModal()"></i>
+            <div id="username" class="md">
+              <h3>Insira o novo nome de usuário</h3>
+              <p>Seu nome de usuário não pode conter espaços e deve ser único.</p>
+              <input type="text" id="username" name="username" />
+              <button type="submit" class="button" name="submit">Editar</button>
+            </div>
+            <div id="desc" class="md">
+              <h3>Insira a nova descrição</h3>
+              <p>A descrição é o lugar onde você fala um pouco sobre você, ele fica visível para todos!</p>
+              <textarea id="descricao" name="descricao" rows="5" maxlength="280"></textarea>
+              <button type="submit" class="button" name="submit">Editar</button>
+            </div>
+            <div id="email" class="md">
+              <h3>Insira o novo email</h3>
+              <p>E por este email que nos comunicaremos com você.</p>
+              <input type="text" id="email" name="email" />
+              <button type="submit" class="button" name="submit">Editar</button>
+            </div>
+            <div id="chavepix" class="md">
+              <h3>Insira sua chave aleatória pix</h3>
+              <p>Sua chave aleatória pix é inserida aqui para que você receba seus pagamentos.</p>
+              <input type="text" id="chavepix" name="chavepix" />
+              <button type="submit" class="button" name="submit">Editar</button>
+            </div>
+            <div id="senha" class="md">
+              <h3>Insira sua senha!</h3>
+              <input type="text" id="senha" name="senha" placeholder="senha"/>
+              <input type="text" id="confsenha" name="confsenha" placeholder="confirmar senha"/>
+              <button type="submit" class="button" name="submit">Editar</button>
             </div>
           </div>
         </main>
