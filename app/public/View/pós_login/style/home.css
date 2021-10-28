@@ -16,7 +16,7 @@
 	margin: 0 auto;
 	background: #ffff;
     border-radius: 10px 10px 10px 10px;
-    height: 90%;
+    height: 16rem;
     width: 80%;
     border: 1px solid #ccc;
     cursor: pointer;
@@ -27,7 +27,6 @@
 
 .item:hover {
     box-shadow: 0 3px 10px rgba(0,0,0,.2);
-    height: 95%;
     width: 90%;
 }
 
@@ -77,11 +76,12 @@
 @media screen and (max-width: 1030px) {
 
     .container {
-        height: 190vh;
+        height: fit-content;
     }
 
     .grid_home { 
-        width: 80%;
+        row-gap: 2rem;
+        width: 85%;
         grid-template-columns: 33% 33% 33%;
     }
 }
@@ -106,6 +106,18 @@
 
     .grid_home { 
         grid-template-columns: 100%;
-        width: 50%;
+        width: 60%;
     }
+
+    .item {
+        height: 20rem;
+    }
+}
+
+@media screen and (max-height: 900px) {
+
+    .container {
+        height: fit-content;
+    }
+    
 }

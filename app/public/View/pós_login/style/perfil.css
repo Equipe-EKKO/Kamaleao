@@ -2,17 +2,6 @@
   display: none;
 }
 
-/* .container {
-  position: relative;
-  z-index: -1;
-  margin: 0 auto;
-  background-color: #fff;
-  width: 100%;
-  max-width: 85rem;
-  height: 100vh;
-  padding-top:160px;
-} */
-
 .perfil_icon {
     text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
     width: 60%;
@@ -21,7 +10,7 @@
     padding-bottom: 3rem;
     text-align: center;
     padding-top:  80px;
-    font-family: 'Urbanist';
+    font-family: 'Urbanist'; 
   }
   
   .icone_perf {
@@ -50,6 +39,7 @@
     margin-top: 5rem;
     z-index: inherit;
     margin-bottom: 4rem;
+    width: 100%;
   }
 
   .tab {
@@ -79,6 +69,7 @@
     cursor: pointer;
     font-size: 17px;
     text-transform: uppercase;
+    font-weight: 600;
   }
   
   /* Change background color of buttons on hover */
@@ -182,6 +173,11 @@
   float: right;
   cursor: pointer;
   color: #363636;
+  transition: .3s;
+}
+
+.md-ct i:hover {
+  color: #F53446; /*oiii*/
 }
 
 .form_anuncio {
@@ -202,13 +198,13 @@
   padding: 2rem;
   border: 1px;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
-  border-radius: 30px;
+  border-radius: 40px 5px 40px 5px;
   background-color: white;
   display: block;
 }
 
 .form_anuncio h1 {
-  margin-top: 2rem;
+  margin-top: 1rem;
   color: #363636;
 }
 
@@ -218,6 +214,16 @@
   margin-top: 2rem;
   margin-left: 0.5rem;
   text-align: left;
+}
+
+.form_anuncio .fa-times-circle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 18pt;
+  float: right;
+  cursor: pointer;
+  color: #363636;
 }
 
 .grid_anuncio{
@@ -238,7 +244,6 @@
   width: 1rem;
   height: 1rem;
   margin-top: 0.5rem;
-  cursor: pointer;
 }
 
 .check label {
@@ -282,16 +287,41 @@
   
 }
 
-.grid_anuncio form input[type=file] {
+#imagem {
   display: none;
 }
 
-.grid_anuncio .left label{
+.grid_anuncio textarea:focus {
+  outline: 0;
+}
+
+.grid_anuncio select:focus {
+  outline: 0;
+}
+
+#escolha{
   border: 1px solid #363636;
   padding: 0.3rem 1rem;
   cursor: pointer;
   border-radius: 5px;
   margin-left: -2rem;
+}
+
+select {
+  width: 20rem;
+  height: 2.5rem;
+  font-size: 18px;
+  border-radius: 15px;
+  border: 1px solid #363636;
+  padding-left: 15px;
+  margin-left: -30px;
+  cursor: pointer;
+}
+
+select option {
+  font-size: 10pt;
+  border: 1px solid #363636;
+  cursor: pointer;
 }
 
 /*botao*/
@@ -308,8 +338,6 @@
   font-size: 28px;
   color: #363636;
   font-family: 'Urbanist', sans-serif;
-  margin-bottom: 7px;
-  margin-top: 2rem;
 }
 
 .form_anuncio .botao:hover {
@@ -460,24 +488,46 @@
 
 
   @media screen and (max-width: 800px) {
-    
-    .tab div {
-      display:block;
+
+    main {
+      
     }
 
     .tab {
+      width: 100%;
       display: block;
       background: none;
       text-align: center;
+      margin-left: -1.5rem;
+
     }
 
     #bt1, #bt2, #bt3 {
-      border-radius: 0;
-      width: 10rem;
+      border-radius: 30px 30px 0 0;
+      width: 100%;
+      font-size: 70%;
+      font-weight: 400;
+      text-align: center;
     }
 
+    #bt2 {
+      margin-left: -.7rem;
+    }
+
+    #bt3 {
+      margin-left: -1.5rem;
+    }
+
+
     .tab div {
+      background: none;
       border-radius: 0;
+      width: 30%;
+    }
+
+    .form_anuncio {
+      margin-top: 2rem;
+      height: 60%;
     }
 
   }

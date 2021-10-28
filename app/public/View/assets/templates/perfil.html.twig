@@ -12,13 +12,13 @@
       <!-- conteudo de perfil -->
       {% block perfil_icon %}
       <div class="perfil_icon">
-         <a class="icone_perf"><i class='bx bxs-user-circle'></i></a>
+        <a class="icone_perf"><i class='bx bxs-user-circle'></i></a>
         
-         <h1> @{{Usuario}} </h1>
+        <h1> @{{Usuario}} </h1>
 
-         {% if Descricao != "" %}
-         <p>{{Descricao}}</p>
-         {% endif %}
+        {% if Descricao != "" %}
+        <p>{{Descricao}}</p>
+        {% endif %}
 
       </div>
       {% endblock perfil_icon %}
@@ -26,9 +26,9 @@
       {% block div_container %}
       <main>
         <div class="tab">
-          <div><button id="bt1" class="tablinks" onclick="openTab(event, 'Inventário', 'bt1')"> <strong>inventário</strong> </button></div>
-          <div><button id="bt2" class="tablinks" onclick="openTab(event, 'Serviços', 'bt2')" autofocus> <strong>Serviços</strong></button></div>
-          <div><button id="bt3" class="tablinks" onclick="openTab(event, 'Comissao', 'bt3')"> <strong>comissões</strong></button></div>
+          <div><button id="bt1" class="tablinks" onclick="openTab(event, 'Inventário', 'bt1')">inventário</button></div>
+          <div><button id="bt2" class="tablinks" onclick="openTab(event, 'Serviços', 'bt2')" autofocus>serviços</button></div>
+          <div><button id="bt3" class="tablinks" onclick="openTab(event, 'Comissao', 'bt3')">comissões</button></div>
         </div>
 
         <div class="all">
@@ -62,6 +62,7 @@
 
             <div id="md-pr" class="md-ct-pos">
               <div class ="form_anuncio">
+              <i class="fas fa-times-circle" onclick="fechaModal()"></i>
                 <h1>Anunciar um Serviço</h1>
                 <div class ="grid_anuncio">
                   <div class="left">
@@ -70,24 +71,35 @@
                     <p>Descrição do serviço</p>
                     <textarea id="descricao" name="descricao" rows="5" maxlength="280" placeholder="Descreva detalhadamente o serviço que será oferecido..."></textarea>
                     <p>Escolha uma imagem para o Anúncio:</p>
-                    <label for="imagem">Escolher arquivo</label>
+                    <label for="imagem" id="escolha">Escolher arquivo</label>
                     <input type="file" id="imagem" name="imagem" accept="image/png, image/jpeg"></br></br>
-                    <span id="file-name"></span>                             
+                    <span id="file-name"></span>
                   </div>
                   <div clas="rigth">
                     <p>Preço médio</p>
                     <input type="number" min="0" max="10000" id="preco" name="preco" placeholder="Preço médio para o serviço"/>
-                    <p>Tipos de Licenças</p> 
+                    <p>Tipos de Licenças</p>
                     <div class="check"><!-- checkbox para as licencas -->
-                    <input type="checkbox" id="licenca1" name="licenca1" value="1">
-                    <label for="licenca1">Licença de uso Não-Comercial</label><br>
-                    <input type="checkbox" id="licenca2" name="licenca2" value="2">
-                    <label for="licenca2">Licença de uso Comercial</label><br>
-                    <input type="checkbox" id="licenca3" name="licenca3" value="3">
-                    <label for="licenca3">Licença de Download</label><br>
-                  </div>
+                      <input type="checkbox" id="licenca1" name="licenca1" value="1">
+                      <label for="licenca1">Licença de uso Não-Comercial</label><br>
+                      <input type="checkbox" id="licenca2" name="licenca2" value="2">
+                      <label for="licenca2">Licença de uso Comercial</label><br>
+                      <input type="checkbox" id="licenca3" name="licenca3" value="3">
+                      <label for="licenca3">Licença de Download</label><br>
+                    </div>
+                    <p>Categoria</p>
+                    <select name="select_cat" id="select_cat">
+                      <option value="" selected="true" disabled="disabled">Categoria</option>
+                      <option value="">Arte Digital</option>
+                      <option value="">Design</option>
+                      <option value="">Logos</option>
+                      <option value="">Concept Arts</option>
+                      <option value="">Uso comercial</option>
+                      <option value="">Uso não-comercial</option>
+                    </select>  
                 </div>
               </div>
+              <input type="submit" class="botao" name="acao" value="Anunciar" /> <br>
             </div>
           </div>
           <!-- Comissao -->
@@ -115,6 +127,13 @@
             window.onload = function() {
               document.getElementById('bt2').click();
             }
+
+            var $input    = document.getElementById('imagem'),
+            $fileName = document.getElementById('file-name');
+
+            $input.addEventListener('change', function(){
+              $fileName.textContent = this.value;
+            });
           </script>
 
         </div> <!--all-->

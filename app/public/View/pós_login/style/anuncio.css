@@ -9,6 +9,9 @@
 }
 
 .desenho {
+    display: block;
+    margin: 0 auto;
+    margin-left: .5rem;
     border: 2px solid #ccc;
     border-radius: 10px;
     width: 25rem;
@@ -126,11 +129,9 @@ button:hover {
     }
 
     .float {
-        width: 60%;
-        padding: .5rem;
-        margin: 0 auto;
-        margin-right: 3.5rem;
+        width: 50%;
         margin-top: .5rem;
+        margin-left: 6rem;
     }
 
     button{
@@ -149,10 +150,9 @@ button:hover {
     }
 
     .info {
-        margin-left: .3rem;
-        position: absolute;
+        margin-left: .4rem;
         margin-top: 25rem;
-        width: 75%;
+        width: 80%;
     }
 
     .info div {
