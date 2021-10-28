@@ -6,27 +6,26 @@ require_once 'classes/clPerfilProprio.php';
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php'); #arquivo de configuracao
 
 // Função chamada no controller para verificar se o username e o email escolhido na atualização estão disponíveis
-function atualizaUsuario (string $user) { # define que o parametro a ser passado deve ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller
+function atualizaUsuario(string $user):bool { # define que o parametro a ser passado deve ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller
     /* De uma maneira geral, o programa segue a seguinte lógica:
         => Verifica se o username estão disponíveis. Dependendo do caso, uma mensagem diferente será exibida
         => Utiliza uma instância da Classe usuário serializada no model que realiza o Login */
     $usuario = unserialize($_SESSION['usuario']);
     $cdupt = $usuario->getCdUpdate();
-    $message = "";
     if ((!empty($user) || isset($user) || $user != "" || $user != null)) {
         if ($usuario->verificaUsername($user)) {
             //n sei que atualiza
             $usuario->atualizarUsername($user, $cdupt);
             return true;
-        } else {
-            /*$message = "Este username não está disponível. Tente novamente!";
-            return $message;*/
-            return false;
         }
-    } else {
-        $message = "O campo inserido está vazio. Não há como atualizar.";
-        return $message;
+        /*$message = "Este username não está disponível. Tente novamente!";
+        return $message;*/
+        return false;
+        
     }
+    /*$message = "O campo inserido está vazio. Não há como atualizar.";
+    return $message;*/
+    return false;
 }
 // Função chamada no controller para verificar se o username e o email escolhido na atualização estão disponíveis
 function atualizaEmail (string $email) { # define que o parametro a ser passado deve ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller

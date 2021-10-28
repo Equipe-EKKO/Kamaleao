@@ -29,7 +29,7 @@ form {
 
 fieldset {
     height: 26rem;
-    padding: 4rem;
+    padding: 3rem 4rem 5rem 4rem;
     border: 1px;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
     border-radius: 40px 5px 40px 5px;

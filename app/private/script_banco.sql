@@ -37,13 +37,25 @@ CHARACTER SET utf8mb4;
 -- tabela de status de pagamento
 CREATE table IF NOT EXISTS tb_status_pagamento(
 	-- atributos
-    cd_status INT UNSIGNED NOT NULL AUTO_INCREMENT, -- chave primaria
+    cd_status INT UNSIGNED NOT NULL auto_increment, -- chave primaria
     nm_status VARCHAR(20) NOT NULL,
     `dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     -- definicao das chaves
     -- primaria
     constraint pk_status_pagamento
 		primary key (cd_status))
+CHARACTER SET utf8mb4;
+
+-- tabela de tipos de licença
+CREATE table IF NOT EXISTS `tb_tipos_licença`(  
+    -- atributos
+    `cd_licença` INT UNSIGNED NOT NULL auto_increment, -- chave primaria
+    `nm_licença` VARCHAR(20) NOT NULL,
+    `dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    -- definicao das chaves
+    -- primaria
+    constraint pk_status_pagamento
+		primary key (cd_licenca))
 CHARACTER SET utf8mb4;
         
 -- tabela de usuarios
@@ -77,7 +89,7 @@ CHARACTER SET utf8mb4;
 -- tabela de servicos
 CREATE table IF NOT EXISTS `tb_serviço`(
 	-- atributos
-    `cd_serviço` INT UNSIGNED NOT NULL AUTO_INCREMENT, -- chave primaria
+    `cd_serviço` INT UNSIGNED NOT NULL auto_increment, -- chave primaria
 	`nm_serviço` VARCHAR(50) NOT NULL,
 	`ds_serviço` VARCHAR(280) NOT NULL,
 	`qt_versão` INT(1) NOT NULL DEFAULT 1,
@@ -118,7 +130,7 @@ CHARACTER SET utf8mb4;
 -- tabela de denúncias
 CREATE table IF NOT EXISTS `tb_denúncia`(
 	-- atributos
-    `cd_denúncia` INT UNSIGNED NOT NULL AUTO_INCREMENT, -- chave primaria
+    `cd_denúncia` INT UNSIGNED NOT NULL auto_increment, -- chave primaria
     `nm_denúncia` VARCHAR(45) NOT NULL,
     `ds_denúncia` VARCHAR(1200),
     ic_avaliado BOOLEAN NOT NULL DEFAULT 0,
@@ -142,7 +154,7 @@ CHARACTER SET utf8mb4;
 -- tabela de versões do mesmo serviço
 CREATE table IF NOT EXISTS `tb_versão`(
 	-- atributos
-    `cd_versão` INT UNSIGNED NOT NULL, -- chave primaria
+    `cd_versão` INT UNSIGNED NOT NULL auto_increment, -- chave primaria
     `nm_versão` VARCHAR(50) NOT NULL,
 	`ds_versão` VARCHAR(280),
     `vl_preço` DECIMAL(10,2) NOT NULL,
@@ -161,12 +173,12 @@ CHARACTER SET utf8mb4;
 -- tabela de resolução entre serviço e categoria
 CREATE table IF NOT EXISTS `tb_categoria_serviço`(
 	-- atributos
-    `cd_categoria_serviço` INT UNSIGNED NOT NULL, -- chave primaria
+    `cd_categoria_serviço` INT UNSIGNED NOT NULL auto_increment, -- chave primaria
     cd_categoria INT UNSIGNED NOT NULL,  -- chave estrangeira
     `cd_serviço` INT UNSIGNED NOT NULL, -- chave estrangeira
     -- definicao das chaves
     -- primaria
-    constraint `pk_categoria_serviços`
+    constraint `pk_categoria_serviço`
 		primary key (`cd_categoria_serviço`),
 	-- estrangeira: entre categoria e tabela serviço e categoria
     constraint `fk_categoria_serviço_categoria`
@@ -178,10 +190,30 @@ CREATE table IF NOT EXISTS `tb_categoria_serviço`(
 			references `tb_serviço`(`cd_serviço`))
 CHARACTER SET utf8mb4;
 
+-- tabela de resolução entre serviço e licença
+CREATE table IF NOT EXISTS `tb_licença_serviço`(
+	-- atributos
+    `cd_licença_serviço` INT UNSIGNED NOT NULL auto_increment, -- chave primaria
+    `cd_licença` INT UNSIGNED NOT NULL,  -- chave estrangeira
+    `cd_serviço` INT UNSIGNED NOT NULL, -- chave estrangeira
+    -- definicao das chaves
+    -- primaria
+    constraint `pk_licença_serviço`
+		primary key (`cd_licença_serviço`),
+	-- estrangeira: entre licença e tabela serviço e licença
+    constraint `fk_licença_serviço_licença`
+		foreign key (`cd_licença`)
+			references `tb_licença`(`cd_licença`),
+	-- estrangeira: entre servico e tabela serviço e licença
+    constraint `fk_licença_serviço_serviço`
+		foreign key (`cd_serviço`)
+			references `tb_serviço`(`cd_serviço`))
+CHARACTER SET utf8mb4;
+
 -- tabela de pedido
 CREATE table IF NOT EXISTS tb_pedido (
 	-- atributos
-	cd_pedido INT UNSIGNED NOT NULL AUTO_INCREMENT, -- chave primaria
+	cd_pedido INT UNSIGNED NOT NULL auto_increment, -- chave primaria
 	nm_pedido VARCHAR(45) NOT NULL,
 	ds_pedido VARCHAR(200) NOT NULL,
 	ic_cancelado BOOLEAN NOT NULL DEFAULT 0, -- verifica cancelamento, se nao foi cancelado, o default é falso
@@ -201,7 +233,7 @@ CHARACTER SET utf8mb4;
 -- tabela imagem
 CREATE table IF NOT EXISTS tb_imagem (
 	-- atributos
-	cd_imagem INT  NOT NULL AUTO_INCREMENT, -- chave primaria
+	cd_imagem INT  NOT NULL auto_increment, -- chave primaria
 	im_serviço LONGBLOB NOT NULL,
 	`cd_versão` INT UNSIGNED NOT NULL, -- chave estrangeira
     -- definicao das chaves
@@ -220,7 +252,7 @@ CHARACTER SET utf8mb4;
 -- tabela produto
 CREATE table IF NOT EXISTS tb_produto (
 	-- atributos
-	cd_produto INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	cd_produto INT UNSIGNED NOT NULL auto_increment,
 	nm_produto VARCHAR(45) NOT NULL,
 	im_produto LONGBLOB NOT NULL,
 	`dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -241,7 +273,7 @@ CHARACTER SET utf8mb4;
 -- tabela pagamento
 CREATE table IF NOT EXISTS tb_pagamento (
 	-- atributos
-	cd_pagamento INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	cd_pagamento INT UNSIGNED NOT NULL auto_increment,
 	cd_status INT UNSIGNED NOT NULL,
 	cd_produto INT UNSIGNED NOT NULL,
 	cd_usuario INT UNSIGNED NOT NULL,

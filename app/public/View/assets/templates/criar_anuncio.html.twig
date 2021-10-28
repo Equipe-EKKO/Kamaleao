@@ -26,17 +26,15 @@
                         
                     </div>
                     <div clas="rigth">
-                        <p>Preço mínimo</p>
-                        <input type="number" min="0" max="10000" id="preco" name="preco" placeholder="Preço mínimo para o serviço"/>
-                        <p>Preço máximo</p>
-                        <input type="number" min="0" max="10000" id="preco" name="preco" placeholder="Preço máximo para o serviço"/>
+                        <p>Preço médio</p>
+                        <input type="number" min="0" max="10000" id="preco" name="preco" placeholder="Preço médio para o serviço"/>
                         <p>Tipos de Licenças</p> 
                         <div class="check"><!-- checkbox para as licencas -->
-                            <input type="checkbox" id="licenca1" name="licenca1" value="n_comercial">
+                            <input type="checkbox" id="licenca1" name="licenca1" value="1">
                             <label for="licenca1">Licença de uso Não-Comercial</label><br>
-                            <input type="checkbox" id="licenca2" name="licenca2" value="comercial">
+                            <input type="checkbox" id="licenca2" name="licenca2" value="2">
                             <label for="licenca2">Licença de uso Comercial</label><br>
-                            <input type="checkbox" id="licenca3" name="licenca3" value="download">
+                            <input type="checkbox" id="licenca3" name="licenca3" value="3">
                             <label for="licenca3">Licença de Download</label><br>
                         </div>
                     </div>                              
@@ -45,10 +43,9 @@
                 <input type="submit" class="botao" name="acao" value="Anunciar" /> <br>
                 <script>
                     var $input = document.getElementById('imagem'),
-                    $fileName = document.getElementById('file-name');
-
+                    $fileName = document.getElementById("file-id").files[0].name; 
                     $input.addEventListener('change', function(){
-                    $fileName.textContent = this.value;
+                    $fileName.textContent = this.files[0].name;
                     });
                 </script>
                 {% endblock conteudo %}

@@ -10,14 +10,6 @@ $twig = new Environment($loader);
 
 $perfilInfo = unserialize($_SESSION['userinfo']);
 
-/*      TEM Q PUXAR:
-    - username - ja foi
-    - email - ja foi
-    - descricao - ja foi
-    - chave pix
-*/
-
-
 if (isset($perfilInfo['nm_username']) && isset($perfilInfo['nm_email'])) {
     $username = $perfilInfo['nm_username'];
     $email = $perfilInfo['nm_email'];

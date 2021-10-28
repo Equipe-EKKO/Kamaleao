@@ -148,7 +148,7 @@ class Usuario extends Participante {
         /*Conexão com o Banco*/
         $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL
 
-        $sql = "UPDATE tb_login SET nm_login = :email WHERE cd_login = :cdUpdate"; # declara a query do insert na tabela login do banco de dados 
+        $sql = "UPDATE tb_login SET nm_email = :email WHERE cd_login = :cdUpdate"; # declara a query do insert na tabela login do banco de dados 
         $stmt = $banco->prepare($sql); # prepara a query para execução
         /*Substitui os valores de cada placeholder na query preparada*/
         $stmt->bindValue(':email', $email); 

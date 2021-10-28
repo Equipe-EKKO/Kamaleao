@@ -13,6 +13,4 @@ if (!empty($_POST)) { #verifica se o formulário está enviando algo ao controll
     echo "Nada foi enviado";
     #Caso contrário ele retorna o erro 
 }
-
-
 ?>

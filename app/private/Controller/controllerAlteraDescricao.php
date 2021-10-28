@@ -5,8 +5,6 @@ require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 
 ob_end_clean();
 
-/*, $_POST['descricao'], $_POST['email'], $_POST['chavepix'], $_POST['senha'], $_POST['confsenha']*/
-
 if (!empty($_POST)) { #verifica se o formulário está enviando algo ao controller
     $ControllerLogin = new ControllerAlteraDescricao($_POST['descricao']);
 } else {
@@ -15,6 +13,4 @@ if (!empty($_POST)) { #verifica se o formulário está enviando algo ao controll
     echo "Nada foi enviado";
     #Caso contrário ele retorna o erro 
 }
-
-
 ?>

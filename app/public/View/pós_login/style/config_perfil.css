@@ -1,5 +1,10 @@
 * {
-  font-family: 'Segoe UI','Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Urbanist', sans-serif;
+}
+
+.container {
+  padding-top: 140px;
+  height: 135vh;
 }
 
 .nav_filtro {
@@ -8,6 +13,7 @@
 
 h1, h6 {
   text-align: center;
+  color: #363636;
 }
 
 @keyframes modal {
@@ -35,17 +41,29 @@ h1, h6 {
   align-items: center;
 }
 
+.md-ct i {
+  font-size: 18pt;
+  float: right;
+  cursor: pointer;
+  color: #363636;
+}
+
+.md_ct i:hover {
+  color: #F53446;
+}
+
 .md-ct-pos, .main-initial {
   display: none;
 }
 
 .main {
-  display:flex;
-  flex-direction: column;
+  display:grid;
+  grid-template-rows: 25% 20% 20% 20% 20% 20%;
 }
 
-.main h3{
-  margin-top: 1rem;
+.main h3 {
+  display: inline-block;
+  color: #363636;
 }
 
 .main p {
@@ -55,19 +73,20 @@ h1, h6 {
 }
 
 .md {
-  background-image: url("/GitHub/Kamaleao/app/public/View/assets/img/background.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-  background-size: cover;
+  background-color: #ffff;
   width: 40%;
   min-width: 300px;
-  height: 60%;
+  max-width: 500px;
+  height: 47%;
   max-height: 600px;
-  padding: 40px;
+  padding: 2rem;
   border-radius: 40px 5px 40px 5px;
   position: relative;
   overflow-y: auto;
+}
+
+.md p {
+  margin-bottom: 2rem;
 }
 
 .show .md {
@@ -75,8 +94,11 @@ h1, h6 {
 }
 
 .md h3{
-  margin-top: 7.5rem;
+  margin: 2rem;
+  color: #363636;
 }
+
+
 
 button{
   display: block;
@@ -115,8 +137,7 @@ h3, p {
 input[type=text], form input[type=password] {
   display: block;
   margin: 0 auto;
-  margin-top: .5rem;
-  width: 100%;
+  width: 90%;
   max-width: 600px;
   height: 2.5rem;
   font-size: 18px;
@@ -130,35 +151,103 @@ input[type=text], form input[type=password] {
   width: 80%;
   margin-top: 2em;
   font-size: 1.10rem;
-  color: #f44336;
   font-family: 'Urbanist', sans-serif;
 }
 
+.erro {
+  color: #f44336 !important;
+}
+
+.sucesso {
+  color: #00a800 !important;
+}
+
+.info_icone {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .icone_perf {
-  color: #a6a6a6;
-  font-size: 125px;
-  display: block;
-  margin: 0 auto;
-  margin-bottom: 1.5rem;
-}
-
-.icone_perf:hover {
-  color: #a6a6a6;
-  font-size: 125px;
-  display: block;
-  margin: 0 auto;
-  margin-bottom: 1.5rem;
-}
-
-.cliqueperf {
-  display: block;
-  margin: 0 auto;
-  width: 23%;
-  line-height: 30px;
+  border: 1px solid #ccc;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
   cursor: pointer;
   transition: .4s;
 }
 
-.cliqueperf:hover {
+.icone_perf:hover {
+  width: 9rem;
+  height: 9rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,.2);
+}
+
+.icone_edit {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(245, 52, 70, 0.8);
+  align-items: center;
+  display: none;
+}
+
+.icone_perf:hover .icone_edit{
+  display: flex;
+}
+
+.icone_edit i {
+  margin: 0 auto;
+  color: #ffff;
+}
+
+.info_perfil {
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  width: 70%;
+  height: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 25% 75%;
+  transition: .4s;
+  cursor: pointer;
+}
+
+.info_perfil:hover {
+  width: 80%;
+  box-shadow: 0 3px 10px rgba(0,0,0,.2);
+}
+
+.info_perfil:hover h3 {
   color: #F53446;
+}
+
+.info_perfil p {
+  text-align: left;
+  margin-left: 1rem;
+}
+
+.info_perfil h3 {
+  margin: 2rem 0rem 1rem 1rem;
+  transition: .4s;
+}
+
+.edit_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.info_perfil:hover i {
+  color: rgba(245, 52, 70, 1);
+}
+
+
+.fa-pen {
+  font-size: 30pt;
+  color: #363636;
+  transition: .4s;
 }

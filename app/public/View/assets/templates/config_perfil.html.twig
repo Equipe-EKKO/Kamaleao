@@ -21,67 +21,143 @@
           <form id="confSenha" method="POST" action="">
             <p>Digite abaixo sua senha para fazer a confirmação.</p>
             <input type="password" id="senha" name="senha" />
-            <button type="submit" class="button" name="submit">Validar </button>
             {% block erro %}
-                <p hidden class="form-message">
-                    <i class="fas fa-exclamation-triangle"></i>
-                </p>
+              <p hidden id="resultfirst" class="form-message">
+                  <i class="fas fa-exclamation-triangle"></i>
+              </p>
             {% endblock erro %}
+            <button type="submit" class="button" name="submit">Validar </button>
+            
           </form>
         </div>
       </div>
       <div class="container">
+      <h1> Informações pessoais:</h1>
         <main class="main-initial">
-          <h1> Informações pessoais:</h1>
-          <a class="icone_perf"><i class='bx bxs-user-circle'></i></a>
-          <a class="cliqueperf" onclick="abreModal('username')"><h3>Nome de usuário<i class="fas fa-pen"></i></h3></a>
-          <p>@{{Usuario}}</p>
-          <a class="cliqueperf" onclick="abreModal('desc')"><h3>Descrição<i class="fas fa-pen"></i></h3></h3></a>
-          {% if Descricao != null %}            
-          <p>{{Descricao}}</p>
-          {% else %}
-          <p> Você não possui uma descrição ainda!</p>
-          {% endif %}
-          <a class="cliqueperf" onclick="abreModal('email')"><h3>Email<i class="fas fa-pen"></i></h3></h3></a>
-          <p>{{Email}}</p>
-          <a class="cliqueperf" onclick="abreModal('chavepix')"><h3>Chave pix<i class="fas fa-pen"></i></h3></h3></a>
-          {% if ChavePix != null %}
-          <p>{{ChavePix}}</p>
-          {% else %}
-          <p> Você não possui uma chave pix ainda!</p>
-          {% endif %}
+          <div class="info_icone">
+            <div class="icone_perf"  onclick="abreModal('icone')">
+            <i class='bx bxs-user-circle'>
+              <div class="icone_edit">
+                <i class="fas fa-pen"></i>
+              </div>
+            </div>
+          </div>
+          <div class="info_perfil" onclick="abreModal('username')">
+            <div class="edit_icon">
+                <i class="fas fa-pen"></i>
+            </div> <!-- edit_icon -->
+            <div class="edit_text">
+              <h3>Nome de usuário</h3>
+              <p id="atualUsername">@{{Usuario}}</p>
+            </div> <!-- edit_text -->
+          </div> <!-- info_perfil -->
+
+          <div class="info_perfil" onclick="abreModal('desc')">
+            <div class="edit_icon">
+                <i class="fas fa-pen"></i> 
+            </div>  <!-- edit_icon -->
+            <div class="edit_text">
+              <h3>Descrição</h3>
+                {% if Descricao != null %}            
+                <p id="atualDesc">{{Descricao}}</p>
+                {% else %}
+                <p id="atualDesc"> Você não possui uma descrição ainda!</p>
+                {% endif %}
+            </div> <!-- edit_text -->
+          </div> <!-- info_perfil -->
+
+          <div class="info_perfil" onclick="abreModal('email')">
+            <div class="edit_icon">
+                <i class="fas fa-pen"></i>
+            </div> <!-- edit_icon -->
+            <div class="edit_text">
+              <h3>Email</h3>
+              <p id="atualEm">{{Email}}</p>
+            </div> <!-- edit_text -->
+          </div> <!-- info_perfil -->
+
+          <div class="info_perfil" onclick="abreModal('chavepix')">
+            <div class="edit_icon">
+                <i class="fas fa-pen"></i>
+            </div> <!-- edit_icon -->
+            <div class="edit_text">
+              <h3>Chave pix</h3>
+              {% if ChavePix != null %}
+                <p id="atualCP">{{ChavePix}}</p>
+              {% else %}
+                <p id="atualCP"> Você não possui uma chave pix ainda!</p>
+              {% endif %}
+            </div> <!-- edit_text -->
+          </div> <!-- info_perfil -->
+
+          <div class="info_perfil" onclick="abreModal('senha')">
+            <div class="edit_icon">
+             <i class="fas fa-pen"></i>
+            </div> <!-- edit_icon -->
+            <div class="edit_text">
+              <h3>Senha</h3>
+              <p>***********</p>
+            </div> <!-- edit_text -->
+          </div> <!-- info_perfil -->
+          <!--
           <button class="modal-button" onclick="abreModal('senha')">Alterar senha</button>
+          -->
           <div id="md-pr2" class="md-ct-pos">
-            <i class="fas fa-times-circle" onclick="fechaModal()"></i>
             <div id="username" class="md">
+            <i class="fas fa-times-circle" onclick="fechaModal()"></i>
               <h3>Insira o novo nome de usuário</h3>
               <p>Seu nome de usuário não pode conter espaços e deve ser único.</p>
-              <input type="text" id="username" name="username" />
-              <button type="submit" class="button" name="submit">Editar</button>
+              <form id="trocaUsername" method="POST" action="">
+                <input type="text" id="attUser" name="username" />
+                <p hidden id="resultsec" class="form-message">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </p>
+                <button type="submit" class="button" name="submit">Editar</button>
+              </form>
             </div>
             <div id="desc" class="md">
               <h3>Insira a nova descrição</h3>
               <p>A descrição é o lugar onde você fala um pouco sobre você, ele fica visível para todos!</p>
-              <textarea id="descricao" name="descricao" rows="5" maxlength="280"></textarea>
-              <button type="submit" class="button" name="submit">Editar</button>
+              <form id="trocaDesc" method="POST" action="">
+                <textarea id="descricao" name="descricao" rows="5" maxlength="280"></textarea>
+                <p hidden id="resultthird" class="form-message">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </p>
+                <button type="submit" class="button" name="submit">Editar</button>
+              </form>
             </div>
             <div id="email" class="md">
               <h3>Insira o novo email</h3>
-              <p>E por este email que nos comunicaremos com você.</p>
-              <input type="text" id="email" name="email" />
-              <button type="submit" class="button" name="submit">Editar</button>
+              <p>É por este email que nos comunicaremos com você.</p>
+              <form id="trocaEmail" method="POST" action="">
+                <input type="text" id="attEmail" name="email" />
+                <p hidden id="resultfourth" class="form-message">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </p>
+                <button type="submit" class="button" name="submit">Editar</button>
+              </form>
             </div>
             <div id="chavepix" class="md">
               <h3>Insira sua chave aleatória pix</h3>
               <p>Sua chave aleatória pix é inserida aqui para que você receba seus pagamentos.</p>
-              <input type="text" id="chavepix" name="chavepix" />
-              <button type="submit" class="button" name="submit">Editar</button>
+              <form id="trocaCPix" method="POST" action="">
+                <input type="text" id="attCPix" name="chavepix" />
+                <p hidden id="resultfifth" class="form-message">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </p>
+                <button type="submit" class="button" name="submit">Editar</button>
+              </form>
             </div>
             <div id="senha" class="md">
               <h3>Insira sua senha!</h3>
-              <input type="text" id="senha" name="senha" placeholder="senha"/>
-              <input type="text" id="confsenha" name="confsenha" placeholder="confirmar senha"/>
-              <button type="submit" class="button" name="submit">Editar</button>
+              <form id="trocaSenha" method="POST" action="">
+                <input type="password" id="attSenha" name="senha" placeholder="senha"/>
+                <input type="password" id="confsenha" name="confsenha" placeholder="confirmar senha"/>
+                <p hidden id="resultsixth" class="form-message">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </p>
+                <button type="submit" class="button" name="submit">Editar</button>
+              </form>
             </div>
           </div>
         </main>

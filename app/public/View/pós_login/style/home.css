@@ -4,7 +4,6 @@
 
 .grid_home {
     display: grid;
-    border: 1px solid #ccc;
     background-color: #ffff;
     grid-template-columns: 25% 25% 25% 25%;
     margin: 0 auto;

@@ -14,7 +14,7 @@ class ControllerAlteraUsername {
       ob_end_clean();
       echo "Verifique se todos os campos estão inseridos corretamente!";
       return false;
-    }elseif (v::noWhitespace()->validate($this->username) == false){
+    }else if (v::noWhitespace()->validate($this->username) == false){
       /*$_SESSION["error"] = 'Sua senha deve conter pelo menos 7 caracteres!';
       header("Location: /Github/Kamaleao/app/public/view/pós_login/config_perfil/config_perfil.php");*/
       ob_end_clean();
