@@ -6,7 +6,7 @@
     {% block title %}Anunciar{% endblock %}
     {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/criar_anuncio.css"{% endblock hrefcss %}
 </head>
-{% endblock def %}s
+{% endblock def %}
 {% block body %}
 <body>
     {% block form_name %}"form_anuncio"{% endblock form_name %}
@@ -41,14 +41,7 @@
                 </div>
                 
                 <input type="submit" class="botao" name="acao" value="Anunciar" /> <br>
-                <script>
-                    var $input = document.getElementById('imagem'),
-                    $fileName = document.getElementById("file-id").files[0].name;
-                    $input.addEventListener('change', function(){
-                    $fileName.textContent = this.files[0].name;
-                    });
-                </script>
-                {% endblock conteudo %}
+            {% endblock conteudo %}
 </body>
 </html>
 {% endblock body %}

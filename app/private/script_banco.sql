@@ -55,7 +55,7 @@ CREATE table IF NOT EXISTS `tb_tipos_licença`(
     -- definicao das chaves
     -- primaria
     constraint pk_status_pagamento
-		primary key (cd_licenca))
+		primary key (`cd_licença`))
 CHARACTER SET utf8mb4;
         
 -- tabela de usuarios
@@ -95,14 +95,18 @@ CREATE table IF NOT EXISTS `tb_serviço`(
 	`qt_versão` INT(1) NOT NULL DEFAULT 1,
 	`dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	cd_usuario INT UNSIGNED NOT NULL, -- chave estrangeira
+	cd_categoria INT UNSIGNED, -- chave estrangeira
     -- definicao das chaves
     -- primaria
     constraint `pk_serviço`
 		primary key (`cd_serviço`),
-	-- chave estrangeira
+	-- estrangeira: usuário e serviço
     constraint fk_usuario_servico
 		foreign key (cd_usuario)
-			references tb_usuario(cd_usuario))
+			references tb_usuario(cd_usuario),
+	constraint `fk_categoria_serviço`
+		foreign key (cd_categoria)
+			references tb_categoria(cd_categoria))
 CHARACTER SET utf8mb4;
 
 -- tabela de avaliação
@@ -170,26 +174,6 @@ CREATE table IF NOT EXISTS `tb_versão`(
 )
 CHARACTER SET utf8mb4;
 
--- tabela de resolução entre serviço e categoria
-CREATE table IF NOT EXISTS `tb_categoria_serviço`(
-	-- atributos
-    `cd_categoria_serviço` INT UNSIGNED NOT NULL auto_increment, -- chave primaria
-    cd_categoria INT UNSIGNED NOT NULL,  -- chave estrangeira
-    `cd_serviço` INT UNSIGNED NOT NULL, -- chave estrangeira
-    -- definicao das chaves
-    -- primaria
-    constraint `pk_categoria_serviço`
-		primary key (`cd_categoria_serviço`),
-	-- estrangeira: entre categoria e tabela serviço e categoria
-    constraint `fk_categoria_serviço_categoria`
-		foreign key (cd_categoria)
-			references tb_categoria(cd_categoria),
-	-- estrangeira: entre servico e tabela serviço e categoria
-    constraint `fk_categoria_serviço_serviço`
-		foreign key (`cd_serviço`)
-			references `tb_serviço`(`cd_serviço`))
-CHARACTER SET utf8mb4;
-
 -- tabela de resolução entre serviço e licença
 CREATE table IF NOT EXISTS `tb_licença_serviço`(
 	-- atributos
@@ -203,7 +187,7 @@ CREATE table IF NOT EXISTS `tb_licença_serviço`(
 	-- estrangeira: entre licença e tabela serviço e licença
     constraint `fk_licença_serviço_licença`
 		foreign key (`cd_licença`)
-			references `tb_licença`(`cd_licença`),
+			references `tb_tipos_licença`(`cd_licença`),
 	-- estrangeira: entre servico e tabela serviço e licença
     constraint `fk_licença_serviço_serviço`
 		foreign key (`cd_serviço`)
@@ -299,5 +283,3 @@ CREATE table IF NOT EXISTS tb_pagamento (
 		foreign key (cd_usuario)
 			references tb_usuario (cd_usuario))
 CHARACTER SET utf8mb4;
-
-

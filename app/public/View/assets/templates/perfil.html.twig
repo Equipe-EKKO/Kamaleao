@@ -4,6 +4,7 @@
    {# head #}
       {% block title %} Perfil {% endblock title %}
       {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/perfil.css"{% endblock hrefcss %}
+      {% block srcjs %}"/GitHub/Kamaleao/app/public/View/pós_login/js/perfil.js"{% endblock srcjs %}
       <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
       
    {# endhead #}
@@ -38,7 +39,7 @@
           <!-- Serviços -->
           <div id="Serviços" class="tabcontent">
               <section class="grid_home">
-                <a id="adicionar" href="/GitHub/Kamaleao/app/public/View/pós_login/criar_anuncio/criar_anuncio.php">
+                <a id="adicionar" onclick="abreModal()">
                   <i class='bx bx-plus'></i>
                 </a>
                 <div class="item">
@@ -58,6 +59,36 @@
                   </div> <!-- preço -->
                 </div> <!-- item -->
               </section> <!--grid_home-->
+              
+            <div id="md-pr" class="md-ct-pos">
+              <div class ="form_anuncio">
+                <h1>Anunciar um Serviço</h1>
+                <div class ="grid_anuncio">
+                  <div class="left">
+                    <p>Título do anúncio</p>
+                    <input type="text" id="titulo" name="titulo" maxlength="50" placeholder="Título para o seu anúncio"/>
+                    <p>Descrição do serviço</p>
+                    <textarea id="descricao" name="descricao" rows="5" maxlength="280" placeholder="Descreva detalhadamente o serviço que será oferecido..."></textarea>
+                    <p>Escolha uma imagem para o Anúncio:</p>
+                    <label for="imagem">Escolher arquivo</label>
+                    <input type="file" id="imagem" name="imagem" accept="image/png, image/jpeg"></br></br>
+                    <span id="file-name"></span>                             
+                  </div>
+                  <div clas="rigth">
+                    <p>Preço médio</p>
+                    <input type="number" min="0" max="10000" id="preco" name="preco" placeholder="Preço médio para o serviço"/>
+                    <p>Tipos de Licenças</p> 
+                    <div class="check"><!-- checkbox para as licencas -->
+                    <input type="checkbox" id="licenca1" name="licenca1" value="1">
+                    <label for="licenca1">Licença de uso Não-Comercial</label><br>
+                    <input type="checkbox" id="licenca2" name="licenca2" value="2">
+                    <label for="licenca2">Licença de uso Comercial</label><br>
+                    <input type="checkbox" id="licenca3" name="licenca3" value="3">
+                    <label for="licenca3">Licença de Download</label><br>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <!-- Comissao -->
           <div id="Comissao" class="tabcontent">

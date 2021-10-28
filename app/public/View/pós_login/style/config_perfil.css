@@ -42,6 +42,9 @@ h1, h6 {
 }
 
 .md-ct i {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   font-size: 18pt;
   float: right;
   cursor: pointer;
@@ -58,7 +61,7 @@ h1, h6 {
 
 .main {
   display:grid;
-  grid-template-rows: 25% 20% 20% 20% 20% 20%;
+  grid-template-rows:  5% 25% 20% 20% 20% 20% 20%;
 }
 
 .main h3 {
@@ -77,28 +80,25 @@ h1, h6 {
   width: 40%;
   min-width: 300px;
   max-width: 500px;
-  height: 47%;
+  height: 40%;
   max-height: 600px;
-  padding: 2rem;
+  padding: 5rem 2rem 2rem 2rem;
   border-radius: 40px 5px 40px 5px;
   position: relative;
   overflow-y: auto;
 }
 
 .md p {
-  margin-bottom: 2rem;
+  margin: 2rem;
+}
+
+.md h3 {
+  color: #363636;
 }
 
 .show .md {
   animation: modal .6s;
 }
-
-.md h3{
-  margin: 2rem;
-  color: #363636;
-}
-
-
 
 button{
   display: block;
@@ -140,7 +140,7 @@ input[type=text], form input[type=password] {
   width: 90%;
   max-width: 600px;
   height: 2.5rem;
-  font-size: 18px;
+  font-size: 22px;
   border-radius: 15px;
   border: 1px solid #363636;
   padding-left: 10px;
@@ -250,4 +250,87 @@ input[type=text], form input[type=password] {
   font-size: 30pt;
   color: #363636;
   transition: .4s;
+}
+
+textarea { 
+  resize: none;
+  width: 100%;
+  height: 30%;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  padding-top: 5px;
+  margin-left: -5px;
+}
+
+.edit_text p {
+  font-size: 100%;
+}
+
+.md h3 {
+  display: block;
+  margin: 0 auto;
+}
+
+.pass input[type=password] {
+  margin-top: 1rem;
+}
+
+/* RESPONSIVIDADE */
+
+@media screen and (max-height: 820px) {
+
+  .container {
+      height: 150vh;
+    }
+
+    .md {
+      height: 47%;
+    }
+}
+
+@media screen and (max-height: 750px) {
+
+  .container {
+      height: 165vh;
+  }
+}
+
+@media screen and (max-height: 680px) {
+
+  .container {
+      height: 180vh;
+  }
+
+  .md {
+    height: 60%;
+  }
+}
+
+@media screen and (max-height: 620px) {
+
+  .container {
+      height: 195vh;
+  }
+}
+
+@media screen and (max-height: 570px) {
+
+  .container {
+      height: 210vh;
+  }
+  
+  .md {
+    height: 70%;
+  }
+}
+
+@media screen and (max-width: 610px) {
+
+  .main h3 {
+    display: inline-block;
+    color: #363636;
+    font-size: 15pt;
+  }
+  
 }

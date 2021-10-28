@@ -9,6 +9,8 @@ class Anuncio {
     public $nmAnuncio, $dsAnuncio, $nmVersao, $dsVersao, $vlAnuncio; # nmAnuncio: string || dsAnuncio: string || qtVersao: inteiro || dsVersao: string || vlAnuncio: float
     private $qtVersao; # nmVersao: string 
 
+    function salvaAnuncio();
+
     #Métodos Especias - Getter e Setters para os atributos
     /*GETTERS*/
     public function getNmAnuncio() {

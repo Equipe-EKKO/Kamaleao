@@ -32,11 +32,10 @@
         </div>
       </div>
       <div class="container">
-      <h1> Informações pessoais:</h1>
         <main class="main-initial">
+          <h1> Informações pessoais:</h1>
           <div class="info_icone">
             <div class="icone_perf"  onclick="abreModal('icone')">
-            <i class='bx bxs-user-circle'>
               <div class="icone_edit">
                 <i class="fas fa-pen"></i>
               </div>
@@ -85,7 +84,7 @@
               {% if ChavePix != null %}
                 <p id="atualCP">{{ChavePix}}</p>
               {% else %}
-                <p id="atualCP"> Você não possui uma chave pix ainda!</p>
+                <p id="atualCP">Você não possui uma chave pix ainda!</p>
               {% endif %}
             </div> <!-- edit_text -->
           </div> <!-- info_perfil -->
@@ -116,6 +115,7 @@
               </form>
             </div>
             <div id="desc" class="md">
+              <i class="fas fa-times-circle" onclick="fechaModal()"></i>
               <h3>Insira a nova descrição</h3>
               <p>A descrição é o lugar onde você fala um pouco sobre você, ele fica visível para todos!</p>
               <form id="trocaDesc" method="POST" action="">
@@ -127,6 +127,7 @@
               </form>
             </div>
             <div id="email" class="md">
+              <i class="fas fa-times-circle" onclick="fechaModal()"></i>
               <h3>Insira o novo email</h3>
               <p>É por este email que nos comunicaremos com você.</p>
               <form id="trocaEmail" method="POST" action="">
@@ -138,6 +139,7 @@
               </form>
             </div>
             <div id="chavepix" class="md">
+              <i class="fas fa-times-circle" onclick="fechaModal()"></i>
               <h3>Insira sua chave aleatória pix</h3>
               <p>Sua chave aleatória pix é inserida aqui para que você receba seus pagamentos.</p>
               <form id="trocaCPix" method="POST" action="">
@@ -149,8 +151,9 @@
               </form>
             </div>
             <div id="senha" class="md">
-              <h3>Insira sua senha!</h3>
-              <form id="trocaSenha" method="POST" action="">
+              <i class="fas fa-times-circle" onclick="fechaModal()"></i>
+              <h3>Insira sua senha</h3>
+              <form id="trocaSenha" class="pass" method="POST" action="">
                 <input type="password" id="attSenha" name="senha" placeholder="senha"/>
                 <input type="password" id="confsenha" name="confsenha" placeholder="confirmar senha"/>
                 <p hidden id="resultsixth" class="form-message">

@@ -13,6 +13,10 @@ body {
     overflow-x: hidden;
 }
 
+input, textarea {
+    outline: none;
+}
+
 .form_anuncio {
     align-items: center;
     display: flex;
@@ -30,6 +34,7 @@ form {
 }
 
 fieldset {
+    margin-top: 15%;
     padding: 2rem;
     border: 1px;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
@@ -152,7 +157,22 @@ form input[type=file] {
     box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
 }
 
-@media screen and (max-width: 850px) {
-        
+@media screen and (max-width: 1400px) {
+    fieldset {
+        margin-top: 0;
+    }
+}
 
+@media screen and (max-width: 850px) {
+    .grid_anuncio {
+        display: block;
+    }
+
+    .left p, .right p {
+        margin-left: -1rem;
+    }
+    
+    .check {
+        margin-left: 0;
+    }
 }
