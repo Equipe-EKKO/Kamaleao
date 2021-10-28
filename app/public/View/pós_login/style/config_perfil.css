@@ -41,8 +41,8 @@ h1, h6 {
   align-items: center;
 }
 
-.md-ct i {
-  position: absolute;
+.md-ct i .fa-times-circle {
+  position: absolute; /* aqui lina blz vc é lindo */
   top: 10px;
   right: 10px;
   font-size: 18pt;
@@ -51,7 +51,7 @@ h1, h6 {
   color: #363636;
 }
 
-.md_ct i:hover {
+.md_ct i .fa-times-circle:hover {
   color: #F53446;
 }
 
@@ -67,7 +67,7 @@ h1, h6 {
 .main h3 {
   display: inline-block;
   color: #363636;
-}
+} 
 
 .main p {
   margin-bottom: 2rem;

@@ -200,7 +200,8 @@ body {
     -webkit-box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.52); 
     box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.52);
     border-radius: 30px;
-    margin-top: 20rem;
+    margin-top: 15rem;
+    margin-bottom: 15rem;
 }
 
 

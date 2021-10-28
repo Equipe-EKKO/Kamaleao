@@ -5,6 +5,10 @@
     list-style: none;
 }
 
+input, textarea {
+    outline: none;
+}
+
 body {
     background-image: url("/GitHub/Kamaleao/app/public/View/assets/img/background2.jpg");
     background-repeat: no-repeat;
@@ -175,8 +179,25 @@ select {
     
 
 @media screen and (max-width: 850px) {
+
+        fieldset {
+            height: 80%;
+            margin-top: -5rem;
+        }
+
+        .imagem {
+            display: block;
+            margin: 0 auto;
+            width: 70%;
+        }
+
+        .grid_solicitar {
+        display: block;
+    }
+    
         .right {
             display: block;
+            margin-top: 0;
         }
 
 }

@@ -40,7 +40,7 @@ class PerfilProprio extends Perfil {
         }
     }
     function criarAnuncio() {
-        $this->anuncio = ;
+        /*$this->anuncio = ;*/
 
     }
     function excluirAnuncio() {

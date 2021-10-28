@@ -20,7 +20,7 @@
     width: 80%;
     border: 1px solid #ccc;
     cursor: pointer;
-    transition: .5s;
+    transition: .6s;
     display: grid;
     grid-template-rows: 68% 12% 8% 12%;
 }
