@@ -1,29 +1,28 @@
 <?php
 require_once 'classes/clControllerCriaServiço.php';
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
-/*
-if (!empty($_POST) && $_FILES['servfile']['size'] == 0 && !empty($_POST['select_cat'])) {
-    $fileError = $_FILES["servfile"]["error"]; // where FILE_NAME is the name attribute of the file input in your form
-    switch($fileError) {
-        case UPLOAD_ERR_INI_SIZE:
+
+if ((!empty($_POST)) && ($_FILES['servfile']['size']> 0) && ($_FILES["servfile"]["error"] == 0) && (!empty($_POST['select_cat']))) {
+    switch($_FILES["servfile"]["error"]) {
+        case 1:
             echo "Arquivo muito grande para ser salvo.";
             break;
-        case UPLOAD_ERR_NO_FILE:
-            echo "Você não inseriu uma imagem, por favor reveja o formulário.";
-            break;
-        case UPLOAD_ERR_NO_TMP_DIR:
-            echo "Erro na pasta temporária do servidor.";
-            break;
-        case UPLOAD_ERR_CANT_WRITE:
-            echo "Erro do servidor em escrever o arquivo no HD.";
-            break;
-        case UPLOAD_ERR_FORM_SIZE:
+        case 2:
             echo "Erro impossível.";
             break;
-        case UPLOAD_ERR_PARTIAL:
+        case 3:
             echo "O upload do arquivo foi feito de forma parcial.";
             break;    
-        case UPLOAD_ERR_EXTENSION:
+        case 4:
+            echo "Você não inseriu uma imagem, por favor reveja o formulário.";
+            break;
+        case 6:
+            echo "Erro na pasta temporária do servidor.";
+            break;
+        case 7:
+            echo "Erro do servidor em escrever o arquivo no HD.";
+            break;
+        case 8:
             echo "Uma extensão do servidor interrompeu o upload do arquivo.";
             break;
         default:
@@ -33,12 +32,7 @@ if (!empty($_POST) && $_FILES['servfile']['size'] == 0 && !empty($_POST['select_
 } else {
     /*$_SESSION["error"] = 'Nada foi enviado';
     header("Location: /Github/Kamaleao/app/public/View/pós_login/perfil/perfil.php");*/
-    /*echo "Nada foi enviado.";
+    echo "Nada foi enviado.";
     #Caso contrário ele retorna o erro
-}*/
-$temp = $_FILES["servfile"]["tmp_name"];
-$image = basename($_FILES["servfile"]["name"]);
-$img = "E:/xampp/htdocs/GitHub/Kamaleao/app/private/Model/image/service/".$image;
-move_uploaded_file($temp, $img);
-echo "<img src='/GitHub/Kamaleao/app/private/Model/image/service/".$image ."' />";
+}
 ?>

@@ -1,9 +1,10 @@
 <?php
+ob_start();
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 #requere as classes necessárias para o funcionamento (Conexão para fazer o CRUD e Perfil para herdar da classe mãe)
 require_once 'clPerfil.php';
+require_once "autoloadClass.php";
 use Cloudinary\Api\Upload\UploadApi;
-use serviço;
 
 //Subclasse de Perfil cuja função é lidar com as funcionalidades CRUD da partição do Perfil no sistema
 class PerfilProprio extends Perfil {
@@ -40,30 +41,44 @@ class PerfilProprio extends Perfil {
             return false;
         }
     }
-    function criarServiço(string $nm_serviço, $cd_usuario, $extimagem, string $tmpImg):bool {
+    function criarServiço(string $nm_serviço, $cd_usuario, $extimagem, string $tmpImg)/*:bool*/ {
         $nmtemp = explode(" ", $nm_serviço);
-        $partnewname = end($nmtemp);
-        $newname = $cd_usuario . "_serv_" . $partnewname . $extimagem;
-        if (move_uploaded_file($tmpImg, "/image/service/" . $newname)) {
-            if ($objeto = (new UploadApi())->upload("/image/service/" . $newname , ["folder" => "img_service", "use_filename" => true, "unique_filename" => true, "overwrite" => false])){
+        $partnewname = strtolower(end($nmtemp)) . random_int(1, 999);
+        $newname = $cd_usuario . "_serv_" . $partnewname . "." .$extimagem;
+        $newfullpath = realpath(dirname(__FILE__, 2));
+        if (move_uploaded_file($tmpImg, $newfullpath."/image/service/" . $newname)) {
+            if ($objeto = (new UploadApi())->upload($newfullpath."/image/service/" . $newname , ["folder" => "img_service", "use_filename" => true, "unique_filename" => true, "overwrite" => false])){
                 $arrayResult = (array) $objeto;
                 if ($this->serviço->salvaServiço($cd_usuario, $arrayResult['url'])) {
-                    fclose("/image/service/" . $newname);
                     $old = getcwd(); // Save the current directory
-                    chdir("/image/service/");
-                    unlink($newname);
-                    chdir($old); // Restore the old working directory
-                    return true;
+                    chdir($newfullpath."/image/service/");
+                    if (unlink($newname)) {
+                        chdir($old); // Restore the old working directory
+                        return true;
+                    }else {
+                        chdir($old); // Restore the old working directory
+                        return false;
+                    }
                 } else {
-                    echo "Houve um problema em salvar o serviço no banco de dados. <br>";
-                    return false;
+                    (new UploadApi())->destroy($arrayResult['public_id']);
+                    $old = getcwd(); // Save the current directory
+                    chdir($newfullpath."/image/service/");
+                    if (unlink($newname)) {
+                        chdir($old); // Restore the old working directory
+                        $resposta  = ob_get_flush();
+                        ob_end_clean();
+                        echo "Erro ao salvar o serviço no banco de dados. <br> " . $resposta;
+                        return false;
+                    }
                 }
             } else {
+                ob_end_clean();
                 echo "A imagem não pode ser salva no Cloudinary.";
                 return false;
             }    
         } else {
-            echo "Problema em salvar a imagem (temporariamente) no servidor";
+            ob_end_clean();
+            echo "Problema em salvar a imagem (temporariamente) no servidor.";
             return false;
         }
     }
@@ -83,10 +98,7 @@ class PerfilProprio extends Perfil {
     }
     /*GETTERS*/
     public function getServiço() {
-        /*foreach ($this->Serviço as $key => $Serviço) {
-            return $Serviço[$key];
-        }*/
-        
+        return $this->serviço;
     }
     public function getInventario() {
         return $this->inventario;
@@ -96,7 +108,7 @@ class PerfilProprio extends Perfil {
     }
     /*SETTERS*/
     public function setServiço(Serviço $Serviço) {
-        $this->Serviço = $Serviço;
+        $this->serviço = $Serviço;
     }
 
     public function setInventario(/*Inventario*/ $inventario) {

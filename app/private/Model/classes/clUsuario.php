@@ -1,9 +1,9 @@
 <?php
+ob_start();
 #requere as classes necessárias para o funcionamento (Conexão para fazer o CRUD e Participante para herdar da classe mãe)
 require_once 'clParticipante.php';
-require_once 'clPerfilProprio.php';
+require_once "autoloadClass.php";
 use PHPMailer\PHPMailer\PHPMailer;
-use PerfilProprio;
 //Subclasse de Participante cuja função é lidar com as funcionalidades CRUD da partição do usuário comum
 class Usuario extends Participante {
     #Atributos
@@ -64,6 +64,7 @@ class Usuario extends Participante {
             /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
             try {
                 $stmt2->execute(); # executa a query preparada anteriormente
+                ob_end_clean();
                 return true; # retorna true se o processo dos dois inserts forem verdadeiros
             } catch (\PDOException $e) {
                 exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
@@ -106,7 +107,7 @@ class Usuario extends Participante {
                     $this->setSobrenome($resultados['nm_sobrenome']);
                     $this->setCpf($resultados['cd_cpf']);
                     $this->setData_nascimento($resultados['dt_nascimento']);
-                    $this->setPerfil(new PerfilProprio($this->getUsername(), $sobre));
+                    $this->setPerfil(new \PerfilProprio($this->getUsername(), $sobre));
                     $_SESSION['userinfo'] = serialize($resultados); 
                     /*Nova query de select*/
                     $stmt = $banco->prepare("SELECT l.cd_login FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login WHERE l.nm_email = :email");
@@ -116,6 +117,7 @@ class Usuario extends Participante {
                     try {
                         $stmt->execute(); # tenta executar o select preparado
                         $this->setCdUpdate($stmt->fetchColumn());
+                        ob_end_clean();
                         return true; # seta o retorno da função como verdadeiro
                     } catch (\PDOException $e) {
                         exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
@@ -156,6 +158,7 @@ class Usuario extends Participante {
         /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
         try {
             $stmt->execute(); # executa a query preparada anteriormente
+            ob_end_clean();
             return true;
         } catch (\PDOException $e) {
             exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
@@ -177,6 +180,7 @@ class Usuario extends Participante {
         /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
         try {
             $stmt->execute(); # executa a query preparada anteriormente
+            ob_end_clean();
             return true;
         } catch (\PDOException $e) {
             exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
@@ -198,6 +202,7 @@ class Usuario extends Participante {
         /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
         try {
             $stmt->execute(); # executa a query preparada anteriormente
+            ob_end_clean();
             return true;
         } catch (\PDOException $e) {
             exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
@@ -227,6 +232,7 @@ class Usuario extends Participante {
 
         try {
             $stmt->execute();
+            ob_end_clean();
             return true;
         } catch (\PDOException $e) {
             exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
@@ -273,6 +279,7 @@ class Usuario extends Participante {
                 $_SESSION['errousername'] = "Esse username está em uso. Tente outro.";  # exibe ao usuário que o username escolhido já foi cadastrado.
                 return false; # retorna a saída como falsa
             } else { # caso não...
+                ob_end_clean();
                 return true; # retorna a saída do método como verdadeira para que o processo de inserção prossiga
             }
         }
@@ -343,6 +350,7 @@ class Usuario extends Participante {
                         $_SESSION['emailinfo'] = $endemail; # armazena o email inserido para que seja usado na redefinição
                     }
                     /*Fim sessão*/
+                    ob_end_clean();
                     return true; # retorna resultado positivo
                 }
                 /*finalização do código de email*/
@@ -372,6 +380,7 @@ class Usuario extends Participante {
             if ($contaLinha > 0) { # estrutura condicional que irá verificar se o valor de linhas do select anterior é maior que zero, ou seja, se o select retornou algo, e caso tenha retornado...
                 return false; 
             } else { 
+                ob_end_clean();
                 return true; # retorna a saída do método como verdadeira para que o processo de atualização prossiga.
             }
         } catch (\PDOException $e) {
@@ -394,6 +403,7 @@ class Usuario extends Participante {
             if ($contaLinha > 0) { # estrutura condicional que irá verificar se o valor de linhas do select anterior é maior que zero, ou seja, se o select retornou algo, e caso tenha retornado...
                 return false; 
             } else { 
+                ob_end_clean();
                 return true; # retorna a saída do método como verdadeira para que o processo de atualização prossiga.
             }
         } catch (\PDOException $e) {
@@ -417,6 +427,7 @@ class Usuario extends Participante {
         /*Faz um try catch que tentará executar o update e se não der certo, irá capturar o erro*/
         try {
             $stmt->execute(); # executa a query preparada anteriormente
+            ob_end_clean();
             return true;
         } catch (\PDOException $e) {
             exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
