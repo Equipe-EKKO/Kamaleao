@@ -2,15 +2,15 @@
 /* escrita por: Carolina Sena, no dia 12.10.2021 */
 require_once 'clConexaoBanco.php'; # requere a classe ConexaoBanco usada nos filhos
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php'); # requere a Config usada nos filhos
-require_once 'clAnuncio.php';
+require_once 'clServiço.php';
 
 //Classe abstrata cuja função é servir de modelo para suas subclasses, combinando os métodos e atributos que elas têm em comum
 abstract class Perfil {
     #Atributos da classe
-    public $username, $fotoPerfil, $descricao, $anuncio; // username: string || foto_perfil: blob || descrição: string || anuncio: instancia de clAnuncio
+    public $username, $urlfotoPerfil, $descricao, $serviço; // username: string || foto_perfil: blob || descrição: string || Serviço: instancia de clServiço
 
     #Metódos abstratos que serão declarados nas subclasses
-    abstract function listarAnuncio(); 
+    abstract function listarServiço(); 
 
     #Métodos Especias - Getter e Setters para os atributos
     /*GETTERS*/
@@ -23,7 +23,7 @@ abstract class Perfil {
     public function getFotoPerfil() {
         return $this->fotoPerfil;
     }
-    # Sem GET para Anuncio pois é um atributo que depende de cada filho
+    # Sem GET para Serviço pois é um atributo que depende de cada filho
     /*SETTERS*/
     public function setUsername(string $username) { //seta que o tipo de dado a ser passado como parametro deve ser string
         $this->username = $username; #seta o valor do username (que vai vir do cadastro)
@@ -34,6 +34,6 @@ abstract class Perfil {
     public function setFotoPerfil($fotoPerfil) { 
         $this->fotoPerfil = $fotoPerfil;
     }
-    # Sem SET para Anuncio pois é um atributo que depende de cada filho
+    # Sem SET para Serviço pois é um atributo que depende de cada filho
 }
 ?>

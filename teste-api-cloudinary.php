@@ -1,22 +1,13 @@
 <?php
 require_once ('config.php');
-use Cloudinary\Configuration\Configuration;
 use Cloudinary\Api\Upload\UploadApi;
 
 //  Or configure programatically
-
-Configuration::instance([
-    'cloud' => [
-      'cloud_name' => 'kamaleaotcc', 
-      'api_key' => '732428865218215', 
-      'api_secret' => 'GIezSuGMw32v63QQAwVOY20MYEE'],
-    'url' => [
-      'secure' => true]]);
-
-
-      
-      if ((new UploadApi())->upload('https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg')) {
-          echo true;
-      } else {
-          echo false;
-      }
+if ($objeto = (new UploadApi())->upload('app/public/View/assets/img/EKKO.png', ["folder" => "img_service", "use_filename" => true, "unique_filename" => true, "overwrite" => false])){
+  $array = (array) $objeto;
+  print_r($array);
+  echo "<br>";
+  echo $array['url']; 
+} else {
+  echo false;
+}

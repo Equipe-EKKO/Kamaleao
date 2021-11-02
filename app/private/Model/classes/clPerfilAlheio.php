@@ -1,7 +1,7 @@
 <?php
 #requere as classes necessárias para o funcionamento (Conexão para fazer o CRUD e Perfil para herdar da classe mãe)
 require_once 'clPerfil.php';
-use Anuncio;
+use Serviço;
 use PerfilProprio;
 //Subclasse de Perfil cuja função é lidar com as funcionalidades CRUD da partição do Perfil Alheio do sistema
 class PerfilAlheio extends Perfil {
@@ -10,15 +10,15 @@ class PerfilAlheio extends Perfil {
     private $perfilProprio; # perfilPróprio: instancia de perfilProprio
 
     #Métodos da classe abstrata sendo implementados
-    function listarAnuncio() {
-        // $this->listAnuncio[] = $this->getAnuncio();
+    function listarServiço() {
+        // $this->listServiço[] = $this->getServiço();
     }
     
     #Métodos Especias - Getter e Setters para os atributos
     /*GETTERS*/
-    public function getAnuncio() {
-        /*foreach ($this->anuncio as $key => $anuncio) {
-            return $anuncio[$key];
+    public function getServiço() {
+        /*foreach ($this->serviço as $key => $serviço) {
+            return $serviço[$key];
         }*/
     }
     protected function getPerfilProprio() {

@@ -26,7 +26,7 @@ CHARACTER SET utf8mb4;
 CREATE table IF NOT EXISTS tb_categoria(
 	-- atributos
     cd_categoria INT UNSIGNED NOT NULL auto_increment, -- chave primaria
-    nm_cateogoria VARCHAR(40) NOT NULL,
+    nm_categoria VARCHAR(40) NOT NULL,
     `dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     -- definicao das chaves
     -- primaria
@@ -65,8 +65,7 @@ CREATE table IF NOT EXISTS tb_usuario (
     nm_nome VARCHAR(60) NOT NULL,
     nm_sobrenome VARCHAR(200) NOT NULL,
     cd_cpf VARCHAR(11) NOT NULL, -- chave unica index
-		cd_pix VARCHAR(32),
-    im_foto_perfil LONGBLOB,
+    cd_url_foto_perfil VARCHAR(300),
 	ds_usuario VARCHAR(280),
 	`dt_nascimento` DATE NOT NULL,
     `dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -79,11 +78,12 @@ CREATE table IF NOT EXISTS tb_usuario (
     constraint fk_login_usuario
 		foreign key (cd_login)
 			references tb_login (cd_login),
-	-- unique index para não haver duplicacao de cpf
-    
 	-- unique index para fazer o cd_login se tornar uma relacao one to one
     constraint un_cd_login
-		unique index (cd_login))
+		unique index (cd_login),
+	-- unique index para não haver duplicacao de cpf
+    constraint un_cd_cpf
+		unique index (cd_cpf))
 CHARACTER SET utf8mb4;
         
 -- tabela de servicos
@@ -92,10 +92,11 @@ CREATE table IF NOT EXISTS `tb_serviço`(
     `cd_serviço` INT UNSIGNED NOT NULL auto_increment, -- chave primaria
 	`nm_serviço` VARCHAR(50) NOT NULL,
 	`ds_serviço` VARCHAR(280) NOT NULL,
-	`qt_versão` INT(1) NOT NULL DEFAULT 1,
+	`vl_serviço` DECIMAL(10,2) NOT NULL,
 	`dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	cd_usuario INT UNSIGNED NOT NULL, -- chave estrangeira
-	cd_categoria INT UNSIGNED, -- chave estrangeira
+	cd_categoria INT UNSIGNED NOT NULL, -- chave estrangeira
+	`cd_licença` INT UNSIGNED NOT NULL, -- chave estrangeira
     -- definicao das chaves
     -- primaria
     constraint `pk_serviço`
@@ -104,16 +105,21 @@ CREATE table IF NOT EXISTS `tb_serviço`(
     constraint fk_usuario_servico
 		foreign key (cd_usuario)
 			references tb_usuario(cd_usuario),
+	-- estrangeira: categoria e serviço
 	constraint `fk_categoria_serviço`
 		foreign key (cd_categoria)
-			references tb_categoria(cd_categoria))
+			references tb_categoria(cd_categoria),
+	-- estrangeira: licença e serviço
+	constraint `fk_licença_serviço`
+		foreign key (`cd_licença`)
+			references `tb_tipos_licença`(`cd_licença`))
 CHARACTER SET utf8mb4;
 
 -- tabela de avaliação
 CREATE table IF NOT EXISTS `tb_avaliação`(
 	-- atributos
     `cd_avaliação` INT UNSIGNED NOT NULL auto_increment, -- chave primaria
-	`vl_avaliação` DECIMAL(3,2) NOT NULL DEFAULT 0,
+	`qt_avaliação` DECIMAL(3,2) NOT NULL DEFAULT 0,
     `dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	cd_usuario INT UNSIGNED NOT NULL, -- chave estrangeira
 	`cd_serviço` INT UNSIGNED NOT NULL, -- chave estrangeira
@@ -155,45 +161,6 @@ CREATE table IF NOT EXISTS `tb_denúncia`(
 			references `tb_serviço`(`cd_serviço`))
 CHARACTER SET utf8mb4;
 
--- tabela de versões do mesmo serviço
-CREATE table IF NOT EXISTS `tb_versão`(
-	-- atributos
-    `cd_versão` INT UNSIGNED NOT NULL auto_increment, -- chave primaria
-    `nm_versão` VARCHAR(50) NOT NULL,
-	`ds_versão` VARCHAR(280),
-    `vl_preço` DECIMAL(10,2) NOT NULL,
-    `cd_serviço` INT UNSIGNED NOT NULL, -- chave estrangeira
-    -- definicao das chaves
-    -- primaria
-    constraint `pk_versão`
-		primary key (`cd_versão`),
-	-- estrangeira: entre servico e versao
-    constraint `fk_serviço_versão`
-		foreign key (`cd_serviço`)
-			references `tb_serviço`(`cd_serviço`)
-)
-CHARACTER SET utf8mb4;
-
--- tabela de resolução entre serviço e licença
-CREATE table IF NOT EXISTS `tb_licença_serviço`(
-	-- atributos
-    `cd_licença_serviço` INT UNSIGNED NOT NULL auto_increment, -- chave primaria
-    `cd_licença` INT UNSIGNED NOT NULL,  -- chave estrangeira
-    `cd_serviço` INT UNSIGNED NOT NULL, -- chave estrangeira
-    -- definicao das chaves
-    -- primaria
-    constraint `pk_licença_serviço`
-		primary key (`cd_licença_serviço`),
-	-- estrangeira: entre licença e tabela serviço e licença
-    constraint `fk_licença_serviço_licença`
-		foreign key (`cd_licença`)
-			references `tb_tipos_licença`(`cd_licença`),
-	-- estrangeira: entre servico e tabela serviço e licença
-    constraint `fk_licença_serviço_serviço`
-		foreign key (`cd_serviço`)
-			references `tb_serviço`(`cd_serviço`))
-CHARACTER SET utf8mb4;
-
 -- tabela de pedido
 CREATE table IF NOT EXISTS tb_pedido (
 	-- atributos
@@ -218,19 +185,19 @@ CHARACTER SET utf8mb4;
 CREATE table IF NOT EXISTS tb_imagem (
 	-- atributos
 	cd_imagem INT  NOT NULL auto_increment, -- chave primaria
-	im_serviço LONGBLOB NOT NULL,
-	`cd_versão` INT UNSIGNED NOT NULL, -- chave estrangeira
+	cd_url_serviço VARCHAR(300) NOT NULL,
+	`cd_serviço` INT UNSIGNED NOT NULL, -- chave estrangeira
     -- definicao das chaves
     -- primaria
     constraint pk_imagem
 		primary key (cd_imagem),
-	-- cd_versao como chave única para garantir relacionamento um pra um
-    constraint un_cd_versao
-		unique index (`cd_versão`),
+	-- cd_serviço como chave única para garantir relacionamento um pra um
+    constraint `un_cd_serviço`
+		unique index (`cd_serviço`),
 	-- chave estrangeira
-	constraint fk_versao_imagem
-		foreign key (`cd_versão`)
-			references `tb_versão` (`cd_versão`))
+	constraint `fk_serviço_imagem`
+		foreign key (`cd_serviço`)
+			references `tb_serviço` (`cd_serviço`))
 CHARACTER SET utf8mb4;
 
 -- tabela produto
@@ -283,3 +250,11 @@ CREATE table IF NOT EXISTS tb_pagamento (
 		foreign key (cd_usuario)
 			references tb_usuario (cd_usuario))
 CHARACTER SET utf8mb4;
+
+INSERT INTO tb_login (nm_email, nm_username, nm_senha, ic_is_administrador) VALUES ("kamaleaoctt@gmail.com", "administrador", "GabrielzinhoLindo1012", 1), ("carolsenase@gmail.com", "carolina", "PokemonGo", 0), ("gabrielmunizpinto@hotmail.com", "gabriel", "10122003", 0), ("victinho771@gmail.com", "Victor", "Victinho15", 0), ("lucascomercial199@outlook.com", "cachorrospunk", "cachorros123", 0);
+
+INSERT INTO tb_usuario (nm_nome, nm_sobrenome, cd_cpf, dt_nascimento, cd_login) VALUES ("Carolina", "Senha", "43200368337", "2004-08-14", 2), ("Gabriel", "Muniz", "57184892038", "2003-12-10", 3), ("Victor", "Dias Eugênio", "51885494851", "2004-01-15", 4), ("Lucas", "Ribeiro", "23075351865", "2004-03-24", 5);
+
+INSERT INTO tb_tipos_licença (nm_licença) VALUES ("Não-Comercial"), ("Comercial"), ("Download");
+
+INSERT INTO tb_categoria (nm_categoria) VALUES ("Sem Categoria"), ("Arte Digital"), ("Design"), ("Logos"), ("Concept Art");
