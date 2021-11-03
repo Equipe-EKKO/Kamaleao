@@ -165,7 +165,7 @@
   align-items: center;
 }
 
-.md-ct i {
+.md-ct i#iconfecha {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -176,7 +176,7 @@
   transition: .3s;
 }
 
-.md-ct i:hover {
+.md-ct i#iconfecha:hover {
   color: #F53446; /*oiii*/
 }
 
@@ -216,7 +216,7 @@
   text-align: left;
 }
 
-.form_anuncio .fa-times-circle {
+.form_anuncio .fa-times-circle#iconfecha {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -486,12 +486,29 @@ select option {
   font-size: 75pt;
 }
 
+.form-message{
+  margin: 0 auto;
+  width: 80%;
+  margin-top: 2em;
+  margin-bottom: 1rem;
+  font-size: 1.10rem;
+  font-family: 'Urbanist', sans-serif;
+}
+
+.erro {
+  color: #f44336 !important;
+}
+
+.sucesso {
+  color: #00a800 !important;
+}
+
 
   @media screen and (max-width: 800px) {
 
-    main {
+    /*main {
       
-    }
+    }*/
 
     .tab {
       width: 100%;

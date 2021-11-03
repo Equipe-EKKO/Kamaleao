@@ -56,6 +56,7 @@ class ControllerCriaServiço{
       if (recebeServPost($this->titulo, $this->descriçao, $this->preçoMedio, $this->licença, $this->optionCategoria, $this->imgType, $this->imgtmpName)):
         ob_end_clean();
         echo true;
+        return true;
       else:
         return false;
       endif;

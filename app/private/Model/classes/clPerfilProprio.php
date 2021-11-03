@@ -72,6 +72,10 @@ class PerfilProprio extends Perfil {
                     }
                 }
             } else {
+                $old = getcwd(); // Save the current directory
+                chdir($newfullpath."/image/service/");
+                unlink($newname);
+                chdir($old); // Restore the old working directory
                 ob_end_clean();
                 echo "A imagem não pode ser salva no Cloudinary.";
                 return false;

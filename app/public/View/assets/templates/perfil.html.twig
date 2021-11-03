@@ -61,9 +61,12 @@
               </section> <!--grid_home-->
 
             <div id="md-pr" class="md-ct-pos">
-              <form class ="form_anuncio" action="/GitHub/Kamaleao/app/private/Controller/controllerCriaServiço.php" method="post" enctype="multipart/form-data">
-                <i class="fas fa-times-circle" onclick="fechaModal()"></i>
+              <form id="formAnuncio" class ="form_anuncio" action="/" method="post" enctype="multipart/form-data">
+                <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal()"></i>
                   <h1>Anunciar um Serviço</h1>
+                  <p hidden class="form-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </p>
                   <div class ="grid_anuncio">
                     <div class="left">
                       <p>Título do anúncio</p>
