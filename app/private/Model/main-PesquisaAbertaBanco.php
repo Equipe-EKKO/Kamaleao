@@ -15,7 +15,6 @@ function pesquisaCategoria():mixed {
         return "AAAAAAAAA carlaho";
     } else {
         $gabrielmuniz = unserialize($gabriel);
-        print_r($gabrielmuniz); 
         return $gabrielmuniz;
     }
 }

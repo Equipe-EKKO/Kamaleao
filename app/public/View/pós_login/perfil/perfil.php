@@ -1,6 +1,10 @@
 <?php
 ob_start();
+define('DIR_ROOT', $_SERVER['DOCUMENT_ROOT']); # essa constante serve pra pegar qual é a raiz do documento e evitar erros independente do local de acesso
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
+require_once (DIR_ROOT . '/Github/Kamaleao/app/private/Model/main-PesquisaAbertaBanco.php');
+        
+//$slc_categoria[0]['nm_categoria'] . "<br>";
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -27,6 +31,7 @@ if ($username === "userIndefinido"):
     $_SESSION["error"] = 'Você precisa estar logado para acessar esta página!';
     header("Location: /Github/Kamaleao/app/public/view/pré_login/login/login.php");
 else:
-    echo $twig->render('perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre]);
+    $slc_categoria = pesquisaCategoria();
+    echo $twig->render('perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'sltCategoria' => $slc_categoria]);
     ob_end_flush();
 endif;

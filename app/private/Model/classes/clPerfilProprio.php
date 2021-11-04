@@ -11,8 +11,25 @@ class PerfilProprio extends Perfil {
     #Atributos
     /*public $listServiço;*/
     private $inventario, $comissao; # inventario: instancia de classe || comissao: instancia de classe
-    //Métodos da classe abstrata sendo implementados
-    function listarServiço() {
+    # Métodos da classe abstrata sendo implementados
+    //Método que faz um select de todos os serviços que o dono do perfil já anunciou
+    function listarServiços() {
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+
+        $sql = "SELECT `s.nm_serviço` AS 'titulo', `s.vl_serviço` AS 'preço', l.nm_username AS 'username' FROM `tb_serviço` AS s JOIN tb_usuario AS us ON us.cd_usuario = s.cd_usuario JOIN tb_login AS l ON l.cd_login = us.cd_login WHERE l.nm_username = :username"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara o select para execução
+        $stmt->bindValue(':username', $this->getUsername());
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $rsltService = $stmt->fetchAll(PDO::FETCH_ASSOC);           
+            $rsltStrService = serialize($rsltService); # transforma o array em string
+            return $rsltStrService; # retorna a string
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
         
     }
 

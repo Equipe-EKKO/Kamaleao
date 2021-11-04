@@ -9,7 +9,7 @@ abstract class Perfil {
     public $username, $urlfotoPerfil, $descricao, $serviço; // username: string || foto_perfil: blob || descrição: string || Serviço: instancia de clServiço
 
     #Metódos abstratos que serão declarados nas subclasses
-    abstract function listarServiço(); 
+    abstract function listarServiços(); 
 
     #Métodos Especias - Getter e Setters para os atributos
     /*GETTERS*/

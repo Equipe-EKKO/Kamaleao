@@ -91,12 +91,11 @@
                         <label for="licenca3">Licença de Download</label><br>
                       </div>
                       <p>Categoria</p>
-                      <select name="select_cat" id="select_cat">
-                        <option value="1">Sem categoria</option>
-                        <option value="2">Arte Digital</option>
-                        <option value="3">Design</option>
-                        <option value="4">Logos</option>
-                        <option value="5">Concept Arts</option>
+                      <select name="select_cat" id="select_cat" required>
+                        <option value="" disabled selected hidden>Por favor, selecione...</option>
+                        {% for categoria in sltCategoria %}
+                        <option value={{categoria.cd_categoria|escape}}>{{ categoria.nm_categoria|e }}</option>
+                        {% endfor %}
                       </select>  
                     </div>
                   </div>

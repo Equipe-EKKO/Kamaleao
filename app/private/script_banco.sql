@@ -257,4 +257,4 @@ INSERT INTO tb_usuario (nm_nome, nm_sobrenome, cd_cpf, dt_nascimento, cd_login) 
 
 INSERT INTO tb_tipos_licença (nm_licença) VALUES ("Não-Comercial"), ("Comercial"), ("Download");
 
-INSERT INTO tb_categoria (nm_categoria) VALUES ("Sem Categoria"), ("Arte Digital"), ("Design"), ("Logos"), ("Concept Art");
+INSERT INTO tb_categoria (nm_categoria) VALUES ("Arte Digital"), ("Design"), ("Logos"), ("Concept Art"), ("Outros");

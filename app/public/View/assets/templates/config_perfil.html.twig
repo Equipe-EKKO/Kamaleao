@@ -74,21 +74,6 @@
               <p id="atualEm">{{Email}}</p>
             </div> <!-- edit_text -->
           </div> <!-- info_perfil -->
-
-          <div class="info_perfil" onclick="abreModal('chavepix')">
-            <div class="edit_icon">
-                <i class="fas fa-pen"></i>
-            </div> <!-- edit_icon -->
-            <div class="edit_text">
-              <h3>Chave pix</h3>
-              {% if ChavePix != null %}
-                <p id="atualCP">{{ChavePix}}</p>
-              {% else %}
-                <p id="atualCP">Você não possui uma chave pix ainda!</p>
-              {% endif %}
-            </div> <!-- edit_text -->
-          </div> <!-- info_perfil -->
-
           <div class="info_perfil" onclick="abreModal('senha')">
             <div class="edit_icon">
              <i class="fas fa-pen"></i>
@@ -133,18 +118,6 @@
               <form id="trocaEmail" method="POST" action="">
                 <input type="text" id="attEmail" name="email" />
                 <p hidden id="resultfourth" class="form-message">
-                  <i class="fas fa-exclamation-triangle"></i>
-                </p>
-                <button type="submit" class="button" name="submit">Editar</button>
-              </form>
-            </div>
-            <div id="chavepix" class="md">
-              <i class="fas fa-times-circle" onclick="fechaModal()"></i>
-              <h3>Insira sua chave aleatória pix</h3>
-              <p>Sua chave aleatória pix é inserida aqui para que você receba seus pagamentos.</p>
-              <form id="trocaCPix" method="POST" action="">
-                <input type="text" id="attCPix" name="chavepix" />
-                <p hidden id="resultfifth" class="form-message">
                   <i class="fas fa-exclamation-triangle"></i>
                 </p>
                 <button type="submit" class="button" name="submit">Editar</button>

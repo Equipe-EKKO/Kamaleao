@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 class Usuario extends Participante {
     #Atributos
     public $nome, $perfil; // nome: string || perfil: classe perfil?
-    private $sobrenome, $chavePix, $cdUpdate; // sobrenome: string
+    private $sobrenome, $cdUpdate; // sobrenome: string
     protected $cpf, $data_nascimento; //ambos tipo string
 
     #Métodos da classe abstrata sendo implementados
@@ -412,29 +412,6 @@ class Usuario extends Participante {
         }
     }
 
-    public function setarChavePix(string $chavepix, int $cdUpdate):bool {
-        /*Agrupamento dos valores a serem inseridos*/
-        $this->setChavePix($chavepix);
-        /*Conexão com o Banco*/
-        $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL
-        
-        $sql = "UPDATE tb_usuario SET cd_pix = :chavepix WHERE cd_login = :cdUpdate"; # declara a query do update na tabela usuario do banco de dados 
-        $stmt = $banco->prepare($sql); # prepara a query para execução
-        /*Substitui os valores de cada placeholder na query preparada*/
-        $stmt->bindValue(':chavepix', $this->getCdUpdate()); 
-        $stmt->bindValue(':cdUpdate', $cdUpdate);
-
-        /*Faz um try catch que tentará executar o update e se não der certo, irá capturar o erro*/
-        try {
-            $stmt->execute(); # executa a query preparada anteriormente
-            ob_end_clean();
-            return true;
-        } catch (\PDOException $e) {
-            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
-            return false;
-        }
-    }
-
     #Métodos Especias - Getter e Setters para os atributos e Construct
     /* Construtor -- A função que é chamada automaticamente ao instanciar */
     public function __construct(string $nome, string $sobrenome, string $cpf, string $data_nascimento) { # declara que os dados a serem inseridos devem ser obrigatoriamente strings
@@ -470,9 +447,6 @@ class Usuario extends Participante {
     public function getData_nascimento() {
         return $this->data_nascimento;
     }
-    public function getChavePix() {
-        return $this->chavePix;
-    }
     public function getCdUpdate() {
         return $this->cdUpdate;
     }
@@ -491,9 +465,6 @@ class Usuario extends Participante {
     } 
     public function setData_nascimento(string $data_nascimento) {
         $this->data_nascimento = $data_nascimento;
-    }
-    public function setChavePix($chavePix) {
-        $this->chavePix = $chavePix;
     }
     public function setCdUpdate($cdUpdate) {
         $this->cdUpdate = $cdUpdate;

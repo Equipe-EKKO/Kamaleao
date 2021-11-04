@@ -32,7 +32,6 @@ function abreModal(modal){
         $("#username").addClass("md").removeClass("md-ct-pos"); //adiciona a classe de modal para o username 
         $("#desc").removeClass("md").addClass("md-ct-pos"); //e faz o inverso com as outras
         $("#email").removeClass("md").addClass("md-ct-pos");
-        $("#chavepix").removeClass("md").addClass("md-ct-pos");
         $("#senha").removeClass("md").addClass("md-ct-pos");
         $("p.form-message").empty();
         $("p#resultsec").removeClass("sucesso");
@@ -86,7 +85,6 @@ function abreModal(modal){
         $("#desc").addClass("md").removeClass("md-ct-pos");
         $("#username").removeClass("md").addClass("md-ct-pos");
         $("#email").removeClass("md").addClass("md-ct-pos");
-        $("#chavepix").removeClass("md").addClass("md-ct-pos");
         $("#senha").removeClass("md").addClass("md-ct-pos");
         $("p.form-message").empty();
         $("p#resultthird").removeClass("sucesso");
@@ -137,7 +135,6 @@ function abreModal(modal){
         $("#email").addClass("md").removeClass("md-ct-pos");
         $("#username").removeClass("md").addClass("md-ct-pos");
         $("#desc").removeClass("md").addClass("md-ct-pos");
-        $("#chavepix").removeClass("md").addClass("md-ct-pos");
         $("#senha").removeClass("md").addClass("md-ct-pos");
         $("p.form-message").empty();
         $("p#resultfourth").removeClass("sucesso");
@@ -179,58 +176,6 @@ function abreModal(modal){
                         $("p.form-message").empty();
                         $(erro).appendTo("p.form-message");
                     }                    
-                }
-            });
-        });
-    }
-    else if(modal == 'chavepix' ){
-        $("#md-pr2").removeClass("md-ct-pos").addClass("md-ct");
-        $("#chavepix").addClass("md").removeClass("md-ct-pos");
-        $("#username").removeClass("md").addClass("md-ct-pos");
-        $("#desc").removeClass("md").addClass("md-ct-pos");
-        $("#email").removeClass("md").addClass("md-ct-pos");
-        $("#senha").removeClass("md").addClass("md-ct-pos");
-        $("p.form-message").empty();
-        $("p#resultfifth").removeClass("sucesso");
-        $("p#resultfifth").removeClass("erro");
-
-        $('#attCPix').focus(function (e) { 
-            e.preventDefault();
-            $(this).val("");
-            $("p.form-message").empty();
-            $("p#resultfifth").removeClass("sucesso");
-            $("p#resultfifth").removeClass("erro");
-        });
-
-        /*AJAX PRA TROCAR O USERNAME*/
-        $("#trocaCPix").submit(function (e) {
-            e.preventDefault(); // Stop form from submitting normally
-            var cpix = $('#attCPix').val();
-        
-            $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraChavePix.php", { chavepix: cpix }, function (resposta) {
-                if (resposta == 1) {
-                    $("p.form-message").removeAttr("hidden");
-                    $("p#resultfifth").addClass("sucesso");
-                    var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> Sua Chave Pix foi atualizada!</span>";
-                    $("p.form-message").empty();
-                    $(sucesso).appendTo("p.form-message");
-
-                    setTimeout(function () {
-                        fechaModal();
-                      }, 1000);
-
-                    $("p#atualCP").empty();
-                    $("<span>" + cpix +"</span>").appendTo("p#atualCP");
-                    
-                } else {
-                    $("p.form-message").removeAttr("hidden");
-                    $("p#resultfifth").addClass("erro");
-                    var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";
-                    var mes = $("p.form-message").html();
-                    if (mes.includes("atualizada") == false) {
-                        $("p.form-message").empty();
-                        $(erro).appendTo("p.form-message");
-                    }
                 }
             });
         });

@@ -110,37 +110,6 @@ class ControllerAlteraDescricao {
   }
 }
 
-class ControllerAlteraChavePix {
-  private $chavePix;
-  private function validaChavePix():bool{
-    if ($this->chavePix == null) {
-      /*$_SESSION["error"] = 'Verifique se todos os campos estão inseridos corretamente!';
-      header("Location: /Github/Kamaleao/app/public/view/pós_login/config_perfil/config_perfil.php");*/
-      ob_end_clean();
-      echo "Verifique se todos os campos estão inseridos corretamente!";
-      return false;
-    } else { 
-      return true;
-    }
-  }
-  public function __construct(string $chavePix) {
-    $this->chavePix = $chavePix;
-    $this->validaChavePix();
-    $this->chamaModel();
-  }
-  private function chamaModel() {
-    if ($this->validaChavePix()) {
-      if(atualizaChavePix($this->chavePix)):
-        ob_end_clean();
-        echo true;
-      else:
-        ob_end_clean();
-        echo "Houve um erro durante a atualização da chave Pix!";
-      endif;
-    }
-  }
-}
-
 class ControllerAlteraSenha {
   private $senha, $confsenha;
   private function validaSenha():bool{
@@ -175,7 +144,7 @@ class ControllerAlteraSenha {
         echo true;
       else:
         ob_end_clean();
-        echo "Houve um erro durante a atualização da chave Pix!";
+        echo "Houve um erro durante a atualização da senha!";
       endif;
     }
   }

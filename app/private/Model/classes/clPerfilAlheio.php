@@ -10,7 +10,7 @@ class PerfilAlheio extends Perfil {
     private $perfilProprio; # perfilPróprio: instancia de perfilProprio
 
     #Métodos da classe abstrata sendo implementados
-    function listarServiço() {
+    function listarServiços() {
         // $this->listServiço[] = $this->getServiço();
     }
     
