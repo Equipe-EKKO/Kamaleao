@@ -13,7 +13,7 @@ function recebeCadPosts(string $nome, string $sobrenome, string $dtNascimento, s
         recebeLogPosts($email, $senha); #chama a função que realiza o login e foi declarada abaixo nesse mesmo documento.
     else:
         $_SESSION["error"] = 'Erro ao cadastrar usuário!';  # exibe para o cliente que um novo usuário NÃO foi cadastrado e que houve um erro, o redirecionando para a mesma página ao enviar outra header com http
-        header("Location: /Github/Kamaleao/app/public/View/cadastro/cadastro.php"); 
+        header("Location: /Github/Kamaleao/app/public/View/pré_login/cadastro/cadastro.php"); 
     endif;
 }
 
