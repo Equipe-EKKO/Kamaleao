@@ -1,8 +1,6 @@
 <?php
+require_once "classes/autoloadClass.php";
 #requere os arquivos contendo as classes necessárias para o funcionamento do programa principal direcionado ao login (ConexaoBanco -- classe que realiza a conexão com o banco de dados | Usuario -- subclasse de Participante | Administrador -- subclasse Participante)
-require_once 'classes/clConexaoBanco.php';
-require_once 'classes/clUsuario.php';
-require_once 'classes/clPerfilProprio.php';
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php'); #arquivo de configuracao
 
 // Função chamada no controller para verificar se o username e o email escolhido na atualização estão disponíveis
@@ -16,6 +14,7 @@ function atualizaUsuario(string $user):bool { # define que o parametro a ser pas
         if ($usuario->verificaUsername($user)) {
             //n sei que atualiza
             $usuario->atualizarUsername($user, $cdupt);
+            $usuario->atualizaPosConfig();
             return true;
         }
         /*$message = "Este username não está disponível. Tente novamente!";
@@ -39,6 +38,7 @@ function atualizaEmail (string $email) { # define que o parametro a ser passado 
         if ($usuario->verificaEmail($email)) {
             //n sei que atualiza
             $usuario->atualizarEmail($email, $cdupt);
+            $usuario->atualizaPosConfig();
             return true;
         } else {
             /*$message = "Este email não está disponível. Tente novamente!";
@@ -59,6 +59,7 @@ function atualizaSenha (string $senha):bool { # define que o parametro a ser pas
     $cdupt = $usuario->getCdUpdate();
     if ((!empty($senha) || isset($senha) || $senha != "" || $senha != null)) {
         $usuario->atualizarSenha($senha, $cdupt);
+        $usuario->atualizaPosConfig();
         return true;
     } else {
         /*$message = "O campo inserido está vazio. Não há como atualizar.";
@@ -75,6 +76,7 @@ function atualizaDesc (string $desc):bool { # define que o parametro a ser passa
     $cdupt = $usuario->getCdUpdate();
     if ((!empty($desc) || isset($desc) || $desc != "" || $desc != null)) {
         $usuario->perfil->updateDescricao($desc, $cdupt);
+        $usuario->atualizaPosConfig();
         return true;
     } else {
         /*$message = "O campo inserido está vazio. Não há como atualizar.";

@@ -67,4 +67,5 @@ function fechaModal() {
   $("p.form-message").empty();
   $('#formAnuncio')[0].reset();
   $("#md-pr").removeClass("md-ct").addClass("md-ct-pos");
+  location.reload();
 }

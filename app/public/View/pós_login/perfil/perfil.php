@@ -3,8 +3,7 @@ ob_start();
 define('DIR_ROOT', $_SERVER['DOCUMENT_ROOT']); # essa constante serve pra pegar qual é a raiz do documento e evitar erros independente do local de acesso
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 require_once (DIR_ROOT . '/Github/Kamaleao/app/private/Model/main-PesquisaAbertaBanco.php');
-        
-//$slc_categoria[0]['nm_categoria'] . "<br>";
+require_once (DIR_ROOT . '/Github/Kamaleao/app/private/Model/main-Perfil.php');
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -12,7 +11,7 @@ use Twig\Loader\FilesystemLoader;
 $loader = new FilesystemLoader(DIR_ROOT . '/GitHub/Kamaleao/app/public/View/assets/templates/', '/templates');
 $twig = new Environment($loader);
 
-$perfilInfo = unserialize($_SESSION['userinfo']);
+$perfilInfo = unserialize($_SESSION['userinfoToPerfil']);
 
 if (isset($perfilInfo['nm_username'])) {
     $username = $perfilInfo['nm_username'];
@@ -32,6 +31,7 @@ if ($username === "userIndefinido"):
     header("Location: /Github/Kamaleao/app/public/view/pré_login/login/login.php");
 else:
     $slc_categoria = pesquisaCategoria();
-    echo $twig->render('perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'sltCategoria' => $slc_categoria]);
+    $slc_servic = pesquisaServPerf();
+    echo $twig->render('perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'sltCategoria' => $slc_categoria, 'servicos' => $slc_servic]);
     ob_end_flush();
 endif;

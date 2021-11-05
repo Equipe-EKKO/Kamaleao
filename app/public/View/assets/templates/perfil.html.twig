@@ -42,24 +42,27 @@
                 <a id="adicionar" onclick="abreModal()">
                   <i class='bx bx-plus'></i>
                 </a>
-                <div class="item">
-                  <div class="anuncio_img">
-                    <div class="opacidade">
-                        <i class='bx bxs-pencil'></i><br/>
-                    </div>
-                  </div>
-                  <div class="anuncio_titulo">
-                    <h1>Título do anúncio</h1>
-                  </div> <!--anuncio_titulo-->
-                  <div class="anuncio_user">
-                    <h3>@{{Usuario}}</h3>
-                  </div> <!--user-->
-                  <div class="anuncio_preço">
-                    <h2>R$50.000</h2>
-                  </div> <!-- preço -->
-                </div> <!-- item -->
+                {% if servicos is defined %}
+                  {% for servico in servicos %}
+                    <div class="item">
+                      <img class="anuncio_img" src={{servico.url_da_imagem|e}}>
+                        {# <div class="opacidade">
+                            <i class='bx bxs-pencil'></i><br/>
+                        </div> #}
+                      </img>
+                      <div class="anuncio_titulo">
+                        <h1>{{servico.titulo|e}}</h1>
+                      </div> <!--anuncio_titulo-->
+                      <div class="anuncio_user">
+                        <h3>@{{servico.username|e}}</h3>
+                      </div> <!--user-->
+                      <div class="anuncio_preço">
+                        <h2>R${{servico.preço|e}}</h2>
+                      </div> <!-- preço -->
+                    </div> <!-- item -->
+                  {% endfor %}
+                {% endif %}
               </section> <!--grid_home-->
-
             <div id="md-pr" class="md-ct-pos">
               <form id="formAnuncio" class ="form_anuncio" action="/" method="post" enctype="multipart/form-data">
                 <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal()"></i>
