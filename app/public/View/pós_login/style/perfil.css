@@ -375,85 +375,62 @@ select option {
 .item {
 	margin: 0 auto;
 	background: #ffff;
-  border-radius: 10px 10px 10px 10px;
-  height: 90%;
-  width: 13rem;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  transition: .5s;
-  display: grid;
-  grid-template-rows: 68% 12% 8% 12%;
+    border-radius: 10px 10px 10px 10px;
+    height: 16rem;
+    width: 80%;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: .6s;
+    display: grid;
+    grid-template-rows: 68% 12% 8% 12%;
 }
 
 .item:hover {
-  box-shadow: 0 3px 10px rgba(0,0,0,.2);
-  height: 95%;
-  width: 15rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,.2);
+    width: 90%;
 }
 
 .item:hover h2 {
-  color: #F53446;
+    color: #F53446;
 }
 
-
 .anuncio_img {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px 10px 0 0;
-  background-color: powderblue;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px 10px 0 0;
+    background-color: powderblue;
 }
 
 .anuncio_text {
-  padding: 0.5rem;
-  width: 93%;
+    padding: 0.5rem;
+    width: 93%;
 }
 
 .text_flex {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 0.7rem;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.7rem;
 }
 
 .anuncio_titulo h1 {
-  font-size: 12pt;
-  color: #363636;
-  margin: 0.5rem;
+    font-size: 12pt;
+    color: #363636;
+    margin: 0.5rem;
 }
 
 .anuncio_preço h2 {
-  font-size: 12pt;
-  color: #363636;
-  transition: .4s;
-  margin-right: 0.5rem;
-  float: right;
+    font-size: 12pt;
+    color: #363636;
+    transition: .4s;
+    margin-right: 0.5rem;
+    float: right;
 }
 
 .anuncio_user h3 {
-  color: #808080;
-  font-size: 10pt;
-  margin: 0.2rem 0.5rem;
-  
-}
+    color: #808080;
+    font-size: 10pt;
+    margin: 0.2rem 0.5rem;
 
-.opacidade {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 10px 10px 0 0;
-  transition: .5s;
-  display: none;
-  align-items: center;
-}
-
-.opacidade i {
-  margin: 0 auto;
-  font-size: 50pt;
-  color: #ffff;
-}
-
-.item:hover .opacidade {
-  display: flex;
 }
 
 #adicionar {
