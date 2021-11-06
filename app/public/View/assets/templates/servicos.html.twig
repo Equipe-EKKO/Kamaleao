@@ -3,7 +3,7 @@
 {# document #}
    {# head #}
       {% block title %} Perfil {% endblock title %}
-      {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/perfil.css"{% endblock hrefcss %}
+      {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/servicos.css"{% endblock hrefcss %}
       {% block srcjs %}"/GitHub/Kamaleao/app/public/View/pós_login/js/perfil.js"{% endblock srcjs %}
       <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
       
@@ -25,20 +25,51 @@
 
       {% block div_container %}
       <main>
-        <div class="tab">
-          <div><button id="bt1" class="tablinks" onclick="openTab(event, 'Inventário', 'bt1')">inventário</button></div>
+        <!--<div class="tab">
           <div><button id="bt2" class="tablinks" onclick="openTab(event, 'Serviços', 'bt2')" autofocus>serviços</button></div>
-          <div><button id="bt3" class="tablinks" onclick="openTab(event, 'Comissao', 'bt3')">comissões</button></div>
-        </div>
+        </div>-->
 
         <div class="all">
-          <!-- Inventario -->
-          <div id="Inventário" class="tabcontent">
-            <p> Conteúdo do Inventário </p>
-          </div>
+              <div class="gridzada">
+
+              <div class="item">
+               <div class="anuncio_img">
+               </div>
+               <div class="anuncio_titulo">
+                  <h1>Título do anúncio</h1>
+               </div> <!--anuncio_titulo-->
+               <div class="anuncio_user">
+                  <h3>@Artista</h3>
+               </div> <!--user-->
+            </div> <!--item-->
+
+              <div class="item">
+               <div class="anuncio_img">
+               </div>
+               <div class="anuncio_titulo">
+                  <h1>Título do anúncio</h1>
+               </div> <!--anuncio_titulo-->
+               <div class="anuncio_user">
+                  <h3>@Artista</h3>
+               </div> <!--user-->
+              </div> <!--item-->
+
+                             <div class="item">
+               <div class="anuncio_img">
+               </div>
+               <div class="anuncio_titulo">
+                  <h1>Título do anúncio</h1>
+               </div> <!--anuncio_titulo-->
+               <div class="anuncio_user">
+                  <h3>@Artista</h3>
+               </div> <!--user-->
+            </div> <!--item-->
+
+            </div> <!--gridzada-->
           <!-- Serviços -->
           <div id="Serviços" class="tabcontent">
               <section class="grid_home">
+              
                   <div id="editar-excluir-bg" class="editar-excluir-bg">
                     <div class="editar-excluir">
                     <button class="close">x</button>
@@ -120,48 +151,6 @@
           </div>
 
           <div class="clearfix"></div>
-
-          <script>
-            function openTab(evt, contentName, idName) {
-              var i, tabcontent, tablinks;
-              tabcontent = document.getElementsByClassName("tabcontent");
-              for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-              }
-              tablinks = document.getElementsByClassName("tablinks");
-              for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-              }
-              document.getElementById(contentName).style.display = "block";
-              evt.currentTarget.className += " active";
-              document.getElementById(idName).focus();
-            }
-            window.onload = function() {
-              document.getElementById('bt2').click();
-            }
-
-            var $input    = document.getElementById('imagem'),
-            $fileName = document.getElementById('file-name');
-
-            $input.addEventListener('change', function(){
-              $fileName.textContent = this.value;
-            });
-
-            function iniciaModal(modalID) {
-              const modal = document.getElementById(modalID);
-              modal.classList.add('mostrar');
-              modal.addEventListener('click', (e) => {
-                if(e.target.id == 'modalID' || e.target.className == '.close') {
-                  modal.classList.remove('mostrar');
-                }
-                
-              });
-            }
-            
-            const clickimg = document.querySelector('.anuncio_titulo');
-            clickimg.addEventListener('click', () => iniciaModal('editar-excluir-bg'));
-            
-          </script>
 
         </div> <!--all-->
       </main>

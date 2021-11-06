@@ -1,0 +1,632 @@
+.nav_filtro {
+    display: none;
+  }
+
+  .gridzada{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 25% 25% 25% 25%;
+    background-color: #ffff;
+    width: 100%;
+    height: 100%;
+  }
+
+  .perfil_icon {
+      text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+      width: 60%;
+      height: 225px;
+      margin: auto;
+      padding-bottom: 3rem;
+      text-align: center;
+      padding-top:  80px;
+      font-family: 'Urbanist'; 
+      margin-bottom: -5%;
+    }
+    
+    .icone_perf {
+      color: #fff;
+      font-size: 125px;
+    }
+
+    .icone_perf:hover {
+      color: #fff;
+    }
+  
+     .perfil_icon h1 {
+       color: #fff;
+       font-size: 40px;
+       text-transform: lowercase;
+    }
+  
+    .perfil_icon p {
+      padding: 1rem 0rem 2rem 0rem;
+      color: #fff;
+      font-size: 20px;
+      text-align: center;
+    }
+    
+    main {
+      margin-top: 5rem;
+      z-index: inherit;
+      margin-bottom: 4rem;
+      width: 100%;
+    }
+  
+    .tab {
+      margin: auto;
+      width: 80%;
+      max-width: 85rem;
+      display:grid;
+      grid-template-columns: auto auto auto;
+    }
+    
+    .tab div {
+      display: inline-block;
+      cursor: pointer;
+      background-color: rgb(245, 245, 245);
+      border-radius: 30px 30px 0px 0px;
+    }
+    
+    /* Style the buttons inside the tab */
+    .tab div button {
+      background-color: inherit;
+      color: black;
+      padding: 22px 16px;
+      width: 100%;
+      height: 5rem;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-size: 17px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background-color: #ddd;
+    }
+    
+    /* Create an active/current "tab button" class */
+    .tab button.active {
+      background-color: #ccc;
+    }
+    .tab button:focus {
+      background-color: #ccc;
+    }
+    
+    .all {
+      margin: 0 auto;
+      padding-top: 1rem;
+      background-color: #fff;
+      width: 80%;
+      max-width: 85rem;
+      height: 120vh;
+      border-radius: 0px 0px 30px 30px;
+    }
+    
+    /* Style the tab content */
+    .tabcontent {
+      margin: 0 auto;
+      padding-top: 1.5rem;
+      width: 80%;
+      border-left: none;
+      height: 110vh;
+      display: none;
+    }
+  
+    
+    /* Clear floats after the tab */
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+  
+    #Sobre h1{
+      padding: 5rem;
+      font-family: 'Urbanist';
+      font-size: 2rem;
+    }
+    
+    #Sobre i{
+      font-size: 1.5rem;
+      margin-left: 2.5rem;
+    }
+  
+    #bt1, #bt2, #bt3 {
+      background-color: #fff;
+      border-radius: 30px 30px 0px 0px;
+    }
+  
+    #bt1:focus, #bt2:focus, #bt3:focus {
+      background-color: #fff;
+    }
+  
+    /* Conteúdo da pagina de serviços */
+    
+  .grid_home {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 25% 25% 25% 25%;
+    background-color: #ffff;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .md-ct-pos {
+    display: none;
+  }
+  
+  .md-ct {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .md-ct i#iconfecha {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18pt;
+    float: right;
+    cursor: pointer;
+    color: #363636;
+    transition: .3s;
+  }
+  
+  .md-ct i#iconfecha:hover {
+    color: #F53446;
+  }
+  
+  .form_anuncio {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    overflow-y: auto;
+  }   
+  
+  .form_anuncio {
+    text-align: center;
+  }
+  
+  .form_anuncio {
+    padding: 2rem;
+    border: 1px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 40px 5px 40px 5px;
+    background-color: white;
+    display: block;
+  }
+  
+  .form_anuncio h1 {
+    margin-top: 1rem;
+    color: #363636;
+  }
+  
+  .grid_anuncio p {
+    font-size: 18px;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    margin-left: 0.5rem;
+    text-align: left;
+  }
+  
+  .form_anuncio .fa-times-circle#iconfecha {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 18pt;
+    float: right;
+    cursor: pointer;
+    color: #363636;
+  }
+  
+  .grid_anuncio{
+    display: grid;
+    grid-template-columns: 23rem 23rem;
+    margin-bottom: 1rem;
+    margin-left: 1.5rem;
+    padding-top: 1rem;
+  }
+  
+  .check {
+    text-align: left;
+    margin-left: 1rem;
+    color: #363636;
+  }
+  
+  .grid_anuncio form input[type=checkbox]{
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .check label {
+    cursor: pointer;
+  }
+  
+  .grid_anuncio #titulo {
+    width: 20rem;
+    height: 2.5rem;
+    font-size: 18px;
+    border-radius: 15px;
+    border: 1px solid #363636;
+    padding-left: 15px;
+    margin-left: -30px;
+  }
+  .grid_anuncio #preco {
+    width: 20rem;
+    height: 2.5rem;
+    font-size: 18px;
+    border-radius: 15px;
+    border: 1px solid #363636;
+    padding-left: 15px;
+    margin-left: -30px;
+  }
+  
+  .grid_anuncio textarea {
+    resize: none;
+    padding: 0.5rem;
+    width: 20rem;
+    height: 5rem;
+    font-size: 18px;
+    border-radius: 15px;
+    border: 1px solid #363636;
+    padding-left: 15px;
+    margin-left: -30px;
+  }
+  
+  
+  .grid_anuncio form input[type=text]:focus{
+    outline: 0;
+    
+  }
+  
+  #imagem {
+    display: none;
+  }
+  
+  .grid_anuncio textarea:focus {
+    outline: 0;
+  }
+  
+  .grid_anuncio select:focus {
+    outline: 0;
+  }
+  
+  #escolha{
+    border: 1px solid #363636;
+    padding: 0.3rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: -2rem;
+  }
+  
+  select {
+    width: 20rem;
+    height: 2.5rem;
+    font-size: 18px;
+    border-radius: 15px;
+    border: 1px solid #363636;
+    padding-left: 15px;
+    margin-left: -30px;
+    cursor: pointer;
+  }
+  
+  select option {
+    font-size: 10pt;
+    border: 1px solid #363636;
+    cursor: pointer;
+  }
+  
+  /*botao*/
+  
+  .form_anuncio .botao {
+    border: 1px solid #363636;
+    width: 90%;
+    height: 3rem;
+    max-width: 200px;
+    background-color: transparent;
+    border-radius: 15px;
+    padding: 1px;
+    cursor: pointer;
+    font-size: 28px;
+    color: #363636;
+    font-family: 'Urbanist', sans-serif;
+  }
+  
+  .form_anuncio .botao:hover {
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    background-image: url("/GitHub/Kamaleao/app/public/View/assets/img/botao.jpg");
+    background-size: 100%;
+    transition: 0.3s;
+    border: none;
+    box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
+  }
+  
+  @media screen and (max-width: 1400px) {
+    fieldset {
+        margin-top: 0;
+    }
+  }
+  
+  @media screen and (max-width: 850px) {
+    .grid_anuncio {
+        display: block;
+    }
+  
+    .grid_anuncio .left p, .grid_anuncio .right p {
+        margin-left: -1rem;
+    }
+    
+    .check {
+        margin-left: 0;
+    }
+  }
+  
+  
+  
+  .item {
+      margin: 0 auto;
+      background: #ffff;
+      border-radius: 10px 10px 10px 10px;
+      height: 16rem;
+      width: 80%;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition: .6s;
+      display: grid;
+      grid-template-rows: 68% 12% 8% 12%;
+  }
+  
+  .item:hover {
+      box-shadow: 0 3px 10px rgba(0,0,0,.2);
+      width: 90%;
+  }
+  
+  .item:hover h2 {
+      color: #F53446;
+  }
+  
+  .anuncio_img {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px 10px 0 0;
+      background-color: powderblue;
+  }
+  
+  .anuncio_text {
+      padding: 0.5rem;
+      width: 93%;
+  }
+  
+  .text_flex {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.7rem;
+  }
+  
+  .anuncio_titulo h1 {
+      font-size: 12pt;
+      color: #363636;
+      margin: 0.5rem;
+  }
+  
+  .anuncio_preço h2 {
+      font-size: 12pt;
+      color: #363636;
+      transition: .4s;
+      margin-right: 0.5rem;
+      float: right;
+  }
+  
+  .anuncio_user h3 {
+      color: #808080;
+      font-size: 10pt;
+      margin: 0.2rem 0.5rem;
+  
+  }
+  
+  #adicionar {
+    margin: 0 auto;
+    border-radius: 10px 10px 10px 10px;
+    height: 90%;
+    width: 13rem;
+    border: 2px dashed #ccc;
+    background-color: #fff;
+    transition: .4s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  #adicionar i {
+    margin: 0 auto;
+    font-size: 60pt;
+    color: #363636;
+    transition: .4s;
+  }
+  
+  #adicionar:hover {
+    background-color: rgb(233, 233, 233);
+    height: 95%;
+    width: 15rem;
+  }
+  
+  #adicionar:hover i {
+    font-size: 75pt;
+  }
+  
+  .form-message{
+    margin: 0 auto;
+    width: 80%;
+    margin-top: 2em;
+    margin-bottom: 1rem;
+    font-size: 1.10rem;
+    font-family: 'Urbanist', sans-serif;
+  }
+  
+  .erro {
+    color: #f44336 !important;
+  }
+  
+  .sucesso {
+    color: #00a800 !important;
+  }
+  
+  
+  .editar-excluir-bg {
+    text-align: center;
+    position: fixed;
+    background: rgba(0, 0, 0, .5);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: initial;
+  }
+  
+  .editar-excluir-bg.mostrar {
+    display: flex;
+  }
+  
+  .editar-excluir {
+    width: 40%;
+    min-width: 300px;
+    height: 50%;
+    background-color: #fff;
+    border-radius: 40px 5px 40px 5px;
+    padding: 10px;
+  }
+  
+  .arte {
+    display: block;
+    margin: 0 auto;
+    margin-top: 2%;
+    width: 60%;
+    height: 60%;
+    border: 1px dashed #363636;
+    background-color: powderblue;
+    transition: .6s;
+  }
+  
+  .arte:hover {
+    width: 61%;
+    height: 61%;
+  }
+  
+  .editar-excluir h1 {
+    margin-top: 3%;
+  }
+  
+  .btmd {
+    position: relative;
+    width: 9rem;
+    height: 3rem;
+    background: rgb(255, 255, 255);
+    float: center;
+    border: 1px solid rgba(54, 54, 54, 1);
+    border-radius: 20px;
+    font-size: 1.5rem; 
+    font-weight: bold;
+    font-family: 'Urbanist', sans-serif;
+    color: rgba(54, 54, 54, 1);
+    margin-top: 5%;
+  }
+  
+  .btmd:hover {
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    background-image: url('/GitHub/Kamaleao/app/public/View/assets/img/botao.jpg');
+    background-size: 100%;
+    border: none;
+    box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
+    transform: 3.0s;
+    transition: 0.3s;
+  }
+  
+  .imagem-exemplo {
+    width: 100%;
+    max-width: 300px;
+    height: 90%;
+    border: 1px solid black;
+    cursor: pointer;
+  }
+  
+  .close {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    float: right;
+    cursor: pointer;
+    color: #363636;
+    transition: .3s;
+  }
+  
+  .close:hover {
+    background-color: #F53446;
+    color: #fff;
+  }
+  
+  
+  
+    @media screen and (max-width: 800px) {
+  
+      /*main {
+        
+      }*/
+  
+      .tab {
+        width: 100%;
+        display: block;
+        background: none;
+        text-align: center;
+        margin-left: -1.5rem;
+  
+      }
+  
+      #bt1, #bt2, #bt3 {
+        border-radius: 30px 30px 0 0;
+        width: 100%;
+        font-size: 70%;
+        font-weight: 400;
+        text-align: center;
+      }
+  
+      #bt2 {
+        margin-left: -.7rem;
+      }
+  
+      #bt3 {
+        margin-left: -1.5rem;
+      }
+  
+  
+      .tab div {
+        background: none;
+        border-radius: 0;
+        width: 30%;
+      }
+  
+      .form_anuncio {
+        margin-top: 2rem;
+        height: 60%;
+      }
+  
+    }
