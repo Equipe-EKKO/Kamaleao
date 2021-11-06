@@ -1,8 +1,6 @@
 <?php
 #requere os arquivos contendo as classes necessárias para o funcionamento do programa principal direcionado ao login (ConexaoBanco -- classe que realiza a conexão com o banco de dados | Usuario -- subclasse de Participante | Administrador -- subclasse Participante)
-require_once 'classes/clConexaoBanco.php';
-require_once 'classes/clUsuario.php';
-require_once 'classes/clAdministrador.php';
+require_once "classes/autoloadClass.php";
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php'); #arquivo de configuracao
 
 // Função chamada no controller para realizar cadastro de usuários
