@@ -93,7 +93,7 @@ class Usuario extends Participante {
                 $stmt = $banco->prepare("SELECT l.nm_email, l.nm_username, us.cd_url_foto_perfil, us.ds_usuario, us.nm_nome, us.nm_sobrenome, us.cd_cpf, us.dt_nascimento, us.cd_usuario FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login WHERE l.nm_email = :email");
                 /*Substitui os placeholders da query preparada*/
                 $stmt->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
-                 /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou e então, guardar esses resultados numa session que será usada em perfil/config perfil, além de instanciar uma nova classe para perfilProprio*/
+                /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou e então, guardar esses resultados numa session que será usada em perfil/config perfil, além de instanciar uma nova classe para perfilProprio*/
                 try {
                     $stmt->execute(); # tenta executar o select preparado
                     $resultados = $stmt->fetch(PDO::FETCH_ASSOC);
