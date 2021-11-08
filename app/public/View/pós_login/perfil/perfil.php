@@ -11,7 +11,7 @@ use Twig\Loader\FilesystemLoader;
 $loader = new FilesystemLoader(DIR_ROOT . '/GitHub/Kamaleao/app/public/View/assets/templates/', '/templates');
 $twig = new Environment($loader);
 
-$perfilInfo = unserialize($_SESSION['userinfo']);
+$perfilInfo = unserialize($_SESSION['userinfoToPerfil']);
 
 if (isset($perfilInfo['nm_username'])) {
     $username = $perfilInfo['nm_username'];

@@ -412,6 +412,29 @@ class Usuario extends Participante {
         }
     }
 
+    public function atualizaPosConfig():bool {
+        $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL 
+
+        $stmt = $banco->prepare("SELECT l.nm_email, l.nm_username, us.cd_url_foto_perfil, us.ds_usuario FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login WHERE l.cd_login = :cdlogin");
+        /*Substitui os placeholders da query preparada*/
+        $stmt->bindValue(':cdlogin', $this->getCdUpdate(), PDO::PARAM_STR);
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou e então, guardar esses resultados numa session que será usada em perfil/config perfil, além de instanciar uma nova classe para perfilProprio*/
+        try {
+            $stmt->execute(); # tenta executar o select preparado
+            $resultados = $stmt->fetch(PDO::FETCH_ASSOC);
+            $this->perfil->setUsername($resultados['nm_username']);
+            if ($resultados['cd_url_foto_perfil'] != null) {
+                $this->perfil->setFotoPerfil($resultados['cd_url_foto_perfil']);
+            }
+            $this->perfil->setDescricao($resultados['ds_usuario']);
+            $_SESSION['userinfoToPerfil'] = serialize($resultados); 
+            return true;
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+            return false;
+        }
+    }
+
     #Métodos Especias - Getter e Setters para os atributos e Construct
     /* Construtor -- A função que é chamada automaticamente ao instanciar */
     public function __construct(string $nome, string $sobrenome, string $cpf, string $data_nascimento) { # declara que os dados a serem inseridos devem ser obrigatoriamente strings

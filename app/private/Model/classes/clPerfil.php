@@ -20,7 +20,7 @@ abstract class Perfil {
         return $this->descricao;
     }
     public function getFotoPerfil() {
-        return $this->fotoPerfil;
+        return $this->urlfotoPerfil;
     }
     # Sem GET para Serviço pois é um atributo que depende de cada filho
     /*SETTERS*/
@@ -30,8 +30,8 @@ abstract class Perfil {
     public function setDescricao(string $descricao) { //seta que o tipo de dado a ser passado como parametro deve ser string
         $this->descricao = $descricao; #seta o valor de descricao
     }
-    public function setFotoPerfil($fotoPerfil) { 
-        $this->fotoPerfil = $fotoPerfil;
+    public function setFotoPerfil(string $urlfotoPerfil) { 
+        $this->urlfotoPerfil = $urlfotoPerfil;
     }
     # Sem SET para Serviço pois é um atributo que depende de cada filho
 }

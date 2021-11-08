@@ -114,7 +114,7 @@ class PerfilProprio extends Perfil {
     /* Construtor */
     public function __construct(string $user, string $desc) {
         $this->setUsername($user);
-        $this->setFotoPerfil(null);
+        $this->setFotoPerfil("");
         $this->setDescricao($desc);
     }
     /*GETTERS*/
