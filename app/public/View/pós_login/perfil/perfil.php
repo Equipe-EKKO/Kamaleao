@@ -13,16 +13,39 @@ $twig = new Environment($loader);
 
 $perfilInfo = unserialize($_SESSION['userinfo']);
 
-if (isset($perfilInfo['nm_username'])) {
-    $username = $perfilInfo['nm_username'];
-    if (!isset($perfilInfo['ds_usuario']) || empty($perfilInfo['ds_usuario']) || $perfilInfo['ds_usuario'] == "" || $perfilInfo['ds_usuario'] == null) {
-        $sobre = "";
-    }
-    else {
-        $sobre = $perfilInfo['ds_usuario'];
+if (isset($_SESSION['userinfoToPerfil'])/* || !empty($_SESSION['userinfoToPerfil']) || $_SESSION['userinfoToPerfil'] != null*/) {
+    $userinfoToPerfil = unserialize($_SESSION['userinfoToPerfil']);
+    if (isset($userinfoToPerfil['nm_username']) && isset($userinfoToPerfil['nm_email']) && isset($userinfoToPerfil['nm_senha'])) {
+        $username = $userinfoToPerfil['nm_username'];
+        $email = $userinfoToPerfil['nm_email'];
+        $senha = $userinfoToPerfil['nm_senha'];
+        if (!isset($userinfoToPerfil['ds_usuario']) || empty($userinfoToPerfil['ds_usuario']) || $userinfoToPerfil['ds_usuario'] == "" || $userinfoToPerfil['ds_usuario'] == null) {
+            $sobre = "";
+        }
+        else {
+            $sobre = $userinfoToPerfil['ds_usuario'];
+        }
+    } else {
+        $username = "userIndefinido";
+        $email = "emailIndefinido";
+        $senha = "senhaIndefinida";
     }
 } else {
-    $username = "userIndefinido";
+    if (isset($perfilInfo['nm_username']) && isset($perfilInfo['nm_email']) && isset($perfilInfo['nm_senha']) ) {
+        $username = $perfilInfo['nm_username'];
+        $email = $perfilInfo['nm_email'];
+        $senha = $perfilInfo['nm_senha'];
+        if (!isset($perfilInfo['ds_usuario']) || empty($perfilInfo['ds_usuario']) || $perfilInfo['ds_usuario'] == "" || $perfilInfo['ds_usuario'] == null) {
+            $sobre = "";
+        }
+        else {
+            $sobre = $perfilInfo['ds_usuario'];
+        }
+    } else {
+        $username = "userIndefinido";
+        $email = "emailIndefinido";
+        $senha = "senhaIndefinida";
+    }
 }
 
 if ($username === "userIndefinido"):

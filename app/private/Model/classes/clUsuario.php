@@ -90,7 +90,7 @@ class Usuario extends Participante {
             if ($contaLinha == 1 ) { # estrutura condicional que verifica se o valor retornado no select corresponde a apenas e somente 1, e se sim...
                 $this->setEmail($email);
                 $this->setSenha($senha);
-                $stmt = $banco->prepare("SELECT l.nm_email, l.nm_username, us.cd_url_foto_perfil, us.ds_usuario, us.nm_nome, us.nm_sobrenome, us.cd_cpf, us.dt_nascimento, us.cd_usuario FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login WHERE l.nm_email = :email");
+                $stmt = $banco->prepare("SELECT l.nm_email, l.nm_username, l.nm_senha, us.cd_url_foto_perfil, us.ds_usuario, us.nm_nome, us.nm_sobrenome, us.cd_cpf, us.dt_nascimento, us.cd_usuario FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login WHERE l.nm_email = :email");
                 /*Substitui os placeholders da query preparada*/
                 $stmt->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
                 /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou e então, guardar esses resultados numa session que será usada em perfil/config perfil, além de instanciar uma nova classe para perfilProprio*/
@@ -415,7 +415,7 @@ class Usuario extends Participante {
     public function atualizaPosConfig():bool {
         $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL 
 
-        $stmt = $banco->prepare("SELECT l.nm_email, l.nm_username, us.cd_url_foto_perfil, us.ds_usuario FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login WHERE l.cd_login = :cdlogin");
+        $stmt = $banco->prepare("SELECT l.nm_email, l.nm_username, us.cd_url_foto_perfil, us.ds_usuario, l.nm_senha FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login WHERE l.cd_login = :cdlogin");
         /*Substitui os placeholders da query preparada*/
         $stmt->bindValue(':cdlogin', $this->getCdUpdate(), PDO::PARAM_STR);
         /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou e então, guardar esses resultados numa session que será usada em perfil/config perfil, além de instanciar uma nova classe para perfilProprio*/

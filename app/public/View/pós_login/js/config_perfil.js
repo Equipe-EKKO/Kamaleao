@@ -14,6 +14,14 @@ window.onload = function () {
                     $("#md-pr").remove();
                     $(conteudo).appendTo("div.container");
                     $("main").removeClass("main-initial").addClass("main");
+                    var asterisco = $("p#maskSenha").html();
+                    $("p#maskSenha").empty();
+                    var qtAste = asterisco.length;
+                    var sub = "";
+                    for (let index = 0; index < qtAste; index++) {
+                        sub = sub + "*";
+                    }
+                    $("p#maskSenha").html(sub);
                 } else {
                     $("p.form-message").removeAttr("hidden");
                     $("p#resultfirst").addClass("erro");
