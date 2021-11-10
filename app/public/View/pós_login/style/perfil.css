@@ -180,6 +180,17 @@
   color: #F53446;
 }
 
+#iconfecha1 {
+  position: absolute;
+  top: 20%;
+  right: 30%;
+  font-size: 18pt;
+  float: right;
+  cursor: pointer;
+  color: #363636;
+  transition: .3s;
+}
+
 .form_anuncio {
   align-items: center;
   display: flex;
@@ -500,6 +511,8 @@ select option {
   display: flex;
 }
 
+
+
 .editar-excluir {
   width: 40%;
   min-width: 300px;
@@ -526,6 +539,7 @@ select option {
 }
 
 .editar-excluir h1 {
+  color: #363636;
   margin-top: 3%;
 }
 
@@ -563,21 +577,108 @@ select option {
   cursor: pointer;
 }
 
-.close {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
+.editar-excluir i#iconfecha {
+  position: absolute;
+  top: 25%;
+  right: 30%;
+  font-size: 18pt;
   float: right;
   cursor: pointer;
   color: #363636;
   transition: .3s;
 }
 
-.close:hover {
-  background-color: #F53446;
-  color: #fff;
+.editar-excluir i#iconfecha:hover {
+  color: #F53446;
 }
 
+/* Modal de Edição de Anúncio */
+
+.editar-bg {
+  text-align: center;
+  position: fixed;
+  background: rgba(0, 0, 0, .5);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  cursor: initial;
+}
+
+.editar-bg.mostrar {
+  display: flex;
+}
+
+.editar i#iconfecha {
+  position: absolute;
+  top: 21%;
+  right: 24%;
+  font-size: 18pt;
+  float: right;
+  cursor: pointer;
+  color: #363636;
+  transition: .3s;
+}
+
+.editar-bg.modal {
+  display: flex;
+}
+
+.editar {
+  width: 60%;
+  min-width: 300px;
+  max-width: 780px;
+  height: 60%;
+  background-color: #fff;
+  border-radius: 40px 5px 40px 5px;
+  padding: 10px;
+  justify-content: center;
+}
+
+.editar h1 {
+  margin-top: 1rem;
+  color: #363636;
+}
+
+.editar .grid_anuncio p{
+  margin-left: 1.5rem;
+}
+
+.editar .grid_anuncio {
+  margin-left: 2.3rem
+}
+
+.bxs-pencil {
+  margin-left: 0.5rem;
+}
+
+.editar .botao {
+  border: 1px solid #363636;
+  width: 90%;
+  height: 3rem;
+  max-width: 200px;
+  background-color: transparent;
+  border-radius: 15px;
+  padding: 1px;
+  cursor: pointer;
+  font-size: 28px;
+  color: #363636;
+  font-family: 'Urbanist', sans-serif;
+}
+
+.editar .botao:hover {
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  background-image: url("/GitHub/Kamaleao/app/public/View/assets/img/botao.jpg");
+  background-size: 100%;
+  transition: 0.3s;
+  border: none;
+  box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
+}
 
 
   @media screen and (max-width: 800px) {
