@@ -131,10 +131,17 @@
                     </div>
                   <input type="submit" class="botao" name="acao" value="Anunciar" /> <br>
                 </form>
+                <div class="editar-excluir" id="editar-excluir">
+                  <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
+                  <h1>O que você deseja fazer ?!</h1>
+                  <div class="arte"></div>
+                  <button class="btmd">Editar</button>
+                  <button class="btmd">Excluir</button>
+                </div> <!--editar-excluir-->
               </div>
               {% if servicos is defined %}
                 {% for servico in servicos %}
-                  <div class="item">
+                  <div class="item" onclick="abreModal('editar-excluir')">
                     <img class="anuncio_img" src={{servico.url_da_imagem|e}}>
                       {# <div class="opacidade">
                           <i class='bx bxs-pencil'></i><br/>
