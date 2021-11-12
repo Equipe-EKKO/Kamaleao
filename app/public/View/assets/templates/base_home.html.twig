@@ -51,8 +51,18 @@
                      <li class="icone">
                         <a onclick="mostraPerf()" class="bt2"><i class='bx bx-user-circle' id="icon_nav"></i></a>
                         <ul onmouseleave="escondePerf()" id="perf" class="perfil">
-                           <li><a href="/Github/Kamaleao/app/private/Controller/controllerChamaPerfil.php" class="opt">Ver perfil</a></li>
-                           <li><a href="/Github/Kamaleao/app/public/view/pós_login/config_perfil/config_perfil.php" class="opt">Configurar conta</a></li>
+                           <!-- Perfil -->
+                           {% if username is defined %}
+                              <li><a href="/Github/Kamaleao/app/public/view/pós_login/perfil/perfil?username={{username}}" class="opt">Ver perfil</a></li>
+                           {% else %}
+                              <li><a href="/Github/Kamaleao/app/private/Controller/controllerChamaPerfil" class="opt">Ver perfil</a></li>
+                           {% endif %}
+                           <!-- Configura Perfil -->
+                           {% if username is defined %}
+                              <li><a href="/Github/Kamaleao/app/public/view/pós_login/config_perfil/config_perfil?username={{username}}" class="opt">Configurar conta</a></li>
+                           {% else %}
+                              <li><a href="/Github/Kamaleao/app/public/view/pós_login/config_perfil/config_perfil" class="opt">Configurar conta</a></li>
+                           {% endif %}
                            <li><a href="/Github/Kamaleao/app/private/Controller/controllerLogOff.php" class="opt">Sair</a></li>
                         </ul>
                      </li>

@@ -6,7 +6,7 @@
     text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
     width: 60%;
     height: 225px;
-    margin:auto;
+    margin: auto;
     padding-bottom: 3rem;
     text-align: center;
     padding-top:  80px;
@@ -48,6 +48,7 @@
     max-width: 85rem;
     display:grid;
     grid-template-columns: auto auto auto;
+    margin-top: -5%;
   }
   
   .tab div {
@@ -139,130 +140,122 @@
 
   /* Conteúdo da pagina de serviços */
   
-.grid_home {
-  display: grid;
-  grid-template-columns: 33% 33% 33%;
-  grid-template-rows: 25% 25% 25% 25%;
-  background-color: #ffff;
-  width: 100%;
-  height: 100%;
-}
-
-.md-ct-pos {
-  display: none;
-}
-
-.md-ct {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100vw;
-  height: 100%;
-  background: rgba(0,0,0,.5);
-  z-index: 2000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.md-ct i#iconfecha {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 18pt;
-  float: right;
-  cursor: pointer;
-  color: #363636;
-  transition: .3s;
-}
-
-.md-ct i#iconfecha:hover {
-  color: #F53446;
-}
-
-#iconfecha1 {
-  position: absolute;
-  top: 20%;
-  right: 30%;
-  font-size: 18pt;
-  float: right;
-  cursor: pointer;
-  color: #363636;
-  transition: .3s;
-}
-
-.form_anuncio {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  position: relative;
-  overflow-y: auto;
-}   
-
-.form_anuncio {
-  text-align: center;
-}
-
-.form_anuncio {
-  padding: 2rem;
-  border: 1px;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
-  border-radius: 40px 5px 40px 5px;
-  background-color: white;
-  display: block;
-}
-
-.form_anuncio h1 {
-  margin-top: 1rem;
-  color: #363636;
-}
-
-.grid_anuncio p {
-  font-size: 18px;
-  margin-bottom: 1rem;
-  margin-top: 2rem;
-  margin-left: 0.5rem;
-  text-align: left;
-}
-
-.form_anuncio .fa-times-circle#iconfecha {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 18pt;
-  float: right;
-  cursor: pointer;
-  color: #363636;
-}
-
-.grid_anuncio{
-  display: grid;
-  grid-template-columns: 23rem 23rem;
-  margin-bottom: 1rem;
-  margin-left: 1.5rem;
-  padding-top: 1rem;
-}
-
-.check {
-  text-align: left;
-  margin-left: 1rem;
-  color: #363636;
-}
-
-.grid_anuncio form input[type=checkbox]{
-  width: 1rem;
-  height: 1rem;
-  margin-top: 0.5rem;
-}
-
-.check label {
-  cursor: pointer;
-}
-
-.grid_anuncio #titulo {
-  width: 20rem;
+  
+  .md-ct-pos {
+    display: none;
+  }
+  
+  .md-ct {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .md-ct i#iconfecha {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18pt;
+    float: right;
+    cursor: pointer;
+    color: #363636;
+    transition: .3s;
+  }
+  
+  .md-ct i#iconfecha:hover {
+    color: #F53446;
+  }
+  
+  #iconfecha1 {
+    position: absolute;
+    top: 20%;
+    right: 30%;
+    font-size: 18pt;
+    float: right;
+    cursor: pointer;
+    color: #363636;
+    transition: .3s;
+  }
+  
+  .form_anuncio {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    overflow-y: auto;
+  }   
+  
+  .form_anuncio {
+    text-align: center;
+  }
+  
+  .form_anuncio, .editar-excluir {
+    padding: 2rem;
+    border: 1px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 40px 5px 40px 5px;
+    background-color: white;
+    display: block;
+  }
+  
+  .form_anuncio h1 {
+    margin-top: 1rem;
+    color: #363636;
+  }
+  
+  .grid_anuncio p {
+    font-size: 18px;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    margin-left: 0.5rem;
+    text-align: left;
+  }
+  
+  .form_anuncio .fa-times-circle#iconfecha {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 18pt;
+    float: right;
+    cursor: pointer;
+    color: #363636;
+  }
+  
+  .grid_anuncio{
+    display: grid;
+    grid-template-columns: 23rem 23rem;
+    margin-bottom: 1rem;
+    margin-left: 1.5rem;
+    padding-top: 1rem;
+  }
+  
+  .check {
+    text-align: left;
+    margin-left: 1rem;
+    color: #363636;
+  }
+  
+  .grid_anuncio form input[type=checkbox]{
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .check label {
+    cursor: pointer;
+  }
+  
+  .grid_anuncio #titulo {
+    width: 20rem;
   height: 2.5rem;
   font-size: 18px;
   border-radius: 15px;
@@ -337,7 +330,7 @@ select option {
 
 /*botao*/
 
-.form_anuncio .botao {
+.form_anuncio .botao, .editar-excluir .botao {
   border: 1px solid #363636;
   width: 90%;
   height: 3rem;
@@ -351,7 +344,7 @@ select option {
   font-family: 'Urbanist', sans-serif;
 }
 
-.form_anuncio .botao:hover {
+.form_anuncio .botao:hover, .editar-excluir .botao:hover {
   color: rgb(255, 255, 255);
   cursor: pointer;
   background-image: url("/GitHub/Kamaleao/app/public/View/assets/img/botao.jpg");
@@ -363,42 +356,49 @@ select option {
 
 @media screen and (max-width: 1400px) {
   fieldset {
-      margin-top: 0;
+    margin-top: 0;
   }
 }
 
 @media screen and (max-width: 850px) {
   .grid_anuncio {
-      display: block;
+    display: block;
   }
-
+  
   .grid_anuncio .left p, .grid_anuncio .right p {
-      margin-left: -1rem;
+    margin-left: -1rem;
   }
   
   .check {
-      margin-left: 0;
+    margin-left: 0;
   }
 }
 
+.grid_home {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 33% 33% 33%;
+  background-color: #ffff;
+  width: 100%;
+  height: 100%;
+}
 
 
 .item {
-	margin: 0 auto;
-	background: #ffff;
-    border-radius: 10px 10px 10px 10px;
-    height: 16rem;
-    width: 80%;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    transition: .6s;
-    display: grid;
-    grid-template-rows: 68% 12% 8% 12%;
+  margin: 0 auto;
+  background: #ffff;
+  border-radius: 10px 10px 10px 10px;
+  height: 80%;
+  width: 85%;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: .6s;
+  display: grid;
+  grid-template-rows: 68% 12% 8% 12%;
 }
 
 .item:hover {
-    box-shadow: 0 3px 10px rgba(0,0,0,.2);
-    width: 90%;
+  box-shadow: 0 3px 10px rgba(0,0,0,.2);
 }
 
 .item:hover h2 {
@@ -423,10 +423,17 @@ select option {
     margin-top: 0.7rem;
 }
 
+.anuncio_titulo {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: "ellipsis";
+}
+
 .anuncio_titulo h1 {
     font-size: 12pt;
     color: #363636;
     margin: 0.5rem;
+    overflow: hidden;
 }
 
 .anuncio_preço h2 {
@@ -445,10 +452,11 @@ select option {
 }
 
 #adicionar {
-  margin: 0 auto;
+	margin: 0 auto;
+	background: #ffff;
   border-radius: 10px 10px 10px 10px;
-  height: 90%;
-  width: 13rem;
+  height: 12.8rem;
+  width: 80%;
   border: 2px dashed #ccc;
   background-color: #fff;
   transition: .4s;
@@ -466,8 +474,7 @@ select option {
 
 #adicionar:hover {
   background-color: rgb(233, 233, 233);
-  height: 95%;
-  width: 15rem;
+  width: 90%;
 }
 
 #adicionar:hover i {
@@ -491,56 +498,28 @@ select option {
   color: #00a800 !important;
 }
 
-
-.editar-excluir-bg {
-  text-align: center;
-  position: fixed;
-  background: rgba(0, 0, 0, .5);
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 2000;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  cursor: initial;
-}
-
-.editar-excluir-bg.mostrar {
-  display: flex;
-}
-
-
-
 .editar-excluir {
-  width: 40%;
-  min-width: 300px;
-  height: 50%;
   background-color: #fff;
   border-radius: 40px 5px 40px 5px;
-  padding: 10px;
-}
-
-.arte {
-  display: block;
-  margin: 0 auto;
-  margin-top: 2%;
-  width: 60%;
-  height: 60%;
-  border: 1px dashed #363636;
-  background-color: powderblue;
-  transition: .6s;
-}
-
-.arte:hover {
-  width: 61%;
-  height: 61%;
+  text-align: center;
 }
 
 .editar-excluir h1 {
   color: #363636;
   margin-top: 3%;
+}
+
+.md-ct {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100%;
+  background: rgba(0,0,0,.5);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btmd {
@@ -579,8 +558,8 @@ select option {
 
 .editar-excluir i#iconfecha {
   position: absolute;
-  top: 25%;
-  right: 30%;
+  top: 10px;
+  right: 10px;
   font-size: 18pt;
   float: right;
   cursor: pointer;
@@ -719,7 +698,7 @@ select option {
       width: 30%;
     }
 
-    .form_anuncio {
+    .form_anuncio{
       margin-top: 2rem;
       height: 60%;
     }

@@ -1,7 +1,7 @@
 function abreModal(modal) {
   if (modal == "add") {
     $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
-    $("#editar-excluir").removeClass("md-ct").addClass("md-ct-pos");
+    $("#editar-excluir").removeClass("editar-excluir").addClass("md-ct-pos");
 
     $("#formAnuncio").submit(function (e) {
       e.preventDefault();
@@ -69,13 +69,15 @@ function abreModal(modal) {
     $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
     $("#formAnuncio").removeClass("form_anuncio").addClass("md-ct-pos");
   }
+  if (modal == "titulo") {
+    $("#titulo").removeClass("md-ct-pos").addClass("modal-edit");
+    $("#editar-excluir").removeClass("editar-excluir").addClass("md-ct-pos");
+  }
 }
 
 function fechaModal(modal) {
-  if (modal == "add") {
     $("p.form-message").empty();
     $('#formAnuncio')[0].reset();
     $("#md-pr").removeClass("md-ct").addClass("md-ct-pos");
     location.reload();
-  }
 }

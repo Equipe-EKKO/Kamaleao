@@ -13,7 +13,7 @@ $twig = new Environment($loader);
 
 $perfilInfo = unserialize($_SESSION['userinfo']);
 
-if (isset($_SESSION['userinfoToPerfil'])/* || !empty($_SESSION['userinfoToPerfil']) || $_SESSION['userinfoToPerfil'] != null*/) {
+if (isset($_SESSION['userinfoToPerfil'])) {
     $userinfoToPerfil = unserialize($_SESSION['userinfoToPerfil']);
     if (isset($userinfoToPerfil['nm_username']) && isset($userinfoToPerfil['nm_email']) && isset($userinfoToPerfil['nm_senha'])) {
         $username = $userinfoToPerfil['nm_username'];
@@ -53,8 +53,14 @@ if ($username === "userIndefinido"):
     $_SESSION["error"] = 'Você precisa estar logado para acessar esta página!';
     header("Location: /Github/Kamaleao/app/public/view/pré_login/login/login.php");
 else:
-    $slc_categoria = pesquisaCategoria();
-    $slc_servic = pesquisaServPerf();
-    echo $twig->render('perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'sltCategoria' => $slc_categoria, 'servicos' => $slc_servic]);
-    ob_end_flush();
+    if ($_GET['username'] === $username) {
+        $slc_categoria = pesquisaCategoria();
+        $slc_servic = pesquisaServPerf();
+        echo $twig->render('perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'sltCategoria' => $slc_categoria, 'servicos' => $slc_servic, 'username' => $username]);
+        ob_end_flush();
+    } else {
+        $slc_servic = pesquisaServPerf();
+        echo $twig->render('servicos.html.twig');
+        ob_end_flush();
+    }
 endif;

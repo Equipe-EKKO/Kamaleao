@@ -50,6 +50,6 @@ if ($username === "userIndefinido"):
     $_SESSION["error"] = 'Você precisa estar logado para acessar esta página!';
     header("Location: /Github/Kamaleao/app/public/view/pré_login/login/login.php");
 else:
-    echo $twig->render('config_perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'Email' => $email, 'Senha' => $senha]);
+    echo $twig->render('config_perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'Email' => $email, 'Senha' => $senha, 'username' => $username]);
     ob_end_flush();
 endif;

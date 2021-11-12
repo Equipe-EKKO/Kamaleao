@@ -76,6 +76,7 @@ function recebeSenhaRedPost(string $endemail, string $newSenha):bool {
 function fazLogOff(object $objUsuario):void {
     unset($objUsuario);
     unset($usuario);
+    session_destroy();
     header("Location: /Github/Kamaleao/app/public/view/acesso_livre/index/index"); # envia header que redireciona a pessoa para a header
 }
 // Função chamada no controller para validar a senha, que posteriormente permitirá edição de dados

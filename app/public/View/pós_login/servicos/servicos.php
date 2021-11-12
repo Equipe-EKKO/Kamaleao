@@ -32,6 +32,6 @@ if ($username === "userIndefinido"):
 else:
     $slc_categoria = pesquisaCategoria();
     $slc_servic = pesquisaServPerf();
-    echo $twig->render('servicos.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'sltCategoria' => $slc_categoria, 'servicos' => $slc_servic]);
+    echo $twig->render('servicos.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'sltCategoria' => $slc_categoria, 'servicos' => $slc_servic, 'username' => $username]);
     ob_end_flush();
 endif;
