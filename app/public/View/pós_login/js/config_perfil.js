@@ -14,6 +14,11 @@ window.onload = function () {
                     $("#md-pr").remove();
                     $(conteudo).appendTo("div.container");
                     $("main").removeClass("main-initial").addClass("main");
+                    var asterisco 
+                    var asterisco = $("p#senha").detach();
+
+
+                    //asterisco.length;
                 } else {
                     $("p.form-message").removeAttr("hidden");
                     $("p#resultfirst").addClass("erro");

@@ -10,24 +10,39 @@ $twig = new Environment($loader);
 
 $perfilInfo = unserialize($_SESSION['userinfo']);
 
-if (isset($perfilInfo['nm_username']) && isset($perfilInfo['nm_email'])) {
-    $username = $perfilInfo['nm_username'];
-    $email = $perfilInfo['nm_email'];
-    if (!isset($perfilInfo['ds_usuario']) || empty($perfilInfo['ds_usuario']) || $perfilInfo['ds_usuario'] == "" || $perfilInfo['ds_usuario'] == null) {
-        $sobre = "";
-    }
-    else {
-        $sobre = $perfilInfo['ds_usuario'];
-    }
-    if (!isset($perfilInfo['cd_pix']) || empty($perfilInfo['cd_pix']) || $perfilInfo['cd_pix'] == "" || $perfilInfo['cd_pix'] == null) {
-        $chavePix = "";
-    }
-    else {
-        $sobre = $perfilInfo['ds_usuario'];
+if (isset($_SESSION['userinfoToPerfil'])/* || !empty($_SESSION['userinfoToPerfil']) || $_SESSION['userinfoToPerfil'] != null*/) {
+    $userinfoToPerfil = unserialize($_SESSION['userinfoToPerfil']);
+    if (isset($userinfoToPerfil['nm_username']) && isset($userinfoToPerfil['nm_email']) && isset($userinfoToPerfil['nm_senha'])) {
+        $username = $userinfoToPerfil['nm_username'];
+        $email = $userinfoToPerfil['nm_email'];
+        $senha = $userinfoToPerfil['nm_senha'];
+        if (!isset($userinfoToPerfil['ds_usuario']) || empty($userinfoToPerfil['ds_usuario']) || $userinfoToPerfil['ds_usuario'] == "" || $userinfoToPerfil['ds_usuario'] == null) {
+            $sobre = "";
+        }
+        else {
+            $sobre = $userinfoToPerfil['ds_usuario'];
+        }
+    } else {
+        $username = "userIndefinido";
+        $email = "emailIndefinido";
+        $senha = "senhaIndefinida";
     }
 } else {
-    $username = "userIndefinido";
-    $email = "emailIndefinido";
+    if (isset($perfilInfo['nm_username']) && isset($perfilInfo['nm_email']) && isset($perfilInfo['nm_senha']) ) {
+        $username = $perfilInfo['nm_username'];
+        $email = $perfilInfo['nm_email'];
+        $senha = $perfilInfo['nm_senha'];
+        if (!isset($perfilInfo['ds_usuario']) || empty($perfilInfo['ds_usuario']) || $perfilInfo['ds_usuario'] == "" || $perfilInfo['ds_usuario'] == null) {
+            $sobre = "";
+        }
+        else {
+            $sobre = $perfilInfo['ds_usuario'];
+        }
+    } else {
+        $username = "userIndefinido";
+        $email = "emailIndefinido";
+        $senha = "senhaIndefinida";
+    }
 }
 
 if ($username === "userIndefinido"):
@@ -35,6 +50,6 @@ if ($username === "userIndefinido"):
     $_SESSION["error"] = 'Você precisa estar logado para acessar esta página!';
     header("Location: /Github/Kamaleao/app/public/view/pré_login/login/login.php");
 else:
-    echo $twig->render('config_perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'Email' => $email, 'ChavePix' => $chavePix]);
+    echo $twig->render('config_perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'Email' => $email, 'Senha' => $senha]);
     ob_end_flush();
 endif;
