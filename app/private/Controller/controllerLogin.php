@@ -9,6 +9,4 @@ if (!empty($_POST)) {  #verifica se o formulário está enviando algo ao control
     header("Location: /Github/Kamaleao/app/public/view/pré_login/login/login.php");#Caso contrário ele retorna o erro 
 }
 
-
-
 ?>

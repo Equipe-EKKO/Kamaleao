@@ -10,8 +10,9 @@ use Twig\Loader\FilesystemLoader;
 $loader = new FilesystemLoader(DIR_ROOT . '/GitHub/Kamaleao/app/public/View/assets/templates/', '/templates');
 $twig = new Environment($loader);
 
-$perfilInfo = unserialize($_SESSION['userinfo']);
-
+if (isset($_SESSION['userinfo'])) {
+    $perfilInfo = unserialize($_SESSION['userinfo']);
+}
 if (isset($_SESSION['userinfoToPerfil'])) {
     $userinfoToPerfil = unserialize($_SESSION['userinfoToPerfil']);
     if (isset($userinfoToPerfil['nm_username']) && isset($userinfoToPerfil['nm_email']) && isset($userinfoToPerfil['nm_senha'])) {

@@ -55,15 +55,15 @@
                            {% if username is defined %}
                               <li><a href="/Github/Kamaleao/app/public/view/pós_login/perfil/perfil?username={{username}}" class="opt">Ver perfil</a></li>
                            {% else %}
-                              <li><a href="/Github/Kamaleao/app/private/Controller/controllerChamaPerfil" class="opt">Ver perfil</a></li>
+                              <li><a href="/Github/Kamaleao/app/public/view/pré_login/cadastro/cadastro" class="opt">Cadastre-se</a></li>
                            {% endif %}
                            <!-- Configura Perfil -->
                            {% if username is defined %}
-                              <li><a href="/Github/Kamaleao/app/public/view/pós_login/config_perfil/config_perfil?username={{username}}" class="opt">Configurar conta</a></li>
-                           {% else %}
                               <li><a href="/Github/Kamaleao/app/public/view/pós_login/config_perfil/config_perfil" class="opt">Configurar conta</a></li>
+                              <li><a href="/Github/Kamaleao/app/private/Controller/controllerLogOff.php" class="opt">Sair</a></li>
+                           {% else %}
+                              <li><a href="/Github/Kamaleao/app/public/view/pré_login/login/login" class="opt">Faça Login</a></li>
                            {% endif %}
-                           <li><a href="/Github/Kamaleao/app/private/Controller/controllerLogOff.php" class="opt">Sair</a></li>
                         </ul>
                      </li>
 
