@@ -6,14 +6,14 @@
       {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/perfil.css"{% endblock hrefcss %}
       {% block srcjs %}"/GitHub/Kamaleao/app/public/View/pós_login/js/perfil.js"{% endblock srcjs %}
       <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-      
+     
    {# endhead #}
    {# body #}
       <!-- conteudo de perfil -->
       {% block perfil_icon %}
       <div class="perfil_icon">
         <a class="icone_perf"><i class='bx bxs-user-circle'></i></a>
-        
+       
         <h1> @{{Usuario}} </h1>
 
         {% if Descricao != "" %}
@@ -43,17 +43,6 @@
                 <i class='bx bx-plus'></i>
               </a>
               <div id="md-pr" class="md-ct-pos">
-                <div id="titulo" class="md-ct-pos">
-                  <i class="fas fa-times-circle" onclick="fechaModal()"></i>
-                  <h3>Insira o novo título</h3>
-                  <form id="trocaTitulo" method="POST" action="">
-                  <input type="text" id="attTitulo" name="titulo" />
-                  <p hidden id="resultthird" class="form-message">
-                    <i class="fas fa-exclamation-triangle"></i>
-                  </p>
-                  <button type="submit" class="button" name="submit">Editar</button>
-                  </form>
-                </div>
                 <form id="formAnuncio" class ="form_anuncio" action="/" method="post" enctype="multipart/form-data">
                   <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
                     <h1>Anunciar um Serviço</h1>
@@ -94,30 +83,45 @@
                     </div>
                   <input type="submit" class="botao" name="acao" value="Anunciar" /> <br>
                 </form>
-                <div class="editar-excluir" id="editar-excluir">
+                <div class="form_anuncio" id="editar-excluir">
                   <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
                   <h1>Editar ou excluir serviço</h1>
                   <div class ="grid_anuncio">
                       <div class="left">
-                        <p>Título do serviço:</p>
-                        <p>Título <i class="fas fa-pen" onclick="abreModal('titulo')"></i></p>
-                        <p>Descrição do serviço:</p>
-                        <p>Descrição <i class="fas fa-pen"></i></p>
-                        <p>Alterar imagem para o Anúncio:</p>
-                        {# nao sei oq fazer aqui calma #}
                       </div>
                       <div class="rigth">
-                        <p>Preço médio:</p>
-                        <p>25,00 <i class="fas fa-pen"></i></p>
-                        <p>Licença:</p>
-                        <p>Licença de não sei oq <i class="fas fa-pen"></i></p>
-                        <p>Categoria</p>
-                        <p>Categoria <i class="fas fa-pen"></i></p>
+                        <p>Título: titulo do servico</p>
+                        <p>Preço médio:25,00</p>
+                        <textarea readonly>Descrição</textarea>
+                        <p>Licença: aaaaaaaaaaaaa</p>
+                        <p>Categoria: seila porra</p>
                       </div>
                     </div>
-                    <button class="botao">Excluir serviço</button>
+                    <button class="botao" onclick="abreModal('conf-excluir')">Excluir serviço</button>
+                    <button class="botao">Editar serviço</button>
+                </div>
+                <div class="md-ct-pos" id="conf-excluir">
+                  <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('conf-excluir')"></i>
+                  <h1>Tem certeza?</h1>
+                  <div class="grid_button">
+                    <button class="botao" onclick="fechaModal('conf-excluir')">Cancelar</button>
+                    <button class="botao">Excluir</button>
+                  </div>
                 </div>
               </div>
+              <div class="item">
+               <div class="anuncio_img">
+               </div>
+               <div class="anuncio_titulo">
+                  <h1>Título do anúncio muito grandao </h1></br> 
+               </div> <!--anuncio_titulo-->
+               <div class="anuncio_user">
+                  <h3>@Artista</h3>
+               </div>
+               <div class="anuncio_preço">
+                  <h2>R$50.000</h2>
+               </div> <!-- preço -->
+            </div> <!--item-->
               {% if servicos is defined %}
                 {% for servico in servicos %}
                   <div class="item" onclick="abreModal('editar-excluir')">
@@ -142,7 +146,7 @@
           </div>
           <!-- Comissao -->
           <div id="Comissao" class="tabcontent">
-            <p> Conteúdo da Comissão </p> 
+            <p> Conteúdo da Comissão </p>
           </div>
 
           <div class="clearfix"></div>
@@ -177,8 +181,8 @@
         </div> <!--all-->
       </main>
       {% endblock div_container %}
-    
-      <!-- fim conteudo de perfil -->   
+   
+      <!-- fim conteudo de perfil -->  
    {# end body #}
 {# end document #}
 {% endblock perfil %}

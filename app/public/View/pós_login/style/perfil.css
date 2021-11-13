@@ -354,6 +354,14 @@ select option {
   box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
 }
 
+.grid_button{
+  display: grid;
+  grid-template-columns: 10rem 10rem;
+  margin-bottom: 1rem;
+  margin-left: 1.5rem;
+  padding-top: 1rem;
+}
+
 @media screen and (max-width: 1400px) {
   fieldset {
     margin-top: 0;
@@ -376,7 +384,7 @@ select option {
 
 .grid_home {
   display: grid;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: 33% 34% 33%;
   grid-template-rows: 33% 33% 33%;
   background-color: #ffff;
   width: 100%;
@@ -456,6 +464,7 @@ select option {
 	background: #ffff;
   border-radius: 10px 10px 10px 10px;
   height: 12.8rem;
+  max-width: 12.8rem;
   width: 80%;
   border: 2px dashed #ccc;
   background-color: #fff;
@@ -469,12 +478,11 @@ select option {
   margin: 0 auto;
   font-size: 60pt;
   color: #363636;
-  transition: .4s;
+  transition: .2s;
 }
 
 #adicionar:hover {
   background-color: rgb(233, 233, 233);
-  width: 90%;
 }
 
 #adicionar:hover i {
@@ -631,6 +639,9 @@ select option {
   margin-left: 2.3rem
 }
 
+.editar .grid_anuncio {
+  margin-left: 2.3rem
+}
 .bxs-pencil {
   margin-left: 0.5rem;
 }

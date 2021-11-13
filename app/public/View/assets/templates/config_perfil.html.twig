@@ -35,7 +35,7 @@
         <main class="main-initial">
           <h1> Informações pessoais:</h1>
           <div class="info_icone">
-            <div class="icone_perf"  onclick="abreModal('icone')">
+            <div class="icone_perf" onclick="abreModal('icone')">
               <div class="icone_edit">
                 <i class="fas fa-pen"></i>
               </div>
@@ -87,8 +87,21 @@
           <button class="modal-button" onclick="abreModal('senha')">Alterar senha</button>
           -->
           <div id="md-pr2" class="md-ct-pos">
+            <div id="icone" class="md">
+              <i class="fas fa-times-circle" onclick="fechaModal()"></i>
+                <h3>Insira sua nova foto de perfil</h3>
+                <p>Tenha preferência por fotos quadradas e leves.</p>
+                <form id="trocaFoto" method="POST" action="" enctype="multipart/form-data">
+                  <input type="file" id="attFoto" name="fotoperfil" accept="image/jpeg, image/png"/>
+                  <span id="file-name"></span>
+                  <p hidden id="resultseventh" class="form-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </p>
+                  <button type="submit" class="button" name="submit">Enviar</button>
+                </form>
+            </div>
             <div id="username" class="md">
-            <i class="fas fa-times-circle" onclick="fechaModal()"></i>
+              <i class="fas fa-times-circle" onclick="fechaModal()"></i>
               <h3>Insira o novo nome de usuário</h3>
               <p>Seu nome de usuário não pode conter espaços e deve ser único.</p>
               <form id="trocaUsername" method="POST" action="">

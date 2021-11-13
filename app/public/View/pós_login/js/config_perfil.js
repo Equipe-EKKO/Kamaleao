@@ -41,6 +41,7 @@ function abreModal(modal){
         $("#desc").removeClass("md").addClass("md-ct-pos"); //e faz o inverso com as outras
         $("#email").removeClass("md").addClass("md-ct-pos");
         $("#senha").removeClass("md").addClass("md-ct-pos");
+        $("#icone").removeClass("md").addClass("md-ct-pos");
         $("p.form-message").empty();
         $("p#resultsec").removeClass("sucesso");
         $("p#resultsec").removeClass("erro");
@@ -91,6 +92,7 @@ function abreModal(modal){
     else if(modal == 'desc' ){
         $("#md-pr2").removeClass("md-ct-pos").addClass("md-ct");
         $("#desc").addClass("md").removeClass("md-ct-pos");
+        $("#icone").removeClass("md").addClass("md-ct-pos");
         $("#username").removeClass("md").addClass("md-ct-pos");
         $("#email").removeClass("md").addClass("md-ct-pos");
         $("#senha").removeClass("md").addClass("md-ct-pos");
@@ -141,6 +143,7 @@ function abreModal(modal){
     else if(modal == 'email' ){
         $("#md-pr2").removeClass("md-ct-pos").addClass("md-ct");
         $("#email").addClass("md").removeClass("md-ct-pos");
+        $("#icone").removeClass("md").addClass("md-ct-pos");
         $("#username").removeClass("md").addClass("md-ct-pos");
         $("#desc").removeClass("md").addClass("md-ct-pos");
         $("#senha").removeClass("md").addClass("md-ct-pos");
@@ -188,9 +191,10 @@ function abreModal(modal){
             });
         });
     }
-    else if(modal == 'senha' ){
+    else if(modal == 'senha'){
         $("#md-pr2").removeClass("md-ct-pos").addClass("md-ct");
         $("#senha").addClass("md").removeClass("md-ct-pos");
+        $("#icone").removeClass("md").addClass("md-ct-pos");
         $("#username").removeClass("md").addClass("md-ct-pos");
         $("#desc").removeClass("md").addClass("md-ct-pos");
         $("#chavepix").removeClass("md").addClass("md-ct-pos");
@@ -247,6 +251,32 @@ function abreModal(modal){
                 $('#confsenha').val("");
             });
         });
+    }else if (modal == 'icone') {
+        $("#md-pr2").removeClass("md-ct-pos").addClass("md-ct");
+        $("#icone").addClass("md").removeClass("md-ct-pos");
+        $("#email").removeClass("md").addClass("md-ct-pos");
+        $("#username").removeClass("md").addClass("md-ct-pos");
+        $("#desc").removeClass("md").addClass("md-ct-pos");
+        $("#senha").removeClass("md").addClass("md-ct-pos");
+        $("p.form-message").empty();
+        $("p#resultseventh").removeClass("sucesso");
+        $("p#resultseventh").removeClass("erro");
+
+        $('#attEmail').focus(function (e) { 
+            e.preventDefault();
+            $(this).val("");
+            $("p.form-message").empty();
+            $("p#resultseventh").removeClass("sucesso");
+            $("p#resultseventh").removeClass("erro");
+        });
+
+        var $input    = document.getElementById('imagem'),
+            $fileName = document.getElementById('file-name');
+
+        $input.addEventListener('change', function(){
+          $fileName.textContent = this.value;
+        });
+        
     }
 }
 

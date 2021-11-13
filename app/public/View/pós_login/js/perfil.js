@@ -1,7 +1,8 @@
 function abreModal(modal) {
   if (modal == "add") {
     $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
-    $("#editar-excluir").removeClass("editar-excluir").addClass("md-ct-pos");
+    $("#editar-excluir").removeClass("form_anuncio").addClass("md-ct-pos");
+    $("#formAnuncio").addClass("form_anuncio").removeClass("md-ct-pos");
 
     $("#formAnuncio").submit(function (e) {
       e.preventDefault();
@@ -68,10 +69,13 @@ function abreModal(modal) {
   if (modal == "editar-excluir") {
     $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
     $("#formAnuncio").removeClass("form_anuncio").addClass("md-ct-pos");
+    $("#editar-excluir").addClass("form_anuncio").removeClass("md-ct-pos");
+    $("#conf-excluir").addClass("md-ct-pos").removeClass("form_anuncio");
   }
-  if (modal == "titulo") {
-    $("#titulo").removeClass("md-ct-pos").addClass("modal-edit");
-    $("#editar-excluir").removeClass("editar-excluir").addClass("md-ct-pos");
+  if (modal == "conf-excluir") {
+    $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
+    $("#conf-excluir").addClass("form_anuncio").removeClass("md-ct-pos");
+    $("#editar-excluir").removeClass("form_anuncio").addClass("md-ct-pos");
   }
 }
 
@@ -79,5 +83,11 @@ function fechaModal(modal) {
     $("p.form-message").empty();
     $('#formAnuncio')[0].reset();
     $("#md-pr").removeClass("md-ct").addClass("md-ct-pos");
-    location.reload();
+
+    if (modal == "conf-excluir") {
+      $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
+      $("#formAnuncio").removeClass("form_anuncio").addClass("md-ct-pos");
+      $("#editar-excluir").addClass("form_anuncio").removeClass("md-ct-pos");
+      $("#conf-excluir").addClass("md-ct-pos").removeClass("form_anuncio");
+    }
 }

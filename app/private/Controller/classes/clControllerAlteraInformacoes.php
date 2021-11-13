@@ -5,6 +5,52 @@ require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 require_once (DIR_ROOT . '/Github/Kamaleao/app/private/Model/main-ConfiguraPerfil.php');
 use Respect\Validation\Validator as v;
 
+
+class ControllerAlteraFotoPerfil {
+  private $imgName, $imgSize, $imgType, $imgtmpName;
+  private function validaFoto():bool{
+    if ($this->imgName == null || $this->imgSize == null || $this->imgSize == 0) {
+      ob_end_clean();
+      echo "Verifique o campo foi inserido corretamente!";
+      return false;
+    }elseif (($this->imgType != "image/png") && ($this->imgType != "image/jpeg" ) && ($this->imgType != "image/jpg")) {
+      ob_end_clean();
+      echo 'A imagem está em um formato não suportado!';
+      return false;
+    }elseif ($this->imgSize > 52428800.0) {
+      ob_end_clean();
+      echo 'O arquivo adicionado é maior que 50MB.';
+      return false;
+    } else { 
+      ob_end_clean();
+      return true;
+    }
+  }
+  public function __construct($imgName, $imgSize, $imgType, $imgtmpName) /*são relacionados ao $_FILES, não sei bem o tipo*/ {
+    $this->imgName = $imgName;
+    $this->imgSize = $imgSize;
+    $this->imgType = $imgType;
+    $this->imgtmpName = $imgtmpName;
+    $this->validaFoto();
+    $this->chamaModel();
+  }
+  private function chamaModel() {
+    if ($this->validaFoto()) {
+      if (atualizaFotoPerfil($this->imgType, $this->imgtmpName)):
+        ob_end_clean();
+        echo true;
+        return true;
+      else:
+        return false;
+      endif;
+    } else {
+      ob_end_flush();
+      return false;
+    }
+  }
+}
+
+
 class ControllerAlteraUsername {
   private $username;
   private function validaUsername():bool{
