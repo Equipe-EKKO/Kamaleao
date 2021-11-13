@@ -77,12 +77,53 @@ function abreModal(modal) {
     $("#conf-excluir").addClass("form_anuncio").removeClass("md-ct-pos");
     $("#editar-excluir").removeClass("form_anuncio").addClass("md-ct-pos");
   }
-}
 
+  if (modal == "modal-editar") {
+    $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
+    $("#modal-editar").addClass("form_edit").removeClass("md-ct-pos");
+    $("#editar-excluir").removeClass("form_anuncio").addClass("md-ct-pos");
+  }
+
+  if (modal == "titulo") {
+    $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
+    $("#alt-titulo").addClass("form_edit").removeClass("md-ct-pos");
+    $("#modal-editar").removeClass("form_edit").addClass("md-ct-pos");
+  }
+
+  if (modal == "preco") {
+    $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
+    $("#alt-preco").addClass("form_edit").removeClass("md-ct-pos");
+    $("#modal-editar").removeClass("form_edit").addClass("md-ct-pos");
+  }
+
+  if (modal == "desc") {
+    $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
+    $("#alt-desc").addClass("form_edit").removeClass("md-ct-pos");
+    $("#modal-editar").removeClass("form_edit").addClass("md-ct-pos");
+  }
+
+  if (modal == "licenca") {
+    $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
+    $("#alt-licenca").addClass("form_edit").removeClass("md-ct-pos");
+    $("#modal-editar").removeClass("form_edit").addClass("md-ct-pos");
+  }
+
+  if (modal == "categoria") { // deu certo nao
+    $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
+    $("#alt-categoria").addClass("form_edit").removeClass("md-ct-pos");
+    $("#modal-editar").removeClass("form_edit").addClass("md-ct-pos");
+  }
+}7
 function fechaModal(modal) {
     $("p.form-message").empty();
     $('#formAnuncio')[0].reset();
     $("#md-pr").removeClass("md-ct").addClass("md-ct-pos");
+    $("#modal-editar").addClass("md-ct-pos").removeClass("form_edit");
+    $("#alt-titulo").addClass("md-ct-pos").removeClass("form_edit");
+    $("#alt-desc").addClass("md-ct-pos").removeClass("form_edit");
+    $("#alt-preco").addClass("md-ct-pos").removeClass("form_edit");
+    $("#alt-categoria").addClass("md-ct-pos").removeClass("form_edit");
+    $("#alt-licenca").addClass("md-ct-pos").removeClass("form_edit");
 
     if (modal == "conf-excluir") {
       $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");

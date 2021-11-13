@@ -51,6 +51,7 @@
                     </p>
                     <div class ="grid_anuncio">
                       <div class="left">
+                        <div class="quadrado"></div>
                         <p>Título do serviço</p>
                         <input type="text" id="titulo" name="titulo" maxlength="50" placeholder="Título para o seu anúncio"/>
                         <p>Descrição do serviço</p>
@@ -97,31 +98,97 @@
                         <p>Categoria: seila porra</p>
                       </div>
                     </div>
+                    <button class="botao" onclick="abreModal('modal-editar')">Editar serviço</button>
                     <button class="botao" onclick="abreModal('conf-excluir')">Excluir serviço</button>
-                    <button class="botao">Editar serviço</button>
                 </div>
+                <div class="md-ct-pos" id="modal-editar">
+                <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-editar')"></i>
+
+                  <h1>Alterar Informações</h1>
+
+                  <div class="opcoes-alterar" onclick="abreModal('titulo')">
+                    <h3>Editar Titulo</h3>
+                  </div>
+
+                  <div class="opcoes-alterar" onclick="abreModal('preco')">
+                    <h3>Editar Preço</h3>
+                  </div>
+
+                  <div class="opcoes-alterar" onclick="abreModal('desc')">
+                    <h3>Editar Descrição</h3>
+                  </div>
+
+                  <div class="opcoes-alterar" onclick="abreModal('licenca')">
+                    <h3>Editar Licença</h3>
+                  </div>
+
+                  <div class="opcoes-alterar" onclick="abreModal('categoria')">
+                    <h3>Editar Categoria</h3>
+                  </div>
+
+                </div>
+
+                <div class="md-ct-pos" id="alt-titulo">
+                    <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal()"></i>
+                    <h1>Alterar Titulo</h1>
+                    <label for="alt-tit">Insira abaixo o titulo desejado</label>
+                    <input type="text" id="alt-tit" placeholder="Titulo"/>
+                    <button id="botao-editar" class="botao">Salvar</button>
+                </div>
+
+                
+                <div class="md-ct-pos" id="alt-preco">
+                  <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal()"></i>
+                    <h1>Alterar Preço</h1>
+                    <label for="alt-preco">Insira abaixo o preço desejado</label>
+                    <input type="number" id="alt-preco" placeholder="preço"/>
+                    <button id="botao-editar" class="botao">Salvar</button>
+                </div>
+
+                <div class="md-ct-pos" id="alt-desc">
+                    <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal()"></i>
+                    <h1>Alterar Descricao</h1>
+                    <label for="alt-desc">Insira abaixo a desc desejado</label>
+                    <textarea class="textarea-desc" placeholder="Desc aqui"></textarea>
+                    <button id="botao-editar" class="botao">Salvar</button>
+                </div>
+
+                <div class="md-ct-pos" id="alt-licenca">
+                    <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal()"></i>
+                    <h1>Alterar Licença</h1>
+                    <div class="opc">
+                      <h3>Insira abaixo a licença desejado</h3>
+                      <input type="radio" id="licenca1" name="licenca" value="1">
+                      <label for="licenca1">Licença de uso Não-Comercial</label><br>
+                      <input type="radio" id="licenca2" name="licenca" value="2">
+                      <label for="licenca2">Licença de uso Comercial</label><br>
+                      <input type="radio" id="licenca3" name="licenca" value="3">
+                      <label for="licenca3">Licença de Download</label><br>
+                      <button id="botao-editar" class="botao">Salvar</button>
+                    </div>
+                </div>
+
+                <div class="md-ct-pos" id="alt-categoria">
+                    <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal()"></i>
+                    <h1>Alterar categoria</h1>
+                    <select class="slct-css" name="select_cat" id="select_cat" required>
+                      <option value="" disabled selected hidden>Por favor, selecione...</option>
+                      {% for categoria in sltCategoria %}
+                      <option value={{categoria.cd_categoria|escape}}>{{ categoria.nm_categoria|e }}</option>
+                      {% endfor %}
+                    </select> 
+                    <button id="botao-editar" class="botao">Salvar</button>
+                </div>
+
                 <div class="md-ct-pos" id="conf-excluir">
                   <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('conf-excluir')"></i>
                   <h1>Tem certeza?</h1>
                   <div class="grid_button">
-                    <button class="botao" onclick="fechaModal('conf-excluir')">Cancelar</button>
+                    <button class="botao" onclick="fechaModal('conf-excluir')">Voltar</button>
                     <button class="botao">Excluir</button>
                   </div>
                 </div>
               </div>
-              <div class="item">
-               <div class="anuncio_img">
-               </div>
-               <div class="anuncio_titulo">
-                  <h1>Título do anúncio muito grandao </h1></br> 
-               </div> <!--anuncio_titulo-->
-               <div class="anuncio_user">
-                  <h3>@Artista</h3>
-               </div>
-               <div class="anuncio_preço">
-                  <h2>R$50.000</h2>
-               </div> <!-- preço -->
-            </div> <!--item-->
               {% if servicos is defined %}
                 {% for servico in servicos %}
                   <div class="item" onclick="abreModal('editar-excluir')">
