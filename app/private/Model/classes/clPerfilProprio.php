@@ -66,7 +66,7 @@ class PerfilProprio extends Perfil {
         if (move_uploaded_file($tmpImg, $newfullpath."/image/service/" . $newname)) {
             if ($objeto = (new UploadApi())->upload($newfullpath."/image/service/" . $newname , ["folder" => "img_service", "use_filename" => true, "unique_filename" => true, "overwrite" => false])){
                 $arrayResult = (array) $objeto;
-                if ($this->serviço->salvaServiço($cd_usuario, $arrayResult['url'])) {
+                if ($this->serviço->salvaServiço($cd_usuario, $arrayResult['url'], $arrayResult['public_id'])) {
                     $old = getcwd(); // Save the current directory
                     chdir($newfullpath."/image/service/");
                     if (unlink($newname)) {

@@ -186,6 +186,7 @@ CREATE table IF NOT EXISTS tb_imagem (
 	-- atributos
 	cd_imagem INT  NOT NULL auto_increment, -- chave primaria
 	cd_url_serviço VARCHAR(300) NOT NULL,
+	cd_public_id VARCHAR(300) NOT NULL,
 	`cd_serviço` INT UNSIGNED NOT NULL, -- chave estrangeira
     -- definicao das chaves
     -- primaria

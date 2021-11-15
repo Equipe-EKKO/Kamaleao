@@ -5,13 +5,8 @@ require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 
 ob_end_clean();
 
-if ((!empty($_FILES[
-    
-    
-    
-    
-    ) && ($_FILES['servfile']['size']> 0) && ($_FILES["servfile"]["error"] == 0))) { #verifica se o formulário está enviando algo ao controller
-    switch($_FILES["servfile"]["error"]) {
+if ((!empty($_FILES['fotoperfil']) && ($_FILES['fotoperfil']['size']> 0) && ($_FILES['fotoperfil']["error"] == 0))) { #verifica se o formulário está enviando algo ao controller
+    switch($_FILES['fotoperfil']["error"]) {
         case 1:
             ob_end_clean();
             echo "Arquivo muito grande para ser salvo.";
@@ -42,7 +37,7 @@ if ((!empty($_FILES[
             break;
         default:
             ob_end_clean();
-            $ControllerCriaServiço = new ControllerAlteraFotoPerfil($_FILES['servfile']['name'], $_FILES['servfile']['size'], $_FILES['servfile']['type'], $_FILES['servfile']['tmp_name']);
+            $ControllerCriaServiço = new ControllerAlteraFotoPerfil($_FILES['fotoperfil']['name'], $_FILES['fotoperfil']['size'], $_FILES['fotoperfil']['type'], $_FILES['fotoperfil']['tmp_name']);
             break;
     }
 } else {

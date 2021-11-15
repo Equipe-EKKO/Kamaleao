@@ -17,3 +17,15 @@ function recebeServPost(string $titulo, string $descriçao, $preçoMedio, $licen
         return false;
     }
 }
+
+// Função chamada no controller para realizar exclusão de serviço
+function recebeServExcludePost(string $cdServ):bool {
+    $serviço = new \Serviço("", "", 0, 0, 0);
+    $usuario = unserialize($_SESSION['usuario']);
+    $usuario->perfil->setServiço($serviço);
+    if ($usuario->perfil->serviço->excluiServiço($cdServ)) {
+        return true;
+    } else {
+        return false;
+    }
+}

@@ -144,11 +144,6 @@
   .md-ct-pos {
     display: none;
   }
-
-  textarea, input {
-    display: block;
-    resize: none;
-  }
   
   .md-ct {
     position: fixed;
@@ -198,7 +193,18 @@
     justify-content: center;
     position: relative;
     overflow-y: auto;
-  }   
+  }
+
+  .left, .right{
+    text-align: center;
+    align-items: center;
+  }
+
+  .img-item{
+    width:90%;
+    height:90%;
+    border-radius: 5%;
+  }
   
   .form_edit {
     text-align: center;
@@ -246,6 +252,8 @@
   }
   
   .grid_anuncio{
+    justify-content: center;
+    align-items: center;
     display: grid;
     grid-template-columns: 23rem 23rem;
     margin-bottom: 1rem;
@@ -291,7 +299,7 @@
 .grid_anuncio textarea {
   resize: none;
   padding: 0.5rem;
-  width: 80%;
+  width: 20rem;
   height: 5rem;
   font-size: 18px;
   border-radius: 15px;
@@ -304,13 +312,6 @@
 .grid_anuncio form input[type=text]:focus{
   outline: 0;
   
-}
-
-.grid_anuncio .quadrado {
-  position: relative;
-  background: #00a800;
-  width: 10%;
-  height: 10%;
 }
 
 #imagem {
@@ -351,6 +352,7 @@ select option {
 }
 
 /*botao*/
+
 
 .form_anuncio .botao, .editar-excluir .botao {
   border: 1px solid #363636;
@@ -419,7 +421,7 @@ select option {
   margin: 0 auto;
   background: #ffff;
   border-radius: 10px 10px 10px 10px;
-  height: 80%;
+  height: 12.8rem;
   width: 85%;
   border: 1px solid #ccc;
   cursor: pointer;
@@ -719,32 +721,6 @@ select option {
   color: #414141;
 }
 
-.md-ct input[type="text"], 
-input[type="number"], 
-.textarea-desc,
-.slct-css {
-  display: block;
-  margin: 0 auto;
-  width: 80%;
-  height: 2rem;
-  font-size: 18px;
-  color: #363636;
-  resize: none;
-  border-radius: 30px;
-  padding: 10px;
-  outline: 0;
-  border: 1px solid #363636;
-  margin-top: 10%;
-}
-
-.textarea-desc {
-  height: 40%;
-}
-
-.slct-css {
-  height: 10%;
-}
-
 .opc {
   display: block;
   margin: 0 auto;
@@ -760,10 +736,10 @@ input[type="number"],
 
 .opc label, input[type="radio"] {
   display: inline-block;
-  margin-top: 10%;
+  margin-top: 5%;
 }
 
-.md-ct #botao-editar {
+/* .md-ct #botao-editar {
   display: block;
   margin: 0 auto;
   margin-top: 10%;
@@ -788,7 +764,7 @@ input[type="number"],
   transition: 0.3s;
   border: none;
   box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
-}
+} */
 
   @media screen and (max-width: 800px) {
 

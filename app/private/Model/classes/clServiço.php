@@ -10,7 +10,7 @@ class Serviço {
     public $nmServiço, $dsServiço, $URLServiço, $vlServiço, $tipoLicença, $cdCategoria; # nmServiço: string || dsServiço: string || imtmpServiço: string com url de imagem || tipoLicença: inteiro || vlServiço: float
     private $cdDono, $cdServiço; // cdDono: inteiro
 
-    function salvaServiço(string $cd_usuario, string $URLSerImg):bool {
+    function salvaServiço(string $cd_usuario, string $URLSerImg, string $publicid):bool {
         /*seta os valores dos parametros*/
         $this->setURLServiço($URLSerImg);
         $this->setCdDono($cd_usuario);
@@ -40,7 +40,7 @@ class Serviço {
                 $stmt->execute(); # executa a query preparada anteriormente
                 goto segA;
             } catch (\PDOException $e) {
-                exit("Houve um erro. #1Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+                exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
                 return false;
             }
             segA:
@@ -53,14 +53,15 @@ class Serviço {
                 $this->setCdServiço($espstmt->fetchColumn()); # pega o primeiro resultado da primeira linha (o cd_serviço )
                 goto segB;
             } catch (\PDOException $e) {
-                exit("Houve um erro. #2Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+                exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
                 return false;
             }
             segB:
-            $sql2 = "INSERT INTO tb_imagem (`cd_url_serviço`, `cd_serviço`) VALUES (:cdurlimg, :cdserv)";  # declara a query do insert na tabela imagem do banco de dados, que só é feito após o insert na tabela serviço
+            $sql2 = "INSERT INTO tb_imagem (`cd_url_serviço`, cd_public_id,`cd_serviço`) VALUES (:cdurlimg,  :publicid, :cdserv)";  # declara a query do insert na tabela imagem do banco de dados, que só é feito após o insert na tabela serviço
             $stmt2 = $banco->prepare($sql2); # prepara a query com o insert para a execução
             /*Substitui os placeholders da query preparada*/
             $stmt2->bindValue(':cdurlimg', $urlimg);
+            $stmt2->bindValue(':publicid', $publicid);
             $stmt2->bindValue(':cdserv', $this->getCdServiço());
 
             /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
@@ -68,7 +69,7 @@ class Serviço {
                 $stmt2->execute(); # executa a query preparada anteriormente
                 return true; # retorna true se o processo dos dois inserts forem verdadeiros
             } catch (\PDOException $e) {
-                exit("Houve um erro. #3Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+                exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
                 return false;
             }
             
@@ -76,6 +77,32 @@ class Serviço {
             return false;
         }
         
+    }
+    function excluiServiço(int $cdServiço) {
+        $this->setNmServiço("");
+        $this->setDsServiço("");
+        $this->setVlServiço(0);
+        $this->setTipoLicença(0);
+        $this->setCdCategoria(0);
+        $this->setCdServiço($cdServiço);
+
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+
+        $sql = "SELECT cd_public_id FROM tb_imagem WHERE :cd_serv"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara a query para execução
+        /*Substitui os valores de cada placeholder na query preparada*/
+        $stmt->bindValue(':cd_serv', $cdServiço); 
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $publicid = $stmt->fetchColumn();  
+            echo "Meu amor, eu tive que perder pra voltar: " . $publicid;
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+
     }
 
     private function verificaDados():bool {
@@ -91,7 +118,7 @@ class Serviço {
             $stmt->execute(); # executa a query preparada 
             $contaLinha = $stmt->rowCount(); # armazena numa variável o valor de quantas linhas existem no retorno desse select
         } catch (\PDOException $e) {
-            exit("Houve um erro. #4Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
             return false;
         }
         
@@ -109,7 +136,7 @@ class Serviço {
                 $stmt->execute(); # executa a query preparada 
                 $contaLinha = $stmt->rowCount(); # armazena numa variável o valor de quantas linhas existem no retorno desse select
             } catch (\PDOException $e) {
-                exit("Houve um erro. #5Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage());  # retorna erro, caso houver, e sai do script
+                exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage());  # retorna erro, caso houver, e sai do script
                 return false;
             }
 
@@ -127,7 +154,7 @@ class Serviço {
                     $stmt->execute(); # executa a query preparada 
                     $contaLinha = $stmt->rowCount(); # armazena numa variável o valor de quantas linhas existem no retorno desse select
                 } catch (\PDOException $e) {
-                    exit("Houve um erro. #6Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage());  # retorna erro, caso houver, e sai do script
+                    exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage());  # retorna erro, caso houver, e sai do script
                     return false;
                 }
 
@@ -192,7 +219,7 @@ class Serviço {
     public function setVlServiço(float $vlServiço) {
         $this->vlServiço = $vlServiço;
     }
-    public function setCdCategoria($CdCategoria) {
+    public function setCdCategoria(int $CdCategoria) {
         $this->cdCategoria = $CdCategoria;
     }
     private function setCdDono($cdDono){

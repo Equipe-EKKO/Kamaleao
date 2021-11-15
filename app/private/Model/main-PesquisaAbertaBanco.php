@@ -6,7 +6,7 @@ require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php'); #arquivo de configuraca
 
 // Função chamada no view para realizar pesquisa na tabela cadastro no banco
 function pesquisaCategoria():mixed {
-    $categoria = new \PesquisaAberta();
+    $categoria = new \PesquisaAberta("tb_categoria");
 
     $rsltSelect =  $categoria->searchCategoria();
 
@@ -19,4 +19,17 @@ function pesquisaCategoria():mixed {
     }
 }
 
+function pesquisaServInfo(string $username, string $titulo):mixed {
+    $serviço= new \PesquisaAberta("tb_serviço");
+
+    $rsltSelect =  $serviço->searchServEsp($username, $titulo);
+
+    if ($rsltSelect == false) {
+        echo "Houve um problema na conexão. Perdão.";
+        return "Houve um problema na conexão. Perdão.";
+    } else {
+        $servReturn = unserialize($rsltSelect);
+        return $servReturn;
+    }
+}
 ?>

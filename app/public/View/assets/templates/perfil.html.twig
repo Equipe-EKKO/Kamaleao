@@ -42,8 +42,10 @@
               <a id="adicionar" onclick="abreModal('add')">
                 <i class='bx bx-plus'></i>
               </a>
+              <!-- Fundo dos modais -->
               <div id="md-pr" class="md-ct-pos">
-                <form id="formAnuncio" class ="form_anuncio" action="/" method="post" enctype="multipart/form-data">
+                <!-- Formulario: Adiciona Anuncio -->
+                <form id="add" class ="md-ct-pos" action="/" method="post" enctype="multipart/form-data">
                   <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
                     <h1>Anunciar um Serviço</h1>
                     <p hidden class="form-message">
@@ -51,7 +53,6 @@
                     </p>
                     <div class ="grid_anuncio">
                       <div class="left">
-                        <div class="quadrado"></div>
                         <p>Título do serviço</p>
                         <input type="text" id="titulo" name="titulo" maxlength="50" placeholder="Título para o seu anúncio"/>
                         <p>Descrição do serviço</p>
@@ -59,19 +60,19 @@
                         <p>Escolha uma imagem para o Anúncio:</p>
                         <label for="imagem" id="escolha">Escolher arquivo</label>
                         <input type="file" id="imagem" name="servfile" accept="image/jpeg, image/png"></br></br>
-                        <span id="file-name"></span>
+                        <span class="file-name"></span>
                       </div>
                       <div class="rigth">
                         <p>Preço médio</p>
                         <input type="number" min="0" max="10000" step=0.01 id="preco" name="precoMedio" placeholder="Preço médio para o serviço"/>
                         <p>Tipos de Licenças</p>
-                        <div class="check"><!-- checkbox para as licencas -->
+                        <div class="check">
                           <input type="radio" id="licenca1" name="licenca" value="1">
                           <label for="licenca1">Licença de uso Não-Comercial</label><br>
                           <input type="radio" id="licenca2" name="licenca" value="2">
                           <label for="licenca2">Licença de uso Comercial</label><br>
                           <input type="radio" id="licenca3" name="licenca" value="3">
-                          <label for="licenca3">Licença de Download</label><br>
+                          <label for="licenca3">Licença de Download</label>
                         </div>
                         <p>Categoria</p>
                         <select name="select_cat" id="select_cat" required>
@@ -82,82 +83,81 @@
                         </select>  
                       </div>
                     </div>
-                  <input type="submit" class="botao" name="acao" value="Anunciar" /> <br>
+                  <input type="submit" class="botao" name="acao" value="Anunciar" />
                 </form>
+                <!-- Fim Form -->
+                <!-- Div: Decide Acao -->
                 <div class="form_anuncio" id="editar-excluir">
-                  <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
-                  <h1>Editar ou excluir serviço</h1>
+                  <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('editar-excluir')"></i>
+                  <h1>Gerenciar Anúncio</h1>
                   <div class ="grid_anuncio">
                       <div class="left">
+                        <img class = "img-item" src="" alt="Representação do Anúncio em Imagem">
                       </div>
                       <div class="rigth">
-                        <p>Título: titulo do servico</p>
-                        <p>Preço médio:25,00</p>
-                        <textarea readonly>Descrição</textarea>
-                        <p>Licença: aaaaaaaaaaaaa</p>
-                        <p>Categoria: seila porra</p>
+                        <p>Título: <span id="titSub"></span></p>
+                        <p>Preço Médio: <b><span id="valSub"></span></b></p>
+                        <textarea id="descSub"readonly></textarea>
+                        <p>Licença: <span id="liSub"></span></p>
+                        <p>Categoria: <span id="catSub"></span></p>
                       </div>
                     </div>
                     <button class="botao" onclick="abreModal('modal-editar')">Editar serviço</button>
                     <button class="botao" onclick="abreModal('conf-excluir')">Excluir serviço</button>
                 </div>
+                <!-- Fim Div: Edita Anuncio -->
                 <div class="md-ct-pos" id="modal-editar">
-                <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-editar')"></i>
-
+                  <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-editar')"></i>
                   <h1>Alterar Informações</h1>
-
                   <div class="opcoes-alterar" onclick="abreModal('titulo')">
                     <h3>Editar Titulo</h3>
                   </div>
-
                   <div class="opcoes-alterar" onclick="abreModal('preco')">
                     <h3>Editar Preço</h3>
                   </div>
-
                   <div class="opcoes-alterar" onclick="abreModal('desc')">
                     <h3>Editar Descrição</h3>
                   </div>
-
                   <div class="opcoes-alterar" onclick="abreModal('licenca')">
                     <h3>Editar Licença</h3>
                   </div>
-
                   <div class="opcoes-alterar" onclick="abreModal('categoria')">
                     <h3>Editar Categoria</h3>
                   </div>
-
                 </div>
+                <!-- Fim Formulario: Edita Anuncio -->
 
-                <div class="md-ct-pos" id="alt-titulo">
+                <!-- Formulario: Edita Titulo -->
+                <form class ="form_anuncio" action="/" method="post" id="alt-titulo">
                     <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal()"></i>
                     <h1>Alterar Titulo</h1>
-                    <label for="alt-tit">Insira abaixo o titulo desejado</label>
+                    <label for="alt-tit">Insira abaixo o título desejado: </label>
                     <input type="text" id="alt-tit" placeholder="Titulo"/>
                     <button id="botao-editar" class="botao">Salvar</button>
-                </div>
+                </form>
 
                 
-                <div class="md-ct-pos" id="alt-preco">
+                <form class ="form_anuncio" action="/" method="post" id="alt-preco">
                   <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal()"></i>
                     <h1>Alterar Preço</h1>
-                    <label for="alt-preco">Insira abaixo o preço desejado</label>
+                    <label for="alt-preco">Insira abaixo o preço desejado: </label>
                     <input type="number" id="alt-preco" placeholder="preço"/>
                     <button id="botao-editar" class="botao">Salvar</button>
-                </div>
+                </form>
 
-                <div class="md-ct-pos" id="alt-desc">
+                <form class ="form_anuncio" action="/" method="post" id="alt-desc">
                     <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal()"></i>
                     <h1>Alterar Descricao</h1>
-                    <label for="alt-desc">Insira abaixo a desc desejado</label>
+                    <label for="alt-desc">Insira abaixo a descrição desejada:</label>
                     <textarea class="textarea-desc" placeholder="Desc aqui"></textarea>
                     <button id="botao-editar" class="botao">Salvar</button>
-                </div>
+                </form>
 
-                <div class="md-ct-pos" id="alt-licenca">
+                <form class ="form_anuncio" action="/" method="post" id="alt-licenca">
                     <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal()"></i>
                     <h1>Alterar Licença</h1>
                     <div class="opc">
-                      <h3>Insira abaixo a licença desejado</h3>
+                      <h3>Insira abaixo a licença desejada: </h3>
                       <input type="radio" id="licenca1" name="licenca" value="1">
                       <label for="licenca1">Licença de uso Não-Comercial</label><br>
                       <input type="radio" id="licenca2" name="licenca" value="2">
@@ -166,11 +166,11 @@
                       <label for="licenca3">Licença de Download</label><br>
                       <button id="botao-editar" class="botao">Salvar</button>
                     </div>
-                </div>
+                </form>
 
-                <div class="md-ct-pos" id="alt-categoria">
+                <form class ="form_anuncio" action="/" method="post" id="alt-categoria">
                     <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal()"></i>
-                    <h1>Alterar categoria</h1>
+                    <h1>Alterar categoria: </h1>
                     <select class="slct-css" name="select_cat" id="select_cat" required>
                       <option value="" disabled selected hidden>Por favor, selecione...</option>
                       {% for categoria in sltCategoria %}
@@ -178,30 +178,37 @@
                       {% endfor %}
                     </select> 
                     <button id="botao-editar" class="botao">Salvar</button>
-                </div>
-
-                <div class="md-ct-pos" id="conf-excluir">
-                  <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('conf-excluir')"></i>
-                  <h1>Tem certeza?</h1>
-                  <div class="grid_button">
-                    <button class="botao" onclick="fechaModal('conf-excluir')">Voltar</button>
-                    <button class="botao">Excluir</button>
+                </form>
+                <!-- Segundo Fundo -->
+                <div id="md-pr2" class="md-ct-pos">
+                  <!-- Div: Exclui Anuncio -->
+                  <div class="md-ct-pos" id="conf-excluir">
+                    <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('conf-excluir') ; fechaModal('editar-excluir')"></i>
+                    <h1>Tem certeza?</h1>
+                    <p id="cdhidden" hidden></p>
+                    <div class="grid_button">
+                      <button class="botao" onclick="fechaModal('conf-excluir')">Voltar</button>
+                      <button class="botao" id="exclui">Excluir</button>
+                    </div>
                   </div>
+                  <!-- Fim Div -->
                 </div>
+                <!-- Fim Segundo Fundo -->
               </div>
+              <!-- Pagina os serviços do username -->
               {% if servicos is defined %}
                 {% for servico in servicos %}
-                  <div class="item" onclick="abreModal('editar-excluir')">
+                  <div class="item" id='item{{loop.index|e}}'>
                     <img class="anuncio_img" src={{servico.url_da_imagem|e}}>
                       {# <div class="opacidade">
-                          <i class='bx bxs-pencil'></i><br/>
+                        <i class='bx bxs-pencil'></i><br/>
                       </div> #}
                     </img>
                     <div class="anuncio_titulo">
-                      <h1>{{servico.titulo|e}}</h1>
+                      <h1 name="titulo-item" >{{servico.titulo|e}}</h1>
                     </div> <!--anuncio_titulo-->
                     <div class="anuncio_user">
-                      <h3>@{{servico.username|e}}</h3>
+                      <h3 name="username-item">@{{servico.username|e}}</h3>
                     </div> <!--user-->
                     <div class="anuncio_preço">
                       <h2>R${{servico.preço|e}}</h2>
@@ -237,11 +244,10 @@
               document.getElementById('bt2').click();
             }
 
-            var $input    = document.getElementById('imagem'),
-            $fileName = document.getElementById('file-name');
-
-            $input.addEventListener('change', function(){
-              $fileName.textContent = this.value;
+            $(function () {
+              $('#imagem').change(function() {
+                $('.file-name').html($(this).val().substr(12));
+              });
             });
           </script>
 

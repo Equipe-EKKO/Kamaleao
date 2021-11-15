@@ -1,6 +1,6 @@
 <?php
 ob_start();
-require_once 'classes/clControllerCriaServiço.php';
+require_once 'classes/clControllerGerenciaServiço.php';
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 
 if ((!empty($_POST)) && ($_FILES['servfile']['size']> 0) && ($_FILES["servfile"]["error"] == 0) && (!empty($_POST['select_cat']))) {
