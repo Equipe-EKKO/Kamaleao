@@ -28,7 +28,7 @@ function atualizaFotoPerfil(string $imgType, $imgtmpName):bool { # define que o 
     /*$message = "O campo inserido está vazio. Não há como atualizar.";
     return $message;*/
     return false;
-}
+// }
 // Função chamada no controller para verificar se o username escolhido na atualização estão disponíveis
 function atualizaUsuario(string $user):bool { # define que o parametro a ser passado deve ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller
     /* De uma maneira geral, o programa segue a seguinte lógica:

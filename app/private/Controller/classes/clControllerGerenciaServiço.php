@@ -70,7 +70,7 @@ class ControllerCriaServiço{
 
 //Classe controller exclui serviço
 class ControllerDeletaServiço{
-  private $cdServiço;
+  private $cdServiço; #inteiro
   private function validaServiço():bool{ #Função bool para ver se todos os campos estão corretos para mandar ao model
     if ($this->cdServiço == null || $this->cdServiço == 0 || $this->cdServiço == "") {
       ob_end_clean();
@@ -81,7 +81,7 @@ class ControllerDeletaServiço{
       return true;
     }
   }
-  public function __construct(int $cdServiço) /*os ultimos são relacionados ao $_FILES, não sei bem o tipo*/ {
+  public function __construct(int $cdServiço){
     $this->cdServiço = $cdServiço;
     $this->validaServiço();
     $this->chamaModel();
@@ -95,6 +95,7 @@ class ControllerDeletaServiço{
         return true;
       else:
         ob_end_flush();
+        echo false;
         return false;
       endif;
     } else {
@@ -102,4 +103,183 @@ class ControllerDeletaServiço{
     }
   }
 }
+
+//Classe controller altera titulo
+class ControllerAlteraTitulo{
+  private $titulo, $cdServiço; #string || #inteiro  
+  private function validaTituloServiço():bool{ #Função bool para ver se todos os campos estão corretos para mandar ao model
+    if ($this->titulo == null) {
+      ob_end_clean();
+      echo 'Verifique se está inserido corretamente!';
+      return false;
+    } elseif (v::stringType()->length(1, 50)->validate($this->titulo) == false) {
+      ob_end_clean();
+      echo 'O título só pode ter 50 caracteres.';
+      return false;
+    } else { 
+      ob_end_clean();
+      return true;
+    }
+  }
+
+  public function __construct(string $titulo, int $cdServiço) {
+    $this->titulo = $titulo;
+    $this->cdServiço = $cdServiço;
+    $this->validaTituloServiço();
+    $this->chamaModel();
+  }
+
+  private function chamaModel() {
+    if ($this->validaTituloServiço()) {
+      if(atualizaTitulo($this->titulo, $this->cdServiço)):
+        ob_end_clean();
+        echo true;
+      else:
+        echo ob_end_flush();
+        return false;
+      endif;
+    }
+  }
+}/*
+//Classe controller altera preço
+class ControllerAlteraPreço{
+  private $preçoMedio, $cdServiço; #float || #inteiro 
+  private function validaPreçoServiço():bool{ #Função bool para ver se todos os campos estão corretos para mandar ao model
+    if ($this->preçoMedio == null) {
+      ob_end_clean();
+      echo 'Verifique se está inserido corretamente!';
+      return false;
+    } else if (v::NumericVal()->validate($this->preçoMedio) == false){
+      ob_end_clean();
+      echo 'Digite um preço válido!';
+      return false;
+    } else { 
+      ob_end_clean();
+      return true;
+    }
+  }
+
+  public function __construct(float $preçoMedio, int $cdServiço) {
+    $this->preçoMedio = $preçoMedio;
+    $this->cdServiço = $cdServiço;
+    $this->validaPreçoServiço();
+    $this->chamaModel();
+  }
+
+  private function chamaModel() {
+    if ($this->validaPreçoServiço()) {
+      if(atualizaPreço($this->preçoMedio)):
+        ob_end_clean();
+        echo true;
+      else:
+        echo ob_end_flush();
+        return false;
+      endif;
+    }
+  }
+}
+//Classe controller altera descrição
+class ControllerAlteraDescricao{
+  private $descricao, $cdServiço; #string || #inteiro
+  private function validaDescricaoServiço():bool{ #Função bool para ver se todos os campos estão corretos para mandar ao model
+    if ($this->descricao == null) {
+      ob_end_clean();
+      echo 'Verifique se está inserido corretamente!';
+      return false;
+    } elseif (v::stringType()->length(1, 280)->validate($this->descricao) == false) {
+      ob_end_clean();
+      echo 'A descrição só pode ter 280 caracteres.';
+      return false;
+    } else { 
+      ob_end_clean();
+      return true;
+    }
+  }
+
+  public function __construct(string $descricao, int $cdServiço) {
+    $this->descricao = $descricao;
+    $this->cdServiço = $cdServiço;
+    $this->validaDescricaoServiço();
+    $this->chamaModel();
+  }
+
+  private function chamaModel() {
+    if ($this->validaDescricaoServiço()) {
+      if(atualizaDescricaoAnuncio($this->descricao)):
+        ob_end_clean();
+        echo true;
+      else:
+        echo ob_end_flush();
+        return false;
+      endif;
+    }
+  }
+}
+//Classe controller altera licença
+class ControllerAlteraLicença{
+  private $licença, $cdServiço; #inteiro || #inteiro
+  private function validaLicençaServiço():bool{ #Função bool para ver se todos os campos estão corretos para mandar ao model
+    if ($this->licença == null) {
+      ob_end_clean();
+      echo 'Verifique se está inserido corretamente!';
+      return false;
+    } else { 
+      ob_end_clean();
+      return true;
+    }
+  }
+
+  public function __construct(int $licença, int $cdServiço) {
+    $this->licença = $licença;
+    $this->cdServiço = $cdServiço;
+    $this->validaLicençaServiço();
+    $this->chamaModel();
+  }
+
+  private function chamaModel() {
+    if ($this->validaLicençaServiço()) {
+      if(atualizaLicença($this->licença)):
+        ob_end_clean();
+        echo true;
+      else:
+        echo ob_end_flush();
+        return false;
+      endif;
+    }
+  }
+}
+//Classe controller altera categoria
+class ControllerAlteraCategoria{
+  private $optionCategoria, $cdServiço; #inteiro || #inteiro
+  private function validaCategoriaServiço():bool{ #Função bool para ver se todos os campos estão corretos para mandar ao model
+    if ($this->optionCategoria == null) {
+      ob_end_clean();
+      echo 'Verifique se está inserido corretamente!';
+      return false;
+    } else { 
+      ob_end_clean();
+      return true;
+    }
+  }
+
+  public function __construct(int $optionCategoria, int $cdServiço) {
+    $this->optionCategoria = $optionCategoria;
+    $this->cdServiço = $cdServiço;
+    $this->validaCategoriaServiço();
+    $this->chamaModel();
+  }
+
+  private function chamaModel() {
+    if ($this->validaCategoriaServiço()) {
+      if(atualizaCategoria($this->optionCategoria)):
+        ob_end_clean();
+        echo true;
+      else:
+        echo ob_end_flush();
+        return false;
+      endif;
+    }
+  }
+}
+*/
 ?>

@@ -200,6 +200,13 @@
     align-items: center;
   }
 
+  #editar-excluir > .grid_anuncio > .left, #editar-excluir > .grid_anuncio > .right{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .img-item{
     width:90%;
     height:90%;
@@ -216,7 +223,6 @@
     position: relative;
     overflow-y: auto;
     width: 40%;
-    height: 50%;
   }
   
   .form_anuncio, .editar-excluir, .form_edit {
@@ -238,6 +244,17 @@
     margin-bottom: 1rem;
     margin-top: 2rem;
     margin-left: 0.5rem;
+    text-align: left;
+  }
+
+  .grid_anuncio p#esp {
+    margin-left: 1.4rem;
+  }
+
+  #editar-excluir .grid_anuncio p {
+    margin-bottom: 1.3rem;
+    margin-top: 0.7rem;
+    margin-left: 0;
     text-align: left;
   }
   
@@ -331,7 +348,7 @@
   padding: 0.3rem 1rem;
   cursor: pointer;
   border-radius: 5px;
-  margin-left: -2rem;
+  margin-left: -2rem;;
 }
 
 select {
@@ -340,8 +357,6 @@ select {
   font-size: 18px;
   border-radius: 15px;
   border: 1px solid #363636;
-  padding-left: 15px;
-  margin-left: -30px;
   cursor: pointer;
 }
 
@@ -350,6 +365,11 @@ select option {
   border: 1px solid #363636;
   cursor: pointer;
 }
+
+#alt-tit, #alt-desci, #alt-prec {
+  padding-left: 10px;
+}
+
 
 /*botao*/
 
@@ -641,14 +661,79 @@ select option {
 }
 
 .editar {
+  margin-top: 2rem;
   width: 60%;
   min-width: 300px;
   max-width: 780px;
-  height: 60%;
   background-color: #fff;
   border-radius: 40px 5px 40px 5px;
   padding: 10px;
   justify-content: center;
+  display: grid;
+
+}
+
+.info_perfil {
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  width: 70%;
+  margin: 0 auto;
+  vertical-align:center;
+  display: grid;
+  grid-template-columns: 25% 75%;
+  transition: .4s;
+  cursor: pointer;
+}
+
+.info_perfil:hover {
+  width: 80%;
+  box-shadow: 0 3px 10px rgba(0,0,0,.2);
+}
+
+.info_perfil:hover h3 {
+  color: #F53446;
+}
+
+.info_perfil p {
+  text-align: left;
+  margin-left: 1rem;
+}
+
+.info_perfil h3 {
+  margin: 1rem 0rem 1rem 1rem;
+  transition: .4s;
+}
+
+.edit_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; 
+}
+
+.info_perfil:hover i {
+  color: rgba(245, 52, 70, 1);
+  font-size: 22pt;
+}
+/* Modal editar-excluir conteúdo */
+span#titSub {
+  color: rgb(46, 46, 46);
+  font-size: 16pt;
+}
+
+span#valSub {
+  color: #F53446;
+  font-size: 24pt;
+}
+span#liSub, span#catSub {
+  color: #F53446;
+  font-style: italic;
+}
+
+.fa-pen {
+  font-size: 20pt;
+  color: #363636;
+  transition: .4s;
 }
 
 .editar h1 {
@@ -724,9 +809,10 @@ select option {
 .opc {
   display: block;
   margin: 0 auto;
-  width: 50%;
-  height: 50%;
+  width: 60%;
+  height: 100%;
   text-align: left;
+  align-items: center;
 }
 
 .opc h3 {
@@ -739,32 +825,35 @@ select option {
   margin-top: 5%;
 }
 
-/* .md-ct #botao-editar {
-  display: block;
-  margin: 0 auto;
-  margin-top: 10%;
-  border: 1px solid #363636;
-  width: 90%;
-  height: 3rem;
-  max-width: 200px;
-  background-color: transparent;
-  border-radius: 15px;
-  padding: 1px;
-  cursor: pointer;
-  font-size: 28px;
-  color: #363636;
-  font-family: 'Urbanist', sans-serif;
+.opc label, input[type="radio"]:last-of-type {
+  margin-bottom: 5%;
 }
 
-.md-ct #botao-editar:hover {
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-  background-image: url("/GitHub/Kamaleao/app/public/View/assets/img/botao.jpg");
-  background-size: 100%;
-  transition: 0.3s;
-  border: none;
-  box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
-} */
+#alt-titulo input, #alt-preco input, .slct-css{
+  width: 20rem;
+  height: 2.5rem;
+  font-size: 14px;
+  border-radius: 15px;
+  border: 1px solid #363636;
+  margin-top:1rem;
+  margin-bottom:1rem;
+}
+
+#alt-desci{
+  resize: none;
+  padding: 0.5rem;
+  width: 20rem;
+  height: 5rem;
+  font-size: 18px;
+  border-radius: 15px;
+  border: 1px solid #363636;
+  margin-top:1rem;
+  margin-bottom:1rem;
+}
+
+#alt-licenca{
+  width: 25rem;
+}
 
   @media screen and (max-width: 800px) {
 

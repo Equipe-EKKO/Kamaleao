@@ -3,7 +3,7 @@ function abreModal(modal) {
   if (modal == "add") {
     $("#add").removeClass("md-ct-pos").addClass("form_anuncio");
     $("#editar-excluir").removeClass("form_anuncio").addClass("md-ct-pos");
-    $("#modal-editar").removeClass("form_anuncio").addClass("md-ct-pos");
+    $("#modal-editar").removeClass("form_edit").addClass("md-ct-pos");
     $("#alt-titulo").removeClass("form_anuncio").addClass("md-ct-pos");
     $("#alt-preco").removeClass("form_anuncio").addClass("md-ct-pos");
     $("#alt-desc").removeClass("form_anuncio").addClass("md-ct-pos");
@@ -84,32 +84,245 @@ function abreModal(modal) {
     $("#alt-licenca").removeClass("form_anuncio").addClass("md-ct-pos");
     $("#alt-categoria").removeClass("form_anuncio").addClass("md-ct-pos");
   } else if  (modal == "conf-excluir") {
-    $("#md-pr2").removeClass("md-ct-pos").addClass("md-ct");
+    $("#md-pr3").removeClass("md-ct-pos").addClass("md-ct");
     $("#conf-excluir").addClass("form_anuncio").removeClass("md-ct-pos");
   } else if  (modal == "modal-editar") {
-    $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
-    $("#modal-editar").addClass("form_edit").removeClass("md-ct-pos");
+    $("#modal-editar").removeClass("md-ct-pos").addClass("form_edit");
     $("#editar-excluir").removeClass("form_anuncio").addClass("md-ct-pos");
+    $("#alt-titulo").removeClass("form_anuncio").addClass("md-ct-pos");
+    $("#alt-preco").removeClass("form_anuncio").addClass("md-ct-pos");
+    $("#alt-desc").removeClass("form_anuncio").addClass("md-ct-pos");
+    $("#alt-licenca").removeClass("form_anuncio").addClass("md-ct-pos");
+    $("#alt-categoria").removeClass("form_anuncio").addClass("md-ct-pos");
   } else if (modal == "titulo") {
-    $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
-    $("#alt-titulo").addClass("form_edit").removeClass("md-ct-pos");
-    $("#modal-editar").removeClass("form_edit").addClass("md-ct-pos");
+    $("#md-pr2").removeClass("md-ct-pos").addClass("md-ct");
+    $("#alt-titulo").addClass("form_anuncio").removeClass("md-ct-pos");
+    $("p.form-message").empty();
+    $("p#resultsec").removeClass("sucesso");
+    $("p#resultsec").removeClass("erro");
+
+    $('#alt-tit').focus(function (e) { 
+      e.preventDefault();
+      $(this).val("");
+      $("p.form-message").empty();
+      $("p#resultsec").removeClass("sucesso");
+      $("p#resultsec").removeClass("erro");
+    });
+
+    /*AJAX PRA TROCAR O TITULO*/
+    $("#alt-titulo").submit(function (e) {
+      e.preventDefault(); // Stop form from submitting normally
+      var titulo = $('#alt-tit').val(), 
+          cdServ = $("p#hiddenedita1").text();
+
+      alert("titulo novo: " + titulo + " cd_servico: " + cdServ)
+
+      $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraTitulo.php", { titulo: titulo, cd_serviço: cdServ }, function (resposta) {
+        alert(resposta);
+        /*
+        if (resposta == 1) {
+          
+          $("p.form-message").removeAttr("hidden");
+          $("p#resultsec").addClass("sucesso");
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> Seu username foi atualizado!</span>";
+          $(sucesso).appendTo("p.form-message");
+
+          setTimeout(function () {
+            fechaModal();
+          }, 1000);
+                                
+        } else {
+          $("p.form-message").removeAttr("hidden");         
+          $("p#resultsec").addClass("erro");                   
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";           
+          var mes = $("p.form-message").html();            
+          if (mes.includes("atualizado") == false) {
+            $("p.form-message").empty();
+            $(erro).appendTo("p.form-message");
+          }         
+        }*/   
+      });
+    });
   } else if  (modal == "preco") {
-    $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
-    $("#alt-preco").addClass("form_edit").removeClass("md-ct-pos");
-    $("#modal-editar").removeClass("form_edit").addClass("md-ct-pos");
+    $("#md-pr2").removeClass("md-ct-pos").addClass("md-ct");
+    $("#alt-preco").addClass("form_anuncio").removeClass("md-ct-pos");
+    $("p.form-message").empty();
+    $("p#resultthird").removeClass("sucesso");
+    $("p#resultthird").removeClass("erro");
+
+    $('#alt-prec').focus(function (e) { 
+      e.preventDefault();
+      $(this).val("");
+      $("p.form-message").empty();
+      $("p#resultthird").removeClass("sucesso");
+      $("p#resultthird").removeClass("erro");
+    });
+
+    /*AJAX PRA TROCAR O TITULO*/
+    $("#alt-preco").submit(function (e) {
+      e.preventDefault(); // Stop form from submitting normally
+      var preco = $('#alt-prec').val(), 
+          cdServ = $("p#hiddenedita2").text();
+
+      alert("titulo novo: " + titulo + " cd_servico: " + cdServ)
+
+      $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraPreço.php", { preço: preco, cd_serviço: cdServ }, function (resposta) {
+        alert(resposta);
+        /*
+        if (resposta == 1) {
+          
+          $("p.form-message").removeAttr("hidden");
+          $("p#resultsec").addClass("sucesso");
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> Seu username foi atualizado!</span>";
+          $(sucesso).appendTo("p.form-message");
+
+          setTimeout(function () {
+            fechaModal();
+          }, 1000);
+                                
+        } else {
+          $("p.form-message").removeAttr("hidden");         
+          $("p#resultsec").addClass("erro");                   
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";           
+          var mes = $("p.form-message").html();            
+          if (mes.includes("atualizado") == false) {
+            $("p.form-message").empty();
+            $(erro).appendTo("p.form-message");
+          }         
+        }*/   
+      });
+    });
   } else if  (modal == "desc") {
-    $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
-    $("#alt-desc").addClass("form_edit").removeClass("md-ct-pos");
-    $("#modal-editar").removeClass("form_edit").addClass("md-ct-pos");
+    $("#md-pr2").removeClass("md-ct-pos").addClass("md-ct");
+    $("#alt-desc").addClass("form_anuncio").removeClass("md-ct-pos");
+    $("p.form-message").empty();
+    $("p#resultfourth").removeClass("sucesso");
+    $("p#resultfourth").removeClass("erro");
+
+    $('#alt-desci').focus(function (e) { 
+      e.preventDefault();
+      $(this).val("");
+      $("p.form-message").empty();
+      $("p#resultfourth").removeClass("sucesso");
+      $("p#resultfourth").removeClass("erro");
+    });
+
+    /*AJAX PRA TROCAR O TITULO*/
+    $("#alt-desc").submit(function (e) {
+      e.preventDefault(); // Stop form from submitting normally
+      var desc = $('#alt-desci').val(), 
+          cdServ = $("p#hiddenedita3").text();
+
+      alert("titulo novo: " + titulo + " cd_servico: " + cdServ)
+
+      $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraDescricaoAnuncio.php", { descricao: desc, cd_serviço: cdServ }, function (resposta) {
+        alert(resposta);
+        /*
+        if (resposta == 1) {
+          
+          $("p.form-message").removeAttr("hidden");
+          $("p#resultsec").addClass("sucesso");
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> Seu username foi atualizado!</span>";
+          $(sucesso).appendTo("p.form-message");
+
+          setTimeout(function () {
+            fechaModal();
+          }, 1000);
+                                
+        } else {
+          $("p.form-message").removeAttr("hidden");         
+          $("p#resultsec").addClass("erro");                   
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";           
+          var mes = $("p.form-message").html();            
+          if (mes.includes("atualizado") == false) {
+            $("p.form-message").empty();
+            $(erro).appendTo("p.form-message");
+          }         
+        }*/   
+      });
+    });
   } else if (modal == "licenca") {
-    $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
-    $("#alt-licenca").addClass("form_edit").removeClass("md-ct-pos");
-    $("#modal-editar").removeClass("form_edit").addClass("md-ct-pos");
-  } else if (modal == "categoria") { // deu certo nao
-    $("#md-pr").removeClass("md-ct-pos").addClass("md-ct");
-    $("#alt-categoria").addClass("form_edit").removeClass("md-ct-pos");
-    $("#modal-editar").removeClass("form_edit").addClass("md-ct-pos");
+    $("#md-pr2").removeClass("md-ct-pos").addClass("md-ct");
+    $("#alt-licenca").addClass("form_anuncio").removeClass("md-ct-pos");
+    $("p.form-message").empty();
+    $("p#resultfifth").removeClass("sucesso");
+    $("p#resultfifth").removeClass("erro");
+
+    /*AJAX PRA TROCAR O TITULO*/
+    $("#alt-licenca").submit(function (e) {
+      e.preventDefault(); // Stop form from submitting normally
+      var lic = $('input[name="licenca2"]:checked').val(), 
+          cdServ = $("p#hiddenedita4").text();
+
+      alert("licença novo: " + lic + " cd_servico: " + cdServ)
+      /*
+      $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraLicença.php", { licença: lic, cd_serviço: cdServ }, function (resposta) {
+        alert(resposta);
+        /*
+        if (resposta == 1) {
+          
+          $("p.form-message").removeAttr("hidden");
+          $("p#resultsec").addClass("sucesso");
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> Seu username foi atualizado!</span>";
+          $(sucesso).appendTo("p.form-message");
+
+          setTimeout(function () {
+            fechaModal();
+          }, 1000);
+                                
+        } else {
+          $("p.form-message").removeAttr("hidden");         
+          $("p#resultsec").addClass("erro");                   
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";           
+          var mes = $("p.form-message").html();            
+          if (mes.includes("atualizado") == false) {
+            $("p.form-message").empty();
+            $(erro).appendTo("p.form-message");
+          }         
+        }   
+      });*/
+    });
+  } else if (modal == "categoria") {
+    $("#md-pr2").removeClass("md-ct-pos").addClass("md-ct");
+    $("#alt-categoria").addClass("form_anuncio").removeClass("md-ct-pos");
+    $("p.form-message").empty();
+    $("p#resultsixth").removeClass("sucesso");
+    $("p#resultsixth").removeClass("erro");
+
+    /*AJAX PRA TROCAR O TITULO*/
+    $("#alt-categoria").submit(function (e) {
+      e.preventDefault(); // Stop form from submitting normally
+      var cat =  $('#select_cat2').val(), 
+          cdServ = $("p#hiddenedita5").text();
+
+      alert("categoria: " + cat + " cd_servico: " + cdServ)
+      /*
+      $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraLicença.php", { licença: lic, cd_serviço: cdServ }, function (resposta) {
+        alert(resposta);
+        /*
+        if (resposta == 1) {
+          
+          $("p.form-message").removeAttr("hidden");
+          $("p#resultsec").addClass("sucesso");
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> Seu username foi atualizado!</span>";
+          $(sucesso).appendTo("p.form-message");
+
+          setTimeout(function () {
+            fechaModal();
+          }, 1000);
+                                
+        } else {
+          $("p.form-message").removeAttr("hidden");         
+          $("p#resultsec").addClass("erro");                   
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";           
+          var mes = $("p.form-message").html();            
+          if (mes.includes("atualizado") == false) {
+            $("p.form-message").empty();
+            $(erro).appendTo("p.form-message");
+          }         
+        }   
+      });*/
+    });
   }
 }
 
@@ -124,8 +337,30 @@ function fechaModal(modal) {
     $("#md-pr").removeClass("md-ct").addClass("md-ct-pos");
     $("#editar-excluir").addClass("md-ct-pos").removeClass("form_anuncio");
   } else if  (modal == "conf-excluir") {
-    $("#md-pr2").removeClass("md-ct").addClass("md-ct-pos");
+    $("#md-pr3").removeClass("md-ct").addClass("md-ct-pos");
     $("#conf-excluir").addClass("md-ct-pos").removeClass("form_anuncio");
+  } else if (modal == "modal-editar"){
+    $("#md-pr").removeClass("md-ct").addClass("md-ct-pos");
+    $("#modal-editar").addClass("md-ct-pos").removeClass("form_edit");
+  } else if (modal == "alt-titulo"){
+    $("#md-pr2").removeClass("md-ct").addClass("md-ct-pos");
+    $("#alt-titulo").addClass("md-ct-pos").removeClass("form_anuncio");
+  } else if (modal == "alt-preco") {
+    $("#md-pr2").removeClass("md-ct").addClass("md-ct-pos");
+    $("#alt-preco").addClass("md-ct-pos").removeClass("form_anuncio");
+  } else if (modal == "alt-desc"){
+    $("#md-pr2").removeClass("md-ct").addClass("md-ct-pos");
+    $("#alt-desc").addClass("md-ct-pos").removeClass("form_anuncio");
+  } else if (modal == "alt-licenca"){
+    $("#md-pr2").removeClass("md-ct").addClass("md-ct-pos");
+    $("#alt-licenca").addClass("md-ct-pos").removeClass("form_anuncio");
+    $('input[name="licenca2"]:checked').prop('checked', false);
+    $("p.form-message").empty();
+    $("p#resultfifth").removeClass("sucesso");
+    $("p#resultfifth").removeClass("erro");
+  } else if (modal == "alt-categoria"){
+    $("#md-pr2").removeClass("md-ct").addClass("md-ct-pos");
+    $("#alt-categoria3").addClass("md-ct-pos").removeClass("form_anuncio");
   }
 }
 
@@ -144,27 +379,49 @@ $(document).ready(function () {
     $.post("/GitHub/Kamaleao/app/private/Controller/controllerInfoServico.php", {titulo: titulo, username: username},function (resposta) {
         var a =  jQuery.parseJSON(resposta);
         $("p span#titSub").text(a.titulo);
-        $("p span#valSub").text(a.valor);
+        $("p span#valSub").text("R$"+a.valor);
         $("textarea#descSub").text(a.desc);
         $("p span#liSub").text(a.licenca);
         $("p span#catSub").text(a.categoria);
         $(".img-item").attr("src", a.urlfoto);
         abreModal("editar-excluir");
-        $("#cdhidden").text(a.cdServ);
+        $(".cdhidden").text(a.cdServ);
       });
   });
   
   $("button#exclui").click(function (e) { 
     e.preventDefault();
 
-    var cdServ = $("p#cdhidden").text();
+    var cdServ = $("p#hiddenexclui").text();
 
     $.get("/GitHub/Kamaleao/app/private/Controller/controllerDeletaServiço.php", {serviço: cdServ},
       function (data) {
-        alert("Belo diz: " + data);
-      }
-    );
-    
+        if (data == true) {
+          $("#exclui-anuncio.form-message").removeClass("sucesso");
+          $("#exclui-anuncio.form-message").removeClass("erro");
+          $("#exclui-anuncio.form-message").removeAttr("hidden");
+          $("#exclui-anuncio.form-message").addClass("sucesso");
+          $("#exclui-anuncio.form-message").empty();
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> O anúncio foi excluído!</span>";
+          $(sucesso).appendTo("#exclui-anuncio.form-message");
+          setTimeout(function () {
+            fechaModal('conf-excluir');
+            fechaModal('editar-excluir');
+            location.reload(true)
+          }, 1000);
+        } else {
+          $("#exclui-anuncio.form-message").removeClass("sucesso");
+          $("#exclui-anuncio.form-message").removeClass("erro");
+          $("#exclui-anuncio.form-message").removeAttr("hidden");
+          $("#exclui-anuncio.form-message").addClass("erro");
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";
+          var mes = $("#exclui-anuncio.form-message").html();
+          if (mes.includes("excluído") == false) {
+            $("#exclui-anuncio.form-message").empty();
+            $(erro).appendTo("#exclui-anuncio.form-message");
+          }
+        }
+      });
   });
 });
 

@@ -3,6 +3,7 @@ ob_start();
 /* escrita por: Carolina Sena, no dia 13.10.2021*/
 require_once 'clConexaoBanco.php'; # requere a classe ConexaoBanco usada nos filhos
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php'); # requere a Config usada nos filhos
+use Cloudinary\Api\Upload\UploadApi;
 
 //Classe cuja função é representar um ou mais objetos de Serviço
 class Serviço {
@@ -88,7 +89,7 @@ class Serviço {
 
         $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
 
-        $sql = "SELECT cd_public_id FROM tb_imagem WHERE :cd_serv"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $sql = "SELECT cd_public_id FROM tb_imagem WHERE cd_serviço = :cd_serv"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
         $stmt = $banco->prepare($sql); # prepara a query para execução
         /*Substitui os valores de cada placeholder na query preparada*/
         $stmt->bindValue(':cd_serv', $cdServiço); 
@@ -96,13 +97,67 @@ class Serviço {
         /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
         try {
             $stmt->execute(); # executa a query preparada 
-            $publicid = $stmt->fetchColumn();  
-            echo "Meu amor, eu tive que perder pra voltar: " . $publicid;
+            $publicid = $stmt->fetchColumn();
+            if((new UploadApi())->destroy($publicid)):
+                $result1 = true;
+            else:
+                $result1 = false;
+            endif;
         } catch (\PDOException $e) {
             exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
             return false;
         }
+        if ($result1) {
+            $sql = "DELETE FROM tb_imagem WHERE cd_serviço = :cd_serv"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+            $stmt = $banco->prepare($sql); # prepara a query para execução
+            /*Substitui os valores de cada placeholder na query preparada*/
+            $stmt->bindValue(':cd_serv', $cdServiço); 
 
+            /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+            try { 
+                if($stmt->execute()): # executa a query (delete tabela de imagem) preparada e ve o resultado
+                    $result2 = true;
+                else:
+                    $result2 = false;
+                endif;
+            } catch (\PDOException $e) {
+                $result2 = false;
+                exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+                return false;
+            }
+            if ($result2 == true) {
+                $sql = "DELETE FROM tb_serviço WHERE cd_serviço = :cd_serv"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+                $stmt = $banco->prepare($sql); # prepara a query para execução
+                /*Substitui os valores de cada placeholder na query preparada*/
+                $stmt->bindValue(':cd_serv', $cdServiço); 
+    
+                /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+                try { 
+                    if($stmt->execute()): # executa a query (delete tabela de imagem) preparada e ve o resultado
+                        $result3 = true;
+                    else:
+                        $result3 = false;
+                    endif;
+                } catch (\PDOException $e) {
+                    $result3 = false;
+                    exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+                    return false;
+                }
+                if ($result3) {
+                    //echo true;
+                    return true;
+                }else {
+                    //echo false;
+                    return false;
+                }
+            } else {
+                //echo false;
+                return false;
+            }
+        } else {
+            //echo false;
+            return false;
+        }
     }
 
     private function verificaDados():bool {

@@ -35,7 +35,7 @@ window.onload = function () {
 }
 
 function abreModal(modal){
-    if(modal == 'username' ){ //se o parametro da função for username ele...
+    if(modal == 'username' ) { //se o parametro da função for username ele...
         $("#md-pr2").removeClass("md-ct-pos").addClass("md-ct"); //remove a classe que deixa a div invisível e adiciona a classe de background do modal
         $("#username").addClass("md").removeClass("md-ct-pos"); //adiciona a classe de modal para o username 
         $("#desc").removeClass("md").addClass("md-ct-pos"); //e faz o inverso com as outras

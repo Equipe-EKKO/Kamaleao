@@ -19,13 +19,28 @@ function recebeServPost(string $titulo, string $descriçao, $preçoMedio, $licen
 }
 
 // Função chamada no controller para realizar exclusão de serviço
-function recebeServExcludePost(string $cdServ):bool {
+function recebeServExcludePost(int $cdServ):bool {
     $serviço = new \Serviço("", "", 0, 0, 0);
     $usuario = unserialize($_SESSION['usuario']);
     $usuario->perfil->setServiço($serviço);
     if ($usuario->perfil->serviço->excluiServiço($cdServ)) {
+        echo true;
         return true;
     } else {
         return false;
     }
+}
+// Função chamada no controller para mudar o título do serviço
+function atualizaTitulo(string $titulo,int $cdServ) {
+    $serviço = new \Serviço($titulo , "", 0, 0, 0);
+    $usuario = unserialize($_SESSION['usuario']);
+    $usuario->perfil->setServiço($serviço);
+    /*
+    if ($usuario->perfil->serviço->excluiServiço($cdServ)) {
+        echo true;
+        return true;
+    } else {
+        return false;
+    }*/
+    return true;
 }
