@@ -9,7 +9,6 @@ use Cloudinary\Api\Upload\UploadApi;
 //Subclasse de Perfil cuja função é lidar com as funcionalidades CRUD da partição do Perfil no sistema
 class PerfilProprio extends Perfil {
     #Atributos
-    /*public $listServiço;*/
     private $inventario, $comissao; # inventario: instancia de classe || comissao: instancia de classe
     # Métodos da classe abstrata sendo implementados
     //Método que faz um select de todos os serviços que o dono do perfil já anunciou
@@ -58,7 +57,7 @@ class PerfilProprio extends Perfil {
             return false;
         }
     }
-    function criarServiço(string $nm_serviço, $cd_usuario, $extimagem, string $tmpImg)/*:bool*/ {
+    function criarServiço(string $nm_serviço, $cd_usuario, $extimagem, string $tmpImg):bool {
         $nmtemp = explode(" ", $nm_serviço);
         $partnewname = strtolower(end($nmtemp)) . random_int(1, 999);
         $newname = $cd_usuario . "_serv_" . $partnewname . "." .$extimagem;
@@ -102,9 +101,6 @@ class PerfilProprio extends Perfil {
             echo "Problema em salvar a imagem (temporariamente) no servidor.";
             return false;
         }
-    }
-    function excluirServiço() {
-
     }
     function avaliarComissao() {
 

@@ -50,7 +50,7 @@ class PesquisaAberta {
     public function listServRecente(){
         $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
 
-        $sql = "SELECT s.nm_serviço AS 'titulo', s.vl_serviço AS 'preço', img.cd_url_serviço as 'url_da_imagem',l.nm_username AS 'usernameserv' FROM `tb_serviço` AS s JOIN tb_usuario AS us ON us.cd_usuario = s.cd_usuario JOIN tb_login AS l ON l.cd_login = us.cd_login JOIN tb_imagem AS img ON s.cd_serviço = img.cd_serviço ORDER BY s.dt_criação DESC LIMIT 16"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $sql = "SELECT s.cd_serviço as 'codigoserv',s.nm_serviço AS 'titulo', s.vl_serviço AS 'preço', img.cd_url_serviço as 'url_da_imagem',l.nm_username AS 'usernameserv' FROM `tb_serviço` AS s JOIN tb_usuario AS us ON us.cd_usuario = s.cd_usuario JOIN tb_login AS l ON l.cd_login = us.cd_login JOIN tb_imagem AS img ON s.cd_serviço = img.cd_serviço ORDER BY s.dt_criação DESC LIMIT 16"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
         $stmt = $banco->prepare($sql); # prepara a query para execução
     
         /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
@@ -64,6 +64,7 @@ class PesquisaAberta {
             return false;
         }
     }
+    
 
     #Métodos Especias - Getter e Setters para os atributos e Construct
     public function __construct($nm_table) {

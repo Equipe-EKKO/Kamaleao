@@ -7,17 +7,16 @@
       <div class="container">
          <div class="anuncio">
             <div class="desenho">
+               <img class="anuncio_img" src={{url_da_imagem|e}}> </img>
             </div>
             
             <div class="float">
-               <h1>Título do Serviço</h1>
-               <h2>Preço: R$50,00</h2>
-               <h2>Licenças:</h2>
+               <h1>{{titulo}}</h1>
+               <h2>Preço: R${{preço}}</h2>
+               <h2>Licença:</h2>
                <div class="lic">
                   <ul class="licencas">
-                     <li class="li-coluna"><a href="#">Licença de uso Não-Comercial</a></li>
-                     <li class="li-coluna"><a href="#">Licença de uso Comercial</a></li>
-                     <li class="li-coluna"><a href="#">Licença de Download</a></li>
+                     <li class="li-coluna"><a href="#">Licença de {{licença}}</a></li>
                   </ul>
                </div>
                <button type="submit">Solicitar Serviço</button>
@@ -31,7 +30,7 @@
          <div class="info">
             <h1>Descrição do Serviço</h1>
                <div class="sobre">
-               <p></p>
+               <p>{{desc}}</p>
                </div>
             <h1>Outros Anúncios</h1>   
                <div class="anun">
