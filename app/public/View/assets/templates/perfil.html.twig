@@ -12,8 +12,11 @@
       <!-- conteudo de perfil -->
       {% block perfil_icon %}
       <div class="perfil_icon">
-        <a class="icone_perf"><i class='bx bxs-user-circle'></i></a>
-       
+        {% if url_foto_perfil is defined %}
+          <a class="icone_perf"><img src={{url_foto_perfil|e}}></a>
+        {% else %}
+          <a class="icone_perf"><i class='bx bxs-user-circle'></i></a>
+        {% endif %}
         <h1> @{{Usuario}} </h1>
 
         {% if Descricao != "" %}

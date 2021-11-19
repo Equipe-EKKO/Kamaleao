@@ -36,6 +36,75 @@ class PerfilProprio extends Perfil {
     function baixarInventario() {
 
     }
+    function updateFotoPerfil(string $imgName, $cd_usuario, $extimagem, string $tmpImg):bool {
+        /* Pra ver se já existe uma foto de perfil prévia */
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+        
+        $sql = "SELECT cd_public_id FROM tb_foto_perfil WHERE cd_usuario = :cdus"; # declara query do select que irá verificar se o titulo escolhido já foi cadastrado anteriormente pelo usuário da conta
+        $stmt = $banco->prepare($sql); # prepara o select para execuçãp
+        $stmt->bindValue(':cdus', $cd_usuario); #substitui o placeholder da query preparada
+        
+        /*Try catch que tentará executar o select e contar quantas linhas foram retornadas*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $contaLinha = $stmt->rowCount(); # armazena numa variável o valor de quantas linhas existem no retorno desse select
+        } catch (\PDOException $e) {
+            exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+
+        if ($contaLinha > 0) {
+            $stmt->execute(); # executa a query preparada 
+            $publicidold = $stmt->fetchColumn();
+            if((new UploadApi())->destroy($publicidold)):
+                $nmtemp = explode(" ", $imgName);
+                $partnewname = strtolower(end($nmtemp)) . random_int(1, 999);
+                $newname = $cd_usuario . "_profile_" . $partnewname . "." . $extimagem;
+                $newfullpath = realpath(dirname(__FILE__, 2));
+                if (move_uploaded_file($tmpImg, $newfullpath."/image/profile/" . $newname)) {
+                    if ($objeto = (new UploadApi())->upload($newfullpath."/image/profile/" . $newname , ["folder" => "img_profile", "use_filename" => true, "unique_filename" => true, "overwrite" => false])){
+                        $arrayResult = (array) $objeto;
+                        if ($this->salvaFotoPerfil($cd_usuario, $arrayResult['url'], $arrayResult['public_id'])) {
+                            $old = getcwd(); // Save the current directory
+                            chdir($newfullpath."/image/profile/");
+                            if (unlink($newname)) {
+                                chdir($old); // Restore the old working directory
+                                return true;
+                            }else {
+                                chdir($old); // Restore the old working directory
+                                return false;
+                            }
+                        } else {
+                            (new UploadApi())->destroy($arrayResult['public_id']);
+                            $old = getcwd(); // Save the current directory
+                            chdir($newfullpath."/image/profile/");
+                            if (unlink($newname)) {
+                                chdir($old); // Restore the old working directory
+                                $resposta  = ob_get_flush();
+                                ob_end_clean();
+                                echo "Erro ao salvar o serviço no banco de dados. <br> " . $resposta;
+                                return false;
+                            }
+                        }
+                    } else {
+                        $old = getcwd(); // Save the current directory
+                        chdir($newfullpath."/image/profile/");
+                        unlink($newname);
+                        chdir($old); // Restore the old working directory
+                        ob_end_clean();
+                        echo "A imagem não pode ser salva no Cloudinary.";
+                        return false;
+                    }
+                } else {
+                    ob_end_clean();
+                    echo "Problema em salvar a imagem (temporariamente) no servidor.";
+                    return false;
+                }
+            else:
+                return false;
+            endif;
+        }
+    }
     function updateDescricao(string $desc, int $cdUpdate) {
         /*Agrupamento dos valores a serem inseridos*/
         $this->setDescricao($desc);
@@ -104,6 +173,26 @@ class PerfilProprio extends Perfil {
     }
     function avaliarComissao() {
 
+    }
+    private function salvaFotoPerfil(string $cd_usuario, string $URLSerImg, string $publicid):bool {
+        /*seta os valores dos parametros*/
+        /*Conexão com o Banco*/
+        $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL
+        $sql = "UPDATE tb_foto_perfil SET cd_url_perfil = :cdurlimg, cd_public_id = :publicid WHERE cd_usuario = :cduser";  # declara a query do insert na tabela imagem do banco de dados, que só é feito após o insert na tabela serviço
+        $stmt = $banco->prepare($sql); # prepara a query com o insert para a execução
+        /*Substitui os placeholders da query preparada*/
+        $stmt->bindValue(':cdurlimg', $URLSerImg);
+        $stmt->bindValue(':publicid', $publicid);
+        $stmt->bindValue(':cduser', $cd_usuario);
+
+        /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
+        try {
+            $stmt->execute(); # executa a query preparada anteriormente
+            return true; # retorna true se o processo dos dois inserts forem verdadeiros
+        } catch (\PDOException $e) {
+            exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+            return false;
+        }
     }
 
     #Métodos Especias - Getter e Setters para os atributos

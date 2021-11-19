@@ -64,8 +64,34 @@ class Usuario extends Participante {
             /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
             try {
                 $stmt2->execute(); # executa a query preparada anteriormente
+                /*ob_end_clean();
+                return true; # retorna true se o processo dos dois inserts forem verdadeiros*/
+            } catch (\PDOException $e) {
+                exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+                return false;
+            }
+
+            $espstmt2 = $banco->prepare("SELECT cd_usuario FROM tb_usuario WHERE cd_login = :cd_login"); # prepara um select que irá recuperar o cd_login (chave primária da tabela login) inserido anteriormente, para que possa ser usado no próximo insert (como chave estrangeira)
+            $espstmt2->bindValue(':cd_login', $cd_login); #substituiu o placeholder email pelo parametro
+            /*Faz um try catch para tentar executar o select ou pegar o erro se der errado*/
+            try {
+                $espstmt2->execute(); # executa o select
+                $cd_usuario = $espstmt2->fetchColumn(); # pega o primeiro resultado da primeira linha (o cd_login )
+            } catch (\PDOException $e) {
+                exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+                return false;
+            }
+
+            $sql3 = "INSERT INTO tb_foto_perfil (cd_usuario) VALUES (:cdusuario)";  # declara a query do insert na tabela usuario do banco de dados, que só é feito após o insert na tabela login
+            $stmt3 = $banco->prepare($sql3); # prepara a query com o insert para a execução
+            /*Substitui os placeholders da query preparada*/
+            $stmt3->bindValue(':cdusuario', $cd_usuario);
+
+            /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
+            try {
+                $stmt3->execute(); # executa a query preparada anteriormente
                 ob_end_clean();
-                return true; # retorna true se o processo dos dois inserts forem verdadeiros
+                return true; # retorna true se o processo dos dois inserts forem verdadeiros*/
             } catch (\PDOException $e) {
                 exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
                 return false;
@@ -90,7 +116,7 @@ class Usuario extends Participante {
             if ($contaLinha == 1 ) { # estrutura condicional que verifica se o valor retornado no select corresponde a apenas e somente 1, e se sim...
                 $this->setEmail($email);
                 $this->setSenha($senha);
-                $stmt = $banco->prepare("SELECT l.nm_email, l.nm_username, l.nm_senha, us.cd_url_foto_perfil, us.ds_usuario, us.nm_nome, us.nm_sobrenome, us.cd_cpf, us.dt_nascimento, us.cd_usuario FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login WHERE l.nm_email = :email");
+                $stmt = $banco->prepare("SELECT l.nm_email, l.nm_username, l.nm_senha, us.ds_usuario, us.nm_nome, us.nm_sobrenome, us.cd_cpf, us.dt_nascimento, us.cd_usuario FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login WHERE l.nm_email = :email");
                 /*Substitui os placeholders da query preparada*/
                 $stmt->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
                 /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou e então, guardar esses resultados numa session que será usada em perfil/config perfil, além de instanciar uma nova classe para perfilProprio*/
@@ -117,7 +143,7 @@ class Usuario extends Participante {
                     try {
                         $stmt->execute(); # tenta executar o select preparado
                         $this->setCdUpdate($stmt->fetchColumn());
-                        ob_end_clean();
+                        $this->pegaFotoPerfil();
                         return true; # seta o retorno da função como verdadeiro
                     } catch (\PDOException $e) {
                         exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
@@ -415,7 +441,7 @@ class Usuario extends Participante {
     public function atualizaPosConfig():bool {
         $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL 
 
-        $stmt = $banco->prepare("SELECT l.nm_email, l.nm_username, us.cd_url_foto_perfil, us.ds_usuario, l.nm_senha FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login WHERE l.cd_login = :cdlogin");
+        $stmt = $banco->prepare("SELECT l.nm_email, l.nm_username, us.ds_usuario, l.nm_senha FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login WHERE l.cd_login = :cdlogin");
         /*Substitui os placeholders da query preparada*/
         $stmt->bindValue(':cdlogin', $this->getCdUpdate(), PDO::PARAM_STR);
         /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou e então, guardar esses resultados numa session que será usada em perfil/config perfil, além de instanciar uma nova classe para perfilProprio*/
@@ -423,11 +449,28 @@ class Usuario extends Participante {
             $stmt->execute(); # tenta executar o select preparado
             $resultados = $stmt->fetch(PDO::FETCH_ASSOC);
             $this->perfil->setUsername($resultados['nm_username']);
-            if ($resultados['cd_url_foto_perfil'] != null) {
-                $this->perfil->setFotoPerfil($resultados['cd_url_foto_perfil']);
-            }
             $this->perfil->setDescricao($resultados['ds_usuario']);
             $_SESSION['userinfoToPerfil'] = serialize($resultados); 
+            return true;
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+            return false;
+        }
+    }
+    public function pegaFotoPerfil():bool {
+        $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL 
+
+        $stmt = $banco->prepare("SELECT ft.cd_url_perfil FROM tb_login AS l JOIN tb_usuario as us ON l.cd_login = us.cd_login JOIN tb_foto_perfil as ft ON us.cd_usuario = ft.cd_usuario WHERE l.cd_login = :cdlogin");
+        /*Substitui os placeholders da query preparada*/
+        $stmt->bindValue(':cdlogin', $this->getCdUpdate(), PDO::PARAM_STR);
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou e então, guardar esses resultados numa session que será usada em perfil/config perfil, além de instanciar uma nova classe para perfilProprio*/
+        try {
+            $stmt->execute(); # tenta executar o select preparado
+            $resultado = $stmt->fetchColumn();
+            if ($resultado != null) {
+                $this->perfil->setFotoPerfil($resultado);
+            }
+            $_SESSION['fototoPerfil'] = $resultado; 
             return true;
         } catch (\PDOException $e) {
             exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema

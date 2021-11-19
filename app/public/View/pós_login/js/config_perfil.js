@@ -108,7 +108,7 @@ function abreModal(modal){
             $("p#resultthird").removeClass("erro");
         });
 
-        /*AJAX PRA TROCAR O USERNAME*/
+        /*AJAX PRA TROCAR A DESCRIÇÃO*/
         $("#trocaDesc").submit(function (e) {
             e.preventDefault(); // Stop form from submitting normally
             var desc = $('#descricao').val();
@@ -159,7 +159,7 @@ function abreModal(modal){
             $("p#resultfourth").removeClass("erro");
         });
 
-        /*AJAX PRA TROCAR O USERNAME*/
+        /*AJAX PRA TROCAR O EMAIL*/
         $("#trocaEmail").submit(function (e) {
             e.preventDefault(); // Stop form from submitting normally
             var email = $('#attEmail').val();
@@ -224,7 +224,7 @@ function abreModal(modal){
             var senha = $('#attSenha').val();
             var csenha = $('#confsenha').val();
 
-        
+            /*AJAX PRA TROCAR A SENHA*/
             $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraSenha.php", { senha: senha, confsenha: csenha }, function (resposta) {
                 if (resposta == 1) {
                     $("p.form-message").removeAttr("hidden");
@@ -262,7 +262,7 @@ function abreModal(modal){
         $("p#resultseventh").removeClass("sucesso");
         $("p#resultseventh").removeClass("erro");
 
-        $('#attEmail').focus(function (e) { 
+        $('#attFoto').focus(function (e) { 
             e.preventDefault();
             $(this).val("");
             $("p.form-message").empty();
@@ -270,13 +270,63 @@ function abreModal(modal){
             $("p#resultseventh").removeClass("erro");
         });
 
-        var $input    = document.getElementById('imagem'),
-            $fileName = document.getElementById('file-name');
+        /*AJAX PRA TROCAR O USERNAME*/
+        $("#trocaFoto").submit(function (e) {
+            e.preventDefault();
 
-        $input.addEventListener('change', function(){
-          $fileName.textContent = this.value;
+            var form_data = new FormData();
+            form_data.append('fotoperfil', $('input#attFoto').prop('files')[0]);
+
+            // desabilitar o botão de "submit" para evitar multiplos envios até receber uma resposta
+            $("button.button").prop("disabled", true);
+            // processar
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: "/GitHub/Kamaleao/app/private/Controller/controllerAlteraFotoPerfil.php",
+                data: form_data,
+                processData: false, // impedir que o jQuery tranforma a "data" em querystring
+                contentType: false, // desabilitar o cabeçalho "Content-Type"
+                cache: false, // desabilitar o "cache"
+                // manipular o sucesso da requisição
+                success: function (resposta) {
+                    if (resposta == 1) {
+                    $("p#resultseventh").removeClass("sucesso");
+                    $("p#resultseventh").removeClass("erro");
+                    $("p#resultseventh").removeAttr("hidden");
+                    $("p#resultseventh").addClass("sucesso");
+                    $("p#resultseventh").empty();
+                    var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> Sua foto de perfil foi atualizada!</span>";
+                    $(sucesso).appendTo("p#resultseventh");
+                    setTimeout(function () {
+                    fechaModal();
+                    location.reload(true);
+
+                    }, 1000);
+
+                    } else {
+                    $("p#resultseventh").removeClass("sucesso");
+                    $("p#resultseventh").removeClass("erro");
+                    $("p#resultseventh").removeAttr("hidden");
+                    $("p#resultseventh").addClass("erro");
+                    var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";
+                    var mes = $("p#resultseventh").html();
+                    if (mes.includes("atualizada") == false) {
+                    $("p#resultseventh").empty();
+                    $(erro).appendTo("p#resultseventh");
+                    }
+                }
+                // reativar o botão de "submit"
+                $("button.button").prop("disabled", false);
+                },
+                // manipular erros da requisição
+                error: function (e) {
+                alert(e);
+                // reativar o botão de "submit"
+                $("button.button").prop("disabled", false);
+                }
+            });
         });
-        
     }
 }
 

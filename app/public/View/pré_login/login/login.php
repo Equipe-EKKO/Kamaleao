@@ -9,7 +9,7 @@ $twig = new Environment($loader);
 
 error_reporting(E_ALL & ~E_WARNING);
 
-if ($_SESSION['error'] == null || !isset($_SESSION['error'])){
+if (!isset($_SESSION['error'])){
     $_SESSION['error'] = " ";
     $error = $_SESSION['error'];
     echo $twig->render('login.html.twig', ['erro' => $error]);

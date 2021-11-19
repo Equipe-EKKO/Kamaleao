@@ -1,3 +1,7 @@
+* {
+    font-family: 'Trebuchet MS', sans-serif;
+  }
+
 .anuncio {
     width: 80%;
     height: 45vh;
@@ -19,12 +23,17 @@
     background-image: url("/GitHub/Kamaleao/app/public/View/assets/img/background2.jpg");
 }
 
+.desenho img{
+    width:100%;
+    height:100%;
+    border-radius: 10px;
+}
+
 .float {
     border: 2px solid #ccc;
     border-radius: 30px;
     width: 50%;
-    height: 80%;
-    margin: 30px;
+    margin-left: 30px;
     padding: 20px;
     text-align: left;
 }
@@ -34,9 +43,18 @@
     color: #363636;
 }
 
+.float a{
+    color: #363636;
+    transition: .2s;
+}
+
+.float a:hover {
+    color: #F53446;
+}
+
 .info {
     width: 80%;
-    height: 50vh;
+    height: 50%;
     margin: 0 auto;
 }
 
@@ -46,41 +64,101 @@
     color: #363636;
 }
 
-.info div {
+.sobre{
     border: 2px solid #ccc;
     border-radius: 30px;
     width: 90%;
-    height: 10vh;
+    height: 30%;
     margin: 20px auto;
-    padding: 30px;
+    padding: 1px;
 }
+
+.sobre p{
+    padding: 1rem;
+    width: 100%;
+}
+
+.anun {
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    width: 90%;
+    height: 52%;
+    margin: 20px auto;
+    padding: 1px;
+}
+
+.item {
+    margin: 0 auto;
+    background: #ffff;
+    border-radius: 10px 10px 10px 10px;
+    height: 12.8rem;
+    width: 25%;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: .6s;
+    display: grid;
+    grid-template-rows: 68% 12% 8% 12%;
+  }
+  
+  .item:hover {
+    box-shadow: 0 3px 10px rgba(0,0,0,.2);
+  }
+  
+  .item:hover h2 {
+      color: #F53446;
+  }
+  
+  .anuncio_img {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px 10px 0 0;
+      background-color: powderblue;
+  }
+  
+  .anuncio_text {
+      padding: 0.5rem;
+      width: 93%;
+  }
+  
+  .text_flex {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.7rem;
+  }
+  
+  .anuncio_titulo {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: "ellipsis";
+  }
+  
+  .anuncio_titulo h1 {
+      font-size: 12pt;
+      color: #363636;
+      margin: 0.5rem;
+      overflow: hidden;
+  }
+  
+  .anuncio_preço h2 {
+      font-size: 12pt;
+      color: #363636;
+      transition: .4s;
+      margin-right: 0.5rem;
+      float: right;
+  }
+  
+  .anuncio_user h3 {
+      color: #808080;
+      font-size: 10pt;
+      margin: 0.2rem 0.5rem;
+  
+  }
 
 .info p {
     font-size: 15px;
     text-align: justify;
 }
 
-.lic .licencas {
-    height: 100px;
-}
-
-.lic .licencas li {
-    display: block;
-    margin-left: 30px;
-    cursor: pointer;
-}
-
-.lic .licencas a {
-    cursor: pointer;
-    color: #363636;
-    transition: .5s;
-}
-
-.lic .licencas a:hover {
-    margin-left: 10px;
-    color: #F53446;
-    
-}
 
 .float h1 {
     font-size: 18px;
@@ -95,11 +173,11 @@
 button {
     border: 1px solid #363636;
     width: 70%;
-    margin-left: 2.5rem;
+    margin-left: 15%;
     height: 3rem;
     background-color: transparent;
     border-radius: 15px;
-    margin-top: 0.5rem;
+    margin-top:20%;
     padding: 2px;
     font-size: 20px;
     color: #363636;
@@ -114,13 +192,29 @@ button:hover {
     box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.1);
 }
 
+.md-ct-pos {
+    display: none;
+  }
+  
+  .md-ct {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
 @media screen and (max-width:875px) {
 
     .container {
         width: 100%;
-        height: 150vh;
+        height: 200vh;
     }
-
 
     .anuncio {
         margin: 0;
@@ -150,18 +244,21 @@ button:hover {
     }
 
     .info {
-        margin-left: .4rem;
+        margin-left: -.2em;
         margin-top: 25rem;
-        width: 80%;
+        width: 90%;
     }
 
-    .info div {
-        height: 2vh;
+    .info h1 {
+        margin-left: -.5em;
     }
 
     h1 {
         text-align: center;
     }
 
+    .item {
+        width: 50%;
+    }
 
 }

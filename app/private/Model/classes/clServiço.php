@@ -58,7 +58,7 @@ class Serviço {
                 return false;
             }
             segB:
-            $sql2 = "INSERT INTO tb_imagem (`cd_url_serviço`, cd_public_id,`cd_serviço`) VALUES (:cdurlimg,  :publicid, :cdserv)";  # declara a query do insert na tabela imagem do banco de dados, que só é feito após o insert na tabela serviço
+            $sql2 = "INSERT INTO tb_imagem (`cd_url_serviço`, cd_public_id,`cd_serviço`) VALUES (:cdurlimg, :publicid, :cdserv)";  # declara a query do insert na tabela imagem do banco de dados, que só é feito após o insert na tabela serviço
             $stmt2 = $banco->prepare($sql2); # prepara a query com o insert para a execução
             /*Substitui os placeholders da query preparada*/
             $stmt2->bindValue(':cdurlimg', $urlimg);

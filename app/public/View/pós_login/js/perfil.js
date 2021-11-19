@@ -11,7 +11,6 @@ function abreModal(modal) {
     $("#alt-categoria").removeClass("form_anuncio").addClass("md-ct-pos");
   
     $("form#add").submit(function (e) {
-
       e.preventDefault();
 
       var form_data = new FormData();

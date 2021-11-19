@@ -12,7 +12,7 @@ $loader = new FilesystemLoader(DIR_ROOT . '/GitHub/Kamaleao/app/public/View/asse
 $twig = new Environment($loader);
 
 $perfilInfo = unserialize($_SESSION['userinfo']);
-
+// <a class="icone_perf"><img src={{url_foto_perfil|e}}> </a>
 if (isset($_SESSION['userinfoToPerfil'])) {
     $userinfoToPerfil = unserialize($_SESSION['userinfoToPerfil']);
     if (isset($userinfoToPerfil['nm_username']) && isset($userinfoToPerfil['nm_email']) && isset($userinfoToPerfil['nm_senha'])) {
@@ -56,8 +56,20 @@ else:
     if ($_GET['username'] === $username) {
         $slc_categoria = pesquisaCategoria();
         $slc_servic = pesquisaServPerf();
-        echo $twig->render('perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'sltCategoria' => $slc_categoria, 'servicos' => $slc_servic, 'username' => $username]);
-        ob_end_flush();
+        if (!isset($_SESSION['fototoPerfil']) || empty($_SESSION['fototoPerfil']) || $_SESSION['fototoPerfil'] == "" || $_SESSION['fototoPerfil'] == null) {
+            $urlfotoperf = null;
+        }
+        else {
+            $urlfotoperf = $_SESSION['fototoPerfil'];
+        }
+        if ($urlfotoperf == null || $urlfotoperf == "" || empty($urlfotoperf)) {
+            echo $twig->render('perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'sltCategoria' => $slc_categoria, 'servicos' => $slc_servic, 'username' => $username]);
+            ob_end_flush();
+        } else {
+            echo $twig->render('perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'url_foto_perfil' => $urlfotoperf,'sltCategoria' => $slc_categoria, 'servicos' => $slc_servic, 'username' => $username]);
+            ob_end_flush();
+        }
+       
     } else {
         echo $twig->render('servicos.html.twig');
         ob_end_flush();

@@ -33,6 +33,20 @@ function pesquisaServInfo(string $username, string $titulo):mixed {
     }
 }
 
+function pesquisaQuaseServInfo(string $username, string $titulo):mixed {
+    $serviço= new \PesquisaAberta("tb_serviço");
+
+    $rsltSelect =  $serviço->searchAllServMinosEsp($username, $titulo);
+
+    if ($rsltSelect == false) {
+        echo "Houve um problema na conexão. Perdão.";
+        return "Houve um problema na conexão. Perdão.";
+    } else {
+        $servReturn = unserialize($rsltSelect);
+        return $servReturn;
+    }
+}
+
 function pesquisaAllServRec():mixed {
     $serviço= new \PesquisaAberta("tb_serviço");
 
@@ -46,5 +60,6 @@ function pesquisaAllServRec():mixed {
         return $servAllReturn;
     }
 }
+
 
 ?>

@@ -36,7 +36,7 @@ if ((!empty($_FILES['fotoperfil']) && ($_FILES['fotoperfil']['size']> 0) && ($_F
             echo "Uma extensão do servidor interrompeu o upload do arquivo.";
             break;
         default:
-            ob_end_clean();
+            //ob_end_clean();
             $ControllerCriaServiço = new ControllerAlteraFotoPerfil($_FILES['fotoperfil']['name'], $_FILES['fotoperfil']['size'], $_FILES['fotoperfil']['type'], $_FILES['fotoperfil']['tmp_name']);
             break;
     }

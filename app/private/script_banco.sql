@@ -65,7 +65,6 @@ CREATE table IF NOT EXISTS tb_usuario (
     nm_nome VARCHAR(60) NOT NULL,
     nm_sobrenome VARCHAR(200) NOT NULL,
     cd_cpf VARCHAR(11) NOT NULL, -- chave unica index
-    cd_url_foto_perfil VARCHAR(300),
 	ds_usuario VARCHAR(280),
 	`dt_nascimento` DATE NOT NULL,
     `dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -86,6 +85,26 @@ CREATE table IF NOT EXISTS tb_usuario (
 		unique index (cd_cpf))
 CHARACTER SET utf8mb4;
         
+-- tabela foto do perfil
+CREATE table IF NOT EXISTS tb_foto_perfil (
+	-- atributos
+	cd_foto INT  NOT NULL auto_increment, -- chave primaria
+	cd_url_perfil VARCHAR(300),
+	cd_public_id VARCHAR(300),
+	cd_usuario INT UNSIGNED NOT NULL, -- chave estrangeira
+    -- definicao das chaves
+    -- primaria
+    constraint pk_foto_perfil
+		primary key (cd_foto),
+	-- cd_usuario como chave única para garantir relacionamento um pra um
+    constraint `un_cd_usuario`
+		unique index (`cd_usuario`),
+	-- chave estrangeira
+	constraint `fk_usuario_imagem`
+		foreign key (`cd_usuario`)
+			references `tb_usuario` (`cd_usuario`))
+CHARACTER SET utf8mb4;
+
 -- tabela de servicos
 CREATE table IF NOT EXISTS `tb_serviço`(
 	-- atributos
@@ -255,6 +274,8 @@ CHARACTER SET utf8mb4;
 INSERT INTO tb_login (nm_email, nm_username, nm_senha, ic_is_administrador) VALUES ("kamaleaoctt@gmail.com", "administrador", "GabrielzinhoLindo1012", 1), ("carolsenase@gmail.com", "carolina", "PokemonGo", 0), ("gabrielmunizpinto@hotmail.com", "gabriel", "10122003", 0), ("victinho771@gmail.com", "Victor", "Victinho15", 0), ("lucascomercial199@outlook.com", "cachorrospunk", "cachorros123", 0);
 
 INSERT INTO tb_usuario (nm_nome, nm_sobrenome, cd_cpf, dt_nascimento, cd_login) VALUES ("Carolina", "Senha", "43200368337", "2004-08-14", 2), ("Gabriel", "Muniz", "57184892038", "2003-12-10", 3), ("Victor", "Dias Eugênio", "51885494851", "2004-01-15", 4), ("Lucas", "Ribeiro", "23075351865", "2004-03-24", 5);
+
+INSERT INTO tb_foto_perfil (cd_usuario) VALUES (1), (2), (3), (4);
 
 INSERT INTO tb_tipos_licença (nm_licença) VALUES ("Não-Comercial"), ("Comercial"), ("Download");
 

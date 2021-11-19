@@ -4,21 +4,18 @@ require_once "classes/autoloadClass.php";
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php'); #arquivo de configuracao
 
 // Função chamada no controller para verificar se a foto escolhida na atualização pode ser usada
-function atualizaFotoPerfil(string $imgType, $imgtmpName):bool { # define que o parametro a ser passado deve ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller
+function atualizaFotoPerfil(string $imgType, $imgtmpName, string $imgName):bool { # define que o parametro a ser passado deve ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller
     /* De uma maneira geral, o programa segue a seguinte lógica:
         => Verifica se o username está disponível. Dependendo do caso, uma mensagem diferente será exibida
         => Utiliza uma instância da Classe usuário serializada no model que realiza o Login */
     $temp = explode("/", $imgType);
     $extension = end($temp);
     $usuario = unserialize($_SESSION['usuario']);
-    $cdupt = $usuario->getCdUpdate();
+    $cdupt = $usuario->getCdUpdate() - 1;
     if ((!empty($imgtmpName) || isset($imgtmpName) || $imgtmpName != "" || $imgtmpName != null)) {
-        /*
-        if ($usuario->verificaUsername($user)) {
-            //n sei que atualiza
-            $usuario->atualizarUsername($user, $cdupt);
-            $usuario->atualizaPosConfig();
-            return true;*/
+        if ($usuario->perfil->updateFotoPerfil($imgName, $cdupt, $extension, $imgtmpName)) {
+            $usuario->pegaFotoPerfil();
+            return true;
         }
         /*$message = "Este username não está disponível. Tente novamente!";
         return $message;*/
@@ -28,7 +25,8 @@ function atualizaFotoPerfil(string $imgType, $imgtmpName):bool { # define que o 
     /*$message = "O campo inserido está vazio. Não há como atualizar.";
     return $message;*/
     return false;
-// }
+}
+
 // Função chamada no controller para verificar se o username escolhido na atualização estão disponíveis
 function atualizaUsuario(string $user):bool { # define que o parametro a ser passado deve ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller
     /* De uma maneira geral, o programa segue a seguinte lógica:

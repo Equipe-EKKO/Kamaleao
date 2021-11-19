@@ -7,8 +7,8 @@ use Twig\Loader\FilesystemLoader;
 $loader = new FilesystemLoader(DIR_ROOT . '/GitHub/Kamaleao/app/public/View/assets/templates/', '/templates');
 $twig = new Environment($loader);
 
-if ($_SESSION['error'] == null || !isset($_SESSION['error'])){
-    $_SESSION['error'] = "";
+if (!isset($_SESSION['error'])){
+    $_SESSION['error'] = " ";
     $error = $_SESSION['error'];
     echo $twig->render('cadastro.html.twig', ['erro' => $error]);
 }else {

@@ -21,8 +21,7 @@ class ControllerAlteraFotoPerfil {
       ob_end_clean();
       echo 'O arquivo adicionado é maior que 50MB.';
       return false;
-    } else { 
-      ob_end_clean();
+    } else {
       return true;
     }
   }
@@ -36,7 +35,7 @@ class ControllerAlteraFotoPerfil {
   }
   private function chamaModel() {
     if ($this->validaFoto()) {
-      if (atualizaFotoPerfil($this->imgType, $this->imgtmpName)):
+      if (atualizaFotoPerfil($this->imgType, $this->imgtmpName, $this->imgName)):
         ob_end_clean();
         echo true;
         return true;

@@ -1,3 +1,7 @@
+* {
+    font-family: 'Trebuchet MS', sans-serif;
+  }
+
 .container {
     padding-bottom: 5rem;
     height: fit-content;
@@ -13,6 +17,12 @@
     width: 90%;
     padding-top: 0.5rem;
     row-gap: 2rem;
+}
+
+.titulo_home {
+    margin: 2% 5% 2%;
+    font-weight: 600;
+    color: #363636;
 }
 
 .item {
@@ -74,17 +84,25 @@
 
 .anuncio_preço h2 {
     font-size: 12pt;
-    color: #363636;
+    color: #737373;
     transition: .4s;
     margin-right: 0.5rem;
     float: right;
 }
 
-.anuncio_user h3 {
-    color: #808080;
+.anuncio_user h3 a{
+    color: #737373;
     font-size: 10pt;
     margin: 0.2rem 0.5rem;
+    transition: .2s;
+}
 
+.anuncio_user h3 a:hover {
+    color: #F53446;
+}
+
+.anuncio_preço h2 {
+    color: #363636;
 }
 
 .loader {

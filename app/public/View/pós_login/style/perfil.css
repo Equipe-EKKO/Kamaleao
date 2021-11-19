@@ -14,14 +14,13 @@
     padding-bottom: 3rem;
     text-align: center;
     padding-top:  80px;
-    font-family: 'Urbanist'; 
   }
   
   .icone_perf {
     color: #fff;
     font-size: 125px;
   }
-
+  
   .icone_perf:hover {
     color: #fff;
   }
@@ -120,7 +119,6 @@
 
   #Sobre h1{
     padding: 5rem;
-    font-family: 'Urbanist';
     font-size: 2rem;
   }
   
@@ -389,7 +387,6 @@ select option {
   cursor: pointer;
   font-size: 28px;
   color: #363636;
-  font-family: 'Urbanist', sans-serif;
 }
 
 .form_anuncio .botao:hover, .editar-excluir .botao:hover {
@@ -441,7 +438,6 @@ select option {
 }
 
 textarea  {  
-   font-family: 'Lucida Sans', sans-serif;
    font-size: 10px;   
 }
 
@@ -449,8 +445,9 @@ textarea  {
   margin: 0 auto;
   background: #ffff;
   border-radius: 10px 10px 10px 10px;
-  height: 12.8rem;
-  width: 85%;
+  height: 13rem;
+  width: 100%;
+  max-width: 12.8rem;
   border: 1px solid #ccc;
   cursor: pointer;
   transition: .6s;
@@ -467,10 +464,11 @@ textarea  {
 }
 
 .anuncio_img {
+    display: block;
+    margin: 0 auto;
     width: 100%;
     height: 100%;
     border-radius: 10px 10px 0 0;
-    background-color: powderblue;
 }
 
 .anuncio_text {
@@ -548,7 +546,6 @@ textarea  {
   margin-top: 2em;
   margin-bottom: 1rem;
   font-size: 1.10rem;
-  font-family: 'Urbanist', sans-serif;
 }
 
 .erro {
@@ -593,7 +590,6 @@ textarea  {
   border-radius: 20px;
   font-size: 1.5rem; 
   font-weight: bold;
-  font-family: 'Urbanist', sans-serif;
   color: rgba(54, 54, 54, 1);
   margin-top: 5%;
 }
@@ -775,7 +771,6 @@ span#liSub, span#catSub {
   cursor: pointer;
   font-size: 28px;
   color: #363636;
-  font-family: 'Urbanist', sans-serif;
 }
 
 .editar .botao:hover {
@@ -869,14 +864,7 @@ span#liSub, span#catSub {
       
     }*/
 
-    .tab {
-      width: 100%;
-      display: block;
-      background: none;
-      text-align: center;
-      margin-left: -1.5rem;
 
-    }
 
     #bt1, #bt2, #bt3 {
       border-radius: 30px 30px 0 0;
@@ -892,13 +880,6 @@ span#liSub, span#catSub {
 
     #bt3 {
       margin-left: -1.5rem;
-    }
-
-
-    .tab div {
-      background: none;
-      border-radius: 0;
-      width: 30%;
     }
 
     .form_anuncio{
