@@ -140,7 +140,7 @@ class ControllerAlteraTitulo{
       endif;
     }
   }
-}/*
+}
 //Classe controller altera preço
 class ControllerAlteraPreço{
   private $preçoMedio, $cdServiço; #float || #inteiro 
@@ -168,7 +168,7 @@ class ControllerAlteraPreço{
 
   private function chamaModel() {
     if ($this->validaPreçoServiço()) {
-      if(atualizaPreço($this->preçoMedio)):
+      if(atualizaPreço($this->preçoMedio, $this->cdServiço)):
         ob_end_clean();
         echo true;
       else:
@@ -205,7 +205,7 @@ class ControllerAlteraDescricao{
 
   private function chamaModel() {
     if ($this->validaDescricaoServiço()) {
-      if(atualizaDescricaoAnuncio($this->descricao)):
+      if(atualizaDescricaoAnuncio($this->descricao, $this->cdServiço)):
         ob_end_clean();
         echo true;
       else:
@@ -238,7 +238,7 @@ class ControllerAlteraLicença{
 
   private function chamaModel() {
     if ($this->validaLicençaServiço()) {
-      if(atualizaLicença($this->licença)):
+      if(atualizaLicença($this->licença, $this->cdServiço)):
         ob_end_clean();
         echo true;
       else:
@@ -271,7 +271,7 @@ class ControllerAlteraCategoria{
 
   private function chamaModel() {
     if ($this->validaCategoriaServiço()) {
-      if(atualizaCategoria($this->optionCategoria)):
+      if(atualizaCategoria($this->optionCategoria, $this->cdServiço)):
         ob_end_clean();
         echo true;
       else:
@@ -281,5 +281,4 @@ class ControllerAlteraCategoria{
     }
   }
 }
-*/
 ?>

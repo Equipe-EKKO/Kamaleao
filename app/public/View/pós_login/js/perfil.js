@@ -115,8 +115,6 @@ function abreModal(modal) {
       var titulo = $('#alt-tit').val(), 
           cdServ = $("p#hiddenedita1").text();
 
-      alert("titulo novo: " + titulo + " cd_servico: " + cdServ)
-
       $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraTitulo.php", { titulo: titulo, cd_serviço: cdServ }, function (resposta) {
         alert(resposta);
         /*
@@ -164,9 +162,8 @@ function abreModal(modal) {
       var preco = $('#alt-prec').val(), 
           cdServ = $("p#hiddenedita2").text();
 
-      alert("titulo novo: " + titulo + " cd_servico: " + cdServ)
-
       $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraPreço.php", { preço: preco, cd_serviço: cdServ }, function (resposta) {
+        alert(resposta);
         alert(resposta);
         /*
         if (resposta == 1) {
@@ -213,7 +210,7 @@ function abreModal(modal) {
       var desc = $('#alt-desci').val(), 
           cdServ = $("p#hiddenedita3").text();
 
-      alert("titulo novo: " + titulo + " cd_servico: " + cdServ)
+      alert("desc novo: " + desc + " cd_servico: " + cdServ)
 
       $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraDescricaoAnuncio.php", { descricao: desc, cd_serviço: cdServ }, function (resposta) {
         alert(resposta);
