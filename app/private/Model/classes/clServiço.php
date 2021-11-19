@@ -159,6 +159,190 @@ class Serviço {
             return false;
         }
     }
+    public function editaServiçoTitulo(string $newtitulo, int $cdServiço):mixed {
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+
+        $sql = "SELECT * FROM tb_serviço WHERE cd_serviço = :cd_serv"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara a query para execução
+        /*Substitui os valores de cada placeholder na query preparada*/
+        $stmt->bindValue(':cd_serv', $cdServiço); 
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $contaserv = $stmt->rowCount();
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+        if ($contaserv == 1) {
+            $sql = "UPDATE tb_serviço SET nm_serviço = :titulo WHERE cd_serviço = :cdServ"; # declara a query do insert na tabela login do banco de dados 
+            $stmt = $banco->prepare($sql); # prepara a query para execução
+            /*Substitui os valores de cada placeholder na query preparada*/
+            $stmt->bindValue(':titulo', $newtitulo); 
+            $stmt->bindValue(':cdServ', $cdServiço);
+
+            /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
+            try {
+                $stmt->execute(); # executa a query preparada anteriormente
+                return true;
+            } catch (\PDOException $e) {
+                exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+                return false;
+            }
+        } else {
+            return "Esse serviço não existe";
+        }
+        
+    }
+
+    public function editaServiçoPreço(float $newpreço, int $cdServiço):mixed {
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+
+        $sql = "SELECT * FROM tb_serviço WHERE cd_serviço = :cd_serv"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara a query para execução
+        /*Substitui os valores de cada placeholder na query preparada*/
+        $stmt->bindValue(':cd_serv', $cdServiço); 
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $contaserv = $stmt->rowCount();
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+        if ($contaserv == 1) {
+            $sql = "UPDATE tb_serviço SET vl_serviço = :valor WHERE cd_serviço = :cdServ"; # declara a query do insert na tabela login do banco de dados 
+            $stmt = $banco->prepare($sql); # prepara a query para execução
+            /*Substitui os valores de cada placeholder na query preparada*/
+            $stmt->bindValue(':valor', $newpreço); 
+            $stmt->bindValue(':cdServ', $cdServiço);
+
+            /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
+            try {
+                $stmt->execute(); # executa a query preparada anteriormente
+                return true;
+            } catch (\PDOException $e) {
+                exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+                return false;
+            }
+        } else {
+            return "Esse serviço não existe";
+        }
+        
+    }
+
+    public function editaServiçoDesc(string $newdesc, int $cdServiço):mixed {
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+
+        $sql = "SELECT * FROM tb_serviço WHERE cd_serviço = :cd_serv"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara a query para execução
+        /*Substitui os valores de cada placeholder na query preparada*/
+        $stmt->bindValue(':cd_serv', $cdServiço); 
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $contaserv = $stmt->rowCount();
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+        if ($contaserv == 1) {
+            $sql = "UPDATE tb_serviço SET ds_serviço = :descri WHERE cd_serviço = :cdServ"; # declara a query do insert na tabela login do banco de dados 
+            $stmt = $banco->prepare($sql); # prepara a query para execução
+            /*Substitui os valores de cada placeholder na query preparada*/
+            $stmt->bindValue(':descri', $newdesc); 
+            $stmt->bindValue(':cdServ', $cdServiço);
+
+            /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
+            try {
+                $stmt->execute(); # executa a query preparada anteriormente
+                return true;
+            } catch (\PDOException $e) {
+                exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+                return false;
+            }
+        } else {
+            return "Esse serviço não existe";
+        }
+        
+    }
+
+    public function editaServiçoLic(string $newlic, int $cdServiço):mixed {
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+
+        $sql = "SELECT * FROM tb_serviço WHERE cd_serviço = :cd_serv"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara a query para execução
+        /*Substitui os valores de cada placeholder na query preparada*/
+        $stmt->bindValue(':cd_serv', $cdServiço); 
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $contaserv = $stmt->rowCount();
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+        if ($contaserv == 1) {
+            $sql = "UPDATE tb_serviço SET cd_licença = :lic WHERE cd_serviço = :cdServ"; # declara a query do insert na tabela login do banco de dados 
+            $stmt = $banco->prepare($sql); # prepara a query para execução
+            /*Substitui os valores de cada placeholder na query preparada*/
+            $stmt->bindValue(':lic', $newlic); 
+            $stmt->bindValue(':cdServ', $cdServiço);
+
+            /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
+            try {
+                $stmt->execute(); # executa a query preparada anteriormente
+                return true;
+            } catch (\PDOException $e) {
+                exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+                return false;
+            }
+        } else {
+            return "Esse serviço não existe";
+        }
+        
+    }
+    
+    public function editaServiçoCategoria(string $newcat, int $cdServiço):mixed {
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+
+        $sql = "SELECT * FROM tb_serviço WHERE cd_serviço = :cd_serv"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara a query para execução
+        /*Substitui os valores de cada placeholder na query preparada*/
+        $stmt->bindValue(':cd_serv', $cdServiço); 
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $contaserv = $stmt->rowCount();
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+        if ($contaserv == 1) {
+            $sql = "UPDATE tb_serviço SET cd_categoria = :cate WHERE cd_serviço = :cdServ"; # declara a query do insert na tabela login do banco de dados 
+            $stmt = $banco->prepare($sql); # prepara a query para execução
+            /*Substitui os valores de cada placeholder na query preparada*/
+            $stmt->bindValue(':cate', $newcat); 
+            $stmt->bindValue(':cdServ', $cdServiço);
+
+            /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
+            try {
+                $stmt->execute(); # executa a query preparada anteriormente
+                return true;
+            } catch (\PDOException $e) {
+                exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+                return false;
+            }
+        } else {
+            return "Esse serviço não existe";
+        }
+        
+    }
 
     private function verificaDados():bool {
         $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático

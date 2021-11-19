@@ -1,3 +1,7 @@
+* {
+  font-family: 'Lucida Sans', sans-serif;
+}
+
 .nav_filtro {
   display: none;
 }
@@ -436,6 +440,10 @@ select option {
   height: 100%;
 }
 
+textarea  {  
+   font-family: 'Lucida Sans', sans-serif;
+   font-size: 10px;   
+}
 
 .item {
   margin: 0 auto;

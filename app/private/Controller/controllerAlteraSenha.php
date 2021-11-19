@@ -5,13 +5,9 @@ require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 
 ob_end_clean();
 
-/*, $_POST['descricao'], $_POST['email'], $_POST['chavepix'], $_POST['senha'], $_POST['confsenha']*/
-
 if (!empty($_POST)) { #verifica se o formulário está enviando algo ao controller
     $ControllerLogin = new ControllerAlteraSenha($_POST['senha'], $_POST['confsenha']);
-} else {
-    /*$_SESSION["error"] = 'Nada foi enviado';
-    header("Location: /Github/Kamaleao/app/public/View/pós_login/config_perfil/config_perfil.php");*/
+} else {   
     echo "Nada foi enviado";
     #Caso contrário ele retorna o erro 
 }

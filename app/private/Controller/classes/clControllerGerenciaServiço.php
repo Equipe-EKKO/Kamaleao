@@ -179,7 +179,7 @@ class ControllerAlteraPreço{
   }
 }
 //Classe controller altera descrição
-class ControllerAlteraDescricao{
+class ControllerAlteraDescricaoAnuncio{
   private $descricao, $cdServiço; #string || #inteiro
   private function validaDescricaoServiço():bool{ #Função bool para ver se todos os campos estão corretos para mandar ao model
     if ($this->descricao == null) {

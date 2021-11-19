@@ -35,68 +35,63 @@ function atualizaTitulo(string $titulo,int $cdServ) {
     $serviço = new \Serviço($titulo , "", 0, 0, 0);
     $usuario = unserialize($_SESSION['usuario']);
     $usuario->perfil->setServiço($serviço);
-    /*
-    if ($usuario->perfil->serviço->excluiServiço($cdServ)) {
+    if ($respo = $usuario->perfil->serviço->editaServiçoTitulo($titulo, $cdServ)) {
         echo true;
         return true;
     } else {
-        return false;
-    }*/
-    return true;
+        echo $respo;
+        return $respo;
+    }
 }
 // Função chamada no controller para mudar o preço do serviço
 function atualizaPreço(float $preço, int $cdServ) {
     $serviço = new \Serviço("", "", $preço, 0, 0);
     $usuario = unserialize($_SESSION['usuario']);
     $usuario->perfil->setServiço($serviço);
-    /*
-    if ($usuario->perfil->serviço->excluiServiço($cdServ)) {
+    if ($respo = $usuario->perfil->serviço->editaServiçoPreço($preço, $cdServ)) {
         echo true;
         return true;
     } else {
-        return false;
-    }*/
-    return true;
+        echo $respo;
+        return $respo;
+    }
 }
 // Função chamada no controller para mudar a descrição do serviço
 function atualizaDescricaoAnuncio(string $desc, int $cdServ) {
     $serviço = new \Serviço("", $desc, 0, 0, 0);
     $usuario = unserialize($_SESSION['usuario']);
     $usuario->perfil->setServiço($serviço);
-    /*
-    if ($usuario->perfil->serviço->excluiServiço($cdServ)) {
+    if ($respo = $usuario->perfil->serviço->editaServiçoDesc($desc, $cdServ)) {
         echo true;
         return true;
     } else {
-        return false;
-    }*/
-    return true;
+        echo $respo;
+        return $respo;
+    }
 }
 // Função chamada no controller para mudar a licença do serviço
 function atualizaLicença(int $licenca, int $cdServ) {
     $serviço = new \Serviço("", "", 0, $licenca, 0);
     $usuario = unserialize($_SESSION['usuario']);
     $usuario->perfil->setServiço($serviço);
-    /*
-    if ($usuario->perfil->serviço->excluiServiço($cdServ)) {
+    if ($respo = $usuario->perfil->serviço->editaServiçoLic($licenca, $cdServ)) {
         echo true;
         return true;
     } else {
-        return false;
-    }*/
-    return true;
+        echo $respo;
+        return $respo;
+    }
 }
 // Função chamada no controller para mudar a categoria do serviço
 function atualizaCategoria(int $categoria, int $cdServ) {
     $serviço = new \Serviço("", "", 0, 0, $categoria);
     $usuario = unserialize($_SESSION['usuario']);
     $usuario->perfil->setServiço($serviço);
-    /*
-    if ($usuario->perfil->serviço->excluiServiço($cdServ)) {
+    if ($respo = $usuario->perfil->serviço->editaServiçoCategoria($categoria, $cdServ)) {
         echo true;
         return true;
     } else {
-        return false;
-    }*/
-    return true;
+        echo $respo;
+        return $respo;
+    }
 }

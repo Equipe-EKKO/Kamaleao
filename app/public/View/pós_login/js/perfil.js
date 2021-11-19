@@ -45,7 +45,7 @@ function abreModal(modal) {
             $(sucesso).appendTo("p.form-message");
             setTimeout(function () {
               fechaModal('add');
-              location.reload(true)
+              location.reload(true);
 
             }, 1000);
 
@@ -116,29 +116,29 @@ function abreModal(modal) {
           cdServ = $("p#hiddenedita1").text();
 
       $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraTitulo.php", { titulo: titulo, cd_serviço: cdServ }, function (resposta) {
-        alert(resposta);
-        /*
         if (resposta == 1) {
-          
-          $("p.form-message").removeAttr("hidden");
+          $("p#resultsec").removeAttr("hidden");
           $("p#resultsec").addClass("sucesso");
-          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> Seu username foi atualizado!</span>";
-          $(sucesso).appendTo("p.form-message");
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span>O título do serviço foi atualizado!</span>";
+          $(sucesso).appendTo("p#resultsec");
 
           setTimeout(function () {
-            fechaModal();
+            fechaModal('alt-titulo');
+            fechaModal('modal-editar');
+            location.reload(true);
+
           }, 1000);
                                 
         } else {
-          $("p.form-message").removeAttr("hidden");         
+          $("p#resultsec").removeAttr("hidden");         
           $("p#resultsec").addClass("erro");                   
           var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";           
-          var mes = $("p.form-message").html();            
+          var mes = $("p#resultsec").html();            
           if (mes.includes("atualizado") == false) {
-            $("p.form-message").empty();
-            $(erro).appendTo("p.form-message");
+            $("p#resultsec").empty();
+            $(erro).appendTo("p#resultsec");
           }         
-        }*/   
+        }
       });
     });
   } else if  (modal == "preco") {
@@ -156,37 +156,35 @@ function abreModal(modal) {
       $("p#resultthird").removeClass("erro");
     });
 
-    /*AJAX PRA TROCAR O TITULO*/
+    /*AJAX PRA TROCAR O PREÇO*/
     $("#alt-preco").submit(function (e) {
       e.preventDefault(); // Stop form from submitting normally
       var preco = $('#alt-prec').val(), 
           cdServ = $("p#hiddenedita2").text();
 
       $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraPreço.php", { preço: preco, cd_serviço: cdServ }, function (resposta) {
-        alert(resposta);
-        alert(resposta);
-        /*
         if (resposta == 1) {
-          
-          $("p.form-message").removeAttr("hidden");
-          $("p#resultsec").addClass("sucesso");
-          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> Seu username foi atualizado!</span>";
+          $("p#resultthird").removeAttr("hidden");
+          $("p#resultthird").addClass("sucesso");
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span>O preço médio do serviço foi atualizado!</span>";
           $(sucesso).appendTo("p.form-message");
 
           setTimeout(function () {
-            fechaModal();
+            fechaModal('alt-preco');
+            fechaModal('modal-editar');
+            location.reload(true);
           }, 1000);
                                 
         } else {
-          $("p.form-message").removeAttr("hidden");         
-          $("p#resultsec").addClass("erro");                   
+          $("p#resultthird").removeAttr("hidden");         
+          $("p#resultthird").addClass("erro");                   
           var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";           
-          var mes = $("p.form-message").html();            
+          var mes = $("p#resultthird").html();            
           if (mes.includes("atualizado") == false) {
-            $("p.form-message").empty();
-            $(erro).appendTo("p.form-message");
+            $("p#resultthird").empty();
+            $(erro).appendTo("p#resultthird");
           }         
-        }*/   
+        } 
       });
     });
   } else if  (modal == "desc") {
@@ -204,38 +202,35 @@ function abreModal(modal) {
       $("p#resultfourth").removeClass("erro");
     });
 
-    /*AJAX PRA TROCAR O TITULO*/
+    /*AJAX PRA TROCAR A DESCRIÇÃO*/
     $("#alt-desc").submit(function (e) {
       e.preventDefault(); // Stop form from submitting normally
       var desc = $('#alt-desci').val(), 
           cdServ = $("p#hiddenedita3").text();
 
-      alert("desc novo: " + desc + " cd_servico: " + cdServ)
-
       $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraDescricaoAnuncio.php", { descricao: desc, cd_serviço: cdServ }, function (resposta) {
-        alert(resposta);
-        /*
         if (resposta == 1) {
-          
-          $("p.form-message").removeAttr("hidden");
-          $("p#resultsec").addClass("sucesso");
-          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> Seu username foi atualizado!</span>";
-          $(sucesso).appendTo("p.form-message");
+          $("p#resultfourth").removeAttr("hidden");
+          $("p#resultfourth").addClass("sucesso");
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span>A descrição do serviço foi atualizada!</span>";
+          $(sucesso).appendTo("p#resultfourth");
 
           setTimeout(function () {
-            fechaModal();
+            fechaModal('alt-desc');
+            fechaModal('modal-editar');
+            location.reload(true);
           }, 1000);
                                 
         } else {
-          $("p.form-message").removeAttr("hidden");         
-          $("p#resultsec").addClass("erro");                   
+          $("p#resultfourth").removeAttr("hidden");         
+          $("p#resultfourth").addClass("erro");                   
           var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";           
-          var mes = $("p.form-message").html();            
-          if (mes.includes("atualizado") == false) {
-            $("p.form-message").empty();
-            $(erro).appendTo("p.form-message");
+          var mes = $("p#resultfourth").html();            
+          if (mes.includes("atualizada") == false) {
+            $("p#resultfourth").empty();
+            $(erro).appendTo("p#resultfourth");
           }         
-        }*/   
+        }
       });
     });
   } else if (modal == "licenca") {
@@ -245,39 +240,36 @@ function abreModal(modal) {
     $("p#resultfifth").removeClass("sucesso");
     $("p#resultfifth").removeClass("erro");
 
-    /*AJAX PRA TROCAR O TITULO*/
+    /*AJAX PRA TROCAR A lICENÇA*/
     $("#alt-licenca").submit(function (e) {
       e.preventDefault(); // Stop form from submitting normally
       var lic = $('input[name="licenca2"]:checked').val(), 
           cdServ = $("p#hiddenedita4").text();
-
-      alert("licença novo: " + lic + " cd_servico: " + cdServ)
-      /*
+      
       $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraLicença.php", { licença: lic, cd_serviço: cdServ }, function (resposta) {
-        alert(resposta);
-        /*
         if (resposta == 1) {
-          
-          $("p.form-message").removeAttr("hidden");
-          $("p#resultsec").addClass("sucesso");
-          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> Seu username foi atualizado!</span>";
-          $(sucesso).appendTo("p.form-message");
+          $("p#resultfifth").removeAttr("hidden");
+          $("p#resultfifth").addClass("sucesso");
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span>A licença do serviço foi atualizada!</span>";
+          $(sucesso).appendTo("p#resultfifth");
 
           setTimeout(function () {
-            fechaModal();
+            fechaModal('alt-licenca');
+            fechaModal('modal-editar');
+            location.reload(true);
           }, 1000);
                                 
         } else {
-          $("p.form-message").removeAttr("hidden");         
-          $("p#resultsec").addClass("erro");                   
+          $("p#resultfifth").removeAttr("hidden");         
+          $("p#resultfifth").addClass("erro");                   
           var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";           
-          var mes = $("p.form-message").html();            
-          if (mes.includes("atualizado") == false) {
-            $("p.form-message").empty();
-            $(erro).appendTo("p.form-message");
+          var mes = $("p#resultfifth").html();            
+          if (mes.includes("atualizada") == false) {
+            $("p#resultfifth").empty();
+            $(erro).appendTo("p#resultfifth");
           }         
-        }   
-      });*/
+        }
+      });
     });
   } else if (modal == "categoria") {
     $("#md-pr2").removeClass("md-ct-pos").addClass("md-ct");
@@ -286,39 +278,36 @@ function abreModal(modal) {
     $("p#resultsixth").removeClass("sucesso");
     $("p#resultsixth").removeClass("erro");
 
-    /*AJAX PRA TROCAR O TITULO*/
+    /*AJAX PRA TROCAR A CATEGORIA*/
     $("#alt-categoria").submit(function (e) {
       e.preventDefault(); // Stop form from submitting normally
       var cat =  $('#select_cat2').val(), 
           cdServ = $("p#hiddenedita5").text();
-
-      alert("categoria: " + cat + " cd_servico: " + cdServ)
-      /*
-      $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraLicença.php", { licença: lic, cd_serviço: cdServ }, function (resposta) {
-        alert(resposta);
-        /*
+      
+      $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraCategoria.php", { categoria: cat, cd_serviço: cdServ }, function (resposta) {
         if (resposta == 1) {
-          
-          $("p.form-message").removeAttr("hidden");
-          $("p#resultsec").addClass("sucesso");
-          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> Seu username foi atualizado!</span>";
-          $(sucesso).appendTo("p.form-message");
+          $("p#resultsixth").removeAttr("hidden");
+          $("p#resultsixth").addClass("sucesso");
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span>A categoria do serviço foi atualizada!</span>";
+          $(sucesso).appendTo("p#resultsixth");
 
           setTimeout(function () {
-            fechaModal();
+            fechaModal('alt-categoria');
+            fechaModal('modal-editar');
+            location.reload(true);
           }, 1000);
                                 
         } else {
-          $("p.form-message").removeAttr("hidden");         
-          $("p#resultsec").addClass("erro");                   
+          $("p#resultsixth").removeAttr("hidden");         
+          $("p#resultsixth").addClass("erro");                   
           var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";           
           var mes = $("p.form-message").html();            
           if (mes.includes("atualizado") == false) {
-            $("p.form-message").empty();
-            $(erro).appendTo("p.form-message");
+            $("p#resultsixth").empty();
+            $(erro).appendTo("p#resultsixth");
           }         
-        }   
-      });*/
+        }
+      });
     });
   }
 }
