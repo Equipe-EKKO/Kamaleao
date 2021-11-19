@@ -178,6 +178,7 @@ input[type=text], form input[type=password] {
   border-radius: 50%;
   cursor: pointer;
   transition: .4s;
+  background-color: rgba(0,0,0,.3);
 }
 
 .icone_perf:hover {
@@ -277,6 +278,28 @@ textarea {
   margin-top: 1rem;
 }
 
+.perf_img {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}
+
+.perf_img + i#hoverpen {
+  opacity: 0;
+  position: absolute;
+  top: 32%;
+  right: 48.5%;
+}
+
+.perf_img:hover{
+  opacity: 0.4;
+}
+
+.perf_img:hover + i#hoverpen {
+  opacity: 1;
+  color: #F53446;
+  
+}
 
 /* RESPONSIVIDADE */
 

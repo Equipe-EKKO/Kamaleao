@@ -48,15 +48,14 @@ class PerfilProprio extends Perfil {
         try {
             $stmt->execute(); # executa a query preparada 
             $contaLinha = $stmt->rowCount(); # armazena numa variável o valor de quantas linhas existem no retorno desse select
+            $publicid = $stmt->fetchColumn();
         } catch (\PDOException $e) {
             exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
             return false;
         }
 
-        if ($contaLinha > 0) {
-            $stmt->execute(); # executa a query preparada 
-            $publicidold = $stmt->fetchColumn();
-            if((new UploadApi())->destroy($publicidold)):
+        if (!empty($publicid)) {
+            if((new UploadApi())->destroy($publicid)):
                 $nmtemp = explode(" ", $imgName);
                 $partnewname = strtolower(end($nmtemp)) . random_int(1, 999);
                 $newname = $cd_usuario . "_profile_" . $partnewname . "." . $extimagem;
@@ -103,6 +102,50 @@ class PerfilProprio extends Perfil {
             else:
                 return false;
             endif;
+        } else {
+            $nmtemp = explode(" ", $imgName);
+            $partnewname = strtolower(end($nmtemp)) . random_int(1, 999);
+            $newname = $cd_usuario . "_profile_" . $partnewname . "." . $extimagem;
+            $newfullpath = realpath(dirname(__FILE__, 2));
+            if (move_uploaded_file($tmpImg, $newfullpath."/image/profile/" . $newname)) {
+                if ($objeto = (new UploadApi())->upload($newfullpath."/image/profile/" . $newname , ["folder" => "img_profile", "use_filename" => true, "unique_filename" => true, "overwrite" => false])){
+                    $arrayResult = (array) $objeto;
+                    if ($this->salvaFotoPerfil($cd_usuario, $arrayResult['url'], $arrayResult['public_id'])) {
+                        $old = getcwd(); // Save the current directory
+                        chdir($newfullpath."/image/profile/");
+                        if (unlink($newname)) {
+                            chdir($old); // Restore the old working directory
+                            return true;
+                        }else {
+                            chdir($old); // Restore the old working directory
+                            return false;
+                        }
+                    } else {
+                        (new UploadApi())->destroy($arrayResult['public_id']);
+                        $old = getcwd(); // Save the current directory
+                        chdir($newfullpath."/image/profile/");
+                        if (unlink($newname)) {
+                            chdir($old); // Restore the old working directory
+                            $resposta  = ob_get_flush();
+                            ob_end_clean();
+                            echo "Erro ao salvar o serviço no banco de dados. <br> " . $resposta;
+                            return false;
+                        }
+                    }
+                } else {
+                    $old = getcwd(); // Save the current directory
+                    chdir($newfullpath."/image/profile/");
+                    unlink($newname);
+                    chdir($old); // Restore the old working directory
+                    ob_end_clean();
+                    echo "A imagem não pode ser salva no Cloudinary.";
+                    return false;
+                }
+            } else {
+                ob_end_clean();
+                echo "Problema em salvar a imagem (temporariamente) no servidor.";
+                return false;
+            }
         }
     }
     function updateDescricao(string $desc, int $cdUpdate) {

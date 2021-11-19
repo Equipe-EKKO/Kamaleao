@@ -35,7 +35,7 @@ class ControllerAlteraFotoPerfil {
   }
   private function chamaModel() {
     if ($this->validaFoto()) {
-      if (atualizaFotoPerfil($this->imgType, $this->imgtmpName, $this->imgName)):
+      if (atualizaFotoPerfil($this->imgType, $this->imgtmpName, $this->imgName) == true):
         ob_end_clean();
         echo true;
         return true;

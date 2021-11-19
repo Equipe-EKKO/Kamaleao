@@ -209,6 +209,21 @@ button:hover {
     align-items: center;
   }
 
+#titSub {
+    color: rgb(46, 46, 46);
+    font-size: 18pt;
+}
+  
+#valSub {
+    color: #F53446;
+    font-size: 28pt;
+}
+span#liSub, span#catSub {
+    color: #F53446;
+    font-style: italic;
+}
+  
+
 @media screen and (max-width:875px) {
 
     .container {

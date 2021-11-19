@@ -13,7 +13,9 @@
       {% block perfil_icon %}
       <div class="perfil_icon">
         {% if url_foto_perfil is defined %}
-          <a class="icone_perf"><img src={{url_foto_perfil|e}}></a>
+          <div class="foto_perf">
+            <img class="perf_img" src={{url_foto_perfil|e}}> </img>
+          </div>
         {% else %}
           <a class="icone_perf"><i class='bx bxs-user-circle'></i></a>
         {% endif %}

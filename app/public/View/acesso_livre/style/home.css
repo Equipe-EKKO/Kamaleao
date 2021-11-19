@@ -13,10 +13,11 @@
     grid-template-columns: 25% 25% 25% 25%;
     grid-template-rows: auto;
     margin: 0 auto;
-    height: 100%;
+    min-height: 60vh;
     width: 90%;
     padding-top: 0.5rem;
     row-gap: 2rem;
+    height: fit-content;
 }
 
 .titulo_home {

@@ -11,11 +11,11 @@
             </div>
             
             <div class="float">
-               <h1>{{titulo}}</h1>
+               <h1 id="titSub">{{titulo}}</h1>
                <h2>Feito por: <a href="/Github/Kamaleao/app/public/view/pós_login/perfil/perfil?username={{usernameserv|e}}">@{{usernameserv}}</a></h2>
-               <h2>Preço médio: R${{preço}}</h2>
-               <h2>Licença: Licença de {{licença}}</h2>
-               <h2>Categoria: {{categoria}}</h2>
+               <h2 id="valSub">R${{preço}}</h2>
+               <h2><strong>Licença:</strong> <span id="liSub">Licença de {{licença}}</span></h2>
+               <h2><strong>Categoria:</strong> <span id="catSub">{{categoria}}  </span></h2>
                {% if (username != usernameserv) %}
                <button type="submit">Solicitar Serviço</button>
                {% endif %}
@@ -41,7 +41,7 @@
                            <h1 name="titulo-item" >{{servico.titulo|e}}</h1>
                         </div> <!--anuncio_titulo-->
                         <div class="anuncio_user">
-                           <h3 name="username-item">@{{servico.username|e}}</h3>
+                           <h3 name="username-item">@{{username|e}}</h3>
                         </div> <!--user-->
                         <div class="anuncio_preço">
                            <h2>R${{servico.preço|e}}</h2>

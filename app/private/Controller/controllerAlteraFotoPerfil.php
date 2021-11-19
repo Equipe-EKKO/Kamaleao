@@ -3,7 +3,6 @@ ob_start();
 require_once 'classes/clControllerAlteraInformacoes.php';
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 
-ob_end_clean();
 
 if ((!empty($_FILES['fotoperfil']) && ($_FILES['fotoperfil']['size']> 0) && ($_FILES['fotoperfil']["error"] == 0))) { #verifica se o formulário está enviando algo ao controller
     switch($_FILES['fotoperfil']["error"]) {

@@ -50,6 +50,17 @@ if ($username === "userIndefinido"):
     $_SESSION["error"] = 'Você precisa estar logado para acessar esta página!';
     header("Location: /Github/Kamaleao/app/public/view/pré_login/login/login.php");
 else:
-    echo $twig->render('config_perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'Email' => $email, 'Senha' => $senha, 'username' => $username]);
-    ob_end_flush();
+    if (!isset($_SESSION['fototoPerfil']) || empty($_SESSION['fototoPerfil']) || $_SESSION['fototoPerfil'] == "" || $_SESSION['fototoPerfil'] == null) {
+        $urlfotoperf = null;
+    }
+    else {
+        $urlfotoperf = $_SESSION['fototoPerfil'];
+    }
+    if ($urlfotoperf == null || $urlfotoperf == "" || empty($urlfotoperf)) {
+        echo $twig->render('config_perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'Email' => $email, 'Senha' => $senha, 'username' => $username]);
+        ob_end_flush();
+    } else {
+        echo $twig->render('config_perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'Email' => $email, 'Senha' => $senha, 'username' => $username, 'url_foto_perfil' => $urlfotoperf]);
+        ob_end_flush();
+    }
 endif;

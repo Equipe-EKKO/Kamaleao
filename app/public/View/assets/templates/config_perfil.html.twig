@@ -36,9 +36,14 @@
           <h1> Informações pessoais:</h1>
           <div class="info_icone">
             <div class="icone_perf" onclick="abreModal('icone')">
-              <div class="icone_edit">
-                <i class="fas fa-pen"></i>
-              </div>
+              {% if url_foto_perfil is defined %}
+                <img class="perf_img" src={{url_foto_perfil|e}}> </img>
+                <i class="fas fa-pen" id="hoverpen"></i>
+              {% else %}
+                <div class="icone_edit">
+                  <i class="fas fa-pen"></i>
+                </div>
+              {% endif %}
             </div>
           </div>
           <div class="info_perfil" onclick="abreModal('username')">

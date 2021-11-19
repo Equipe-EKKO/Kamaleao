@@ -21,6 +21,7 @@ function atualizaFotoPerfil(string $imgType, $imgtmpName, string $imgName):bool 
         return $message;*/
         return false;
         
+        
     }
     /*$message = "O campo inserido está vazio. Não há como atualizar.";
     return $message;*/
