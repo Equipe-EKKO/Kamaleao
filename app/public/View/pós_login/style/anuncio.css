@@ -83,8 +83,12 @@
     border-radius: 30px;
     width: 90%;
     height: 52%;
-    margin: 20px auto;
-    padding: 1px;
+    display:grid;
+    grid-template-rows: auto;
+}
+
+.anun h2{
+    padding: 90px;
 }
 
 .item {
@@ -92,7 +96,7 @@
     background: #ffff;
     border-radius: 10px 10px 10px 10px;
     height: 12.8rem;
-    width: 25%;
+    width: 35%;
     border: 1px solid #ccc;
     cursor: pointer;
     transition: .6s;
@@ -173,14 +177,17 @@
 button {
     border: 1px solid #363636;
     width: 70%;
-    margin-left: 15%;
     height: 3rem;
     background-color: transparent;
     border-radius: 15px;
-    margin-top:20%;
+    margin-top: 10%;
     padding: 2px;
     font-size: 20px;
     color: #363636;
+}
+
+.float button{
+    margin-left: 15%;
 }
 
 button:hover {
@@ -195,8 +202,8 @@ button:hover {
 .md-ct-pos {
     display: none;
   }
-  
-  .md-ct {
+
+.md-ct {
     position: fixed;
     top: 0px;
     left: 0px;
@@ -207,6 +214,71 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  
+  .md-ct i#iconfecha {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18pt;
+    float: right;
+    cursor: pointer;
+    color: #363636;
+    transition: .3s;
+  }
+  
+  .md-ct i#iconfecha:hover {
+    color: #F53446;
+  }
+
+  .md-pedido {
+    padding: 2rem;
+    border: 1px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 40px 5px 40px 5px;
+    background-color: white;
+    display: block;
+    text-align: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    overflow-y: auto;
+  }
+
+  .md-pedido h1 {
+    margin-top: 1rem;
+    color: #363636;
+  }
+
+  .md-pedido p {
+    font-size: 18px;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    margin-left: 0.5rem;
+    text-align: left;
+  }
+
+  .md-pedido input{
+    width: 20rem;
+    height: 2.5rem;
+    font-size: 14px;
+    border-radius: 15px;
+    border: 1px solid #363636;
+    margin-top:1rem;
+    margin-bottom:1rem;
+  }
+
+  .md-pedido textarea{
+    resize: none;
+    padding: 0.5rem;
+    width: 20rem;
+    height: 5rem;
+    font-size: 18px;
+    border-radius: 15px;
+    border: 1px solid #363636;
+    margin: 0 auto;
   }
 
 #titSub {

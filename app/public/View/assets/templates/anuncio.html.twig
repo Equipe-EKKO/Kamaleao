@@ -2,6 +2,7 @@
 {% block anuncio %}
 
       {% block title %} Anúncio {% endblock title %}
+      {% block srcjs %}"/GitHub/Kamaleao/app/public/View/pós_login/js/anuncio.js"{% endblock srcjs %}
       {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/anuncio.css"{% endblock hrefcss %}
       {% block div_container %}
       <div class="container">
@@ -17,12 +18,21 @@
                <h2><strong>Licença:</strong> <span id="liSub">Licença de {{licença}}</span></h2>
                <h2><strong>Categoria:</strong> <span id="catSub">{{categoria}}  </span></h2>
                {% if (username != usernameserv) %}
-               <button type="submit">Solicitar Serviço</button>
+               <button onclick="abreModal()">Solicitar Serviço</button>
                {% endif %}
-
-               </div><!--float--> 
-               
-            </div><!--anuncio--> 
+               </div>
+            </div>
+            <div id="md-pr" class="md-ct-pos">
+               <div id="md-pedido" class ="md-pedido">
+                  <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
+                  <h1>Solicite sua arte!</h1>
+                  <p>Título do seu pedido</p>
+                  <input type="text" id="titulo" name="titulo" maxlength="50" placeholder="Título para o seu pedido"/>
+                  <p>Descrição do serviço</p>
+                  <textarea id="descricao" name="descricao" rows="5" maxlength="280" placeholder="Descreva detalhadamente como você quer seu pedido"></textarea>
+                  <button>Solicitar</button>
+               </div>
+            </div>
             
          
 
@@ -31,7 +41,7 @@
                <div class="sobre">
                <p>{{desc}}</p>
                </div>
-            <h1>Anúncios do mesmo criador:</h1>  
+            <h1>Anúncios da Mesma Categoria:</h1>  
                <div class="anun">
                   {% if outrosservicos != null %}
                      {% for servico in outrosservicos %}
@@ -41,7 +51,7 @@
                            <h1 name="titulo-item" >{{servico.titulo|e}}</h1>
                         </div> <!--anuncio_titulo-->
                         <div class="anuncio_user">
-                           <h3 name="username-item">@{{username|e}}</h3>
+                           <h3 name="username-item">@{{servico.usernameserv|e}}</h3>
                         </div> <!--user-->
                         <div class="anuncio_preço">
                            <h2>R${{servico.preço|e}}</h2>
@@ -49,17 +59,10 @@
                      </div> <!-- item -->
                      {% endfor %}
                   {% else %}
-                        <h2>Este usuário não possui outros anúncios, por enquanto.</h2>
+                        <h2>Não existem outros serviços com a mesma categoria.</h2>
                   {% endif %} 
                </div>
          </div>  <!--info-->
-      <div id="md-pr" class="md-ct-pos">
-         <div id="md-pedido" class ="md-pedido">
-         <!--<div>-->
-      </div>
       </div>
       {% endblock div_container %}
-
-   {# end body #}
-{# end document #}
 {% endblock anuncio %}

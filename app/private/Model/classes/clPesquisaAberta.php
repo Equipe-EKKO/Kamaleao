@@ -30,7 +30,7 @@ class PesquisaAberta {
     public function searchServEsp(string $username, string $titulo){
         $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
 
-        $sql = "SELECT s.cd_serviço as 'cdServ', nm_serviço as 'titulo', ds_serviço as 'desc', vl_serviço as 'valor', nm_categoria as 'categoria', nm_licença as 'licenca', i.cd_url_serviço as 'urlfoto' FROM tb_serviço AS s JOIN tb_usuario AS u ON u.cd_usuario = s.cd_usuario JOIN tb_login AS l ON l.cd_login = u.cd_login JOIN tb_categoria AS cat ON s.cd_categoria = cat.cd_categoria JOIN tb_tipos_licença AS li ON li.cd_licença = s.cd_licença JOIN tb_imagem AS i ON s.cd_serviço = i.cd_serviço  WHERE l.nm_username = :username AND s.nm_serviço = :tituloserv"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $sql = "SELECT s.cd_serviço as 'cdServ', nm_serviço as 'titulo', ds_serviço as 'desc', vl_serviço as 'valor', nm_categoria as 'categoria', nm_licença as 'licenca', i.cd_url_serviço as 'urlfoto' FROM tb_serviço AS s JOIN tb_usuario AS u ON u.cd_usuario = s.cd_usuario JOIN tb_login AS l ON l.cd_login = u.cd_login JOIN tb_categoria AS cat ON s.cd_categoria = cat.cd_categoria JOIN tb_tipos_licença AS li ON li.cd_licença = s.cd_licença JOIN tb_imagem AS i ON s.cd_serviço = i.cd_serviço  WHERE l.nm_username = :username AND s.nm_serviço = :tituloserv LIMIT 5"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
         $stmt = $banco->prepare($sql); # prepara a query para execução
         /*Substitui os valores de cada placeholder na query preparada*/
         $stmt->bindValue(':username', $username); 
@@ -48,13 +48,27 @@ class PesquisaAberta {
         }
     }
 
-    public function searchAllServMinosEsp(string $username, string $titulo){
+    public function searchAllServMinosEsp(string $categoria, string $titulo){
         $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
 
-        $sql = "SELECT s.cd_serviço as 'codigoserv',s.nm_serviço AS 'titulo', s.vl_serviço AS 'preço', img.cd_url_serviço as 'url_da_imagem',l.nm_username AS 'usernameserv' FROM `tb_serviço` AS s JOIN tb_usuario AS us ON us.cd_usuario = s.cd_usuario JOIN tb_login AS l ON l.cd_login = us.cd_login JOIN tb_imagem AS img ON s.cd_serviço = img.cd_serviço WHERE l.nm_username = :username AND s.nm_serviço != :tituloserv"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $presql = "SELECT cd_categoria FROM tb_categoria WHERE nm_categoria = :catnm"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $prestmt = $banco->prepare($presql); # prepara a query para execução
+        /*Substitui os valores de cada placeholder na query preparada*/
+        $prestmt->bindValue(':catnm', $categoria); 
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $prestmt->execute(); # executa a query preparada 
+            $categoriaid = $prestmt->fetchColumn();
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+        
+        $sql = "SELECT s.cd_serviço as 'codigoserv',s.nm_serviço AS 'titulo', s.vl_serviço AS 'preço', img.cd_url_serviço as 'url_da_imagem',l.nm_username AS 'usernameserv' FROM `tb_serviço` AS s JOIN tb_usuario AS us ON us.cd_usuario = s.cd_usuario JOIN tb_login AS l ON l.cd_login = us.cd_login JOIN tb_imagem AS img ON s.cd_serviço = img.cd_serviço WHERE s.cd_categoria = :cdcat AND s.nm_serviço != :tituloserv"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
         $stmt = $banco->prepare($sql); # prepara a query para execução
         /*Substitui os valores de cada placeholder na query preparada*/
-        $stmt->bindValue(':username', $username); 
+        $stmt->bindValue(':cdcat', $categoriaid); 
         $stmt->bindValue(':tituloserv', $titulo);
 
         /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/

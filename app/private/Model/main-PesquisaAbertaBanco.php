@@ -33,10 +33,10 @@ function pesquisaServInfo(string $username, string $titulo):mixed {
     }
 }
 
-function pesquisaQuaseServInfo(string $username, string $titulo):mixed {
+function pesquisaQuaseServInfo(string $categoria, string $titulo):mixed {
     $serviço= new \PesquisaAberta("tb_serviço");
 
-    $rsltSelect =  $serviço->searchAllServMinosEsp($username, $titulo);
+    $rsltSelect =  $serviço->searchAllServMinosEsp($categoria, $titulo);
 
     if ($rsltSelect == false) {
         echo "Houve um problema na conexão. Perdão.";
