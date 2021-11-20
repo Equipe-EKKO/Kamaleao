@@ -85,6 +85,7 @@
     height: 52%;
     display:grid;
     grid-template-rows: auto;
+    margin: 0 auto;
 }
 
 .anun h2{
@@ -245,6 +246,7 @@ button:hover {
     justify-content: center;
     position: relative;
     overflow-y: auto;
+    width: 20rem;
   }
 
   .md-pedido h1 {

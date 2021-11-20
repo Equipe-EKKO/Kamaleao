@@ -12,7 +12,6 @@ $loader = new FilesystemLoader(DIR_ROOT . '/GitHub/Kamaleao/app/public/View/asse
 $twig = new Environment($loader);
 
 $perfilInfo = unserialize($_SESSION['userinfo']);
-// <a class="icone_perf"><img src={{url_foto_perfil|e}}> </a>
 if (isset($_SESSION['userinfoToPerfil'])) {
     $userinfoToPerfil = unserialize($_SESSION['userinfoToPerfil']);
     if (isset($userinfoToPerfil['nm_username']) && isset($userinfoToPerfil['nm_email']) && isset($userinfoToPerfil['nm_senha'])) {
@@ -71,7 +70,8 @@ else:
         }
        
     } else {
-        echo $twig->render('servicos.html.twig');
+        $username = $perfilInfo['nm_username'];
+        echo $twig->render('servicos.html.twig', ['Usuario' => $username]);
         ob_end_flush();
     }
 endif;
