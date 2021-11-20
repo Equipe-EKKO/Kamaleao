@@ -37,7 +37,10 @@ if (isset($_SESSION['userinfoToPerfil'])) {
 }
 
 if ($username === "userIndefinido"):
-    echo $twig->render('home.html.twig');
+    $slc_servicosAll = pesquisaAllServRec();
+    echo $twig->render('home.html.twig', ['servicos' => $slc_servicosAll]);
 else:
-    echo $twig->render('home.html.twig', ['username' => $username]);
+    $slc_servicosAll = pesquisaAllServRec();
+    echo $twig->render('home.html.twig', ['username' => $username, 'servicos' => $slc_servicosAll]);
+    
 endif;

@@ -59,7 +59,6 @@ else:
         echo $twig->render('perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'sltCategoria' => $slc_categoria, 'servicos' => $slc_servic, 'username' => $username]);
         ob_end_flush();
     } else {
-        $slc_servic = pesquisaServPerf();
         echo $twig->render('servicos.html.twig');
         ob_end_flush();
     }

@@ -36,14 +36,14 @@ function pesquisaServInfo(string $username, string $titulo):mixed {
 function pesquisaAllServRec():mixed {
     $serviço= new \PesquisaAberta("tb_serviço");
 
-    $rsltSelect =  $serviço->searchServEsp();
+    $rsltSelect =  $serviço->listServRecente();
 
     if ($rsltSelect == false) {
         echo "Houve um problema na conexão. Perdão.";
         return "Houve um problema na conexão. Perdão.";
     } else {
-        $servReturn = unserialize($rsltSelect);
-        return $servReturn;
+        $servAllReturn = unserialize($rsltSelect);
+        return $servAllReturn;
     }
 }
 

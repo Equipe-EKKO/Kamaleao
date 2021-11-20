@@ -254,11 +254,7 @@
               {% if servicos is defined %}
                 {% for servico in servicos %}
                   <div class="item" id='item{{loop.index|e}}'>
-                    <img class="anuncio_img" src={{servico.url_da_imagem|e}}>
-                      {# <div class="opacidade">
-                        <i class='bx bxs-pencil'></i><br/>
-                      </div> #}
-                    </img>
+                    <img class="anuncio_img" src={{servico.url_da_imagem|e}}></img>
                     <div class="anuncio_titulo">
                       <h1 name="titulo-item" >{{servico.titulo|e}}</h1>
                     </div> <!--anuncio_titulo-->
