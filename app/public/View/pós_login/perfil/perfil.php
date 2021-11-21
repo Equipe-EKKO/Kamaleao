@@ -70,8 +70,34 @@ else:
         }
        
     } else {
-        $username = $perfilInfo['nm_username'];
-        echo $twig->render('servicos.html.twig', ['Usuario' => $username]);
-        ob_end_flush();
+        if (isset($_GET['username'])):
+            $anousername = $_GET['username'];
+            if (pesquisaPerfInfo($anousername) == false ) {
+                echo "deu merda porra";
+                ob_end_flush();
+            } else {
+                $arrayResult = pesquisaPerfInfo($anousername);
+                $slc_servic = pesquisaServPerfAlheio();
+                if ($arrayResult['descricao'] != null AND $arrayResult['urlfoto'] != null) {
+                    $username = $perfilInfo['nm_username'];
+                    echo $twig->render('servicos.html.twig', ['Usuario' => $arrayResult['username'], 'Descricao' => $arrayResult['descricao'], 'url_foto_perfil' => $arrayResult['urlfoto'],'username' => $username, 'servicos' => $slc_servic]);
+                    ob_end_flush();
+                } elseif ($arrayResult['descricao'] == null AND $arrayResult['urlfoto'] != null) {
+                    $username = $perfilInfo['nm_username'];
+                    echo $twig->render('servicos.html.twig', ['Usuario' => $arrayResult['username'], 'url_foto_perfil' => $arrayResult['urlfoto'],'username' => $username, 'servicos' => $slc_servic]);
+                    ob_end_flush();
+                } elseif ($arrayResult['descricao'] != null AND $arrayResult['urlfoto'] == null) {
+                    $username = $perfilInfo['nm_username'];
+                    echo $twig->render('servicos.html.twig', ['Usuario' => $arrayResult['username'], 'Descricao' => $arrayResult['descricao'], 'username' => $username, 'servicos' => $slc_servic]);
+                    ob_end_flush();
+                } else {
+                    $username = $perfilInfo['nm_username'];
+                    echo $twig->render('servicos.html.twig', ['Usuario' => $arrayResult['username'],'username' => $username, 'servicos' => $slc_servic]);
+                    ob_end_flush();
+                }
+                
+            }
+        endif;
     }
 endif;
+

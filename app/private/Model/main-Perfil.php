@@ -18,4 +18,32 @@ function pesquisaServPerf():mixed {
     }
 }
 
+function pesquisaPerfInfo(string $username):mixed {
+    $perfilalheio = new PerfilAlheio();
+
+    if ($perfilalheio->dadosPerfilAlheio($username)) {
+        $rslPerfil = array(
+            "username" => $perfilalheio->getUsername(),
+            "descricao" => $perfilalheio->getDescricao(),
+            "urlfoto" => $perfilalheio->getFotoPerfil()
+        );
+        return $rslPerfil;
+    } else {
+        return false;
+    }
+}
+
+function pesquisaServPerfAlheio():mixed {
+    $perfilalheio = new PerfilAlheio();
+
+    $rsltSelect = $perfilalheio->listarServiços();
+
+    if ($rsltSelect == false) {
+        echo "Houve um problema na conexão. Perdão.";
+        return "Houve um problema na conexão. Perdão.";
+    } else {
+        $servReturn = unserialize($rsltSelect);
+        return $servReturn;
+    }
+}
 ?>

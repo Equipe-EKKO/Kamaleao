@@ -12,8 +12,13 @@
       <!-- conteudo de perfil -->
       {% block perfil_icon %}
       <div class="perfil_icon">
-        <a class="icone_perf"><i class='bx bxs-user-circle'></i></a>
-        
+        {% if url_foto_perfil is defined %}
+          <div class="foto_perf">
+            <img class="perf_img" src={{url_foto_perfil|e}}> </img>
+          </div>
+        {% else %}
+          <a class="icone_perf"><i class='bx bxs-user-circle'></i></a>
+        {% endif %}
         <h1> @{{Usuario}} </h1>
 
         {% if Descricao != "" %}
@@ -25,64 +30,10 @@
 
       {% block div_container %}
       <main>
-        <!--<div class="tab">
-          <div><button id="bt2" class="tablinks" onclick="openTab(event, 'Serviços', 'bt2')" autofocus>serviços</button></div>
-        </div>-->
 
         <div class="all">
-              <div class="gridzada">
-
-              <div class="item">
-               <div class="anuncio_img">
-               </div>
-               <div class="anuncio_titulo">
-                  <h1>Título do anúncio</h1>
-               </div> <!--anuncio_titulo-->
-               <div class="anuncio_user">
-                  <h3>@Artista</h3>
-               </div> <!--user-->
-            </div> <!--item-->
-
-              <div class="item">
-               <div class="anuncio_img">
-               </div>
-               <div class="anuncio_titulo">
-                  <h1>Título do anúncio</h1>
-               </div> <!--anuncio_titulo-->
-               <div class="anuncio_user">
-                  <h3>@Artista</h3>
-               </div> <!--user-->
-              </div> <!--item-->
-
-                             <div class="item">
-               <div class="anuncio_img">
-               </div>
-               <div class="anuncio_titulo">
-                  <h1>Título do anúncio</h1>
-               </div> <!--anuncio_titulo-->
-               <div class="anuncio_user">
-                  <h3>@Artista</h3>
-               </div> <!--user-->
-            </div> <!--item-->
-
-            </div> <!--gridzada-->
-          <!-- Serviços -->
-          <div id="Serviços" class="tabcontent">
-              <section class="grid_home">
-              
-                  <div id="editar-excluir-bg" class="editar-excluir-bg">
-                    <div class="editar-excluir">
-                    <button class="close">x</button>
-                    <h1>O que você deseja fazer ?!</h1>
-                      <div class="arte"></div>
-                      <button class="btmd">editar</button>
-                      <button class="btmd">excluir</button>
-                    </div> <!--editar-excluir-->
-          </div> <!--editar-excluir-bg-->
-                <a id="adicionar" onclick="abreModal()">
-                  <i class='bx bx-plus'></i>
-                </a>
-                {% if servicos is defined %}
+            <div class="gridzada">
+              {% if servicos is defined %}
                   {% for servico in servicos %}
                     <div class="item">
                       <img class="anuncio_img" src={{servico.url_da_imagem|e}}>
@@ -102,60 +53,11 @@
                     </div> <!-- item -->
                   {% endfor %}
                 {% endif %}
-              </section> <!--grid_home-->
-            <div id="md-pr" class="md-ct-pos">
-              <form id="formAnuncio" class ="form_anuncio" action="/" method="post" enctype="multipart/form-data">
-                <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal()"></i>
-                  <h1>Anunciar um Serviço</h1>
-                  <p hidden class="form-message">
-                    <i class="fas fa-exclamation-triangle"></i>
-                  </p>
-                  <div class ="grid_anuncio">
-                    <div class="left">
-                      <p>Título do anúncio</p>
-                      <input type="text" id="titulo" name="titulo" maxlength="50" placeholder="Título para o seu anúncio"/>
-                      <p>Descrição do serviço</p>
-                      <textarea id="descricao" name="descricao" rows="5" maxlength="280" placeholder="Descreva detalhadamente o serviço que será oferecido..."></textarea>
-                      <p>Escolha uma imagem para o Anúncio:</p>
-                      <label for="imagem" id="escolha">Escolher arquivo</label>
-                      <input type="file" id="imagem" name="servfile" accept="image/jpeg, image/png"></br></br>
-                      <span id="file-name"></span>
-                    </div>
-                    <div class="rigth">
-                      <p>Preço médio</p>
-                      <input type="number" min="0" max="10000" step=0.01 id="preco" name="precoMedio" placeholder="Preço médio para o serviço"/>
-                      <p>Tipos de Licenças</p>
-                      <div class="check"><!-- checkbox para as licencas -->
-                        <input type="radio" id="licenca1" name="licenca" value="1">
-                        <label for="licenca1">Licença de uso Não-Comercial</label><br>
-                        <input type="radio" id="licenca2" name="licenca" value="2">
-                        <label for="licenca2">Licença de uso Comercial</label><br>
-                        <input type="radio" id="licenca3" name="licenca" value="3">
-                        <label for="licenca3">Licença de Download</label><br>
-                      </div>
-                      <p>Categoria</p>
-                      <select name="select_cat" id="select_cat" required>
-                        <option value="" disabled selected hidden>Por favor, selecione...</option>
-                        {% for categoria in sltCategoria %}
-                        <option value={{categoria.cd_categoria|escape}}>{{ categoria.nm_categoria|e }}</option>
-                        {% endfor %}
-                      </select>  
-                    </div>
-                  </div>
-                <input type="submit" class="botao" name="acao" value="Anunciar" /> <br>
-            </form>
-          </div>
-          <!-- Comissao -->
-          <div id="Comissao" class="tabcontent">
-            <p> Conteúdo da Comissão </p> 
-          </div>
 
-          <div class="clearfix"></div>
-
+            </div> <!--gridzada-->
         </div> <!--all-->
       </main>
       {% endblock div_container %}
-    
       <!-- fim conteudo de perfil -->   
    {# end body #}
 {# end document #}
