@@ -9,6 +9,7 @@
     background-color: #ffff;
     width: 100%;
     height: 100%;
+    border-radius: 10px 10px 10px 10px;
   }
 
   .perfil_icon {
@@ -102,7 +103,7 @@
       width: 80%;
       max-width: 85rem;
       height: 120vh;
-      border-radius: 0px 0px 30px 30px;
+      border-radius: 10px 10px 10px 10px;
     }
     
     /* Style the tab content */
@@ -379,21 +380,21 @@
   
   
   .item {
-      margin: 0 auto;
-      background: #ffff;
-      border-radius: 10px 10px 10px 10px;
-      height: 16rem;
-      width: 80%;
-      border: 1px solid #ccc;
-      cursor: pointer;
-      transition: .6s;
-      display: grid;
-      grid-template-rows: 68% 12% 8% 12%;
+    margin: 0 auto;
+    background: #ffff;
+    border-radius: 10px 10px 10px 10px;
+    height: 13rem;
+    width: 100%;
+    max-width: 12.8rem;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: .6s;
+    display: grid;
+    grid-template-rows: 68% 12% 8% 12%;
   }
   
   .item:hover {
-      box-shadow: 0 3px 10px rgba(0,0,0,.2);
-      width: 90%;
+    box-shadow: 0 3px 10px rgba(0,0,0,.2);
   }
   
   .item:hover h2 {

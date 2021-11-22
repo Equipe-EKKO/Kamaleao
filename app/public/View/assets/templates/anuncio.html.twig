@@ -26,11 +26,16 @@
                <div id="md-pedido" class ="md-pedido">
                   <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
                   <h1>Solicite sua arte!</h1>
+                  <p hidden id="fazPedidoReturn" class="form-message">
+                     <i class="fas fa-exclamation-triangle"></i>
+                   </p>
                   <p>Título do seu pedido</p>
                   <input type="text" id="titulo" name="titulo" maxlength="50" placeholder="Título para o seu pedido"/>
                   <p>Descrição do serviço</p>
-                  <textarea id="descricao" name="descricao" rows="5" maxlength="280" placeholder="Descreva detalhadamente como você quer seu pedido"></textarea>
-                  <button>Solicitar</button>
+                  <textarea id="descricao" name="descricao" rows="5" maxlength="280" placeholder="Descreva detalhadamente como você quer seu pedido" required></textarea>
+                  <p hidden id="hiddenpedido">{{idserv}}</p>
+                  <p hidden id="hiddenpedidouser">{{username}}</p>
+                  <button type="submit" id="solicitaPedido">Solicitar</button>
                </div>
             </div>
             

@@ -184,20 +184,25 @@ CHARACTER SET utf8mb4;
 CREATE table IF NOT EXISTS tb_pedido (
 	-- atributos
 	cd_pedido INT UNSIGNED NOT NULL auto_increment, -- chave primaria
-	nm_pedido VARCHAR(45) NOT NULL,
-	ds_pedido VARCHAR(200) NOT NULL,
+	nm_pedido VARCHAR(50) NOT NULL,
+	ds_pedido VARCHAR(280) NOT NULL,
 	ic_cancelado BOOLEAN NOT NULL DEFAULT 0, -- verifica cancelamento, se nao foi cancelado, o default é falso
-	vl_pedido DECIMAL(10,2) NOT NULL,
+	vl_pedido DECIMAL(10,2),
 	ds_resposta VARCHAR(100),
 	cd_serviço INT UNSIGNED NOT NULL, -- chave estrangeira
+	cd_usuario INT UNSIGNED NOT NULL, -- chave estrangeira
 	-- definicao das chaves
     -- primaria
 	constraint pk_pedido
 		primary key (`cd_pedido`),
-	-- chave estrangeira
+	-- chave estrangeira tb_serviço com tb_pedido
 	constraint fk_serviço_pedido
 		foreign key (`cd_serviço`)
-			references `tb_serviço` (`cd_serviço`))
+			references `tb_serviço` (`cd_serviço`),
+	-- chave estrangeira tb_usuario com tb_pedido
+	constraint fk_usuario_pedido
+		foreign key (`cd_usuario`)
+			references `tb_usuario` (`cd_usuario`))
 CHARACTER SET utf8mb4;
 
 -- tabela imagem

@@ -263,13 +263,14 @@ button:hover {
   }
 
   .md-pedido input{
-    width: 20rem;
-    height: 2.5rem;
-    font-size: 14px;
+    padding: 0.5rem;
+    width: 21rem;
+    height: 1.5rem;
+    font-size: 18px;
     border-radius: 15px;
     border: 1px solid #363636;
-    margin-top:1rem;
-    margin-bottom:1rem;
+    margin: 0 auto;
+    font-family: 'Trebuchet MS', sans-serif;
   }
 
   .md-pedido textarea{
@@ -281,6 +282,7 @@ button:hover {
     border-radius: 15px;
     border: 1px solid #363636;
     margin: 0 auto;
+    font-family: 'Trebuchet MS', sans-serif;
   }
 
 #titSub {
@@ -297,6 +299,25 @@ span#liSub, span#catSub {
     font-style: italic;
 }
   
+.form-message{
+    margin: 0 auto;
+    width: 80%;
+    margin-top: 2em;
+    margin-bottom: 1rem;
+    font-size: 1.10rem;
+    text-align: center;
+    margin-left: 2.5rem;
+  }
+  
+  .erro {
+    color: #f44336 !important;
+    text-align: center !important;
+    margin-left: 2.5rem !important;
+  }
+  
+  .sucesso {
+    color: #00a800 !important;
+  }
 
 @media screen and (max-width:875px) {
 

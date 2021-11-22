@@ -35,7 +35,7 @@ else:
         if ($titulo != null || $usernameserv != null) {
             $resposta = pesquisaServInfo($usernameserv, $titulo);
             $resposta2 = pesquisaQuaseServInfo($resposta['categoria'], $titulo);
-            echo $twig->render('anuncio.html.twig', ['titulo' => $resposta['titulo'], 'preço' => $resposta['valor'], 'licença' => $resposta['licenca'], 'url_da_imagem' => $resposta['urlfoto'], 'desc' => $resposta['desc'], 'categoria' => $resposta['categoria'],'username' => $username, 'usernameserv' => $usernameserv, 'outrosservicos' => $resposta2]);
+            echo $twig->render('anuncio.html.twig', ['idserv' => $resposta['cdServ'],'titulo' => $resposta['titulo'], 'preço' => $resposta['valor'], 'licença' => $resposta['licenca'], 'url_da_imagem' => $resposta['urlfoto'], 'desc' => $resposta['desc'], 'categoria' => $resposta['categoria'],'username' => $username, 'usernameserv' => $usernameserv, 'outrosservicos' => $resposta2]);
         } else {
             echo "Algo de errado não está certo";
         }
