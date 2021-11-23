@@ -39,7 +39,21 @@
         <div class="all">
           <!-- Inventario -->
           <div id="Inventário" class="tabcontent">
-            <p> Conteúdo do Inventário </p>
+            <section class="grid_home">
+             {% if servicos is defined %}
+                {% for servico in servicos %}
+                  <div class="item_inv">
+                    <img class="anuncio_img"></img>
+                    <div class="anuncio_titulo">
+                      <h1 name="titulo-item">Exemplo</h1>
+                    </div> <!--anuncio_titulo-->
+                    <div class="anuncio_user">
+                      <h3 name="username-item">feito por: @Sérgio</h3>
+                    </div> <!--user-->
+                  </div> <!-- item -->
+                {% endfor %}
+              {% endif %}
+            </section>
           </div>
           <!-- Serviços -->
           <div id="Serviços" class="tabcontent">
@@ -161,7 +175,7 @@
                   </div> <!-- info_perfil -->
                 </div>
                 <!-- Fim Formulario: Edita Anuncio -->
-
+                </div>
                 <!-- Formulario: Edita Titulo -->
                 <!-- Segundo Fundo -->
                 <div id="md-pr2" class="md-ct-pos">
@@ -236,6 +250,7 @@
                       <p class="cdhidden" id="hiddenedita5" hidden></p>
                       <button id="botao-editar" class="botao">Salvar</button>
                   </form>
+                  
                 </div>  
                 <!-- Segundo Fundo -->
                 <div id="md-pr3" class="md-ct-pos">
@@ -252,7 +267,6 @@
                     </div>
                   </div>
                   <!-- Fim Div -->
-                </div>
                 <!-- Fim Segundo Fundo -->
               </div>
               <!-- Pagina os serviços do username -->
@@ -274,10 +288,97 @@
               {% endif %}
             </section> <!--grid_home-->
           </div>
+
+
           <!-- Comissao -->
-          <div id="Comissao" class="tabcontent">
-            <p> Conteúdo da Comissão </p>
+        <div id="Comissao" class="tabcontent">
+          <div id="md-pr4" class="md-ct-pos">
+            <div class="md-ct-pos" id="modal-pedido">
+              <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-editar')"></i>
+              <h1>Pedido nº 231</h1>
+              <div class ="grid_anuncio">
+                <div class="left">
+                  <p>Título do pedido:</p>
+                  <h3>Título fodarástico</h3>
+                  <p>Título do serviço:</p>
+                  <h3>Outro título fodarástico</h3>
+                </div>
+                <div class="right">
+                  <p>Descrição do pedido:</p>
+                  <textarea readonly></textarea>
+                  <p>Valor:</p>
+                </div>
+              </div>  
+            </div>
           </div>
+                  
+        <h1>Comissões recebidas</h1>
+        <div class="comissoes_recebidas">
+          {% if comissoes is defined %}
+              {% for comissao in comissoes %}
+                <div class="abrir_comissao">
+                  {% if comissao.valorpedido == null %}
+                  <div class="edit_text aceitaCom" id="{{comissao.idpedido|e}}">
+                    <h3>Pedido recebido em {{comissao.datapedido}} id:{{comissao.idpedido}}</h3>
+                    <p id="atualUsername">pedido feito por @{{comissao.username}}, aguardando sua resposta.</p>
+                  </div> <!-- edit_text -->
+                  {% elseif comissao.valorpedido != null and comissao.indicadorconf == 0 %}
+                  <div class="edit_text">
+                    <h3>Pedido recebido em {{comissao.datapedido}} id:{{comissao.idpedido}}</h3>
+                    <p id="atualUsername">pedido feito por @{{comissao.username}}, aguardando confirmação do comprador.</p>
+                  </div> <!-- edit_text -->  
+                  {% elseif comissao.valorpedido != null and comissao.indicadorconf == 1 %}
+                  <div class="edit_text">
+                    <h3>Pedido recebido em {{comissao.datapedido}} id:{{comissao.idpedido}}</h3>
+                    <p id="atualUsername">pedido feito por @{{comissao.username}}, aguardando produto.</p>
+                  </div> <!-- edit_text -->
+                  {% endif %}
+                </div> <!-- abrir_comissao -->
+              {% endfor %}
+          {% else %}
+            <p>Você ainda não recebeu pedido de comissão :(</p>
+          {% endif %}
+        </div> <!--comissoes_recebidas-->
+
+        <div class="line"></div>
+
+        <h1>Pedidos realizados</h1>
+        <div class="pedidos_realizados">
+          {% if pedidos_feitos is defined %}
+            {% for pedido in pedidos_feitos %}
+              <div class="abrir_pedidos">
+                <div class="edit_text">
+                  <h3>Pedido realizado dia {{pedido.datapedido}} id: {{pedido.idpedido}}</h3>
+                  {% if pedido.valorpedido == null %}
+                    <p id="atualUsername">pedido feito para @{{pedido.username}}, aguardando resposta do artista.</p>
+                  {% elseif pedido..valorpedido != null and pedido.indicadorconf == 0 %}
+                    <p id="atualUsername">pedido feito por @{{pedido.username}}, aguardando sua confirmação.</p>
+                  {% elseif pedido..valorpedido != null and pedido.indicadorconf == 1 %}
+                    <p id="atualUsername">pedido feito por @{{pedido.username}}, em produção.</p>
+                  {% endif %}
+                </div> <!-- edit_text -->
+              </div> <!-- abrir_pedidos -->
+            {% endfor %}
+          {% else %}
+            <p>Você ainda não fez nenhum pedido de comissão. :(</p>
+          {% endif %}
+          
+
+  
+        </div> <!--pedidos_realizados-->
+
+    <div id="posts-container"></div>
+
+    <div class="loader">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+
+        </div> <!-- nao tira essa div aqui nem fodendo se nao vai da merda -->
+
+
+        
 
           <div class="clearfix"></div>
 

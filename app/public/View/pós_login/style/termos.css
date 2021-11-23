@@ -1,0 +1,63 @@
+.container {
+    height: fit-content;
+    line-height: 1.5rem;
+}
+
+.term {
+    width: 80%;
+    height: 80%;
+    height: 100%;
+    margin: 0 auto;
+    text-align: justify;
+    padding-bottom: 5rem;
+}
+
+.term h1 {
+    font-size: 15pt;
+    font-size: 20pt;
+    text-align: center;
+    margin: 3rem 0 5rem 0;
+    color: #363636;
+}
+
+.term h2 {
+    font-size: 13pt;
+    margin: 0rem 1.5rem;
+    color: #363636;
+}
+
+.term p {
+    font-size: 11pt;
+    margin: 2rem 2.5rem;
+}
+
+.term .lista {
+        font-size: 10pt;
+        margin: 1.5rem 3rem;
+}
+
+.term ul {
+    width: 100%;
+    height: fit-content;
+    list-style: circle;
+}
+
+.term ul li {
+    width: 100%;
+}
+
+@media screen and (max-width:700px) {
+
+    .term {
+        width: 60%;
+    }
+
+    .term h2, p {
+        text-align: left;
+    }
+    
+    .term .lista {
+        text-align: left;
+}
+
+}

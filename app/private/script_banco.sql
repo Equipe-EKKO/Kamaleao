@@ -188,7 +188,8 @@ CREATE table IF NOT EXISTS tb_pedido (
 	ds_pedido VARCHAR(280) NOT NULL,
 	ic_cancelado BOOLEAN NOT NULL DEFAULT 0, -- verifica cancelamento, se nao foi cancelado, o default é falso
 	vl_pedido DECIMAL(10,2),
-	ds_resposta VARCHAR(100),
+	ic_confirmado BOOLEAN NOT NULL DEFAULT 0,
+	`dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	cd_serviço INT UNSIGNED NOT NULL, -- chave estrangeira
 	cd_usuario INT UNSIGNED NOT NULL, -- chave estrangeira
 	-- definicao das chaves

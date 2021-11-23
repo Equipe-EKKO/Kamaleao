@@ -18,6 +18,36 @@ function pesquisaServPerf():mixed {
     }
 }
 
+// Função chamada no view para realizar pesquisa na tabela pedido
+function pesquisaComisPerf(string $nmuser):mixed {
+    $usuario = unserialize($_SESSION['usuario']);
+
+    $rsltSelect = $usuario->perfil->listarComissoes($nmuser);
+
+    if ($rsltSelect == false) {
+        echo "Houve um problema na conexão. Perdão.";
+        return "Houve um problema na conexão. Perdão.";
+    } else {
+        $servReturn = unserialize($rsltSelect);
+        return $servReturn;
+    }
+}
+
+// Função chamada no view para realizar pesquisa na tabela pedido
+function pesquisaPedidosPerf(string $nmuser):mixed {
+    $usuario = unserialize($_SESSION['usuario']);
+
+    $rsltSelect = $usuario->perfil->listarPedidosFeitos($nmuser);
+
+    if ($rsltSelect == false) {
+        echo "Houve um problema na conexão. Perdão.";
+        return "Houve um problema na conexão. Perdão.";
+    } else {
+        $servReturn = unserialize($rsltSelect);
+        return $servReturn;
+    }
+}
+
 function pesquisaPerfInfo(string $username):mixed {
     $perfilalheio = new PerfilAlheio();
 

@@ -59,7 +59,7 @@ class ControllerCriaServiço{
         echo true;
         return true;
       else:
-        ob_end_flush();
+        // ob_end_flush();
         return false;
       endif;
     } else {

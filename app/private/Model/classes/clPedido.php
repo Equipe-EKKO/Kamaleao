@@ -10,7 +10,7 @@ class Pedido {
     public $nmPedido, $dsPedido, $icCancelado, $vlPedido, $dsResposta; # nmServiço: string || dsServiço: string || imtmpServiço: string com url de imagem || tipoLicença: inteiro || vlServiço: float
     private $cdUsuario, $cdServiço; // cdDono e cdUsuario: inteiro
 
-    public function salvaPedido(int $cd_serviço, string $username, string $titulo, string $desc):bool {
+    public function salvaPedido(int $cd_serviço, string $username, string $titulo, string $desc)/*:bool*/ {
         /*seta os valores dos parametros*/
         $this->setNmPedido($titulo);
         $this->setDsPedido($desc);
@@ -32,7 +32,7 @@ class Pedido {
             } catch (\PDOException $e) {
                 exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
                 return false;
-            }  
+            }
         } else {
             return false;
         }
@@ -65,14 +65,14 @@ class Pedido {
             try {
                 $stmt2->execute(); # executa a query preparada 
                 $contaLinha2 = $stmt2->rowCount(); # armazena numa variável o valor de quantas linhas existem no retorno desse select
-                $cduser = $stmt->fetchColumn();
+                $cduser = $stmt2->fetchColumn();
             } catch (\PDOException $e) {
                 exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage());  # retorna erro, caso houver, e sai do script
                 return false;
             }
 
             if ($contaLinha2 === 1) { # estrutura condicional que irá verificar se o valor de linhas do select anterior é igual a 1, ou seja, se o select retornou algo, e caso tenha retornado...
-                $this->setCdUsuario($cdserv);
+                $this->setCdUsuario($cduser);
                 return true;
             } else {
                 ob_end_clean();

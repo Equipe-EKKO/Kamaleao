@@ -49,6 +49,44 @@ class ControllerAlteraFotoPerfil {
   }
 }
 
+class ControllerDeletaFotoPerfil{
+  private $username; #string
+  private function validaFoto():bool{ #Função bool para ver se todos os campos estão corretos para mandar ao model
+    if ($this->username == null) {
+      ob_end_clean();
+      echo "Verifique se todos os campos estão inseridos corretamente!";
+      return false;
+    }else if (v::noWhitespace()->validate($this->username) == false){
+      ob_end_clean();
+      echo "O username não contem espaços!";
+      return false;
+    }else { 
+      return true;
+    }
+  }
+  public function __construct(string $username){
+    $this->username = $username;
+    $this->validaFoto();
+    $this->chamaModel();
+  }
+
+  private function chamaModel() {
+    if ($this->validaFoto()) {
+      if (retiraFotoPerfil($this->username)):
+        ob_end_clean();
+        echo true;
+        return true;
+      else:
+        ob_end_flush();
+        echo false;
+        return false;
+      endif;
+    } else {
+      return false;
+    }
+  }
+}
+
 
 class ControllerAlteraUsername {
   private $username;

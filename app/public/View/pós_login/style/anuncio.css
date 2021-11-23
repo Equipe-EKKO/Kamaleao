@@ -53,51 +53,70 @@
 }
 
 .info {
+    
     width: 80%;
     height: 50%;
     margin: 0 auto;
+}
+
+.info ::-webkit-scrollbar-thumb {
+    background: #fff;
 }
 
 .info h1 {
     margin-left: 40px;
     font-size: 18px;
     color: #363636;
+    margin-bottom: .5em;
 }
 
 .sobre{
     border: 2px solid #ccc;
     border-radius: 30px;
-    width: 90%;
-    height: 30%;
-    margin: 20px auto;
-    padding: 1px;
+    width: 100%;
+    height: 15%;
+    padding: 15px;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .sobre p{
-    padding: 1rem;
+    padding-left: 1em;
     width: 100%;
 }
 
-.anun {
-    border: 2px solid #ccc;
-    border-radius: 30px;
-    width: 90%;
-    height: 52%;
-    display:grid;
-    grid-template-rows: auto;
-    margin: 0 auto;
+.info {
+    display: block;
+    background-color: #ffff;
+    min-height: 60vh;
 }
 
-.anun h2{
-    padding: 90px;
+.info h1 {
+    margin-top: 2em;
+}
+
+.anun {
+    display: block;
+    margin: 0 auto;
+    padding: 5px;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    width: 100%;
+    height: 50%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    overflow: hidden;
+    overflow-y: scroll;
+    padding: 15px;
 }
 
 .item {
     margin: 0 auto;
     background: #ffff;
-    border-radius: 10px 10px 10px 10px;
-    height: 12.8rem;
-    width: 35%;
+    border-radius: 10px;
+    height: 13rem;
+    width: 100%;
+    max-width: 12.8rem;
     border: 1px solid #ccc;
     cursor: pointer;
     transition: .6s;
@@ -108,8 +127,14 @@
   .item:hover {
     box-shadow: 0 3px 10px rgba(0,0,0,.2);
   }
+
+  .item a{
+    color: #808080;
+    font-size: 10pt;
+    margin-top: 0.2rem ;
+  }
   
-  .item:hover h2 {
+  .item a:hover {
       color: #F53446;
   }
   
@@ -153,17 +178,16 @@
   }
   
   .anuncio_user h3 {
-      color: #808080;
-      font-size: 10pt;
-      margin: 0.2rem 0.5rem;
-  
-  }
+    color: #808080;
+    font-size: 10pt;
+    margin: 0.2rem 0.5rem;
+    text-decoration: none;
+}
 
 .info p {
     font-size: 15px;
     text-align: justify;
 }
-
 
 .float h1 {
     font-size: 18px;
@@ -254,7 +278,16 @@ button:hover {
     color: #363636;
   }
 
-  .md-pedido p {
+  .form-message{
+    width: 80%;
+    margin-top: 2em;
+    margin-bottom: 1rem;
+    font-size: 1.10rem;
+    text-align: center;
+    margin-left: 2.5rem;
+  }
+
+  .modal-label {
     font-size: 18px;
     margin-bottom: 1rem;
     margin-top: 2rem;
@@ -298,16 +331,7 @@ span#liSub, span#catSub {
     color: #F53446;
     font-style: italic;
 }
-  
-.form-message{
-    margin: 0 auto;
-    width: 80%;
-    margin-top: 2em;
-    margin-bottom: 1rem;
-    font-size: 1.10rem;
-    text-align: center;
-    margin-left: 2.5rem;
-  }
+
   
   .erro {
     color: #f44336 !important;

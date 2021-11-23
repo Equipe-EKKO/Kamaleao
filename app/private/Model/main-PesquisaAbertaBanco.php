@@ -33,6 +33,20 @@ function pesquisaServInfo(string $username, string $titulo):mixed {
     }
 }
 
+function pesquisaComissaoInfo(int $cdpedidoid):mixed {
+    $serviço= new \PesquisaAberta("tb_pedido");
+
+    $rsltSelect =  $serviço->searchCommisaoEsp($cdpedidoid);
+
+    if ($rsltSelect == false) {
+        echo "Houve um problema na conexão. Perdão.";
+        return "Houve um problema na conexão. Perdão.";
+    } else {
+        $servReturn = unserialize($rsltSelect);
+        return $servReturn;
+    }
+}
+
 function pesquisaQuaseServInfo(string $categoria, string $titulo):mixed {
     $serviço= new \PesquisaAberta("tb_serviço");
 

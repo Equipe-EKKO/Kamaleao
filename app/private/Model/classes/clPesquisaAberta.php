@@ -100,7 +100,27 @@ class PesquisaAberta {
             return false;
         }
     }
-    
+    public function searchCommisaoEsp(int $cdpedido){
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+
+        /* [05:10, 11/23/2021] gabo 🥰: titulo do pedido, descrição
+[05:11, 11/23/2021] gabo 🥰: título do serviço  */
+        $sql = "SELECT || pe.nm_pedido as 'tituloped', pe.ds_pedido, titulo do serviço || FROM tb_serviço AS s JOIN tb_pedido AS pe ON s.cd_serviço = pe.cd_serviço WHERE pe.cd_pedido = :cdped"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara a query para execução
+        /*Substitui os valores de cada placeholder na query preparada*/
+        $stmt->bindValue(':cdped', $cdpedido); 
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $resultados = $stmt->fetch(PDO::FETCH_ASSOC);         
+            $resultstr = serialize($resultados); # transforma o array em string
+            return $resultstr; # retorna a string
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+    }
 
     #Métodos Especias - Getter e Setters para os atributos e Construct
     public function __construct($nm_table) {

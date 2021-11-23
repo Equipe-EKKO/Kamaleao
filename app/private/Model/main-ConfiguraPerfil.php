@@ -28,6 +28,27 @@ function atualizaFotoPerfil(string $imgType, $imgtmpName, string $imgName):bool 
     return false;
 }
 
+// Função chamada no controller para retirar a foto de perfil
+function retiraFotoPerfil(string $username):bool { # define que o parametro a ser passado deve ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller
+    /* De uma maneira geral, o programa segue a seguinte lógica:
+        => Verifica se o username está disponível. Dependendo do caso, uma mensagem diferente será exibida
+        => Utiliza uma instância da Classe usuário serializada no model que realiza o Login */
+    $usuario = unserialize($_SESSION['usuario']);
+    if ((!empty($username) || isset($username) || $username != "" || $username != null)) {
+        if ($usuario->perfil->excluiFotoPerfil($username)) {
+            $usuario->pegaFotoPerfil();
+            return true;
+        
+        }
+        /*$message = "Este username não está disponível. Tente novamente!";
+        return $message;*/
+        return false;
+    }
+    /*$message = "O campo inserido está vazio. Não há como atualizar.";
+    return $message;*/
+    return false;
+}
+
 // Função chamada no controller para verificar se o username escolhido na atualização estão disponíveis
 function atualizaUsuario(string $user):bool { # define que o parametro a ser passado deve ter tipo primitivo como string, lembrando que os valores passados serão os posts estabelecidos no controller
     /* De uma maneira geral, o programa segue a seguinte lógica:

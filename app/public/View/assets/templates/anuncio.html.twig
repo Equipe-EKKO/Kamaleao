@@ -29,9 +29,9 @@
                   <p hidden id="fazPedidoReturn" class="form-message">
                      <i class="fas fa-exclamation-triangle"></i>
                    </p>
-                  <p>Título do seu pedido</p>
+                  <p class="modal-label">Título do seu pedido</p>
                   <input type="text" id="titulo" name="titulo" maxlength="50" placeholder="Título para o seu pedido"/>
-                  <p>Descrição do serviço</p>
+                  <p class="modal-label">Descrição do serviço</p>
                   <textarea id="descricao" name="descricao" rows="5" maxlength="280" placeholder="Descreva detalhadamente como você quer seu pedido" required></textarea>
                   <p hidden id="hiddenpedido">{{idserv}}</p>
                   <p hidden id="hiddenpedidouser">{{username}}</p>
@@ -50,18 +50,19 @@
                <div class="anun">
                   {% if outrosservicos != null %}
                      {% for servico in outrosservicos %}
-                     <div class="item" id='item{{loop.index|e}}'>
-                        <img class="anuncio_img" src={{servico.url_da_imagem|e}}></img>
-                        <div class="anuncio_titulo">
-                           <h1 name="titulo-item" >{{servico.titulo|e}}</h1>
-                        </div> <!--anuncio_titulo-->
-                        <div class="anuncio_user">
-                           <h3 name="username-item">@{{servico.usernameserv|e}}</h3>
-                        </div> <!--user-->
-                        <div class="anuncio_preço">
-                           <h2>R${{servico.preço|e}}</h2>
-                        </div> <!-- preço -->
-                     </div> <!-- item -->
+                   <div class="item" id='item{{loop.index|e}}'>
+                    <img class="anuncio_img" src={{servico.url_da_imagem|e}}>
+                    </img>
+                    <div class="anuncio_titulo">
+                      <h1 name="titulo-item" >{{servico.titulo|e}}</h1>
+                    </div> <!--anuncio_titulo-->
+                    <div class="anuncio_user">
+                      <h3 name="username-item"><a href="/Github/Kamaleao/app/public/view/pós_login/perfil/perfil?username={{servico.usernameserv|e}}">@{{servico.usernameserv|e}}</a></h3>
+                    </div> <!--user-->
+                    <div class="anuncio_preço">
+                      <h2>R${{servico.preço|e}}</h2>
+                    </div> <!-- preço -->
+                  </div> <!-- item -->
                      {% endfor %}
                   {% else %}
                         <h2>Não existem outros serviços com a mesma categoria.</h2>

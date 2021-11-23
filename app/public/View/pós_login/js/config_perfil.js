@@ -251,7 +251,8 @@ function abreModal(modal){
                 $('#confsenha').val("");
             });
         });
-    }else if (modal == 'icone') {
+    } 
+    else if (modal == 'icone') {
         $("#md-pr2").removeClass("md-ct-pos").addClass("md-ct");
         $("#icone").addClass("md").removeClass("md-ct-pos");
         $("#email").removeClass("md").addClass("md-ct-pos");
@@ -262,6 +263,11 @@ function abreModal(modal){
         $("p#resultseventh").removeClass("sucesso");
         $("p#resultseventh").removeClass("erro");
 
+        $("button#abreConf").click(function (e) { 
+            e.preventDefault();
+            abreEspecial('conf-excluir');
+        });
+
         $('#attFoto').focus(function (e) { 
             e.preventDefault();
             $(this).val("");
@@ -270,7 +276,7 @@ function abreModal(modal){
             $("p#resultseventh").removeClass("erro");
         });
 
-        /*AJAX PRA TROCAR O USERNAME*/
+        /*AJAX PRA TROCAR O ICONE*/
         $("#trocaFoto").submit(function (e) {
             e.preventDefault();
 
@@ -339,5 +345,55 @@ function fechaModal() { //isso aqui faz tudo pegar a classe de desaparecer!!!
     $("#senha").removeClass("md").addClass("md-ct-pos");
     $("#md-pr2").removeClass("md-ct").addClass("md-ct-pos");
     $("p.form-message").empty();
+}
+
+function fechaEspecial(modal) {
+    if (modal == "conf-excluir") {
+        $("#md-pr3").addClass("md-ct-pos").removeClass("md-ct");
+        $("#conf-excluir").addClass("md-ct-pos").removeClass("md");
+        $("p.form-message").empty();
+    }
+}
+
+function abreEspecial(modal) {
+    if (modal == "conf-excluir") {
+        $("#md-pr3").addClass("md-ct").removeClass("md-ct-pos");
+        $("#conf-excluir").addClass("md").removeClass("md-ct-pos");
+        /*AJAX PRA EXCLUIR A FOTO*/
+        $("button#exclui").click(function (e) { 
+            e.preventDefault();
+        
+            var userA = $("p#atualUsername").text(),
+                username = userA.replace("@", "");
+            
+            $.get("/GitHub/Kamaleao/app/private/Controller/controllerDeletaFotoPerfil.php", {nmuser: username}, function (resposta) {
+                if (resposta == true) {
+                  $("#exclui-foto.form-message").removeClass("sucesso");
+                  $("#exclui-foto.form-message").removeClass("erro");
+                  $("#exclui-foto.form-message").removeAttr("hidden");
+                  $("#exclui-foto.form-message").addClass("sucesso");
+                  $("#exclui-foto.form-message").empty();
+                  var sucesso = "<i class='fas fa-exclamation-triangle'></i> <!--<span>--> <strong>A foto foi retirada!</strong> <!--</span>-->";
+                  $(sucesso).appendTo("#exclui-foto.form-message");
+                  setTimeout(function () {
+                    fechaModal('conf-excluir');
+                    fechaModal('editar-excluir');
+                    location.reload(true)
+                  }, 1000);
+                } else {
+                  $("#exclui-foto.form-message").removeClass("sucesso");
+                  $("#exclui-foto.form-message").removeClass("erro");
+                  $("#exclui-foto.form-message").removeAttr("hidden");
+                  $("#exclui-foto.form-message").addClass("erro");
+                  var erro = "<i class='fas fa-exclamation-triangle'></i> <!--<span>--><strong> " + resposta + "</strong> <!--</span>-->";
+                  var mes = $("#exclui-foto.form-message").html();
+                  if (mes.includes("retirada") == false) {
+                    $("#exclui-foto.form-message").empty();
+                    $(erro).appendTo("#exclui-foto.form-message");
+                  }
+                }
+            });
+        });
+    }
 }
 

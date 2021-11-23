@@ -38,9 +38,11 @@
             <div class="icone_perf" onclick="abreModal('icone')">
               {% if url_foto_perfil is defined %}
                 <img class="perf_img" src={{url_foto_perfil|e}}> </img>
-                <i class="fas fa-pen" id="hoverpen"></i>
-              {% else %}
                 <div class="icone_edit">
+                  <i class="fas fa-pen"></i>
+                </div>
+              {% else %}
+                <div class="icone_edit2">
                   <i class="fas fa-pen"></i>
                 </div>
               {% endif %}
@@ -96,15 +98,30 @@
               <i class="fas fa-times-circle" onclick="fechaModal()"></i>
                 <h3>Insira sua nova foto de perfil</h3>
                 <p>Tenha preferência por fotos quadradas e leves.</p>
-                <form id="trocaFoto" method="POST" action="" enctype="multipart/form-data">
-                  <input type="file" id="attFoto" name="fotoperfil" accept="image/jpeg, image/png"/>
-                  <span id="file-name"></span>
-                  <p hidden id="resultseventh" class="form-message">
-                    <i class="fas fa-exclamation-triangle"></i>
-                  </p>
+                <form class="idform" id="trocaFoto" method="POST" action="" enctype="multipart/form-data">
+                  <label for="attFoto">Escolha sua foto clicando aqui</label>
+                  <span class="file-name"></span>
                   <button type="submit" class="button" name="submit">Enviar</button>
+                  <button type="button" class="button" id="abreConf">Excluir Foto</button>
+                  <input type="file" id="attFoto" name="fotoperfil" accept="image/jpeg, image/png"/>
                 </form>
             </div>
+            <!-- Segundo Fundo -->
+            <div id="md-pr3" class="md-ct-pos">
+              <!-- Div: Exclui Foto de Perfil -->
+              <div class="md-ct-pos" id="conf-excluir">
+                <h1>Tem certeza?</h1>
+                <p hidden class="form-message" id="exclui-foto">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </p>
+                <div class="grid_button">
+                  <button class="botao" onclick="fechaEspecial('conf-excluir')">Voltar</button>
+                  <button class="botao" id="exclui">Excluir</button>
+                </div>
+              </div>
+              <!-- Fim Div -->
+            </div>
+            <!-- Fim Segundo Fundo -->
             <div id="username" class="md">
               <i class="fas fa-times-circle" onclick="fechaModal()"></i>
               <h3>Insira o novo nome de usuário</h3>
@@ -155,6 +172,13 @@
             </div>
           </div>
         </main>
+        <script>
+            $(function () {
+              $('#attFoto').change(function() {
+                $('.file-name').html($(this).val().substr(12));
+              });
+            });
+        </script>
       </div>
       {% endblock div_container %}
 {% endblock config_perfil %}

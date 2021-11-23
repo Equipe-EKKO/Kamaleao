@@ -31,9 +31,129 @@ class PerfilProprio extends Perfil {
         }
         
     }
+    //Método que faz um select de todos os pedidos feitos para o dono do perfil
+    function listarComissoes(string $nmDono) {
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+
+        $sql = "SELECT cd_usuario FROM tb_usuario AS us JOIN tb_login AS l ON l.cd_login = us.cd_login WHERE l.nm_username = :nmusername "; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara o select para execução
+        $stmt->bindValue(':nmusername', $nmDono);
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $cdDono = $stmt->fetchColumn();           
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+
+
+        $sql = "SELECT pe.cd_pedido AS 'idpedido', pe.vl_pedido AS 'valorpedido', date(pe.dt_criação) as 'datapedido', l.nm_username AS 'username', pe.ic_confirmado as 'indicadorconf' FROM `tb_pedido` AS pe JOIN tb_usuario AS us ON us.cd_usuario = pe.cd_usuario JOIN tb_login AS l ON l.cd_login = us.cd_login JOIN `tb_serviço` AS s ON s.cd_serviço = pe.cd_serviço WHERE s.cd_usuario = :cdus AND pe.ic_cancelado = 0"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara o select para execução
+        $stmt->bindValue(':cdus', $cdDono);
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $rsltComissao = $stmt->fetchAll(PDO::FETCH_ASSOC);           
+            $rsltStrComissao = serialize($rsltComissao); # transforma o array em string
+            return $rsltStrComissao; # retorna a string
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+        
+    }
+
+    //Método que faz um select de todos os pedidos feitos pelo dono do perfil
+    function listarPedidosFeitos(string $nmDono) {
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+
+        $sql = "SELECT cd_usuario FROM tb_usuario AS us JOIN tb_login AS l ON l.cd_login = us.cd_login WHERE l.nm_username = :nmusername "; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara o select para execução
+        $stmt->bindValue(':nmusername', $nmDono);
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $cdDono = $stmt->fetchColumn();           
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+
+
+        $sql = "SELECT pe.cd_pedido AS 'idpedido', pe.vl_pedido AS 'valorpedido', date(pe.dt_criação) as 'datapedido', (SELECT nm_username FROM tb_login JOIN tb_usuario ON tb_login.cd_login = tb_usuario.cd_login JOIN `tb_serviço` AS s ON s.cd_usuario = tb_usuario.cd_usuario WHERE s.cd_usuario != :cdus) AS 'username', pe.ic_confirmado as 'indicadorconf' FROM `tb_pedido` AS pe JOIN tb_usuario AS us ON us.cd_usuario = pe.cd_usuario JOIN tb_login AS l ON l.cd_login = us.cd_login JOIN `tb_serviço` AS s ON s.cd_serviço = pe.cd_serviço WHERE pe.cd_usuario = :cdus"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara o select para execução
+        $stmt->bindValue(':cdus', $cdDono);
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $rsltPedidoFeito = $stmt->fetchAll(PDO::FETCH_ASSOC);           
+            $rsltStrPedidoFeito = serialize($rsltPedidoFeito); # transforma o array em string
+            return $rsltStrPedidoFeito; # retorna a string
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+        
+    }
 
     #Métodos da Classe PerfilPróprio em Si
     function baixarInventario() {
+
+    }
+    function excluiFotoPerfil(string $username) {
+        /* Pra ver se já existe uma foto de perfil prévia */
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+        
+        $sql0 = "SELECT cd_usuario FROM tb_login JOIN tb_usuario ON tb_login.cd_login = tb_usuario.cd_login WHERE nm_username = :nmuser"; # declara query do select que irá verificar se o titulo escolhido já foi cadastrado anteriormente pelo usuário da conta
+        $stmt0 = $banco->prepare($sql0); # prepara o select para execuçãp
+        $stmt0->bindValue(':nmuser', $username); #substitui o placeholder da query preparada
+        
+        /*Try catch que tentará executar o select e contar quantas linhas foram retornadas*/
+        try {
+            $stmt0->execute(); # executa a query preparada 
+            $cd_usuario = $stmt0->fetchColumn();
+        } catch (\PDOException $e) {
+            exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+
+        $sql = "SELECT cd_public_id FROM tb_foto_perfil WHERE cd_usuario = :cdus"; # declara query do select que irá verificar se o titulo escolhido já foi cadastrado anteriormente pelo usuário da conta
+        $stmt = $banco->prepare($sql); # prepara o select para execuçãp
+        $stmt->bindValue(':cdus', $cd_usuario); #substitui o placeholder da query preparada
+        
+        /*Try catch que tentará executar o select e contar quantas linhas foram retornadas*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $publicid = $stmt->fetchColumn();
+        } catch (\PDOException $e) {
+            exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+        if ($publicid == null) {
+            return true;
+        }
+        if((new UploadApi())->destroy($publicid)):
+            $sql2 = "UPDATE tb_foto_perfil SET cd_url_perfil = null, cd_public_id = null WHERE cd_usuario = :cduser";  # declara a query do insert na tabela imagem do banco de dados, que só é feito após o insert na tabela serviço
+            $stmt2 = $banco->prepare($sql2); # prepara a query com o insert para a execução
+            /*Substitui os placeholders da query preparada*/
+            $stmt2->bindValue(':cduser', $cd_usuario);
+
+            /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
+            try {
+                $stmt2->execute(); # executa a query preparada anteriormente
+                return true; # retorna true se o processo dos dois inserts forem verdadeiros
+            } catch (\PDOException $e) {
+                exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+                return false;
+            }
+        else:
+            return false;
+        endif;
 
     }
     function updateFotoPerfil(string $imgName, $cd_usuario, $extimagem, string $tmpImg):bool {

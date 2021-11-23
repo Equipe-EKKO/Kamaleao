@@ -35,21 +35,12 @@ body {
     max-width: 600px;
 }
 
-.arrow {
-    position: relative;
-    margin: 0 auto;
-    padding: 0 auto;
-    width: 100%;
-    text-align: center;
-    line-height: 2rem;
-}
-
-.arrow i {
+i {
     color: rgb(255, 255, 255);
     font-size: 70px;
 }
 
-.arrow i:hover {
+i:hover {
     color: rgb(225, 225, 225);
 }
 
@@ -123,6 +114,11 @@ body {
 
 .texto2 a:hover, .texto3 a:hover {
     color: #F53446;
+}
+
+.arrow {
+    text-align: center;
+    width: 100%;
 }
 
 .exemplo {
