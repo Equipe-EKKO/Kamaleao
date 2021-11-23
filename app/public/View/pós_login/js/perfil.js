@@ -9,7 +9,7 @@ function abreModal(modal) {
     $("#alt-desc").removeClass("form_anuncio").addClass("md-ct-pos");
     $("#alt-licenca").removeClass("form_anuncio").addClass("md-ct-pos");
     $("#alt-categoria").removeClass("form_anuncio").addClass("md-ct-pos");
-  
+
     $("form#add").submit(function (e) {
       e.preventDefault();
 
@@ -82,10 +82,10 @@ function abreModal(modal) {
     $("#alt-desc").removeClass("form_anuncio").addClass("md-ct-pos");
     $("#alt-licenca").removeClass("form_anuncio").addClass("md-ct-pos");
     $("#alt-categoria").removeClass("form_anuncio").addClass("md-ct-pos");
-  } else if  (modal == "conf-excluir") {
+  } else if (modal == "conf-excluir") {
     $("#md-pr3").removeClass("md-ct-pos").addClass("md-ct");
     $("#conf-excluir").addClass("form_anuncio").removeClass("md-ct-pos");
-  } else if  (modal == "modal-editar") {
+  } else if (modal == "modal-editar") {
     $("#modal-editar").removeClass("md-ct-pos").addClass("form_edit");
     $("#editar-excluir").removeClass("form_anuncio").addClass("md-ct-pos");
     $("#alt-titulo").removeClass("form_anuncio").addClass("md-ct-pos");
@@ -100,7 +100,7 @@ function abreModal(modal) {
     $("p#resultsec").removeClass("sucesso");
     $("p#resultsec").removeClass("erro");
 
-    $('#alt-tit').focus(function (e) { 
+    $('#alt-tit').focus(function (e) {
       e.preventDefault();
       $(this).val("");
       $("p.form-message").empty();
@@ -111,8 +111,8 @@ function abreModal(modal) {
     /*AJAX PRA TROCAR O TITULO*/
     $("#alt-titulo").submit(function (e) {
       e.preventDefault(); // Stop form from submitting normally
-      var titulo = $('#alt-tit').val(), 
-          cdServ = $("p#hiddenedita1").text();
+      var titulo = $('#alt-tit').val(),
+        cdServ = $("p#hiddenedita1").text();
 
       $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraTitulo.php", { titulo: titulo, cd_serviço: cdServ }, function (resposta) {
         if (resposta == 1) {
@@ -127,27 +127,27 @@ function abreModal(modal) {
             location.reload(true);
 
           }, 1000);
-                                
+
         } else {
-          $("p#resultsec").removeAttr("hidden");         
-          $("p#resultsec").addClass("erro");                   
-          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";           
-          var mes = $("p#resultsec").html();            
+          $("p#resultsec").removeAttr("hidden");
+          $("p#resultsec").addClass("erro");
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";
+          var mes = $("p#resultsec").html();
           if (mes.includes("atualizado") == false) {
             $("p#resultsec").empty();
             $(erro).appendTo("p#resultsec");
-          }         
+          }
         }
       });
     });
-  } else if  (modal == "preco") {
+  } else if (modal == "preco") {
     $("#md-pr2").removeClass("md-ct-pos").addClass("md-ct");
     $("#alt-preco").addClass("form_anuncio").removeClass("md-ct-pos");
     $("p.form-message").empty();
     $("p#resultthird").removeClass("sucesso");
     $("p#resultthird").removeClass("erro");
 
-    $('#alt-prec').focus(function (e) { 
+    $('#alt-prec').focus(function (e) {
       e.preventDefault();
       $(this).val("");
       $("p.form-message").empty();
@@ -158,8 +158,8 @@ function abreModal(modal) {
     /*AJAX PRA TROCAR O PREÇO*/
     $("#alt-preco").submit(function (e) {
       e.preventDefault(); // Stop form from submitting normally
-      var preco = $('#alt-prec').val(), 
-          cdServ = $("p#hiddenedita2").text();
+      var preco = $('#alt-prec').val(),
+        cdServ = $("p#hiddenedita2").text();
 
       $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraPreço.php", { preço: preco, cd_serviço: cdServ }, function (resposta) {
         if (resposta == 1) {
@@ -173,27 +173,27 @@ function abreModal(modal) {
             fechaModal('modal-editar');
             location.reload(true);
           }, 1000);
-                                
+
         } else {
-          $("p#resultthird").removeAttr("hidden");         
-          $("p#resultthird").addClass("erro");                   
-          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";           
-          var mes = $("p#resultthird").html();            
+          $("p#resultthird").removeAttr("hidden");
+          $("p#resultthird").addClass("erro");
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";
+          var mes = $("p#resultthird").html();
           if (mes.includes("atualizado") == false) {
             $("p#resultthird").empty();
             $(erro).appendTo("p#resultthird");
-          }         
-        } 
+          }
+        }
       });
     });
-  } else if  (modal == "desc") {
+  } else if (modal == "desc") {
     $("#md-pr2").removeClass("md-ct-pos").addClass("md-ct");
     $("#alt-desc").addClass("form_anuncio").removeClass("md-ct-pos");
     $("p.form-message").empty();
     $("p#resultfourth").removeClass("sucesso");
     $("p#resultfourth").removeClass("erro");
 
-    $('#alt-desci').focus(function (e) { 
+    $('#alt-desci').focus(function (e) {
       e.preventDefault();
       $(this).val("");
       $("p.form-message").empty();
@@ -204,8 +204,8 @@ function abreModal(modal) {
     /*AJAX PRA TROCAR A DESCRIÇÃO*/
     $("#alt-desc").submit(function (e) {
       e.preventDefault(); // Stop form from submitting normally
-      var desc = $('#alt-desci').val(), 
-          cdServ = $("p#hiddenedita3").text();
+      var desc = $('#alt-desci').val(),
+        cdServ = $("p#hiddenedita3").text();
 
       $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraDescricaoAnuncio.php", { descricao: desc, cd_serviço: cdServ }, function (resposta) {
         if (resposta == 1) {
@@ -219,16 +219,16 @@ function abreModal(modal) {
             fechaModal('modal-editar');
             location.reload(true);
           }, 1000);
-                                
+
         } else {
-          $("p#resultfourth").removeAttr("hidden");         
-          $("p#resultfourth").addClass("erro");                   
-          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";           
-          var mes = $("p#resultfourth").html();            
+          $("p#resultfourth").removeAttr("hidden");
+          $("p#resultfourth").addClass("erro");
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";
+          var mes = $("p#resultfourth").html();
           if (mes.includes("atualizada") == false) {
             $("p#resultfourth").empty();
             $(erro).appendTo("p#resultfourth");
-          }         
+          }
         }
       });
     });
@@ -242,9 +242,9 @@ function abreModal(modal) {
     /*AJAX PRA TROCAR A lICENÇA*/
     $("#alt-licenca").submit(function (e) {
       e.preventDefault(); // Stop form from submitting normally
-      var lic = $('input[name="licenca2"]:checked').val(), 
-          cdServ = $("p#hiddenedita4").text();
-      
+      var lic = $('input[name="licenca2"]:checked').val(),
+        cdServ = $("p#hiddenedita4").text();
+
       $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraLicença.php", { licença: lic, cd_serviço: cdServ }, function (resposta) {
         if (resposta == 1) {
           $("p#resultfifth").removeAttr("hidden");
@@ -257,16 +257,16 @@ function abreModal(modal) {
             fechaModal('modal-editar');
             location.reload(true);
           }, 1000);
-                                
+
         } else {
-          $("p#resultfifth").removeAttr("hidden");         
-          $("p#resultfifth").addClass("erro");                   
-          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";           
-          var mes = $("p#resultfifth").html();            
+          $("p#resultfifth").removeAttr("hidden");
+          $("p#resultfifth").addClass("erro");
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";
+          var mes = $("p#resultfifth").html();
           if (mes.includes("atualizada") == false) {
             $("p#resultfifth").empty();
             $(erro).appendTo("p#resultfifth");
-          }         
+          }
         }
       });
     });
@@ -280,9 +280,9 @@ function abreModal(modal) {
     /*AJAX PRA TROCAR A CATEGORIA*/
     $("#alt-categoria").submit(function (e) {
       e.preventDefault(); // Stop form from submitting normally
-      var cat =  $('#select_cat2').val(), 
-          cdServ = $("p#hiddenedita5").text();
-      
+      var cat = $('#select_cat2').val(),
+        cdServ = $("p#hiddenedita5").text();
+
       $.post("/GitHub/Kamaleao/app/private/Controller/controllerAlteraCategoria.php", { categoria: cat, cd_serviço: cdServ }, function (resposta) {
         if (resposta == 1) {
           $("p#resultsixth").removeAttr("hidden");
@@ -295,16 +295,16 @@ function abreModal(modal) {
             fechaModal('modal-editar');
             location.reload(true);
           }, 1000);
-                                
+
         } else {
-          $("p#resultsixth").removeAttr("hidden");         
-          $("p#resultsixth").addClass("erro");                   
-          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";           
-          var mes = $("p.form-message").html();            
+          $("p#resultsixth").removeAttr("hidden");
+          $("p#resultsixth").addClass("erro");
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";
+          var mes = $("p.form-message").html();
           if (mes.includes("atualizado") == false) {
             $("p#resultsixth").empty();
             $(erro).appendTo("p#resultsixth");
-          }         
+          }
         }
       });
     });
@@ -312,6 +312,11 @@ function abreModal(modal) {
   if (modal == "modal-pedido") {
     $("#md-pr4").removeClass("md-ct-pos").addClass("md-ct");
     $("#modal-pedido").removeClass("md-ct-pos").addClass("form_anuncio");
+  }
+
+  if (modal == "valor-pedido") {
+    $("#md-pr5").removeClass("md-ct-pos").addClass("md-ct");
+    $("#valor-pedido").removeClass("md-ct-pos").addClass("form_anuncio");
   }
 }
 
@@ -325,86 +330,92 @@ function fechaModal(modal) {
   } else if (modal == "editar-excluir") {
     $("#md-pr").removeClass("md-ct").addClass("md-ct-pos");
     $("#editar-excluir").addClass("md-ct-pos").removeClass("form_anuncio");
-  } else if  (modal == "conf-excluir") {
+  } else if (modal == "conf-excluir") {
     $("#md-pr3").removeClass("md-ct").addClass("md-ct-pos");
     $("#conf-excluir").addClass("md-ct-pos").removeClass("form_anuncio");
-  } else if (modal == "modal-editar"){
+  } else if (modal == "modal-editar") {
     $("#md-pr").removeClass("md-ct").addClass("md-ct-pos");
     $("#modal-editar").addClass("md-ct-pos").removeClass("form_edit");
-  } else if (modal == "alt-titulo"){
+  } else if (modal == "alt-titulo") {
     $("#md-pr2").removeClass("md-ct").addClass("md-ct-pos");
     $("#alt-titulo").addClass("md-ct-pos").removeClass("form_anuncio");
   } else if (modal == "alt-preco") {
     $("#md-pr2").removeClass("md-ct").addClass("md-ct-pos");
     $("#alt-preco").addClass("md-ct-pos").removeClass("form_anuncio");
-  } else if (modal == "alt-desc"){
+  } else if (modal == "alt-desc") {
     $("#md-pr2").removeClass("md-ct").addClass("md-ct-pos");
     $("#alt-desc").addClass("md-ct-pos").removeClass("form_anuncio");
-  } else if (modal == "alt-licenca"){
+  } else if (modal == "alt-licenca") {
     $("#md-pr2").removeClass("md-ct").addClass("md-ct-pos");
     $("#alt-licenca").addClass("md-ct-pos").removeClass("form_anuncio");
     $('input[name="licenca2"]:checked').prop('checked', false);
     $("p.form-message").empty();
     $("p#resultfifth").removeClass("sucesso");
     $("p#resultfifth").removeClass("erro");
-  } else if (modal == "alt-categoria"){
+  } else if (modal == "alt-categoria") {
     $("#md-pr2").removeClass("md-ct").addClass("md-ct-pos");
     $("#alt-categoria3").addClass("md-ct-pos").removeClass("form_anuncio");
   } else if (modal == "modal-pedido") {
     $("#md-pr4").addClass("md-ct-pos").removeClass("md-ct");
-    $("#modal-pedido").addClass("md-ct-pos").removeClass("form_anuncio");
+    $("#md-pr3").removeClass("md-ct").addClass("md-ct-pos");
+    $("#md-pr2").removeClass("md-ct").addClass("md-ct-pos");
+    $("#md-pr").removeClass("md-ct").addClass("md-ct-pos");
+    $("#modal-pedido").addClass("md-ct-pos").removeClass("form_edit");
+  } else if (modal == "valor-pedido") {
+    $("#md-pr5").addClass("md-ct-pos").removeClass("md-ct");
+    $("#valor-pedido").addClass("md-ct-pos").removeClass("form_edit");
   }
 }
 
 $(document).ready(function () {
 
-  $("div.aceitaCon").click(function (e){
+  $("div.aceitaCon").click(function (e) {
 
-    e.preventDefault();  
-    
-    var idSelector = this.id;
-    
-    $.post("/GitHub/Kamaleao/app/private/Controller/controllerInfoComissao.php", {idpedido: idSelector},function (resposta) {
-        
-        var a =  jQuery.parseJSON(resposta);
-
-        $("h3#titPed").text(a.tituloped);
-        $("h3#titServ").text(a.tituloserv);
-        $("textarea#descPed").text(a.descped);
-        $("span#idPed").text(idSelector);
-        abreModal("modal-pedido");
-      });
-  });
-
-  $("div.item").click(function (e){
-
-    e.preventDefault();  
+    e.preventDefault();
 
     var idSelector = this.id;
 
-    var titulo = $("div#"+idSelector+" [name='titulo-item']").text(), 
-        userA = $("div#"+idSelector+" [name='username-item']").text(),
-        username = userA.replace("@", "");
-    
-    $.post("/GitHub/Kamaleao/app/private/Controller/controllerInfoServico.php", {titulo: titulo, username: username},function (resposta) {
-        var a =  jQuery.parseJSON(resposta);
-        $("p span#titSub").text(a.titulo);
-        $("p span#valSub").text("R$"+a.valor);
-        $("textarea#descSub").text(a.desc);
-        $("p span#liSub").text(a.licenca);
-        $("p span#catSub").text(a.categoria);
-        $(".img-item").attr("src", a.urlfoto);
-        abreModal("editar-excluir");
-        $(".cdhidden").text(a.cdServ);
-      });
+    $.post("/GitHub/Kamaleao/app/private/Controller/controllerInfoComissao.php", { idpedido: idSelector }, function (resposta) {
+
+      var a = jQuery.parseJSON(resposta);
+
+      $("p#titPed").text(a.tituloped);
+      $("p#titServ").text(a.tituloserv);
+      $("textarea#descPed").text(a.descped);
+      $("span#idPed").text(idSelector);
+      abreModal("modal-pedido");
+    });
   });
-  
-  $("button#exclui").click(function (e) { 
+
+  $("div.item").click(function (e) {
+
+    e.preventDefault();
+
+    var idSelector = this.id;
+
+    var titulo = $("div#" + idSelector + " [name='titulo-item']").text(),
+      userA = $("div#" + idSelector + " [name='username-item']").text(),
+      username = userA.replace("@", "");
+
+    $.post("/GitHub/Kamaleao/app/private/Controller/controllerInfoServico.php", { titulo: titulo, username: username }, function (resposta) {
+      var a = jQuery.parseJSON(resposta);
+      $("p span#titSub").text(a.titulo);
+      $("p span#valSub").text("R$" + a.valor);
+      $("textarea#descSub").text(a.desc);
+      $("p span#liSub").text(a.licenca);
+      $("p span#catSub").text(a.categoria);
+      $(".img-item").attr("src", a.urlfoto);
+      abreModal("editar-excluir");
+      $(".cdhidden").text(a.cdServ);
+    });
+  });
+
+  $("button#exclui").click(function (e) {
     e.preventDefault();
 
     var cdServ = $("p#hiddenexclui").text();
 
-    $.get("/GitHub/Kamaleao/app/private/Controller/controllerDeletaServiço.php", {serviço: cdServ},
+    $.get("/GitHub/Kamaleao/app/private/Controller/controllerDeletaServiço.php", { serviço: cdServ },
       function (data) {
         if (data == true) {
           $("#exclui-anuncio.form-message").removeClass("sucesso");
@@ -434,12 +445,12 @@ $(document).ready(function () {
       });
   });
 
-  $("button#negaPedido").click(function (e) { 
+  $("button#negaPedido").click(function (e) {
     e.preventDefault();
 
     var cdPedido = $("span#idPed").text();
 
-    $.get("/GitHub/Kamaleao/app/private/Controller/controllerNegaPedido.php", {pedido: cdPedido},
+    $.get("/GitHub/Kamaleao/app/private/Controller/controllerNegaPedido.php", { pedido: cdPedido },
       function (data) {
         if (data == true) {
           $("p.form-message").removeClass("sucesso");
@@ -477,7 +488,7 @@ const filter = document.getElementById('filter');
 let limit = 5;
 let page = 1;
 
-async function getPosts () {
+async function getPosts() {
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/posts?_limit=${limit}&_page=${page}`
   );
@@ -538,7 +549,7 @@ function showLoading() {
 window.addEventListener('scroll', () => {
   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-  if (scrollTop + clientHeight >= scrollHeight -5) {
+  if (scrollTop + clientHeight >= scrollHeight - 5) {
     showLoading()
   }
 });

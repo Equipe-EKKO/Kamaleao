@@ -296,19 +296,38 @@
             <div class="md-ct-pos" id="modal-pedido">
               <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-pedido')"></i>
               <h1>Pedido nº <span id="idPed"></span></h1>
-                <div class="grid_anuncio">
-                  <p hidden class="form-message">
-                    <i class="fas fa-exclamation-triangle"></i>
-                  </p>
-                  <p>Título do pedido:</p>
-                  <h3 id="titPed"></h3>
-                  <p>Título do serviço:</p>
-                  <h3 id="titServ"></h3>
-                  <p>Descrição do pedido:</p>
-                  <textarea id="descPed" readonly></textarea>
-                  <button class="botao" id="aceitaPedido" {#onclick="abreModal('modal-editar')"#}>Aceitar Pedido</button>
-                  <button class="botao" id="negaPedido"{#onclick="abreModal('conf-excluir')"#}>Negar Pedido</button>
-                </div>
+              <p hidden class="form-message">
+                <i class="fas fa-exclamation-triangle"></i>
+              </p>
+              </br>
+              <h2>Serviço:</h2>
+              <p id="titServ"></p>
+              </br>
+              <h2>Título do pedido:</h2>
+              <p id="titPed"></p>
+              </br>
+              <h2>Descrição do pedido:</h2>
+              <textarea id="descPed" readonly></textarea>
+              </br>
+              <div class="grid_button">
+                <button class="botao" id="aceitaPedido" onclick="abreModal('valor-pedido')">Aceitar</button>
+                <button class="botao" id="negaPedido">Negar</button>
+              </div>
+            </div>
+          </div>
+          <div id="md-pr5" class="md-ct-pos">
+            <div class="md-ct-pos" id="valor-pedido">
+              <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('valor-pedido')"></i>
+              <h1>Pedido nº <span id="idPed"></span></h1>
+              </br>
+              <p>Insira abaixo o preço desejado </p>
+              <p hidden id="resultthird" class="form-message">
+                <i class="fas fa-exclamation-triangle"></i>
+              </p>
+              <p class="cdhidden" id="hiddenedita2" hidden></p>
+              <input type="number" id="preco-pedido" placeholder="preço"/>
+              <button id="botao-editar" class="botao">Enviar</button>
+              </br>
             </div>
           </div>
                   

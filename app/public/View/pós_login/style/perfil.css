@@ -468,7 +468,7 @@
 }
 
 
-.grid_anuncio form input[type=text]:focus{
+.grid_anuncio form input[type=text]:focus, input:focus{
   outline: 0;
   
 }
@@ -1038,7 +1038,7 @@ span#liSub, span#catSub {
   margin-bottom: 5%;
 }
 
-#alt-titulo input, #alt-preco input, .slct-css{
+#alt-titulo input, #alt-preco input, .slct-css, input{
   width: 20rem;
   height: 2.5rem;
   font-size: 14px;
@@ -1062,6 +1062,24 @@ span#liSub, span#catSub {
 
 #alt-licenca{
   width: 25rem;
+}
+
+#descPed{
+  resize: none;
+  padding: 0.5rem;
+  width: 20rem;
+  height: 5rem;
+  font-size: 18px;
+  border-radius: 15px;
+  border: 1px solid #363636;
+}
+
+#modal-pedido {
+  width: 40%;
+}
+
+#modal-pedido .grid_button{
+  margin-left: 22.5%;
 }
 
 @media screen and (max-width: 1070px) {
