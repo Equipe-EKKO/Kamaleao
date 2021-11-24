@@ -314,6 +314,46 @@
                 <button class="botao" id="negaPedido">Negar</button>
               </div>
             </div>
+            <div class="md-ct-pos" id="modal-valor-pedido">
+              <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-pedido')"></i>
+              <h1>Pedido nº <span id="idPed"></span></h1>
+              <p hidden class="form-message">
+                <i class="fas fa-exclamation-triangle"></i>
+              </p>
+              </br>
+              <h2>Serviço:</h2>
+              <p id="titServ"></p>
+              </br>
+              <h2>Título do pedido:</h2>
+              <p id="titPed"></p>
+              </br>
+              <h2>Valor do pedido:</h2>
+              <p id="valePed"></p>
+              </br>
+              <div class="grid_button">
+                <button class="botao" id="aceitaValor">Aceitar</button>
+                <button class="botao" id="negaValor">Negar</button>
+              </div>
+            </div>
+            <div class="md-ct-pos" id="modal-entregar-pedido">
+              <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-pedido')"></i>
+              <h1>Pedido nº <span id="idPed"></span></h1>
+              <p hidden class="form-message">
+                <i class="fas fa-exclamation-triangle"></i>
+              </p>
+              </br>
+              <h2>Serviço:</h2>
+              <p id="titServ"></p>
+              </br>
+              <h2>Título do pedido:</h2>
+              <p id="titPed"></p>
+              </br>
+              <p>Insira o pedido pronto:</p>
+              <label for="imagem" id="escolha">Escolher arquivo</label>
+              <input type="file" id="imagem" name="servfile" accept="image/jpeg, image/png">
+              </br>
+              <button class="botao" id="entregaPedido">Enviar</button>
+            </div>
           </div>
           <div id="md-pr5" class="md-ct-pos">
             <div class="md-ct-pos" id="valor-pedido">

@@ -1045,7 +1045,7 @@ span#liSub, span#catSub {
   margin-bottom: 5%;
 }
 
-#alt-titulo input, #alt-preco input, .slct-css, input{
+#alt-titulo input, #alt-preco input, .slct-css, .md-ct input{
   width: 20rem;
   height: 2.5rem;
   font-size: 14px;
@@ -1083,10 +1083,6 @@ span#liSub, span#catSub {
 
 #modal-pedido {
   width: 40%;
-}
-
-#modal-pedido .grid_button{
-  margin-left: 22.5%;
 }
 
 .comission-bg {
