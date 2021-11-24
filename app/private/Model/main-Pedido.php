@@ -23,4 +23,14 @@ function recebePedidoNegaPost(int $cd_pedido):bool {
         return false;
     }
 }
+// Função chamada no controller para aceitar o pedido
+function recebePedidoAceitaPost(int $cd_pedido, float $vl_pedido):bool {
+    $pedido = new \Pedido();
+    
+    if ($pedido->aceitaPedido($cd_pedido, $vl_pedido)) {
+        return true;
+    } else {
+        return false;
+    }
+}
 

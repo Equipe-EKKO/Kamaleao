@@ -200,7 +200,7 @@
                         <i class="fas fa-exclamation-triangle"></i>
                       </p>
                       <p class="cdhidden" id="hiddenedita2" hidden></p>
-                      <input type="number" id="alt-prec" placeholder="preço"/>
+                      <input type="number" min="0" max="10000" step=0.01 id="alt-prec" placeholder="preço"/>
                       <button id="botao-editar" class="botao">Salvar</button>
                   </form>
                   <!-- Edita Descricao -->
@@ -320,13 +320,13 @@
               <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('valor-pedido')"></i>
               <h1>Pedido nº <span id="idPed"></span></h1>
               </br>
-              <p>Insira abaixo o preço desejado </p>
-              <p hidden id="resultthird" class="form-message">
+              <p>Insira abaixo o valor que irá cobrar: </p>
+              <p hidden id="result16" class="form-message">
                 <i class="fas fa-exclamation-triangle"></i>
               </p>
-              <p class="cdhidden" id="hiddenedita2" hidden></p>
-              <input type="number" id="preco-pedido" placeholder="preço"/>
-              <button id="botao-editar" class="botao">Enviar</button>
+              <p class="cdhidden" id="hiddenenvia1" hidden></p>
+              <input type="number" min="0" max="10000" step=0.01 id="preco-pedido" placeholder="preço"/>
+              <button id="enviaValorFinal" class="botao">Enviar</button>
               </br>
             </div>
           </div>
@@ -342,12 +342,12 @@
                     <p id="atualUsername">pedido feito por @{{comissao.username}}, aguardando sua resposta.</p>
                   </div> <!-- edit_text -->
                   {% elseif comissao.valorpedido != null and comissao.indicadorconf == 0 %}
-                  <div class="edit_text aceitaCon" id="{{comissao.idpedido|e}}">
+                  <div class="edit_text " id="{{comissao.idpedido|e}}">
                     <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
                     <p id="atualUsername">pedido feito por @{{comissao.username}}, aguardando confirmação do comprador.</p>
                   </div> <!-- edit_text -->  
                   {% elseif comissao.valorpedido != null and comissao.indicadorconf == 1 %}
-                  <div class="edit_text aceitaCon" id="{{comissao.idpedido|e}}">
+                  <div class="edit_text " id="{{comissao.idpedido|e}}">
                     <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
                     <p id="atualUsername">pedido feito por @{{comissao.username}}, aguardando produto.</p>
                   </div> <!-- edit_text -->
@@ -383,16 +383,43 @@
           {% endif %}
           
 
-  
+        <div class="comission-bg">
+          <h1div class="comission-modal">
+          <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
+              <h1>Titulo da comissao</h1>
+              <div class="txtarea"><p>Descricao aqui</p></div>
+              
+              <div class="grid_button">
+                <button class="botao">Aceitar</button>
+                <button class="botao">Negar</button>
+                <div class="acc">
+                  <input type="number" placeholder="insira o valor para aceitar" />
+                </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="pedidos-bg">
+          <h1div class="pedidos-modal">
+          <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
+              <h1>Titulo do pedido</h1>
+              <p>Status do servico: aceito</p>
+              <p>Preco: 200</p>
+              <p>email para contato: carlinhosmaia@outlook.com</p>
+              
+              <div class="grid_button">
+                <button class="botao">Aceitar</button>
+                <button class="botao">Negar</button>
+                <div class="acc">
+                  <input type="number" placeholder="insira o valor para aceitar" />
+                </div>
+              </div>
+          </div>
+        </div>
+
+
         </div> <!--pedidos_realizados-->
 
-    <div id="posts-container"></div>
-
-    <div class="loader">
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-    </div>
 
         </div> <!-- nao tira essa div aqui nem fodendo se nao vai da merda -->
 

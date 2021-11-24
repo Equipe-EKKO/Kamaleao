@@ -369,6 +369,43 @@ function fechaModal(modal) {
 
 $(document).ready(function () {
 
+  $("button#enviaValorFinal").click(function (e) { 
+    e.preventDefault();
+
+    var valPedido = $("input#preco-pedido").val(),
+        cdPedido = $("p#hiddenenvia1").text();
+    
+    $.get("/GitHub/Kamaleao/app/private/Controller/controllerAceitaPedido.php", { pedido: cdPedido, valorPedido: valPedido},
+      function (data) {
+        if (data == true) {
+          $("p#result16").removeClass("sucesso");
+          $("p#result16").removeClass("erro");
+          $("p#result16").removeAttr("hidden");
+          $("p#result16").addClass("sucesso");
+          $("p#result16").empty();
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> O pedido foi aceito. </span>";
+          $(sucesso).appendTo("p#result16");
+          setTimeout(function () {
+            fechaModal('valor-pedido');
+            fechaModal('modal-pedido');
+            location.reload(true)
+          }, 1000);
+        } else {
+          $("p#result16").removeClass("sucesso");
+          $("p#result16").removeClass("erro");
+          $("p#result16").removeAttr("hidden");
+          $("p#result16").addClass("erro");
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + data + "</span>";
+          var mes = $("p#result16").html();
+          if (mes.includes("negado") == false) {
+            $("p#result16").empty();
+            $(erro).appendTo("p#result16");
+          }
+        }
+      });
+    
+  });
+
   $("div.aceitaCon").click(function (e) {
 
     e.preventDefault();
@@ -383,6 +420,7 @@ $(document).ready(function () {
       $("p#titServ").text(a.tituloserv);
       $("textarea#descPed").text(a.descped);
       $("span#idPed").text(idSelector);
+      $("p#hiddenenvia1").text(idSelector);
       abreModal("modal-pedido");
     });
   });

@@ -310,8 +310,19 @@
     color: #363636;
     transition: .3s;
   }
+
+  .comission-modal i#iconfecha, .pedidos-modal i#iconfecha {
+    position: relative;
+    top: 5px;
+    right: 5px;
+    font-size: 18pt;
+    float: right;
+    cursor: pointer;
+    color: #363636;
+    transition: .3s;
+  }
   
-  .md-ct i#iconfecha:hover {
+  .md-ct i#iconfecha:hover, .comission-modal i#iconfecha:hover {
     color: #F53446;
   }
   
@@ -421,29 +432,25 @@
   }
   
   .check {
-    text-align: left;
-    margin-left: 1rem;
     color: #363636;
+    text-align: left;
+    width: 70%;
+    margin: 0 auto;
   }
-  
-  .grid_anuncio form input[type=checkbox]{
-    width: 1rem;
-    height: 1rem;
-    margin-top: 0.5rem;
-  }
-  
-  .check label {
-    cursor: pointer;
+
+  .check input[type=radio] {
+    width: 1em;
+    height: 1em;
   }
   
   .grid_anuncio #titulo {
     width: 20rem;
-  height: 2.5rem;
-  font-size: 18px;
-  border-radius: 15px;
-  border: 1px solid #363636;
-  padding-left: 15px;
-  margin-left: -30px;
+    height: 2.5rem;
+    font-size: 18px;
+    border-radius: 15px;
+    border: 1px solid #363636;
+    padding-left: 15px;
+    margin-left: -30px;
 }
 .grid_anuncio #preco {
   width: 20rem;
@@ -898,7 +905,7 @@ textarea  {
   vertical-align:center;
   transition: .4s;
   cursor: pointer;
-  padding: 1em;
+  padding: 10px;
   margin-top: 1em;
 }
 
@@ -1080,6 +1087,113 @@ span#liSub, span#catSub {
 
 #modal-pedido .grid_button{
   margin-left: 22.5%;
+}
+
+.comission-bg {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 216.2vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.comission-modal {
+  display: block;
+  margin: 0 auto;
+  margin-top: 10%;
+  z-index: 2000;
+  background: #fff;
+  width: 30%;
+  height: 20%;
+  border-radius: 40px 5px 40px 5px;
+  padding: 10px;
+  text-align: center;
+}
+
+.acc {
+  display: none;
+}
+
+.comission-modal .botao, .pedidos-modal .botao {
+  border: 1px solid #363636;
+  width: 90%;
+  height: 3rem;
+  max-width: 200px;
+  background-color: transparent;
+  border-radius: 15px;
+  padding: 1px;
+  cursor: pointer;
+  font-size: 28px;
+  color: #363636;
+  margin-top: 5em;
+}
+
+.comission-modal .botao:hover, .pedidos-modal .botao:hover {
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  background-image: url("/GitHub/Kamaleao/app/public/View/assets/img/botao.jpg");
+  background-size: 100%;
+  transition: 0.3s;
+  border: none;
+  box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
+}
+
+.grid_button{
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.txtarea {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  height: 30%;
+  border-radius: 30px;
+  border: 1px solid #ccc;
+  margin-top: 1em;
+  text-align: left;
+  padding: 5px 10px;
+}
+
+.pedidos-bg {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 216.2vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.pedidos-modal {
+  display: block;
+  margin: 0 auto;
+  margin-top: 10%;
+  z-index: 2000;
+  background: #fff;
+  width: 30%;
+  height: 20%;
+  border-radius: 40px 5px 40px 5px;
+  padding: 10px;
+  text-align: center;
+}
+
+.pedidos-modal p:first-of-type {
+  margin-top: 2em;
+}
+
+.pedidos-modal h1, .pedidos-modal p {
+  margin-top: .5em;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.pedidos-modal h1 {
+  font-size: 23px;
 }
 
 @media screen and (max-width: 1070px) {
