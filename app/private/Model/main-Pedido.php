@@ -35,7 +35,7 @@ function recebePedidoAceitaPost(int $cd_pedido, float $vl_pedido):bool {
 }
 
 // Função chamada no controller para ver as informações do pedido feito
-function pesquisaComissaoInfo(int $cdpedidoid):mixed {
+function pesquisaPedidoInfo(int $cdpedidoid):mixed {
     $pedido = new \Pedido();
 
     $rsltSelect =  $pedido->searchPedidoEsp($cdpedidoid);
@@ -46,6 +46,16 @@ function pesquisaComissaoInfo(int $cdpedidoid):mixed {
     } else {
         $servReturn = unserialize($rsltSelect);
         return $servReturn;
+    }
+}
+
+function recebePedidoValAceitaPost(int $cd_pedido):bool {
+    $pedido = new \Pedido();
+    
+    if ($pedido->aceitaValPedido($cd_pedido)) {
+        return true;
+    } else {
+        return false;
     }
 }
 

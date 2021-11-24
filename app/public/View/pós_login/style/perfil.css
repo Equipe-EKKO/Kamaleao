@@ -900,7 +900,7 @@ textarea  {
   border: 1px solid #ccc;
   border-radius: 30px;
   width: 65%;
-  height: 10%;
+  height: fit-content;
   margin: 0 auto;
   vertical-align:center;
   transition: .4s;

@@ -153,7 +153,7 @@ class ControllerAceitaValPedido{
 
   private function chamaModel() {
     if ($this->validaPedido()) {
-      if (recebePedidoAceitaPost($this->cdPedido, $this->preçoFinal)):
+      if (recebePedidoValAceitaPost($this->cdPedido)):
         ob_end_clean();
         echo true;
         return true;

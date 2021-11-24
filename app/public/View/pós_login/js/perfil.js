@@ -397,7 +397,7 @@ $(document).ready(function () {
     e.preventDefault();
 
     var idSelector = this.id;
-    
+
     $.post("/GitHub/Kamaleao/app/private/Controller/controllerInfoPedido.php", { idpedido: idSelector }, function (resposta) {
 
       var a = jQuery.parseJSON(resposta);
@@ -503,13 +503,13 @@ $(document).ready(function () {
       });
   });
 
-  $("button#enviaValorFinal").click(function (e) { 
+  $("button#enviaValorFinal").click(function (e) {
     e.preventDefault();
 
     var valPedido = $("input#preco-pedido").val(),
-        cdPedido = $("p#hiddenenvia1").text();
-    
-    $.get("/GitHub/Kamaleao/app/private/Controller/controllerAceitaPedido.php", { pedido: cdPedido, valorPedido: valPedido},
+      cdPedido = $("p#hiddenenvia1").text();
+
+    $.get("/GitHub/Kamaleao/app/private/Controller/controllerAceitaPedido.php", { pedido: cdPedido, valorPedido: valPedido },
       function (data) {
         if (data == true) {
           $("p#result16").removeClass("sucesso");
@@ -537,42 +537,41 @@ $(document).ready(function () {
           }
         }
       });
-    
+
   });
 
-  $("button#aceitaValor").click(function (e) { 
+  $("button#aceitaValor").click(function (e) {
     e.preventDefault();
-    
+
     var idpedval = $("span#idValPed").text();
 
-    $.get("/GitHub/Kamaleao/app/private/Controller/controllerAceitaValPedido.php", { pedido: idpedval},
-      function (data) {/*
+    $.get("/GitHub/Kamaleao/app/private/Controller/controllerAceitaValPedido.php", { pedido: idpedval },
+      function (data) {
         if (data == true) {
-          $("p#result16").removeClass("sucesso");
-          $("p#result16").removeClass("erro");
-          $("p#result16").removeAttr("hidden");
-          $("p#result16").addClass("sucesso");
-          $("p#result16").empty();
-          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> O pedido foi aceito. </span>";
-          $(sucesso).appendTo("p#result16");
+          $("p#respValAceita").removeClass("sucesso");
+          $("p#respValAceita").removeClass("erro");
+          $("p#respValAceita").removeAttr("hidden");
+          $("p#respValAceita").addClass("sucesso");
+          $("p#respValAceita").empty();
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> O pedido foi confirmado. Aguarde o produto. </span>";
+          $(sucesso).appendTo("p#respValAceita");
           setTimeout(function () {
             fechaModal('valor-pedido');
             fechaModal('modal-pedido');
             location.reload(true)
           }, 1000);
         } else {
-          $("p#result16").removeClass("sucesso");
-          $("p#result16").removeClass("erro");
-          $("p#result16").removeAttr("hidden");
-          $("p#result16").addClass("erro");
+          $("p#respValAceita").removeClass("sucesso");
+          $("p#respValAceita").removeClass("erro");
+          $("p#respValAceita").removeAttr("hidden");
+          $("p#respValAceita").addClass("erro");
           var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + data + "</span>";
-          var mes = $("p#result16").html();
-          if (mes.includes("negado") == false) {
-            $("p#result16").empty();
-            $(erro).appendTo("p#result16");
+          var mes = $("p#respValAceita").html();
+          if (mes.includes("confirmado") == false) {
+            $("p#respValAceita").empty();
+            $(erro).appendTo("p#respValAceita");
           }
-        }*/
-        alert(data);
+        }
       });
   });
 });
