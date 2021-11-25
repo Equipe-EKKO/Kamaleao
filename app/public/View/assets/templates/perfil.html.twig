@@ -1,524 +1,524 @@
 {% extends "base_home.html.twig" %}
 {% block perfil %}
 {# document #}
-   {# head #}
-      {% block title %} Perfil {% endblock title %}
-      {% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/perfil.css"{% endblock hrefcss %}
-      {% block srcjs %}"/GitHub/Kamaleao/app/public/View/pós_login/js/perfil.js"{% endblock srcjs %}
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-     
-   {# endhead #}
-   {# body #}
-      <!-- conteudo de perfil -->
-      {% block perfil_icon %}
-      <div class="perfil_icon">
-        {% if url_foto_perfil is defined %}
-          <div class="foto_perf">
-            <img class="perf_img" src={{url_foto_perfil|e}}> </img>
+{# head #}
+{% block title %} Perfil {% endblock title %}
+{% block hrefcss %}"/GitHub/Kamaleao/app/public/View/pós_login/style/perfil.css"{% endblock hrefcss %}
+{% block srcjs %}"/GitHub/Kamaleao/app/public/View/pós_login/js/perfil.js"{% endblock srcjs %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+{# endhead #}
+{# body #}
+<!-- conteudo de perfil -->
+{% block perfil_icon %}
+<div class="perfil_icon">
+  {% if url_foto_perfil is defined %}
+  <div class="foto_perf">
+    <img class="perf_img" src={{url_foto_perfil|e}}> </img>
+  </div>
+  {% else %}
+  <a class="icone_perf"><i class='bx bxs-user-circle'></i></a>
+  {% endif %}
+  <h1> @{{Usuario}} </h1>
+
+  {% if Descricao != "" %}
+  <p>{{Descricao}}</p>
+  {% endif %}
+
+</div>
+{% endblock perfil_icon %}
+
+{% block div_container %}
+<main>
+  <div class="tab">
+    <div><button id="bt1" class="tablinks" onclick="openTab(event, 'Inventário', 'bt1')">inventário</button></div>
+    <div><button id="bt2" class="tablinks" onclick="openTab(event, 'Serviços', 'bt2')" autofocus>serviços</button></div>
+    <div><button id="bt3" class="tablinks" onclick="openTab(event, 'Comissao', 'bt3')">comissões e pedidos</button>
+    </div>
+  </div>
+
+  <div class="all">
+    <!-- Inventario -->
+    <div id="Inventário" class="tabcontent">
+      <section class="grid_home">
+        {% if servicos is defined %}
+        {% for servico in servicos %}
+        <div class="item_inv">
+          <img class="anuncio_img"></img>
+          <div class="anuncio_titulo">
+            <h1 name="titulo-item">Exemplo</h1>
           </div>
-        {% else %}
-          <a class="icone_perf"><i class='bx bxs-user-circle'></i></a>
+          <!--anuncio_titulo-->
+          <div class="anuncio_user">
+            <h3 name="username-item">feito por: @Sérgio</h3>
+          </div>
+          <!--user-->
+        </div> <!-- item -->
+        {% endfor %}
         {% endif %}
-        <h1> @{{Usuario}} </h1>
+      </section>
+    </div>
+    <!-- Serviços -->
+    <div id="Serviços" class="tabcontent">
+      <section class="grid_home">
+        <a id="adicionar" onclick="abreModal('add')">
+          <i class='bx bx-plus'></i>
+        </a>
+        <!-- Fundo dos modais -->
+        <div id="md-pr" class="md-ct-pos">
+          <!-- Formulario: Adiciona Anuncio -->
+          <form id="add" class="md-ct-pos" action="/" method="post" enctype="multipart/form-data">
+            <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
+            <h1>Anunciar um Serviço</h1>
+            <p hidden class="form-message">
+              <i class="fas fa-exclamation-triangle"></i>
+            </p>
+            <div class="grid_anuncio">
+              <div class="left">
+                <p>Título do serviço</p>
+                <input type="text" id="titulo" name="titulo" maxlength="50" placeholder="Título para o seu anúncio" />
+                <p>Descrição do serviço</p>
+                <textarea id="descricao" name="descricao" rows="5" maxlength="280"
+                  placeholder="Descreva detalhadamente o serviço que será oferecido..."></textarea>
+                <p>Escolha uma imagem para o Anúncio:</p>
+                <label for="imagem" id="escolha">Escolher arquivo</label>
+                <input type="file" id="imagem" name="servfile" accept="image/jpeg, image/png"></br></br>
+                <span class="file-name"></span>
+              </div>
+              <div class="rigth">
+                <p>Preço médio</p>
+                <input type="number" min="0" max="10000" step=0.01 id="preco" name="precoMedio"
+                  placeholder="Preço médio para o serviço" />
+                <p>Tipos de Licenças</p>
+                <div class="check">
+                  <input type="radio" id="licenca1" name="licenca" value="1" required>
+                  <label for="licenca1">Licença de uso Não-Comercial</label><br>
+                  <input type="radio" id="licenca2" name="licenca" value="2">
+                  <label for="licenca2">Licença de uso Comercial</label><br>
+                  <input type="radio" id="licenca3" name="licenca" value="3">
+                  <label for="licenca3">Licença de Download</label>
+                </div>
+                <p id="esp">Categoria</p>
+                <select name="select_cat" id="select_cat" required>
+                  <option value="" disabled selected hidden>Por favor, selecione...</option>
+                  {% for categoria in sltCategoria %}
+                  <option value={{categoria.cd_categoria|escape}}>{{ categoria.nm_categoria|e }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <input type="submit" class="botao" name="acao" value="Anunciar" />
+          </form>
+          <!-- Fim Form -->
+          <!-- Div: Decide Acao -->
+          <div class="form_anuncio" id="editar-excluir">
+            <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('editar-excluir')"></i>
+            <h1>Gerenciar Anúncio</h1>
+            <div class="grid_anuncio">
+              <div class="left">
+                <img class="img-item" src="" alt="Representação do Anúncio em Imagem">
+              </div>
+              <div class="rigth">
+                <p><span id="titSub"></span></p>
+                <p><b><span id="valSub"></span></b></p>
+                <textarea id="descSub" readonly></textarea>
+                <p style="color:rgb(46, 46, 46)"><strong>Licença:</strong> <span id="liSub"></span></p>
+                <p style="color:rgb(46, 46, 46)"><strong>Categoria:</strong> <span id="catSub"></span></p>
+              </div>
+            </div>
+            <button class="botao" onclick="abreModal('modal-editar')">Editar serviço</button>
+            <button class="botao" onclick="abreModal('conf-excluir')">Excluir serviço</button>
+          </div>
+          <!-- Fim Div: Edita Anuncio -->
+          <div class="md-ct-pos" id="modal-editar">
+            <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-editar')"></i>
+            <h1>Alterar Informações do Anúncio</h1>
+            <br />
+            <div class="info_perfil" onclick="abreModal('titulo')">
+              <div class="edit_icon">
+                <i class="fas fa-pen"></i>
+              </div> <!-- edit_icon -->
+              <div class="edit_text">
+                <h3>Editar Título</h3>
+              </div> <!-- edit_text -->
+            </div> <!-- info_perfil -->
+            <br />
+            <div class="info_perfil" onclick="abreModal('preco')">
+              <div class="edit_icon">
+                <i class="fas fa-pen"></i>
+              </div> <!-- edit_icon -->
+              <div class="edit_text">
+                <h3>Editar Preço Médio</h3>
+              </div> <!-- edit_text -->
+            </div> <!-- info_perfil -->
+            <br />
+            <div class="info_perfil" onclick="abreModal('desc')">
+              <div class="edit_icon">
+                <i class="fas fa-pen"></i>
+              </div> <!-- edit_icon -->
+              <div class="edit_text">
+                <h3>Editar Descrição</h3>
+              </div> <!-- edit_text -->
+            </div> <!-- info_perfil -->
+            <br />
+            <div class="info_perfil" onclick="abreModal('licenca')">
+              <div class="edit_icon">
+                <i class="fas fa-pen"></i>
+              </div> <!-- edit_icon -->
+              <div class="edit_text">
+                <h3>Editar Licença</h3>
+              </div> <!-- edit_text -->
+            </div> <!-- info_perfil -->
+            <br />
+            <div class="info_perfil" onclick="abreModal('categoria')">
+              <div class="edit_icon">
+                <i class="fas fa-pen"></i>
+              </div> <!-- edit_icon -->
+              <div class="edit_text">
+                <h3>Editar Categoria</h3>
+              </div> <!-- edit_text -->
+            </div> <!-- info_perfil -->
+          </div>
+          <!-- Fim Formulario: Edita Anuncio -->
+        </div>
+        <!-- Formulario: Edita Titulo -->
+        <!-- Segundo Fundo -->
+        <div id="md-pr2" class="md-ct-pos">
+          <!-- Edita Titulo -->
+          <form class="form_anuncio" action="/" method="post" id="alt-titulo">
+            <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('alt-titulo')"></i>
+            <h1>Alterar Titulo</h1>
+            <p>Insira abaixo o título desejado </p>
+            <p hidden id="resultsec" class="form-message">
+              <i class="fas fa-exclamation-triangle"></i>
+            </p>
+            <p class="cdhidden" id="hiddenedita1" hidden></p>
+            <input type="text" id="alt-tit" placeholder="Titulo" />
+            <button id="botao-editar" class="botao">Salvar</button>
+          </form>
+          <!-- Edita Preço -->
+          <form class="form_anuncio" action="/" method="post" id="alt-preco">
+            <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('alt-preco')"></i>
+            <h1>Alterar Preço</h1>
+            <p>Insira abaixo o preço desejado </p>
+            <p hidden id="resultthird" class="form-message">
+              <i class="fas fa-exclamation-triangle"></i>
+            </p>
+            <p class="cdhidden" id="hiddenedita2" hidden></p>
+            <input type="number" min="0" max="10000" step=0.01 id="alt-prec" placeholder="preço" />
+            <button id="botao-editar" class="botao">Salvar</button>
+          </form>
+          <!-- Edita Descricao -->
+          <form class="form_anuncio" action="/" method="post" id="alt-desc">
+            <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('alt-desc')"></i>
+            <h1>Alterar Descrição</h1>
+            <p>Insira abaixo a descrição desejada</p>
+            <p hidden id="resultfourth" class="form-message">
+              <i class="fas fa-exclamation-triangle"></i>
+            </p>
+            <p class="cdhidden" id="hiddenedita3" hidden></p>
+            <textarea class="textarea-desc" id="alt-desci" rows="5" maxlength="280"></textarea>
+            <button id="botao-editar" class="botao">Salvar</button>
+          </form>
+          <!-- Edita Licença -->
+          <form class="form_anuncio" action="/" method="post" id="alt-licenca">
+            <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('alt-licenca')"></i>
+            <h1>Alterar Licença</h1>
+            <p hidden id="resultfifth" class="form-message">
+              <i class="fas fa-exclamation-triangle"></i>
+            </p>
+            <div class="opc">
+              <h3>selecione a licença desejada </h3>
+              <input type="radio" id="licenca1" name="licenca2" value="1" required>
+              <label for="licenca1">Licença de uso Não-Comercial</label><br>
+              <input type="radio" id="licenca2" name="licenca2" value="2">
+              <label for="licenca2">Licença de uso Comercial</label><br>
+              <input type="radio" id="licenca3" name="licenca2" value="3">
+              <label for="licenca3">Licença de Download</label><br>
+              <p class="cdhidden" id="hiddenedita4" hidden></p>
+              <button id="botao-editar" class="botao">Salvar</button>
+            </div>
+          </form>
+          <!-- Edita Categoria -->
+          <form class="form_anuncio" action="/" method="post" id="alt-categoria">
+            <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('alt-categoria')"></i>
+            <h1>Alterar Categoria: </h1>
+            <p hidden id="resultsixth" class="form-message">
+              <i class="fas fa-exclamation-triangle"></i>
+            </p>
+            <select class="slct-css" name="select_cat" id="select_cat2" required>
+              <option value="" disabled selected hidden>Por favor, selecione...</option>
+              {% for categoria in sltCategoria %}
+              <option value={{categoria.cd_categoria|escape}}>{{ categoria.nm_categoria|e }}</option>
+              {% endfor %}
+            </select>
+            <p class="cdhidden" id="hiddenedita5" hidden></p>
+            <button id="botao-editar" class="botao">Salvar</button>
+          </form>
 
-        {% if Descricao != "" %}
-        <p>{{Descricao}}</p>
+        </div>
+        <!-- Segundo Fundo -->
+        <div id="md-pr3" class="md-ct-pos">
+          <!-- Div: Exclui Anuncio -->
+          <div class="md-ct-pos" id="conf-excluir">
+            <h1>Tem certeza?</h1>
+            <p class="cdhidden" id="hiddenexclui" hidden></p>
+            <p hidden class="form-message" id="exclui-anuncio">
+              <i class="fas fa-exclamation-triangle"></i>
+            </p>
+            <div class="grid_button">
+              <button class="botao" onclick="fechaModal('conf-excluir')">Voltar</button>
+              <button class="botao" id="exclui">Excluir</button>
+            </div>
+          </div>
+          <!-- Fim Div -->
+          <!-- Fim Segundo Fundo -->
+        </div>
+        <!-- Pagina os serviços do username -->
+        {% if servicos is defined %}
+        {% for servico in servicos %}
+        <div class="item" id='item{{loop.index|e}}'>
+          <img class="anuncio_img" src={{servico.url_da_imagem|e}}></img>
+          <div class="anuncio_titulo">
+            <h1 name="titulo-item">{{servico.titulo|e}}</h1>
+          </div>
+          <!--anuncio_titulo-->
+          <div class="anuncio_user">
+            <h3 name="username-item">@{{servico.username|e}}</h3>
+          </div>
+          <!--user-->
+          <div class="anuncio_preço">
+            <h2>R${{servico.preço|e}}</h2>
+          </div> <!-- preço -->
+        </div> <!-- item -->
+        {% endfor %}
         {% endif %}
+      </section>
+      <!--grid_home-->
+    </div>
 
+
+    <!-- Comissao -->
+    <div id="Comissao" class="tabcontent">
+      <div id="md-pr4" class="md-ct-pos">
+        <!-- abre modal pedido (para o artista aceitar ou negar a comissao) -->
+        <div class="md-ct-pos" id="modal-pedido">
+          <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-pedido')"></i>
+          <h1>Pedido nº <span id="idPed"></span></h1>
+          <p hidden class="form-message">
+            <i class="fas fa-exclamation-triangle"></i>
+          </p>
+          </br>
+          <h2>Serviço:</h2>
+          <p id="titServ"></p>
+          </br>
+          <h2>Título do pedido:</h2>
+          <p id="titPed"></p>
+          </br>
+          <h2>Descrição do pedido:</h2>
+          <textarea id="descPed" readonly></textarea>
+          </br>
+          <div class="grid_button">
+            <button class="botao" id="aceitaPedido" onclick="abreModal('valor-comissao')">Aceitar</button>
+            <button class="botao" id="negaPedido">Negar</button>
+          </div>
+        </div>
+        <!-- fecha modal pedido (para o artista aceitar ou negar a comissao) -->
+        <!-- abre modal valor pedido (pra quem ta pedindo - aceitar ou negar) -->
+        <div class="md-ct-pos" id="valor-pedido">
+          <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('valor-pedido')"></i>
+          <h1>Pedido nº <span id="idValPed"></span></h1>
+          <p id="respValAceita" hidden class="form-message">
+            <i class="fas fa-exclamation-triangle"></i>
+          </p>
+          </br>
+          <h2>Serviço:</h2>
+          <p id="titValServ"></p>
+          </br>
+          <h2>Título do pedido:</h2>
+          <p id="titValPed"></p>
+          </br>
+          <h2>Valor do pedido:</h2>
+          <p>R$<span id="valeValPed"></span></p>
+          </br>
+          <div class="grid_button">
+            <button class="botao" id="aceitaValor">Aceitar</button>
+            <button class="botao" id="negaValor">Negar</button>
+          </div>
+        </div>
+        <!-- fecha modal valor pedido (pra quem ta pedidno) -->
+        <!-- modal entregar pedido (depois que o comprador aceitou) -->
+        <div class="md-ct-pos" id="modal-entregar-pedido">
+          <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-pedido')"></i>
+          <h1>Pedido nº <span id="idPed"></span></h1>
+          <p hidden class="form-message">
+            <i class="fas fa-exclamation-triangle"></i>
+          </p>
+          </br>
+          <h2>Serviço:</h2>
+          <p id="titServ"></p>
+          </br>
+          <h2>Título do pedido:</h2>
+          <p id="titPed"></p>
+          </br>
+          <p>Insira o pedido pronto:</p>
+          <label for="imagem" id="escolha">Escolher arquivo</label>
+          <input type="file" id="imagem" name="servfile" accept="image/jpeg, image/png">
+          </br>
+          <button class="botao" id="entregaPedido">Enviar</button>
+        </div>
       </div>
-      {% endblock perfil_icon %}
+      <!--  fecha modal entregar pedido (depois que o comprador aceitou) -->
+      <!-- abre valor pedido (para o artista aceitar a comissao) -->
+      <div id="md-pr5" class="md-ct-pos">
+        <div class="md-ct-pos" id="valor-comissao">
+          <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('valor-comissao')"></i>
+          <h1>Pedido nº <span id="idPed"></span></h1>
+          </br>
+          <p>Insira abaixo o valor que irá cobrar: </p>
+          <p hidden id="result16" class="form-message">
+            <i class="fas fa-exclamation-triangle"></i>
+          </p>
+          <p class="cdhidden" id="hiddenenvia1" hidden></p>
+          <input type="number" min="0" max="10000" step=0.01 id="preco-pedido" placeholder="preço" />
+          <button id="enviaValorFinal" class="botao">Enviar</button>
+          </br>
+        </div>
+      </div>
+      <!-- fecha valor pedido (para o artista aceitar a comissao) -->
+      <h1>Comissões recebidas</h1>
+      <div class="comissoes_recebidas">
+        {% if comissoes is defined %}
+        {% for comissao in comissoes %}
+        <div class="abrir_comissao">
+          {% if comissao.valorpedido == null and comissao.indicadorconf == 0 %}
+          <div class="edit_text aceitaCon" id="{{comissao.idpedido|e}}">
+            <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
+            <p id="atualUsername">Pedido feito por @{{comissao.username}}.</p>
+            <p style="color:#00a800">Status: aguardando sua resposta</p>
+          </div> <!-- edit_text -->
+          {% elseif comissao.valorpedido != null and comissao.indicadorconf == 0 %}
+          <div class="edit_text " id="{{comissao.idpedido|e}}">
+            <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
+            <p id="atualUsername">Pedido feito por @{{comissao.username}}.</p>
+            <p style="color:#F53446">Status: aguardando confirmação do comprador</p>
+          </div> <!-- edit_text -->
+          {% elseif comissao.valorpedido != null and comissao.indicadorconf == 1 %}
+          <div class="edit_text " id="{{comissao.idpedido|e}}">
+            <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
+            <p id="atualUsername">Pedido feito por @{{comissao.username}}</p>
+            <p style="color:#00a800">Status: aguardando produto</p>
+          </div> <!-- edit_text -->
+          {% endif %}
+        </div> <!-- abrir_comissao -->
+        {% endfor %}
+        {% else %}
+        <p>Você ainda não recebeu pedido de comissão :(</p>
+        {% endif %}
+      </div>
+      <!--comissoes_recebidas-->
 
-      {% block div_container %}
-      <main>
-        <div class="tab">
-          <div><button id="bt1" class="tablinks" onclick="openTab(event, 'Inventário', 'bt1')">inventário</button></div>
-          <div><button id="bt2" class="tablinks" onclick="openTab(event, 'Serviços', 'bt2')" autofocus>serviços</button></div>
-          <div><button id="bt3" class="tablinks" onclick="openTab(event, 'Comissao', 'bt3')">comissões e pedidos</button></div>
+      <div class="line"></div>
+
+      <h1>Pedidos realizados</h1>
+      <div class="pedidos_realizados">
+        {% if pedidos_feitos is defined %}
+        {% for pedido in pedidos_feitos %}
+        <div class="abrir_pedidos">
+          {% if pedido.valorpedido == null %}
+          <div class="edit_text" id="{{pedido.idpedido|e}}">
+            <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
+            <p id="atualUsername">pedido feito para @{{pedido.username}}.</p>
+            <p style="color:#F53446">Status: aguardando resposta do artista</p>
+          </div> <!-- edit_text -->
+          {% elseif pedido..valorpedido != null and pedido.indicadorconf == 0 %}
+          <div class="edit_text confPed" id="{{pedido.idpedido|e}}">
+            <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
+            <p id="atualUsername">pedido feito por @{{pedido.username}}</p>
+            <p style="color:#00a800">Status: aguardando sua confirmaçã</p>
+          </div> <!-- edit_text -->
+
+          {% elseif pedido..valorpedido != null and pedido.indicadorconf == 1 %}
+          <div class="edit_text" id="{{pedido.idpedido|e}}">
+            <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
+            <p id="atualUsername">pedido feito por @{{pedido.username}}.</p>
+            <p style="color:#F53446">Status: em produção</p>
+          </div>
+          <!-- edit_text -->
+          {% endif %}
+        </div> <!-- abrir_pedidos -->
+        {% endfor %}
+        {% else %}
+        <p>Você ainda não fez nenhum pedido de comissão. :(</p>
+        {% endif %}
+
+
+        <div class="comission-bg">
+          <div class="comission-modal">
+            <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
+            <h1>Titulo da comissao</h1>
+            <div class="txtarea">
+              <p>Descricao aqui</p>
+            </div>
+            <div class="grid_button">
+              <button class="botao">Aceitar</button>
+              <button class="botao">Negar</button>
+              <div class="acc">
+                <input type="number" placeholder="insira o valor para aceitar" />
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="all">
-          <!-- Inventario -->
-          <div id="Inventário" class="tabcontent">
-            <section class="grid_home">
-             {% if servicos is defined %}
-                {% for servico in servicos %}
-                  <div class="item_inv">
-                    <img class="anuncio_img"></img>
-                    <div class="anuncio_titulo">
-                      <h1 name="titulo-item">Exemplo</h1>
-                    </div> <!--anuncio_titulo-->
-                    <div class="anuncio_user">
-                      <h3 name="username-item">feito por: @Sérgio</h3>
-                    </div> <!--user-->
-                  </div> <!-- item -->
-                {% endfor %}
-              {% endif %}
-            </section>
-          </div>
-          <!-- Serviços -->
-          <div id="Serviços" class="tabcontent">
-            <section class="grid_home">
-              <a id="adicionar" onclick="abreModal('add')">
-                <i class='bx bx-plus'></i>
-              </a>
-              <!-- Fundo dos modais -->
-              <div id="md-pr" class="md-ct-pos">
-                <!-- Formulario: Adiciona Anuncio -->
-                <form id="add" class ="md-ct-pos" action="/" method="post" enctype="multipart/form-data">
-                  <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
-                    <h1>Anunciar um Serviço</h1>
-                    <p hidden class="form-message">
-                      <i class="fas fa-exclamation-triangle"></i>
-                    </p>
-                    <div class ="grid_anuncio">
-                      <div class="left">
-                        <p>Título do serviço</p>
-                        <input type="text" id="titulo" name="titulo" maxlength="50" placeholder="Título para o seu anúncio"/>
-                        <p>Descrição do serviço</p>
-                        <textarea id="descricao" name="descricao" rows="5" maxlength="280" placeholder="Descreva detalhadamente o serviço que será oferecido..."></textarea>
-                        <p>Escolha uma imagem para o Anúncio:</p>
-                        <label for="imagem" id="escolha">Escolher arquivo</label>
-                        <input type="file" id="imagem" name="servfile" accept="image/jpeg, image/png"></br></br>
-                        <span class="file-name"></span>
-                      </div>
-                      <div class="rigth">
-                        <p>Preço médio</p>
-                        <input type="number" min="0" max="10000" step=0.01 id="preco" name="precoMedio" placeholder="Preço médio para o serviço"/>
-                        <p>Tipos de Licenças</p>
-                        <div class="check">
-                          <input type="radio" id="licenca1" name="licenca" value="1" required>
-                          <label for="licenca1">Licença de uso Não-Comercial</label><br>
-                          <input type="radio" id="licenca2" name="licenca" value="2">
-                          <label for="licenca2">Licença de uso Comercial</label><br>
-                          <input type="radio" id="licenca3" name="licenca" value="3">
-                          <label for="licenca3">Licença de Download</label>
-                        </div>
-                        <p id="esp">Categoria</p>
-                        <select name="select_cat" id="select_cat" required>
-                          <option value="" disabled selected hidden>Por favor, selecione...</option>
-                          {% for categoria in sltCategoria %}
-                          <option value={{categoria.cd_categoria|escape}}>{{ categoria.nm_categoria|e }}</option>
-                          {% endfor %}
-                        </select>  
-                      </div>
-                    </div>
-                  <input type="submit" class="botao" name="acao" value="Anunciar" />
-                </form>
-                <!-- Fim Form -->
-                <!-- Div: Decide Acao -->
-                <div class="form_anuncio" id="editar-excluir">
-                  <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('editar-excluir')"></i>
-                  <h1>Gerenciar Anúncio</h1>
-                  <div class ="grid_anuncio">
-                      <div class="left">
-                        <img class = "img-item" src="" alt="Representação do Anúncio em Imagem">
-                      </div>
-                      <div class="rigth">
-                        <p><span id="titSub"></span></p>
-                        <p><b><span id="valSub"></span></b></p>
-                        <textarea id="descSub" readonly></textarea>
-                        <p style="color:rgb(46, 46, 46)"><strong>Licença:</strong> <span id="liSub"></span></p>
-                        <p style="color:rgb(46, 46, 46)"><strong>Categoria:</strong> <span id="catSub"></span></p>
-                      </div>
-                    </div>
-                    <button class="botao" onclick="abreModal('modal-editar')">Editar serviço</button>
-                    <button class="botao" onclick="abreModal('conf-excluir')">Excluir serviço</button>
-                </div>
-                <!-- Fim Div: Edita Anuncio -->
-                <div class="md-ct-pos" id="modal-editar">
-                  <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-editar')"></i>
-                  <h1>Alterar Informações do Anúncio</h1>
-                  <br />
-                  <div class="info_perfil" onclick="abreModal('titulo')">
-                    <div class="edit_icon">
-                        <i class="fas fa-pen"></i> 
-                    </div>  <!-- edit_icon -->
-                    <div class="edit_text">
-                      <h3>Editar Título</h3>
-                    </div> <!-- edit_text -->
-                  </div> <!-- info_perfil -->
-                  <br />
-                  <div class="info_perfil" onclick="abreModal('preco')">
-                    <div class="edit_icon">
-                        <i class="fas fa-pen"></i> 
-                    </div>  <!-- edit_icon -->
-                    <div class="edit_text">
-                      <h3>Editar Preço Médio</h3>
-                    </div> <!-- edit_text -->
-                  </div> <!-- info_perfil -->
-                  <br />
-                  <div class="info_perfil" onclick="abreModal('desc')">
-                    <div class="edit_icon">
-                        <i class="fas fa-pen"></i> 
-                    </div>  <!-- edit_icon -->
-                    <div class="edit_text">
-                      <h3>Editar Descrição</h3>
-                    </div> <!-- edit_text -->
-                  </div> <!-- info_perfil -->
-                  <br />
-                  <div class="info_perfil" onclick="abreModal('licenca')">
-                    <div class="edit_icon">
-                        <i class="fas fa-pen"></i> 
-                    </div>  <!-- edit_icon -->
-                    <div class="edit_text">
-                      <h3>Editar Licença</h3>
-                    </div> <!-- edit_text -->
-                  </div> <!-- info_perfil -->
-                  <br />
-                  <div class="info_perfil" onclick="abreModal('categoria')">
-                    <div class="edit_icon">
-                        <i class="fas fa-pen"></i> 
-                    </div>  <!-- edit_icon -->
-                    <div class="edit_text">
-                      <h3>Editar Categoria</h3>
-                    </div> <!-- edit_text -->
-                  </div> <!-- info_perfil -->
-                </div>
-                <!-- Fim Formulario: Edita Anuncio -->
-                </div>
-                <!-- Formulario: Edita Titulo -->
-                <!-- Segundo Fundo -->
-                <div id="md-pr2" class="md-ct-pos">
-                  <!-- Edita Titulo -->
-                  <form class ="form_anuncio" action="/" method="post" id="alt-titulo">
-                      <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('alt-titulo')"></i>
-                      <h1>Alterar Titulo</h1>
-                      <p>Insira abaixo o título desejado </p>
-                      <p hidden id="resultsec" class="form-message">
-                        <i class="fas fa-exclamation-triangle"></i>
-                      </p>
-                      <p class="cdhidden" id="hiddenedita1" hidden></p>
-                      <input type="text" id="alt-tit" placeholder="Titulo"/>
-                      <button id="botao-editar" class="botao">Salvar</button>
-                  </form>
-                  <!-- Edita Preço -->
-                  <form class ="form_anuncio" action="/" method="post" id="alt-preco">
-                    <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('alt-preco')"></i>
-                      <h1>Alterar Preço</h1>
-                      <p>Insira abaixo o preço desejado </p>
-                      <p hidden id="resultthird" class="form-message">
-                        <i class="fas fa-exclamation-triangle"></i>
-                      </p>
-                      <p class="cdhidden" id="hiddenedita2" hidden></p>
-                      <input type="number" min="0" max="10000" step=0.01 id="alt-prec" placeholder="preço"/>
-                      <button id="botao-editar" class="botao">Salvar</button>
-                  </form>
-                  <!-- Edita Descricao -->
-                  <form class ="form_anuncio" action="/" method="post" id="alt-desc">
-                      <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('alt-desc')"></i>
-                      <h1>Alterar Descrição</h1>
-                      <p>Insira abaixo a descrição desejada</p>
-                      <p hidden id="resultfourth" class="form-message">
-                        <i class="fas fa-exclamation-triangle"></i>
-                      </p>
-                      <p class="cdhidden" id="hiddenedita3" hidden></p>
-                      <textarea class="textarea-desc" id="alt-desci" rows="5" maxlength="280"></textarea>
-                      <button id="botao-editar" class="botao">Salvar</button>
-                  </form>
-                  <!-- Edita Licença -->
-                  <form class ="form_anuncio" action="/" method="post" id="alt-licenca">
-                      <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('alt-licenca')"></i>
-                      <h1>Alterar Licença</h1>
-                      <p hidden id="resultfifth" class="form-message">
-                        <i class="fas fa-exclamation-triangle"></i>
-                      </p>
-                      <div class="opc">
-                        <h3>selecione a licença desejada </h3>
-                        <input type="radio" id="licenca1" name="licenca2" value="1" required>
-                        <label for="licenca1">Licença de uso Não-Comercial</label><br>
-                        <input type="radio" id="licenca2" name="licenca2" value="2">
-                        <label for="licenca2">Licença de uso Comercial</label><br>
-                        <input type="radio" id="licenca3" name="licenca2" value="3">
-                        <label for="licenca3">Licença de Download</label><br>
-                        <p class="cdhidden" id="hiddenedita4" hidden></p>
-                        <button id="botao-editar" class="botao">Salvar</button>
-                      </div>
-                  </form>
-                  <!-- Edita Categoria -->
-                  <form class ="form_anuncio" action="/" method="post" id="alt-categoria">
-                      <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('alt-categoria')"></i>
-                      <h1>Alterar Categoria: </h1>
-                      <p hidden id="resultsixth" class="form-message">
-                        <i class="fas fa-exclamation-triangle"></i>
-                      </p>
-                      <select class="slct-css" name="select_cat" id="select_cat2" required>
-                        <option value="" disabled selected hidden>Por favor, selecione...</option>
-                        {% for categoria in sltCategoria %}
-                        <option value={{categoria.cd_categoria|escape}}>{{ categoria.nm_categoria|e }}</option>
-                        {% endfor %}
-                      </select> 
-                      <p class="cdhidden" id="hiddenedita5" hidden></p>
-                      <button id="botao-editar" class="botao">Salvar</button>
-                  </form>
-                  
-                </div>  
-                <!-- Segundo Fundo -->
-                <div id="md-pr3" class="md-ct-pos">
-                  <!-- Div: Exclui Anuncio -->
-                  <div class="md-ct-pos" id="conf-excluir">
-                    <h1>Tem certeza?</h1>
-                    <p class="cdhidden" id="hiddenexclui" hidden></p>
-                    <p hidden class="form-message" id="exclui-anuncio">
-                      <i class="fas fa-exclamation-triangle"></i>
-                    </p>
-                    <div class="grid_button">
-                      <button class="botao" onclick="fechaModal('conf-excluir')">Voltar</button>
-                      <button class="botao" id="exclui">Excluir</button>
-                    </div>
-                  </div>
-                  <!-- Fim Div -->
-                <!-- Fim Segundo Fundo -->
-              </div>
-              <!-- Pagina os serviços do username -->
-              {% if servicos is defined %}
-                {% for servico in servicos %}
-                  <div class="item" id='item{{loop.index|e}}'>
-                    <img class="anuncio_img" src={{servico.url_da_imagem|e}}></img>
-                    <div class="anuncio_titulo">
-                      <h1 name="titulo-item" >{{servico.titulo|e}}</h1>
-                    </div> <!--anuncio_titulo-->
-                    <div class="anuncio_user">
-                      <h3 name="username-item">@{{servico.username|e}}</h3>
-                    </div> <!--user-->
-                    <div class="anuncio_preço">
-                      <h2>R${{servico.preço|e}}</h2>
-                    </div> <!-- preço -->
-                  </div> <!-- item -->
-                {% endfor %}
-              {% endif %}
-            </section> <!--grid_home-->
-          </div>
+        <div class="pedidos-modal">
+          <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
+            <h1>Titulo do pedido</h1>
+            <p>Status do servico: aceito</p>
+            <p>Preco: 200</p>
+            <p>email para contato: carlinhosmaia@outlook.com</p>
+        </div>
+      </div>
+      <!--pedidos_realizados-->
+    </div> <!-- Fecha Comissao -->
 
 
-          <!-- Comissao -->
-          <div id="Comissao" class="tabcontent">
-            <div id="md-pr4" class="md-ct-pos">
-              <!-- abre modal pedido (para o artista aceitar ou negar a comissao) -->
-              <div class="md-ct-pos" id="modal-pedido">
-                <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-pedido')"></i>
-                <h1>Pedido nº <span id="idPed"></span></h1>
-                <p hidden class="form-message">
-                  <i class="fas fa-exclamation-triangle"></i>
-                </p>
-                </br>
-                <h2>Serviço:</h2>
-                <p id="titServ"></p>
-                </br>
-                <h2>Título do pedido:</h2>
-                <p id="titPed"></p>
-                </br>
-                <h2>Descrição do pedido:</h2>
-                <textarea id="descPed" readonly></textarea>
-                </br>
-                <div class="grid_button">
-                  <button class="botao" id="aceitaPedido" onclick="abreModal('valor-comissao')">Aceitar</button>
-                  <button class="botao" id="negaPedido">Negar</button>
-                </div>
-              </div>
-              <!-- fecha modal pedido (para o artista aceitar ou negar a comissao) -->
-              <!-- abre modal valor pedido (pra quem ta pedindo - aceitar ou negar) -->
-              <div class="md-ct-pos" id="valor-pedido">
-                <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('valor-pedido')"></i>
-                <h1>Pedido nº <span id="idValPed"></span></h1>
-                <p id="respValAceita" hidden class="form-message">
-                  <i class="fas fa-exclamation-triangle"></i>
-                </p>
-                </br>
-                <h2>Serviço:</h2>
-                <p id="titValServ"></p>
-                </br>
-                <h2>Título do pedido:</h2>
-                <p id="titValPed"></p>
-                </br>
-                <h2>Valor do pedido:</h2>
-                <p>R$<span id="valeValPed"></span></p>
-                </br>
-                <div class="grid_button">
-                  <button class="botao" id="aceitaValor">Aceitar</button>
-                  <button class="botao" id="negaValor">Negar</button>
-                </div>
-              </div>
-              <!-- fecha modal valor pedido (pra quem ta pedidno) -->
-              <!-- modal entregar pedido (depois que o comprador aceitou) -->
-              <div class="md-ct-pos" id="modal-entregar-pedido">
-                <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-pedido')"></i>
-                <h1>Pedido nº <span id="idPed"></span></h1>
-                <p hidden class="form-message">
-                  <i class="fas fa-exclamation-triangle"></i>
-                </p>
-                </br>
-                <h2>Serviço:</h2>
-                <p id="titServ"></p>
-                </br>
-                <h2>Título do pedido:</h2>
-                <p id="titPed"></p>
-                </br>
-                <p>Insira o pedido pronto:</p>
-                <label for="imagem" id="escolha">Escolher arquivo</label>
-                <input type="file" id="imagem" name="servfile" accept="image/jpeg, image/png">
-                </br>
-                <button class="botao" id="entregaPedido">Enviar</button>
-              </div>
-            </div>
-            <!--  fecha modal entregar pedido (depois que o comprador aceitou) -->
-            <!-- abre valor pedido (para o artista aceitar a comissao) -->
-            <div id="md-pr5" class="md-ct-pos">
-              <div class="md-ct-pos" id="valor-comissao">
-                <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('valor-comissao')"></i>
-                <h1>Pedido nº <span id="idPed"></span></h1>
-                </br>
-                <p>Insira abaixo o valor que irá cobrar: </p>
-                <p hidden id="result16" class="form-message">
-                  <i class="fas fa-exclamation-triangle"></i>
-                </p>
-                <p class="cdhidden" id="hiddenenvia1" hidden></p>
-                <input type="number" min="0" max="10000" step=0.01 id="preco-pedido" placeholder="preço"/>
-                <button id="enviaValorFinal" class="botao">Enviar</button>
-                </br>
-              </div>
-            </div>
-            <!-- fecha valor pedido (para o artista aceitar a comissao) -->        
-            <h1>Comissões recebidas</h1>
-            <div class="comissoes_recebidas">
-              {% if comissoes is defined %}
-                  {% for comissao in comissoes %}
-                    <div class="abrir_comissao">
-                      {% if comissao.valorpedido == null and comissao.indicadorconf == 0 %}
-                      <div class="edit_text aceitaCon" id="{{comissao.idpedido|e}}">
-                        <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
-                        <p id="atualUsername">Pedido feito por @{{comissao.username}}.</p>
-                        <p style="color:#00a800">Status: aguardando sua resposta</p>
-                      </div> <!-- edit_text -->
-                      {% elseif comissao.valorpedido != null and comissao.indicadorconf == 0 %}
-                      <div class="edit_text " id="{{comissao.idpedido|e}}">
-                        <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
-                        <p id="atualUsername">Pedido feito por @{{comissao.username}}.</p>
-                        <p style="color:#F53446">Status: aguardando confirmação do comprador</p>
-                      </div> <!-- edit_text -->  
-                      {% elseif comissao.valorpedido != null and comissao.indicadorconf == 1 %}
-                      <div class="edit_text " id="{{comissao.idpedido|e}}">
-                        <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
-                        <p id="atualUsername">Pedido feito por @{{comissao.username}}</p>
-                        <p style="color:#00a800">Status: aguardando produto</p>
-                      </div> <!-- edit_text -->
-                      {% endif %}
-                    </div> <!-- abrir_comissao -->
-                  {% endfor %}
-              {% else %}
-                <p>Você ainda não recebeu pedido de comissão :(</p>
-              {% endif %}
-            </div> <!--comissoes_recebidas-->
-
-            <div class="line"></div>
-
-            <h1>Pedidos realizados</h1>
-            <div class="pedidos_realizados">
-                {% if pedidos_feitos is defined %}
-                  {% for pedido in pedidos_feitos %}
-                    <div class="abrir_pedidos">
-                        {% if pedido.valorpedido == null %}
-                        <div class="edit_text" id="{{pedido.idpedido|e}}">
-                          <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
-                          <p id="atualUsername">pedido feito para @{{pedido.username}}.</p>
-                          <p style="color:#F53446">Status: aguardando resposta do artista</p>
-                        </div> <!-- edit_text -->
-                        {% elseif pedido..valorpedido != null and pedido.indicadorconf == 0 %}
-                        <div class="edit_text confPed" id="{{pedido.idpedido|e}}">
-                          <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
-                          <p id="atualUsername">pedido feito por @{{pedido.username}}</p>
-                          <p style="color:#00a800">Status: aguardando sua confirmaçã</p>
-                        </div> <!-- edit_text -->
-                          
-                        {% elseif pedido..valorpedido != null and pedido.indicadorconf == 1 %}
-                        <div class="edit_text" id="{{pedido.idpedido|e}}">
-                          <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
-                          <p id="atualUsername">pedido feito por @{{pedido.username}}.</p>
-                          <p style="color:#F53446">Status: em produção</p>
-                        </div>
-                         <!-- edit_text -->
-                        {% endif %} 
-                    </div> <!-- abrir_pedidos -->
-                  {% endfor %}
-                {% else %}
-                  <p>Você ainda não fez nenhum pedido de comissão. :(</p>
-                {% endif %}
-                
-
-              <div class="comission-bg">
-                <div class="comission-modal">
-                  <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
-                    <h1>Titulo da comissao</h1>
-                    <div class="txtarea"><p>Descricao aqui</p></div>
-                    <div class="grid_button">
-                      <button class="botao">Aceitar</button>
-                      <button class="botao">Negar</button>
-                      <div class="acc">
-                        <input type="number" placeholder="insira o valor para aceitar" />
-                      </div>
-                    </div>
-                </div>
-              </div>
-
-              <div class="pedidos-bg">
-                <div class="pedidos-modal">
-                  <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
-                    <h1>Titulo do pedido</h1>
-                    <p>Status do servico: aceito</p>
-                    <p>Preco: 200</p>
-                    <p>email para contato: carlinhosmaia@outlook.com</p>
-                    
-                    <div class="grid_button">
-                      <button class="botao">Aceitar</button>
-                      <button class="botao">Negar</button>
-                      <div class="acc">
-                        <input type="number" placeholder="insira o valor para aceitar" />
-                      </div>
-                    </div>
-                </div>
-              </div>
 
 
-            </div> <!--pedidos_realizados-->
+    <div class="clearfix"></div>
 
+    <script>
+      function openTab(evt, contentName, idName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(contentName).style.display = "block";
+        evt.currentTarget.className += " active";
+        document.getElementById(idName).focus();
+      }
+      window.onload = function () {
+        document.getElementById('bt2').click();
+      }
 
-          </div> <!-- Fecha Comissao -->
+      $(function () {
+        $('#imagem').change(function () {
+          $('.file-name').html($(this).val().substr(12));
+        });
+      });
+    </script>
 
+  </div>
+  <!--all-->
+</main>
+{% endblock div_container %}
 
-        
-
-          <div class="clearfix"></div>
-
-          <script>
-            function openTab(evt, contentName, idName) {
-              var i, tabcontent, tablinks;
-              tabcontent = document.getElementsByClassName("tabcontent");
-              for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-              }
-              tablinks = document.getElementsByClassName("tablinks");
-              for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-              }
-              document.getElementById(contentName).style.display = "block";
-              evt.currentTarget.className += " active";
-              document.getElementById(idName).focus();
-            }
-            window.onload = function() {
-              document.getElementById('bt2').click();
-            }
-
-            $(function () {
-              $('#imagem').change(function() {
-                $('.file-name').html($(this).val().substr(12));
-              });
-            });
-          </script>
-
-        </div> <!--all-->
-      </main>
-      {% endblock div_container %}
-   
-      <!-- fim conteudo de perfil -->  
-   {# end body #}
+<!-- fim conteudo de perfil -->
+{# end body #}
 {# end document #}
 {% endblock perfil %}
