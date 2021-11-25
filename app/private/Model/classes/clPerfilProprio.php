@@ -84,7 +84,7 @@ class PerfilProprio extends Perfil {
         }
 
 
-        $sql = "SELECT pe.cd_pedido AS 'idpedido', pe.vl_pedido AS 'valorpedido', date(pe.dt_criação) as 'datapedido', (SELECT nm_username FROM tb_login JOIN tb_usuario ON tb_login.cd_login = tb_usuario.cd_login JOIN `tb_serviço` AS s ON s.cd_usuario = tb_usuario.cd_usuario WHERE s.cd_usuario != :cdus) AS 'username', pe.ic_confirmado as 'indicadorconf' FROM `tb_pedido` AS pe JOIN tb_usuario AS us ON us.cd_usuario = pe.cd_usuario JOIN tb_login AS l ON l.cd_login = us.cd_login JOIN `tb_serviço` AS s ON s.cd_serviço = pe.cd_serviço WHERE pe.cd_usuario = :cdus"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $sql = "SELECT pe.cd_pedido AS 'idpedido', pe.vl_pedido AS 'valorpedido', date(pe.dt_criação) as 'datapedido', (SELECT nm_username FROM tb_login JOIN tb_usuario ON tb_login.cd_login = tb_usuario.cd_login JOIN `tb_serviço` AS s ON s.cd_usuario = tb_usuario.cd_usuario WHERE s.cd_usuario != :cdus) AS 'username', pe.ic_cancelado as 'indicadorcancel', pe.ic_confirmado as 'indicadorconf' FROM `tb_pedido` AS pe JOIN tb_usuario AS us ON us.cd_usuario = pe.cd_usuario JOIN tb_login AS l ON l.cd_login = us.cd_login JOIN `tb_serviço` AS s ON s.cd_serviço = pe.cd_serviço WHERE pe.cd_usuario = :cdus"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
         $stmt = $banco->prepare($sql); # prepara o select para execução
         $stmt->bindValue(':cdus', $cdDono);
 

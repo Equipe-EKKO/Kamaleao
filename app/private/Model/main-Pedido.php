@@ -59,3 +59,12 @@ function recebePedidoValAceitaPost(int $cd_pedido):bool {
     }
 }
 
+function recebePedidoValNegaPost(int $cd_pedido):bool {
+    $pedido = new \Pedido();
+    
+    if ($pedido->negaValPedido($cd_pedido)) {
+        return true;
+    } else {
+        return false;
+    }
+}

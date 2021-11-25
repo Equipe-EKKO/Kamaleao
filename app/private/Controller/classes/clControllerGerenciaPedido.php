@@ -167,3 +167,39 @@ class ControllerAceitaValPedido{
     }
   }
 }
+
+//Classe controller nega val pedido
+class ControllerNegaValPedido{
+  private $cdPedido; #inteiro 
+  private function validaPedido():bool{ #Função bool para ver se todos os campos estão corretos para mandar ao model
+    if ($this->cdPedido == null || $this->cdPedido == 0 || $this->cdPedido == "") {
+      ob_end_clean();
+      echo 'Verifique se os campos obrigatorios estão inseridos corretamente!';
+      return false;
+    } else { 
+      ob_end_clean();
+      return true;
+    }
+  }
+  public function __construct(int $cdPedido){
+    $this->cdPedido = $cdPedido;
+    $this->validaPedido();
+    $this->chamaModel();
+  }
+
+  private function chamaModel() {
+    if ($this->validaPedido()) {
+      if (recebePedidoValNegaPost($this->cdPedido)):
+        ob_end_clean();
+        echo true;
+        return true;
+      else:
+        ob_end_flush();
+        echo false;
+        return false;
+      endif;
+    } else {
+      return false;
+    }
+  }
+}

@@ -362,6 +362,10 @@ function fechaModal(modal) {
     $("#md-pr2").removeClass("md-ct").addClass("md-ct-pos");
     $("#md-pr").removeClass("md-ct").addClass("md-ct-pos");
     $("#modal-pedido").addClass("md-ct-pos").removeClass("form_edit");
+    $("p#modalpedidoResp").empty();
+    $("p#modalpedidoResp").removeClass("sucesso");
+    $("p#modalpedidoResp").removeClass("erro");
+    $("p#modalpedidoResp").attr("hidden", "hidden");
   } else if (modal == "valor-pedido") {
     $("#md-pr4").addClass("md-ct-pos").removeClass("md-ct");
     $("#valor-pedido").addClass("md-ct-pos").removeClass("form_edit");
@@ -476,28 +480,27 @@ $(document).ready(function () {
     $.get("/GitHub/Kamaleao/app/private/Controller/controllerNegaPedido.php", { pedido: cdPedido },
       function (data) {
         if (data == true) {
-          $("p.form-message").removeClass("sucesso");
-          $("p.form-message").removeClass("erro");
-          $("p.form-message").removeAttr("hidden");
-          $("p.form-message").addClass("sucesso");
-          $("p.form-message").empty();
+          $("p#modalpedidoResp").removeClass("sucesso");
+          $("p#modalpedidoResp").removeClass("erro");
+          $("p#modalpedidoResp").removeAttr("hidden");
+          $("p#modalpedidoResp").addClass("sucesso");
+          $("p#modalpedidoResp").empty();
           var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span>O pedido foi negado.</span>";
-          $(sucesso).appendTo("p.form-message");
+          $(sucesso).appendTo("p#modalpedidoResp");
           setTimeout(function () {
-            fechaModal('conf-excluir');
-            fechaModal('editar-excluir');
-            location.reload(true)
+            fechaModal('modal-pedido');
+            location.reload(true);
           }, 1000);
         } else {
-          $("p.form-message").removeClass("sucesso");
-          $("p.form-message").removeClass("erro");
-          $("p.form-message").removeAttr("hidden");
-          $("p.form-message").addClass("erro");
+          $("p#modalpedidoResp").removeClass("sucesso");
+          $("p#modalpedidoResp").removeClass("erro");
+          $("p#modalpedidoResp").removeAttr("hidden");
+          $("p#modalpedidoResp").addClass("erro");
           var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + data + "</span>";
-          var mes = $("p.form-message").html();
+          var mes = $("p#modalpedidoResp").html();
           if (mes.includes("negado") == false) {
-            $("p.form-message").empty();
-            $(erro).appendTo(".form-message");
+            $("p#modalpedidoResp").empty();
+            $(erro).appendTo("p#modalpedidoResp");
           }
         }
       });
@@ -520,9 +523,9 @@ $(document).ready(function () {
           var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> O pedido foi aceito. </span>";
           $(sucesso).appendTo("p#result16");
           setTimeout(function () {
-            fechaModal('valor-pedido');
+            fechaModal('valor-comissao');
             fechaModal('modal-pedido');
-            location.reload(true)
+            location.reload(true);
           }, 1000);
         } else {
           $("p#result16").removeClass("sucesso");
@@ -568,6 +571,41 @@ $(document).ready(function () {
           var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + data + "</span>";
           var mes = $("p#respValAceita").html();
           if (mes.includes("confirmado") == false) {
+            $("p#respValAceita").empty();
+            $(erro).appendTo("p#respValAceita");
+          }
+        }
+      });
+  });
+
+  $("button#negaValor").click(function (e) {
+    e.preventDefault();
+
+    var idpedval = $("span#idValPed").text();
+
+    $.get("/GitHub/Kamaleao/app/private/Controller/controllerNegaValPedido.php", { pedido: idpedval },
+      function (data) {
+        if (data == true) {
+          $("p#respValAceita").removeClass("sucesso");
+          $("p#respValAceita").removeClass("erro");
+          $("p#respValAceita").removeAttr("hidden");
+          $("p#respValAceita").addClass("sucesso");
+          $("p#respValAceita").empty();
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> O pedido foi cancelado. </span>";
+          $(sucesso).appendTo("p#respValAceita");
+          setTimeout(function () {
+            fechaModal('valor-pedido');
+            fechaModal('modal-pedido');
+            location.reload(true)
+          }, 1000);
+        } else {
+          $("p#respValAceita").removeClass("sucesso");
+          $("p#respValAceita").removeClass("erro");
+          $("p#respValAceita").removeAttr("hidden");
+          $("p#respValAceita").addClass("erro");
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + data + "</span>";
+          var mes = $("p#respValAceita").html();
+          if (mes.includes("cancelado") == false) {
             $("p#respValAceita").empty();
             $(erro).appendTo("p#respValAceita");
           }
