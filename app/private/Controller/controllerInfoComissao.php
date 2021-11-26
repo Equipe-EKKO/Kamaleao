@@ -9,11 +9,10 @@ ob_end_clean();
 if (!empty($_POST)) { #verifica se o formulário está enviando algo ao controller
     $cdpedido = $_POST['idpedido'];
     if ($cdpedido != null) {
-        echo json_encode(pesquisaServInfo($username, $titulo));
+        echo json_encode(pesquisaComissaoInfo($cdpedido));
     } else {
         echo "Algo de errado não está certo";
     }
-    
 } else {
     echo "Nada foi enviado";
     #Caso contrário ele retorna o erro 

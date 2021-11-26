@@ -116,7 +116,7 @@
                       <div class="rigth">
                         <p><span id="titSub"></span></p>
                         <p><b><span id="valSub"></span></b></p>
-                        <textarea id="descSub"readonly></textarea>
+                        <textarea id="descSub" readonly></textarea>
                         <p style="color:rgb(46, 46, 46)"><strong>Licença:</strong> <span id="liSub"></span></p>
                         <p style="color:rgb(46, 46, 46)"><strong>Categoria:</strong> <span id="catSub"></span></p>
                       </div>
@@ -294,21 +294,18 @@
         <div id="Comissao" class="tabcontent">
           <div id="md-pr4" class="md-ct-pos">
             <div class="md-ct-pos" id="modal-pedido">
-              <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-editar')"></i>
-              <h1>Pedido nº 231</h1>
-              <div class ="grid_anuncio">
-                <div class="left">
+              <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-pedido')"></i>
+              <h1>Pedido nº <span id="idPed"></span></h1>
+                <div class="grid_anuncio">
                   <p>Título do pedido:</p>
-                  <h3>Título fodarástico</h3>
+                  <h3 id="titPed"></h3>
                   <p>Título do serviço:</p>
-                  <h3>Outro título fodarástico</h3>
-                </div>
-                <div class="right">
+                  <h3 id="titServ"></h3>
                   <p>Descrição do pedido:</p>
-                  <textarea readonly></textarea>
-                  <p>Valor:</p>
+                  <textarea id="descPed" readonly></textarea>
+                  <button class="botao" id="aceitaPedido" {#onclick="abreModal('modal-editar')"#}>Aceitar Pedido</button>
+                  <button class="botao" id="negaPedido"{#onclick="abreModal('conf-excluir')"#}>Negar Pedido</button>
                 </div>
-              </div>  
             </div>
           </div>
                   
@@ -318,18 +315,18 @@
               {% for comissao in comissoes %}
                 <div class="abrir_comissao">
                   {% if comissao.valorpedido == null and comissao.indicadorconf == 0 %}
-                  <div class="edit_text aceitaCom" id="{{comissao.idpedido|e}}">
-                    <h3>Pedido recebido em {{comissao.datapedido}} id:{{comissao.idpedido}}</h3>
+                  <div class="edit_text aceitaCon" id="{{comissao.idpedido|e}}">
+                    <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
                     <p id="atualUsername">pedido feito por @{{comissao.username}}, aguardando sua resposta.</p>
                   </div> <!-- edit_text -->
                   {% elseif comissao.valorpedido != null and comissao.indicadorconf == 0 %}
-                  <div class="edit_text">
-                    <h3>Pedido recebido em {{comissao.datapedido}} id:{{comissao.idpedido}}</h3>
+                  <div class="edit_text aceitaCon" id="{{comissao.idpedido|e}}">
+                    <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
                     <p id="atualUsername">pedido feito por @{{comissao.username}}, aguardando confirmação do comprador.</p>
                   </div> <!-- edit_text -->  
                   {% elseif comissao.valorpedido != null and comissao.indicadorconf == 1 %}
-                  <div class="edit_text">
-                    <h3>Pedido recebido em {{comissao.datapedido}} id:{{comissao.idpedido}}</h3>
+                  <div class="edit_text aceitaCon" id="{{comissao.idpedido|e}}">
+                    <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
                     <p id="atualUsername">pedido feito por @{{comissao.username}}, aguardando produto.</p>
                   </div> <!-- edit_text -->
                   {% endif %}
@@ -348,7 +345,7 @@
             {% for pedido in pedidos_feitos %}
               <div class="abrir_pedidos">
                 <div class="edit_text">
-                  <h3>Pedido realizado dia {{pedido.datapedido}} id: {{pedido.idpedido}}</h3>
+                  <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
                   {% if pedido.valorpedido == null %}
                     <p id="atualUsername">pedido feito para @{{pedido.username}}, aguardando resposta do artista.</p>
                   {% elseif pedido..valorpedido != null and pedido.indicadorconf == 0 %}

@@ -36,7 +36,7 @@ function pesquisaServInfo(string $username, string $titulo):mixed {
 function pesquisaComissaoInfo(int $cdpedidoid):mixed {
     $serviço= new \PesquisaAberta("tb_pedido");
 
-    $rsltSelect =  $serviço->searchCommisaoEsp($cdpedidoid);
+    $rsltSelect =  $serviço->searchComissaoEsp($cdpedidoid);
 
     if ($rsltSelect == false) {
         echo "Houve um problema na conexão. Perdão.";

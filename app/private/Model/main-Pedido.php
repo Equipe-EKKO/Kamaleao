@@ -13,3 +13,16 @@ function recebePedidoPost(string $titulo, string $descriçao, string $username, 
         return false;
     }
 }
+// Função chamada no controller para negar o pedido
+function recebePedidoNegaPost(int $cd_pedido):bool {
+    $pedido = new \Pedido();
+    /*
+    if ($pedido->salvaPedido($cd_serviço, $username, $titulo, $descriçao)) {
+        return true;
+    } else {
+        return false;
+    }*/
+    echo "continuo linda";
+    return false;
+}
+

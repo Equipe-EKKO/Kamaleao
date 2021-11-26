@@ -100,10 +100,10 @@ class PesquisaAberta {
             return false;
         }
     }
-    public function searchCommisaoEsp(int $cdpedido){
+    public function searchComissaoEsp(int $cdpedido):mixed {
         $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
 
-        $sql = "SELECT pe.nm_pedido as 'tituloped', pe.ds_pedido, titulo do serviço FROM tb_serviço AS s JOIN tb_pedido AS pe ON s.cd_serviço = pe.cd_serviço WHERE pe.cd_pedido = :cdped"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $sql = "SELECT pe.nm_pedido as 'tituloped', pe.ds_pedido as 'descped', s.nm_serviço as 'tituloserv' FROM tb_serviço AS s JOIN tb_pedido AS pe ON s.cd_serviço = pe.cd_serviço WHERE pe.cd_pedido = :cdped"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
         $stmt = $banco->prepare($sql); # prepara a query para execução
         /*Substitui os valores de cada placeholder na query preparada*/
         $stmt->bindValue(':cdped', $cdpedido); 

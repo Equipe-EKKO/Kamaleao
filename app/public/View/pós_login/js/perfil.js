@@ -309,7 +309,7 @@ function abreModal(modal) {
       });
     });
   }
-  if (modal == "pedido") {
+  if (modal == "modal-pedido") {
     $("#md-pr4").removeClass("md-ct-pos").addClass("md-ct");
     $("#modal-pedido").removeClass("md-ct-pos").addClass("form_anuncio");
   }
@@ -350,27 +350,29 @@ function fechaModal(modal) {
   } else if (modal == "alt-categoria"){
     $("#md-pr2").removeClass("md-ct").addClass("md-ct-pos");
     $("#alt-categoria3").addClass("md-ct-pos").removeClass("form_anuncio");
+  } else if (modal == "modal-pedido") {
+    $("#md-pr4").addClass("md-ct-pos").removeClass("md-ct");
+    $("#modal-pedido").addClass("md-ct-pos").removeClass("form_anuncio");
   }
 }
 
 $(document).ready(function () {
 
-  $("div.aceitaCom").click(function (e){
+  $("div.aceitaCon").click(function (e){
 
     e.preventDefault();  
     
     var idSelector = this.id;
     
     $.post("/GitHub/Kamaleao/app/private/Controller/controllerInfoComissao.php", {idpedido: idSelector},function (resposta) {
+        
         var a =  jQuery.parseJSON(resposta);
-        $("p span#titSub").text(a.titulo);
-        $("p span#valSub").text("R$"+a.valor);
-        $("textarea#descSub").text(a.desc);
-        $("p span#liSub").text(a.licenca);
-        $("p span#catSub").text(a.categoria);
-        $(".img-item").attr("src", a.urlfoto);
-        abreModal("editar-excluir");
-        $(".cdhidden").text(a.cdServ);
+
+        $("h3#titPed").text(a.tituloped);
+        $("h3#titServ").text(a.tituloserv);
+        $("textarea#descPed").text(a.descped);
+        $("span#idPed").text(idSelector);
+        abreModal("modal-pedido");
       });
   });
 
@@ -429,6 +431,43 @@ $(document).ready(function () {
             $(erro).appendTo("#exclui-anuncio.form-message");
           }
         }
+      });
+  });
+
+  $("button#negaPedido").click(function (e) { 
+    e.preventDefault();
+
+    var cdPedido = $("span#idPed").text();
+
+    $.get("/GitHub/Kamaleao/app/private/Controller/controllerNegaPedido.php", {pedido: cdPedido},
+      function (data) {
+        alert(data);
+        /*
+        if (data == true) {
+          $("#exclui-anuncio.form-message").removeClass("sucesso");
+          $("#exclui-anuncio.form-message").removeClass("erro");
+          $("#exclui-anuncio.form-message").removeAttr("hidden");
+          $("#exclui-anuncio.form-message").addClass("sucesso");
+          $("#exclui-anuncio.form-message").empty();
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> O anúncio foi excluído!</span>";
+          $(sucesso).appendTo("#exclui-anuncio.form-message");
+          setTimeout(function () {
+            fechaModal('conf-excluir');
+            fechaModal('editar-excluir');
+            location.reload(true)
+          }, 1000);
+        } else {
+          $("#exclui-anuncio.form-message").removeClass("sucesso");
+          $("#exclui-anuncio.form-message").removeClass("erro");
+          $("#exclui-anuncio.form-message").removeAttr("hidden");
+          $("#exclui-anuncio.form-message").addClass("erro");
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";
+          var mes = $("#exclui-anuncio.form-message").html();
+          if (mes.includes("excluído") == false) {
+            $("#exclui-anuncio.form-message").empty();
+            $(erro).appendTo("#exclui-anuncio.form-message");
+          }
+        }*/
       });
   });
 });
