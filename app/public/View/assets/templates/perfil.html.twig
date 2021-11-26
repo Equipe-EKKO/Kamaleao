@@ -433,7 +433,7 @@
             <p style="color:#F53446">Status: aguardando resposta do artista</p>
           </div> <!-- edit_text -->
 
-          {% elseif pedido.valorpedido != null and pedido.indicadorcancel == 0 and pedido.indicadorconf == 0 %}
+          {% elseif pedido.valorpedido != null and pedido.indicadorcancel == 1 and pedido.indicadorconf == 0 %}
           <div class="edit_text" id="{{pedido.idpedido|e}}">
             <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
             <p id="atualUsername">pedido feito por @{{pedido.username}}.</p>

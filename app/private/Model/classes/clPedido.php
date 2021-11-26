@@ -163,7 +163,7 @@ class Pedido {
             return false;
         }
         if ($contaped == 1) {
-            $sql = "UPDATE tb_pedido SET ic_confirmado = 0, ic_cancelado = 0 WHERE cd_pedido = :cdPed"; # declara a query do insert na tabela login do banco de dados 
+            $sql = "UPDATE tb_pedido SET ic_confirmado = 0, ic_cancelado = 1 WHERE cd_pedido = :cdPed"; # declara a query do insert na tabela login do banco de dados 
             $stmt = $banco->prepare($sql); # prepara a query para execução
             /*Substitui os valores de cada placeholder na query preparada*/ 
             $stmt->bindValue(':cdPed', $cdpedido);
