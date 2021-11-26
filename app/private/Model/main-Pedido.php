@@ -4,7 +4,7 @@ require_once "classes/autoloadClass.php";
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php'); #arquivo de configuracao
 
 // Função chamada no controller para realizar cadastro de serviço
-function recebePedidoPost(string $titulo, string $descriçao, string $username, int $cd_serviço)/*:bool*/ {
+function recebePedidoPost(string $titulo, string $descriçao, string $username, int $cd_serviço):bool {
     $pedido = new \Pedido();
     
     if ($pedido->salvaPedido($cd_serviço, $username, $titulo, $descriçao)) {

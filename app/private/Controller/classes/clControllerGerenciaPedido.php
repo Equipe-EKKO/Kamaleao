@@ -41,7 +41,6 @@ class ControllerFazPedido{
 
   private function chamaModel() {
     if ($this->validaPedido()) {
-      echo recebePedidoPost($this->titulo, $this->descricao, $this->username, $this->cd_serviço);
       if (recebePedidoPost($this->titulo, $this->descricao, $this->username, $this->cd_serviço)):
         ob_end_clean();
         echo true;

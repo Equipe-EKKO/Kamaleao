@@ -10,7 +10,7 @@ class Pedido {
     public $nmPedido, $dsPedido, $icCancelado, $vlPedido, $dsResposta; # nmServiço: string || dsServiço: string || imtmpServiço: string com url de imagem || tipoLicença: inteiro || vlServiço: float
     private $cdUsuario, $cdServiço; // cdDono e cdUsuario: inteiro
 
-    public function salvaPedido(int $cd_serviço, string $username, string $titulo, string $desc)/*:bool*/ {
+    public function salvaPedido(int $cd_serviço, string $username, string $titulo, string $desc):bool {
         /*seta os valores dos parametros*/
         $this->setNmPedido($titulo);
         $this->setDsPedido($desc);

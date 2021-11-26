@@ -317,7 +317,7 @@
           {% if comissoes is defined %}
               {% for comissao in comissoes %}
                 <div class="abrir_comissao">
-                  {% if comissao.valorpedido == null %}
+                  {% if comissao.valorpedido == null and comissao.indicadorconf == 0 %}
                   <div class="edit_text aceitaCom" id="{{comissao.idpedido|e}}">
                     <h3>Pedido recebido em {{comissao.datapedido}} id:{{comissao.idpedido}}</h3>
                     <p id="atualUsername">pedido feito por @{{comissao.username}}, aguardando sua resposta.</p>
