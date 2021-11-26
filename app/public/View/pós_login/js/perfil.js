@@ -441,33 +441,31 @@ $(document).ready(function () {
 
     $.get("/GitHub/Kamaleao/app/private/Controller/controllerNegaPedido.php", {pedido: cdPedido},
       function (data) {
-        alert(data);
-        /*
         if (data == true) {
-          $("#exclui-anuncio.form-message").removeClass("sucesso");
-          $("#exclui-anuncio.form-message").removeClass("erro");
-          $("#exclui-anuncio.form-message").removeAttr("hidden");
-          $("#exclui-anuncio.form-message").addClass("sucesso");
-          $("#exclui-anuncio.form-message").empty();
-          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> O anúncio foi excluído!</span>";
-          $(sucesso).appendTo("#exclui-anuncio.form-message");
+          $("p.form-message").removeClass("sucesso");
+          $("p.form-message").removeClass("erro");
+          $("p.form-message").removeAttr("hidden");
+          $("p.form-message").addClass("sucesso");
+          $("p.form-message").empty();
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span>O pedido foi negado.</span>";
+          $(sucesso).appendTo("p.form-message");
           setTimeout(function () {
             fechaModal('conf-excluir');
             fechaModal('editar-excluir');
             location.reload(true)
           }, 1000);
         } else {
-          $("#exclui-anuncio.form-message").removeClass("sucesso");
-          $("#exclui-anuncio.form-message").removeClass("erro");
-          $("#exclui-anuncio.form-message").removeAttr("hidden");
-          $("#exclui-anuncio.form-message").addClass("erro");
-          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";
-          var mes = $("#exclui-anuncio.form-message").html();
-          if (mes.includes("excluído") == false) {
-            $("#exclui-anuncio.form-message").empty();
-            $(erro).appendTo("#exclui-anuncio.form-message");
+          $("p.form-message").removeClass("sucesso");
+          $("p.form-message").removeClass("erro");
+          $("p.form-message").removeAttr("hidden");
+          $("p.form-message").addClass("erro");
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + data + "</span>";
+          var mes = $("p.form-message").html();
+          if (mes.includes("negado") == false) {
+            $("p.form-message").empty();
+            $(erro).appendTo(".form-message");
           }
-        }*/
+        }
       });
   });
 });

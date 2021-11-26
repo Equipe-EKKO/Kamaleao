@@ -17,7 +17,13 @@ function abreModal() {
 
 function fechaModal() {
   $("#md-pr").removeClass("md-ct").addClass("md-ct-pos"); 
-  $("#md-pedido").removeClass("md-pedido").addClass("md-ct-pos"); 
+  $("#md-pedido").removeClass("md-pedido").addClass("md-ct-pos");
+  $("#fazPedidoReturn.form-message").empty();
+  $("#fazPedidoReturn.form-message").removeClass("erro");
+  $("#fazPedidoReturn.form-message").removeClass("sucesso");
+  $("#fazPedidoReturn.form-message").attr("hidden", "true");
+  $("input#titulo").val("");
+  $("textarea#descricao").val("");
 }
 
 $(document).ready(function () {

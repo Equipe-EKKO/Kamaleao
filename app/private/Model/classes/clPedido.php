@@ -86,6 +86,41 @@ class Pedido {
         }
     }
 
+    public function negaPedido(int $cdpedido):bool {
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+
+        $sql = "SELECT * FROM tb_pedido WHERE cd_pedido = :cd_ped"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara a query para execução
+        /*Substitui os valores de cada placeholder na query preparada*/
+        $stmt->bindValue(':cd_ped', $cdpedido); 
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $contaped = $stmt->rowCount();
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+        if ($contaped == 1) {
+            $sql = "UPDATE tb_pedido SET ic_cancelado = 1 WHERE cd_pedido = :cdPed"; # declara a query do insert na tabela login do banco de dados 
+            $stmt = $banco->prepare($sql); # prepara a query para execução
+            /*Substitui os valores de cada placeholder na query preparada*/ 
+            $stmt->bindValue(':cdPed', $cdpedido);
+
+            /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
+            try {
+                $stmt->execute(); # executa a query preparada anteriormente
+                return true;
+            } catch (\PDOException $e) {
+                exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+    }
     #Métodos Especias - Getter e Setters para os atributos
     /*GETTERS*/
     public function getNmPedido() {
