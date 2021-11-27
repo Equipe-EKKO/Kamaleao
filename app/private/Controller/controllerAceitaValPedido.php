@@ -4,8 +4,7 @@ require_once 'classes/clControllerGerenciaPedido.php';
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 
 if (!empty($_GET)) {
-    $valpedido = (float) $_GET['valorPedido'];
-    $ControllerAceitaPedido = new ControllerAceitaPedido($_GET['pedido'], $valpedido);
+    $ControllerAceitaValPedido = new ControllerAceitaValPedido($_GET['pedido']);
 } else {
     /*$_SESSION["error"] = 'Nada foi enviado';
     header("Location: /Github/Kamaleao/app/public/View/pós_login/perfil/perfil.php");*/

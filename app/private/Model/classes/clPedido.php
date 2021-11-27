@@ -39,53 +39,6 @@ class Pedido {
         
     }
 
-    private function verificaDados(int $cdserv, string $username):bool {
-        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
-        
-        $sql = "SELECT `cd_serviço` FROM `tb_serviço` WHERE `cd_serviço` = :cdserv"; # declara query do select que irá verificar se o serviço existe
-        $stmt = $banco->prepare($sql); # prepara o select para execuçãp
-        $stmt->bindValue(':cdserv', $cdserv); #substitui o placeholder da query preparada
-        
-        /*Try catch que tentará executar o select e contar quantas linhas foram retornadas*/
-        try {
-            $stmt->execute(); # executa a query preparada 
-            $contaLinha = $stmt->rowCount(); # armazena numa variável o valor de quantas linhas existem no retorno desse select
-        } catch (\PDOException $e) {
-            exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
-            return false;
-        }
-        
-        if ($contaLinha === 1) { # estrutura condicional que irá verificar se o valor de linhas do select anterior é igual a um, ou seja, se o select retorna que o serviço existe, e caso tenha retornado...
-            $this->setCdServiço($cdserv);
-            $sql2 = "SELECT cd_usuario FROM tb_usuario JOIN tb_login ON tb_login.cd_login = tb_usuario.cd_login WHERE nm_username = :nmuser"; # declara query do select que irá verificar se o username solicitante existe
-            $stmt2 = $banco->prepare($sql2); # prepara o select para execuçãp
-            $stmt2->bindValue(':nmuser', $username); #substitui o placeholder da query preparada
-
-            /*Try catch que tentará executar o select e contar quantas linhas foram retornadas*/
-            try {
-                $stmt2->execute(); # executa a query preparada 
-                $contaLinha2 = $stmt2->rowCount(); # armazena numa variável o valor de quantas linhas existem no retorno desse select
-                $cduser = $stmt2->fetchColumn();
-            } catch (\PDOException $e) {
-                exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage());  # retorna erro, caso houver, e sai do script
-                return false;
-            }
-
-            if ($contaLinha2 === 1) { # estrutura condicional que irá verificar se o valor de linhas do select anterior é igual a 1, ou seja, se o select retornou algo, e caso tenha retornado...
-                $this->setCdUsuario($cduser);
-                return true;
-            } else {
-                ob_end_clean();
-                echo "Houve um erro na seleção do usuário solicitante. Tente novamente.";  # exibe ao usuário que o username escolhido já foi cadastrado.
-                return false; # retorna a saída como falsa
-            }
-        } else { # caso não, retorna erro
-            ob_end_clean();
-            echo "Houve um erro na seleção do serviço relacionado ao pedido solicitado. Tente novamente.";  # exibe ao usuário que o username escolhido já foi cadastrado.
-            return false; # retorna a saída como falsa
-        }
-    }
-
     public function negaPedido(int $cdpedido):bool {
         $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
 
@@ -155,6 +108,73 @@ class Pedido {
             }
         } else {
             return false;
+        }
+    }
+
+    public function searchPedidoEsp(int $cdpedido):mixed {
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+
+        $sql = "SELECT pe.nm_pedido as 'tituloped', pe.ds_pedido as 'descped', s.nm_serviço as 'tituloserv', pe.vl_pedido as 'valorpedido' FROM tb_serviço AS s JOIN tb_pedido AS pe ON s.cd_serviço = pe.cd_serviço WHERE pe.cd_pedido = :cdped"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara a query para execução
+        /*Substitui os valores de cada placeholder na query preparada*/
+        $stmt->bindValue(':cdped', $cdpedido); 
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $resultados = $stmt->fetch(PDO::FETCH_ASSOC);         
+            $resultstr = serialize($resultados); # transforma o array em string
+            return $resultstr; # retorna a string
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+    }
+
+    private function verificaDados(int $cdserv, string $username):bool {
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+        
+        $sql = "SELECT `cd_serviço` FROM `tb_serviço` WHERE `cd_serviço` = :cdserv"; # declara query do select que irá verificar se o serviço existe
+        $stmt = $banco->prepare($sql); # prepara o select para execuçãp
+        $stmt->bindValue(':cdserv', $cdserv); #substitui o placeholder da query preparada
+        
+        /*Try catch que tentará executar o select e contar quantas linhas foram retornadas*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $contaLinha = $stmt->rowCount(); # armazena numa variável o valor de quantas linhas existem no retorno desse select
+        } catch (\PDOException $e) {
+            exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+        
+        if ($contaLinha === 1) { # estrutura condicional que irá verificar se o valor de linhas do select anterior é igual a um, ou seja, se o select retorna que o serviço existe, e caso tenha retornado...
+            $this->setCdServiço($cdserv);
+            $sql2 = "SELECT cd_usuario FROM tb_usuario JOIN tb_login ON tb_login.cd_login = tb_usuario.cd_login WHERE nm_username = :nmuser"; # declara query do select que irá verificar se o username solicitante existe
+            $stmt2 = $banco->prepare($sql2); # prepara o select para execuçãp
+            $stmt2->bindValue(':nmuser', $username); #substitui o placeholder da query preparada
+
+            /*Try catch que tentará executar o select e contar quantas linhas foram retornadas*/
+            try {
+                $stmt2->execute(); # executa a query preparada 
+                $contaLinha2 = $stmt2->rowCount(); # armazena numa variável o valor de quantas linhas existem no retorno desse select
+                $cduser = $stmt2->fetchColumn();
+            } catch (\PDOException $e) {
+                exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage());  # retorna erro, caso houver, e sai do script
+                return false;
+            }
+
+            if ($contaLinha2 === 1) { # estrutura condicional que irá verificar se o valor de linhas do select anterior é igual a 1, ou seja, se o select retornou algo, e caso tenha retornado...
+                $this->setCdUsuario($cduser);
+                return true;
+            } else {
+                ob_end_clean();
+                echo "Houve um erro na seleção do usuário solicitante. Tente novamente.";  # exibe ao usuário que o username escolhido já foi cadastrado.
+                return false; # retorna a saída como falsa
+            }
+        } else { # caso não, retorna erro
+            ob_end_clean();
+            echo "Houve um erro na seleção do serviço relacionado ao pedido solicitado. Tente novamente.";  # exibe ao usuário que o username escolhido já foi cadastrado.
+            return false; # retorna a saída como falsa
         }
     }
     #Métodos Especias - Getter e Setters para os atributos

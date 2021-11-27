@@ -34,3 +34,18 @@ function recebePedidoAceitaPost(int $cd_pedido, float $vl_pedido):bool {
     }
 }
 
+// Função chamada no controller para ver as informações do pedido feito
+function pesquisaComissaoInfo(int $cdpedidoid):mixed {
+    $pedido = new \Pedido();
+
+    $rsltSelect =  $pedido->searchPedidoEsp($cdpedidoid);
+
+    if ($rsltSelect == false) {
+        echo "Houve um problema na conexão. Perdão.";
+        return "Houve um problema na conexão. Perdão.";
+    } else {
+        $servReturn = unserialize($rsltSelect);
+        return $servReturn;
+    }
+}
+

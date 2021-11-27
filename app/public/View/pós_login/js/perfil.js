@@ -308,16 +308,17 @@ function abreModal(modal) {
         }
       });
     });
-  }
-  if (modal == "modal-pedido") {
+  } else if (modal == "modal-pedido") {
     $("#md-pr4").removeClass("md-ct-pos").addClass("md-ct");
     $("#modal-pedido").removeClass("md-ct-pos").addClass("form_anuncio");
+  } else if (modal == "valor-pedido") {
+    $("#md-pr4").removeClass("md-ct-pos").addClass("md-ct");
+    $("#valor-pedido").removeClass("md-ct-pos").addClass("form_anuncio");
+  } else if (modal == "valor-comissao") {
+    $("#md-pr5").removeClass("md-ct-pos").addClass("md-ct");
+    $("#valor-comissao").removeClass("md-ct-pos").addClass("form_anuncio");
   }
 
-  if (modal == "valor-pedido") {
-    $("#md-pr5").removeClass("md-ct-pos").addClass("md-ct");
-    $("#valor-pedido").removeClass("md-ct-pos").addClass("form_anuncio");
-  }
 }
 
 function fechaModal(modal) {
@@ -362,49 +363,15 @@ function fechaModal(modal) {
     $("#md-pr").removeClass("md-ct").addClass("md-ct-pos");
     $("#modal-pedido").addClass("md-ct-pos").removeClass("form_edit");
   } else if (modal == "valor-pedido") {
-    $("#md-pr5").addClass("md-ct-pos").removeClass("md-ct");
+    $("#md-pr4").addClass("md-ct-pos").removeClass("md-ct");
     $("#valor-pedido").addClass("md-ct-pos").removeClass("form_edit");
+  } else if (modal == "valor-comissao") {
+    $("#md-pr5").addClass("md-ct-pos").removeClass("md-ct");
+    $("#valor-comissao").addClass("md-ct-pos").removeClass("form_edit");
   }
 }
 
 $(document).ready(function () {
-
-  $("button#enviaValorFinal").click(function (e) { 
-    e.preventDefault();
-
-    var valPedido = $("input#preco-pedido").val(),
-        cdPedido = $("p#hiddenenvia1").text();
-    
-    $.get("/GitHub/Kamaleao/app/private/Controller/controllerAceitaPedido.php", { pedido: cdPedido, valorPedido: valPedido},
-      function (data) {
-        if (data == true) {
-          $("p#result16").removeClass("sucesso");
-          $("p#result16").removeClass("erro");
-          $("p#result16").removeAttr("hidden");
-          $("p#result16").addClass("sucesso");
-          $("p#result16").empty();
-          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> O pedido foi aceito. </span>";
-          $(sucesso).appendTo("p#result16");
-          setTimeout(function () {
-            fechaModal('valor-pedido');
-            fechaModal('modal-pedido');
-            location.reload(true)
-          }, 1000);
-        } else {
-          $("p#result16").removeClass("sucesso");
-          $("p#result16").removeClass("erro");
-          $("p#result16").removeAttr("hidden");
-          $("p#result16").addClass("erro");
-          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + data + "</span>";
-          var mes = $("p#result16").html();
-          if (mes.includes("negado") == false) {
-            $("p#result16").empty();
-            $(erro).appendTo("p#result16");
-          }
-        }
-      });
-    
-  });
 
   $("div.aceitaCon").click(function (e) {
 
@@ -422,6 +389,24 @@ $(document).ready(function () {
       $("span#idPed").text(idSelector);
       $("p#hiddenenvia1").text(idSelector);
       abreModal("modal-pedido");
+    });
+  });
+
+  $("div.confPed").click(function (e) {
+
+    e.preventDefault();
+
+    var idSelector = this.id;
+    
+    $.post("/GitHub/Kamaleao/app/private/Controller/controllerInfoPedido.php", { idpedido: idSelector }, function (resposta) {
+
+      var a = jQuery.parseJSON(resposta);
+
+      $("p#titValPed").text(a.tituloped);
+      $("p#titValServ").text(a.tituloserv);
+      $("span#valeValPed").text(a.valorpedido);
+      $("span#idValPed").text(idSelector);
+      abreModal("valor-pedido");
     });
   });
 
@@ -515,6 +500,79 @@ $(document).ready(function () {
             $(erro).appendTo(".form-message");
           }
         }
+      });
+  });
+
+  $("button#enviaValorFinal").click(function (e) { 
+    e.preventDefault();
+
+    var valPedido = $("input#preco-pedido").val(),
+        cdPedido = $("p#hiddenenvia1").text();
+    
+    $.get("/GitHub/Kamaleao/app/private/Controller/controllerAceitaPedido.php", { pedido: cdPedido, valorPedido: valPedido},
+      function (data) {
+        if (data == true) {
+          $("p#result16").removeClass("sucesso");
+          $("p#result16").removeClass("erro");
+          $("p#result16").removeAttr("hidden");
+          $("p#result16").addClass("sucesso");
+          $("p#result16").empty();
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> O pedido foi aceito. </span>";
+          $(sucesso).appendTo("p#result16");
+          setTimeout(function () {
+            fechaModal('valor-pedido');
+            fechaModal('modal-pedido');
+            location.reload(true)
+          }, 1000);
+        } else {
+          $("p#result16").removeClass("sucesso");
+          $("p#result16").removeClass("erro");
+          $("p#result16").removeAttr("hidden");
+          $("p#result16").addClass("erro");
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + data + "</span>";
+          var mes = $("p#result16").html();
+          if (mes.includes("negado") == false) {
+            $("p#result16").empty();
+            $(erro).appendTo("p#result16");
+          }
+        }
+      });
+    
+  });
+
+  $("button#aceitaValor").click(function (e) { 
+    e.preventDefault();
+    
+    var idpedval = $("span#idValPed").text();
+
+    $.get("/GitHub/Kamaleao/app/private/Controller/controllerAceitaValPedido.php", { pedido: idpedval},
+      function (data) {/*
+        if (data == true) {
+          $("p#result16").removeClass("sucesso");
+          $("p#result16").removeClass("erro");
+          $("p#result16").removeAttr("hidden");
+          $("p#result16").addClass("sucesso");
+          $("p#result16").empty();
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> O pedido foi aceito. </span>";
+          $(sucesso).appendTo("p#result16");
+          setTimeout(function () {
+            fechaModal('valor-pedido');
+            fechaModal('modal-pedido');
+            location.reload(true)
+          }, 1000);
+        } else {
+          $("p#result16").removeClass("sucesso");
+          $("p#result16").removeClass("erro");
+          $("p#result16").removeAttr("hidden");
+          $("p#result16").addClass("erro");
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + data + "</span>";
+          var mes = $("p#result16").html();
+          if (mes.includes("negado") == false) {
+            $("p#result16").empty();
+            $(erro).appendTo("p#result16");
+          }
+        }*/
+        alert(data);
       });
   });
 });

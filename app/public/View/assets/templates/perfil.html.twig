@@ -291,177 +291,190 @@
 
 
           <!-- Comissao -->
-        <div id="Comissao" class="tabcontent">
-          <div id="md-pr4" class="md-ct-pos">
-            <div class="md-ct-pos" id="modal-pedido">
-              <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-pedido')"></i>
-              <h1>Pedido nº <span id="idPed"></span></h1>
-              <p hidden class="form-message">
-                <i class="fas fa-exclamation-triangle"></i>
-              </p>
-              </br>
-              <h2>Serviço:</h2>
-              <p id="titServ"></p>
-              </br>
-              <h2>Título do pedido:</h2>
-              <p id="titPed"></p>
-              </br>
-              <h2>Descrição do pedido:</h2>
-              <textarea id="descPed" readonly></textarea>
-              </br>
-              <div class="grid_button">
-                <button class="botao" id="aceitaPedido" onclick="abreModal('valor-pedido')">Aceitar</button>
-                <button class="botao" id="negaPedido">Negar</button>
-              </div>
-            </div>
-            <div class="md-ct-pos" id="modal-valor-pedido">
-              <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-pedido')"></i>
-              <h1>Pedido nº <span id="idPed"></span></h1>
-              <p hidden class="form-message">
-                <i class="fas fa-exclamation-triangle"></i>
-              </p>
-              </br>
-              <h2>Serviço:</h2>
-              <p id="titServ"></p>
-              </br>
-              <h2>Título do pedido:</h2>
-              <p id="titPed"></p>
-              </br>
-              <h2>Valor do pedido:</h2>
-              <p id="valePed"></p>
-              </br>
-              <div class="grid_button">
-                <button class="botao" id="aceitaValor">Aceitar</button>
-                <button class="botao" id="negaValor">Negar</button>
-              </div>
-            </div>
-            <div class="md-ct-pos" id="modal-entregar-pedido">
-              <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-pedido')"></i>
-              <h1>Pedido nº <span id="idPed"></span></h1>
-              <p hidden class="form-message">
-                <i class="fas fa-exclamation-triangle"></i>
-              </p>
-              </br>
-              <h2>Serviço:</h2>
-              <p id="titServ"></p>
-              </br>
-              <h2>Título do pedido:</h2>
-              <p id="titPed"></p>
-              </br>
-              <p>Insira o pedido pronto:</p>
-              <label for="imagem" id="escolha">Escolher arquivo</label>
-              <input type="file" id="imagem" name="servfile" accept="image/jpeg, image/png">
-              </br>
-              <button class="botao" id="entregaPedido">Enviar</button>
-            </div>
-          </div>
-          <div id="md-pr5" class="md-ct-pos">
-            <div class="md-ct-pos" id="valor-pedido">
-              <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('valor-pedido')"></i>
-              <h1>Pedido nº <span id="idPed"></span></h1>
-              </br>
-              <p>Insira abaixo o valor que irá cobrar: </p>
-              <p hidden id="result16" class="form-message">
-                <i class="fas fa-exclamation-triangle"></i>
-              </p>
-              <p class="cdhidden" id="hiddenenvia1" hidden></p>
-              <input type="number" min="0" max="10000" step=0.01 id="preco-pedido" placeholder="preço"/>
-              <button id="enviaValorFinal" class="botao">Enviar</button>
-              </br>
-            </div>
-          </div>
-                  
-        <h1>Comissões recebidas</h1>
-        <div class="comissoes_recebidas">
-          {% if comissoes is defined %}
-              {% for comissao in comissoes %}
-                <div class="abrir_comissao">
-                  {% if comissao.valorpedido == null and comissao.indicadorconf == 0 %}
-                  <div class="edit_text aceitaCon" id="{{comissao.idpedido|e}}">
-                    <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
-                    <p id="atualUsername">pedido feito por @{{comissao.username}}, aguardando sua resposta.</p>
-                  </div> <!-- edit_text -->
-                  {% elseif comissao.valorpedido != null and comissao.indicadorconf == 0 %}
-                  <div class="edit_text " id="{{comissao.idpedido|e}}">
-                    <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
-                    <p id="atualUsername">pedido feito por @{{comissao.username}}, aguardando confirmação do comprador.</p>
-                  </div> <!-- edit_text -->  
-                  {% elseif comissao.valorpedido != null and comissao.indicadorconf == 1 %}
-                  <div class="edit_text " id="{{comissao.idpedido|e}}">
-                    <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
-                    <p id="atualUsername">pedido feito por @{{comissao.username}}, aguardando produto.</p>
-                  </div> <!-- edit_text -->
-                  {% endif %}
-                </div> <!-- abrir_comissao -->
-              {% endfor %}
-          {% else %}
-            <p>Você ainda não recebeu pedido de comissão :(</p>
-          {% endif %}
-        </div> <!--comissoes_recebidas-->
-
-        <div class="line"></div>
-
-        <h1>Pedidos realizados</h1>
-        <div class="pedidos_realizados">
-          {% if pedidos_feitos is defined %}
-            {% for pedido in pedidos_feitos %}
-              <div class="abrir_pedidos">
-                <div class="edit_text">
-                  <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
-                  {% if pedido.valorpedido == null %}
-                    <p id="atualUsername">pedido feito para @{{pedido.username}}, aguardando resposta do artista.</p>
-                  {% elseif pedido..valorpedido != null and pedido.indicadorconf == 0 %}
-                    <p id="atualUsername">pedido feito por @{{pedido.username}}, aguardando sua confirmação.</p>
-                  {% elseif pedido..valorpedido != null and pedido.indicadorconf == 1 %}
-                    <p id="atualUsername">pedido feito por @{{pedido.username}}, em produção.</p>
-                  {% endif %}
-                </div> <!-- edit_text -->
-              </div> <!-- abrir_pedidos -->
-            {% endfor %}
-          {% else %}
-            <p>Você ainda não fez nenhum pedido de comissão. :(</p>
-          {% endif %}
-          
-
-        <div class="comission-bg">
-          <h1div class="comission-modal">
-          <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
-              <h1>Titulo da comissao</h1>
-              <div class="txtarea"><p>Descricao aqui</p></div>
-              
-              <div class="grid_button">
-                <button class="botao">Aceitar</button>
-                <button class="botao">Negar</button>
-                <div class="acc">
-                  <input type="number" placeholder="insira o valor para aceitar" />
+          <div id="Comissao" class="tabcontent">
+            <div id="md-pr4" class="md-ct-pos">
+              <!-- abre modal pedido (para o artista aceitar ou negar a comissao) -->
+              <div class="md-ct-pos" id="modal-pedido">
+                <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-pedido')"></i>
+                <h1>Pedido nº <span id="idPed"></span></h1>
+                <p hidden class="form-message">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </p>
+                </br>
+                <h2>Serviço:</h2>
+                <p id="titServ"></p>
+                </br>
+                <h2>Título do pedido:</h2>
+                <p id="titPed"></p>
+                </br>
+                <h2>Descrição do pedido:</h2>
+                <textarea id="descPed" readonly></textarea>
+                </br>
+                <div class="grid_button">
+                  <button class="botao" id="aceitaPedido" onclick="abreModal('valor-comissao')">Aceitar</button>
+                  <button class="botao" id="negaPedido">Negar</button>
                 </div>
               </div>
-          </div>
-        </div>
+              <!-- fecha modal pedido (para o artista aceitar ou negar a comissao) -->
+              <!-- abre modal valor pedido (pra quem ta pedindo - aceitar ou negar) -->
+              <div class="md-ct-pos" id="valor-pedido">
+                <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('valor-pedido')"></i>
+                <h1>Pedido nº <span id="idValPed"></span></h1>
+                <p hidden class="form-message">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </p>
+                </br>
+                <h2>Serviço:</h2>
+                <p id="titValServ"></p>
+                </br>
+                <h2>Título do pedido:</h2>
+                <p id="titValPed"></p>
+                </br>
+                <h2>Valor do pedido:</h2>
+                <p>R$<span id="valeValPed"></span></p>
+                </br>
+                <div class="grid_button">
+                  <button class="botao" id="aceitaValor">Aceitar</button>
+                  <button class="botao" id="negaValor">Negar</button>
+                </div>
+              </div> 
+              <!-- fecha modal valor pedido (pra quem ta pedidno) -->
+              <!-- modal entregar pedido (depois que o comprador aceitou) -->
+              <div class="md-ct-pos" id="modal-entregar-pedido">
+                <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-pedido')"></i>
+                <h1>Pedido nº <span id="idPed"></span></h1>
+                <p hidden class="form-message">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </p>
+                </br>
+                <h2>Serviço:</h2>
+                <p id="titServ"></p>
+                </br>
+                <h2>Título do pedido:</h2>
+                <p id="titPed"></p>
+                </br>
+                <p>Insira o pedido pronto:</p>
+                <label for="imagem" id="escolha">Escolher arquivo</label>
+                <input type="file" id="imagem" name="servfile" accept="image/jpeg, image/png">
+                </br>
+                <button class="botao" id="entregaPedido">Enviar</button>
+              </div>
+            </div>
+            <!--  fecha modal entregar pedido (depois que o comprador aceitou) -->
+            <!-- abre valor pedido (para o artista aceitar a comissao) -->
+            <div id="md-pr5" class="md-ct-pos">
+              <div class="md-ct-pos" id="valor-comissao">
+                <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('valor-comissao')"></i>
+                <h1>Pedido nº <span id="idPed"></span></h1>
+                </br>
+                <p>Insira abaixo o valor que irá cobrar: </p>
+                <p hidden id="result16" class="form-message">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </p>
+                <p class="cdhidden" id="hiddenenvia1" hidden></p>
+                <input type="number" min="0" max="10000" step=0.01 id="preco-pedido" placeholder="preço"/>
+                <button id="enviaValorFinal" class="botao">Enviar</button>
+                </br>
+              </div>
+            </div>
+            <!-- fecha valor pedido (para o artista aceitar a comissao) -->        
+            <h1>Comissões recebidas</h1>
+            <div class="comissoes_recebidas">
+              {% if comissoes is defined %}
+                  {% for comissao in comissoes %}
+                    <div class="abrir_comissao">
+                      {% if comissao.valorpedido == null and comissao.indicadorconf == 0 %}
+                      <div class="edit_text aceitaCon" id="{{comissao.idpedido|e}}">
+                        <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
+                        <p id="atualUsername">Pedido feito por @{{comissao.username}}, aguardando sua resposta.</p>
+                      </div> <!-- edit_text -->
+                      {% elseif comissao.valorpedido != null and comissao.indicadorconf == 0 %}
+                      <div class="edit_text " id="{{comissao.idpedido|e}}">
+                        <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
+                        <p id="atualUsername">Pedido feito por @{{comissao.username}}, aguardando confirmação do comprador.</p>
+                      </div> <!-- edit_text -->  
+                      {% elseif comissao.valorpedido != null and comissao.indicadorconf == 1 %}
+                      <div class="edit_text " id="{{comissao.idpedido|e}}">
+                        <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
+                        <p id="atualUsername">Pedido feito por @{{comissao.username}}, aguardando produto.</p>
+                      </div> <!-- edit_text -->
+                      {% endif %}
+                    </div> <!-- abrir_comissao -->
+                  {% endfor %}
+              {% else %}
+                <p>Você ainda não recebeu pedido de comissão :(</p>
+              {% endif %}
+            </div> <!--comissoes_recebidas-->
 
-        <div class="pedidos-bg">
-          <h1div class="pedidos-modal">
-          <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
-              <h1>Titulo do pedido</h1>
-              <p>Status do servico: aceito</p>
-              <p>Preco: 200</p>
-              <p>email para contato: carlinhosmaia@outlook.com</p>
-              
-              <div class="grid_button">
-                <button class="botao">Aceitar</button>
-                <button class="botao">Negar</button>
-                <div class="acc">
-                  <input type="number" placeholder="insira o valor para aceitar" />
+            <div class="line"></div>
+
+            <h1>Pedidos realizados</h1>
+            <div class="pedidos_realizados">
+                {% if pedidos_feitos is defined %}
+                  {% for pedido in pedidos_feitos %}
+                    <div class="abrir_pedidos">
+                        {% if pedido.valorpedido == null %}
+                        <div class="edit_text" id="{{pedido.idpedido|e}}">
+                          <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
+                          <p id="atualUsername">pedido feito para @{{pedido.username}}, aguardando resposta do artista.</p>
+                        </div> <!-- edit_text -->
+                        {% elseif pedido..valorpedido != null and pedido.indicadorconf == 0 %}
+                        <div class="edit_text confPed" id="{{pedido.idpedido|e}}">
+                          <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
+                          <p id="atualUsername">pedido feito por @{{pedido.username}}, aguardando sua confirmação.</p>
+                        </div> <!-- edit_text -->
+                          
+                        {% elseif pedido..valorpedido != null and pedido.indicadorconf == 1 %}
+                        <div class="edit_text" id="{{pedido.idpedido|e}}">
+                          <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
+                          <p id="atualUsername">pedido feito por @{{pedido.username}}, em produção.</p>
+                        </div> <!-- edit_text -->
+                        {% endif %} 
+                    </div> <!-- abrir_pedidos -->
+                  {% endfor %}
+                {% else %}
+                  <p>Você ainda não fez nenhum pedido de comissão. :(</p>
+                {% endif %}
+                
+
+              <div class="comission-bg">
+                <div class="comission-modal">
+                  <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
+                    <h1>Titulo da comissao</h1>
+                    <div class="txtarea"><p>Descricao aqui</p></div>
+                    <div class="grid_button">
+                      <button class="botao">Aceitar</button>
+                      <button class="botao">Negar</button>
+                      <div class="acc">
+                        <input type="number" placeholder="insira o valor para aceitar" />
+                      </div>
+                    </div>
                 </div>
               </div>
-          </div>
-        </div>
+
+              <div class="pedidos-bg">
+                <div class="pedidos-modal">
+                  <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
+                    <h1>Titulo do pedido</h1>
+                    <p>Status do servico: aceito</p>
+                    <p>Preco: 200</p>
+                    <p>email para contato: carlinhosmaia@outlook.com</p>
+                    
+                    <div class="grid_button">
+                      <button class="botao">Aceitar</button>
+                      <button class="botao">Negar</button>
+                      <div class="acc">
+                        <input type="number" placeholder="insira o valor para aceitar" />
+                      </div>
+                    </div>
+                </div>
+              </div>
 
 
-        </div> <!--pedidos_realizados-->
+            </div> <!--pedidos_realizados-->
 
 
-        </div> <!-- nao tira essa div aqui nem fodendo se nao vai da merda -->
+          </div> <!-- Fecha Comissao -->
 
 
         
