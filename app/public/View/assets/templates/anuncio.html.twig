@@ -33,6 +33,8 @@
                   <input type="text" id="titulo" name="titulo" maxlength="50" placeholder="Título para o seu pedido"/>
                   <p class="modal-label">Descrição do serviço</p>
                   <textarea id="descricao" name="descricao" rows="5" maxlength="280" placeholder="Descreva detalhadamente como você quer seu pedido" required></textarea>
+                  <p class="modal-label">Data limite para Entrega:</p>
+                  <input type="date" id="dt_entrega" name="dt_entrega" />
                   <p hidden id="hiddenpedido">{{idserv}}</p>
                   <p hidden id="hiddenpedidouser">{{username}}</p>
                   <button type="submit" id="solicitaPedido">Solicitar</button>

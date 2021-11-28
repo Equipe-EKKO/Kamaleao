@@ -134,52 +134,6 @@ CREATE table IF NOT EXISTS `tb_serviço`(
 			references `tb_tipos_licença`(`cd_licença`))
 CHARACTER SET utf8mb4;
 
--- tabela de avaliação
-CREATE table IF NOT EXISTS `tb_avaliação`(
-	-- atributos
-    `cd_avaliação` INT UNSIGNED NOT NULL auto_increment, -- chave primaria
-	`qt_avaliação` DECIMAL(3,2) NOT NULL DEFAULT 0,
-    `dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	cd_usuario INT UNSIGNED NOT NULL, -- chave estrangeira
-	`cd_serviço` INT UNSIGNED NOT NULL, -- chave estrangeira
-    -- definicao das chaves
-    -- primaria
-    constraint `pk_avaliação`
-		primary key (`cd_avaliação`),
-	-- estrangeira: entre usuario e avaliacao
-    constraint fk_usuario_avaliacao
-		foreign key (cd_usuario)
-			references tb_usuario(cd_usuario),
-	-- estrangeira: entre servico e avaliacao
-    constraint `fk_serviço_avaliação`
-		foreign key (`cd_serviço`)
-			references `tb_serviço`(`cd_serviço`))
-CHARACTER SET utf8mb4;
-
--- tabela de denúncias
-CREATE table IF NOT EXISTS `tb_denúncia`(
-	-- atributos
-    `cd_denúncia` INT UNSIGNED NOT NULL auto_increment, -- chave primaria
-    `nm_denúncia` VARCHAR(45) NOT NULL,
-    `ds_denúncia` VARCHAR(1200),
-    ic_avaliado BOOLEAN NOT NULL DEFAULT 0,
-    `dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    cd_usuario INT UNSIGNED NOT NULL, -- chave estrangeira
-	`cd_serviço` INT UNSIGNED NOT NULL, -- chave estrangeira
-     -- definicao das chaves
-    -- primaria
-    constraint `pk_denúncia`
-		primary key (`cd_denúncia`),
-	-- estrangeira: entre usuario e denuncia
-    constraint fk_usuario_denuncia
-		foreign key (cd_usuario)
-			references tb_usuario(cd_usuario),
-	-- estrangeira: entre servico e denuncia
-    constraint `fk_serviço_denúncia`
-		foreign key (`cd_serviço`)
-			references `tb_serviço`(`cd_serviço`))
-CHARACTER SET utf8mb4;
-
 -- tabela de pedido
 CREATE table IF NOT EXISTS tb_pedido (
 	-- atributos
@@ -190,6 +144,7 @@ CREATE table IF NOT EXISTS tb_pedido (
 	vl_pedido DECIMAL(10,2),
 	ic_confirmado BOOLEAN NOT NULL DEFAULT 0,
 	`dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`dt_entrega` DATE NOT NULL,
 	cd_serviço INT UNSIGNED NOT NULL, -- chave estrangeira
 	cd_usuario INT UNSIGNED NOT NULL, -- chave estrangeira
 	-- definicao das chaves
@@ -204,6 +159,57 @@ CREATE table IF NOT EXISTS tb_pedido (
 	constraint fk_usuario_pedido
 		foreign key (`cd_usuario`)
 			references `tb_usuario` (`cd_usuario`))
+CHARACTER SET utf8mb4;
+
+-- tabela de avaliação
+CREATE table IF NOT EXISTS `tb_avaliação`(
+	-- atributos
+    `cd_avaliação` INT UNSIGNED NOT NULL auto_increment, -- chave primaria
+	`qt_avaliação` DECIMAL(3,2) NOT NULL DEFAULT 0,
+    `dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	cd_usuario INT UNSIGNED NOT NULL, -- chave estrangeira
+	cd_pedido INT UNSIGNED NOT NULL, -- chave estrangeira
+    -- definicao das chaves
+    -- primaria
+    constraint `pk_avaliação`
+		primary key (`cd_avaliação`),
+	-- estrangeira: entre usuario e avaliacao
+    constraint fk_usuario_avaliacao
+		foreign key (cd_usuario)
+			references tb_usuario(cd_usuario),
+	-- estrangeira: entre pedido e avaliacao
+    constraint `fk_pedido_avaliação`
+		foreign key (cd_pedido)
+			references tb_pedido(cd_pedido))
+CHARACTER SET utf8mb4;
+
+-- tabela de denúncias
+CREATE table IF NOT EXISTS `tb_denúncia`(
+	-- atributos
+    `cd_denúncia` INT UNSIGNED NOT NULL auto_increment, -- chave primaria
+    `nm_denúncia` VARCHAR(45) NOT NULL,
+    `ds_denúncia` VARCHAR(1200),
+    ic_avaliado BOOLEAN NOT NULL DEFAULT 0,
+    `dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    cd_usuario INT UNSIGNED NOT NULL, -- chave estrangeira
+	`cd_serviço` INT UNSIGNED, -- chave estrangeira
+	cd_pedido INT UNSIGNED, -- chave estrangeira
+    -- definicao das chaves
+    -- primaria
+    constraint `pk_denúncia`
+		primary key (`cd_denúncia`),
+	-- estrangeira: entre usuario e denuncia
+    constraint fk_usuario_denuncia
+		foreign key (cd_usuario)
+			references tb_usuario(cd_usuario),
+	-- estrangeira: entre servico e denuncia
+    constraint `fk_serviço_denúncia`
+		foreign key (`cd_serviço`)
+			references `tb_serviço`(`cd_serviço`),
+	-- estrangeira: entre pedido e denuncia
+    constraint fk_pedido_denuncia
+		foreign key (cd_pedido)
+			references tb_pedido(cd_pedido))
 CHARACTER SET utf8mb4;
 
 -- tabela imagem
@@ -286,3 +292,5 @@ INSERT INTO tb_foto_perfil (cd_usuario) VALUES (1), (2), (3), (4);
 INSERT INTO tb_tipos_licença (nm_licença) VALUES ("Não-Comercial"), ("Comercial"), ("Download");
 
 INSERT INTO tb_categoria (nm_categoria) VALUES ("Arte Digital"), ("Design"), ("Logos"), ("Concept Art"), ("Outros");
+
+INSERT INTO tb_status_pagamento (nm_status) VALUES ("Pendente"), ("Confirmado"), ("Cancelado");

@@ -10,20 +10,21 @@ class Pedido {
     public $nmPedido, $dsPedido, $icCancelado, $vlPedido, $dsResposta; # nmServiço: string || dsServiço: string || imtmpServiço: string com url de imagem || tipoLicença: inteiro || vlServiço: float
     private $cdUsuario, $cdServiço; // cdDono e cdUsuario: inteiro
 
-    public function salvaPedido(int $cd_serviço, string $username, string $titulo, string $desc):bool {
+    public function salvaPedido(int $cd_serviço, string $username, string $titulo, string $desc, string $dtent):bool {
         /*seta os valores dos parametros*/
         $this->setNmPedido($titulo);
         $this->setDsPedido($desc);
         if ($this->verificaDados($cd_serviço, $username)) {
             /*Conexão com o Banco*/
             $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL
-            $sql = "INSERT INTO `tb_pedido` (`nm_pedido`, `ds_pedido`, `cd_serviço`, cd_usuario) VALUES (:titulo, :descricao, :cdservico, :cdusuario)"; # declara a query do insert na tabela serviço do banco de dados 
+            $sql = "INSERT INTO `tb_pedido` (`nm_pedido`, `ds_pedido`, `cd_serviço`, cd_usuario, dt_entrega) VALUES (:titulo, :descricao, :cdservico, :cdusuario, :dtent)"; # declara a query do insert na tabela serviço do banco de dados 
             $stmt = $banco->prepare($sql); # prepara a query para execução
             /*Substitui os valores de cada placeholder na query preparada*/
             $stmt->bindValue(':titulo', $titulo); 
             $stmt->bindValue(':descricao', $desc);
             $stmt->bindValue(':cdservico', $cd_serviço);
             $stmt->bindValue(':cdusuario', $this->getCdUsuario());
+            $stmt->bindValue(':dtent', $dtent);
 
             /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
             try {

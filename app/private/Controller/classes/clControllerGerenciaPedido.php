@@ -7,9 +7,10 @@ use Respect\Validation\Validator as v;
 
 //Classe controller cria serviço
 class ControllerFazPedido{
-  private $titulo, $descricao, $username, $cd_serviço; 
+  private $titulo, $descricao, $username, $cd_serviço, $dt_entrega; 
   private function validaPedido():bool{ #Função bool para ver se todos os campos estão corretos para mandar ao model
-    if ($this->titulo == null|| $this->descricao == null || $this->username == null || $this->cd_serviço == null) {
+    $dt_min = date('Y-m-d', strtotime("+14 days"));
+    if ($this->titulo == null|| $this->descricao == null || $this->username == null || $this->cd_serviço == null || $this->dt_entrega == null) {
       ob_end_clean();
       echo 'Verifique se os campos obrigatorios estão inseridos corretamente!';
       return false;
@@ -25,23 +26,33 @@ class ControllerFazPedido{
       ob_end_clean();
       echo 'A descrição só pode ter 280 caracteres.';
       return false;
+    } else if (v::date()->validate($this->dt_entrega) == false){ #verifica se a idade é maior que 15 anos
+      ob_end_clean();
+      echo 'O formato da data está errado.';
+      return false;
+    } else if (strtotime($this->dt_entrega) < strtotime($dt_min)){ #verifica se a idade é maior que 15 anos
+      ob_end_clean();
+      echo 'A comissão deve ter a data com distância de ao menos duas semanas desde a data que foi pedida.';
+      return false;
     } else { 
       ob_end_clean();
       return true;
     }
+    return false;
   }
-  public function __construct(string $titulo, string $descriçao, string $username, int $cd_serviço) /*os ultimos são relacionados ao $_FILES, não sei bem o tipo*/ {
+  public function __construct(string $titulo, string $descriçao, string $username, int $cd_serviço, $dt_entrega) /*os ultimos são relacionados ao $_FILES, não sei bem o tipo*/ {
     $this->titulo = $titulo;
     $this->descricao = $descriçao;
     $this->username = $username;
     $this->cd_serviço = $cd_serviço;
+    $this->dt_entrega = $dt_entrega;
     $this->validaPedido();
     $this->chamaModel();
   }
 
   private function chamaModel() {
     if ($this->validaPedido()) {
-      if (recebePedidoPost($this->titulo, $this->descricao, $this->username, $this->cd_serviço)):
+      if (recebePedidoPost($this->titulo, $this->descricao, $this->username, $this->cd_serviço, $this->dt_entrega)):
         ob_end_clean();
         echo true;
         return true;

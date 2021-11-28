@@ -52,6 +52,11 @@ if ($username === "userIndefinido"):
     $_SESSION["error"] = 'Você precisa estar logado para acessar esta página!';
     header("Location: /Github/Kamaleao/app/public/view/pré_login/login/login.php");
 else:
+    if (!isset($_GET['username'])):
+        ob_end_clean();
+        $_SESSION["error"] = 'Você precisa estar logado para acessar esta página!';
+        header("Location: /Github/Kamaleao/app/public/view/pré_login/login/login.php");
+    endif;
     if ($_GET['username'] === $username) {
         $slc_categoria = pesquisaCategoria();
         $slc_servic = pesquisaServPerf();

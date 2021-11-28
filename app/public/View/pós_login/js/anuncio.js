@@ -24,6 +24,7 @@ function fechaModal() {
   $("#fazPedidoReturn.form-message").attr("hidden", "true");
   $("input#titulo").val("");
   $("textarea#descricao").val("");
+  $("input#dt_entrega").val("");
 }
 
 $(document).ready(function () {
@@ -34,9 +35,10 @@ $(document).ready(function () {
     var cdServ = $("p#hiddenpedido").text(),
         nmUser = $("p#hiddenpedidouser").text(), 
         titulo = $("input#titulo").val(),
-        descricao = $("textarea#descricao").val();
+        descricao = $("textarea#descricao").val(),
+        dtent = $("input#dt_entrega").val();
 
-    $.post("/GitHub/Kamaleao/app/private/Controller/controllerFazPedido.php", {nmuser: nmUser, cd_serviço: cdServ, titulo: titulo, desc: descricao},
+    $.post("/GitHub/Kamaleao/app/private/Controller/controllerFazPedido.php", {nmuser: nmUser, cd_serviço: cdServ, titulo: titulo, desc: descricao, dt_entrega: dtent},
       function (data) {
         if (data == true) {
           $("#fazPedidoReturn.form-message").removeClass("erro");
