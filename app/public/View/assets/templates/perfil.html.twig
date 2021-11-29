@@ -302,6 +302,15 @@
     <!-- Comissao -->
     <div id="Comissao" class="tabcontent">
       <div id="md-pr4" class="md-ct-pos">
+        <!-- abre modal status pedido para vermelhinho -->
+        <div class="md-ct-pos" id="pedidos-status">
+          <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('pedidos-status')"></i>
+            <h1 id="pedti"></h1>
+            <p>Status do Servico: <span id="statusped"></span></p>
+            <p>Preco: <span id="pedprec"></span></p>
+            <p>Email para contato: <span id="pedemail"></span></p>
+        </div>
+        <!-- fecha modal status pedido para vermelhinho -->
         <!-- abre modal pedido (para o artista aceitar ou negar a comissao) -->
         <div class="md-ct-pos" id="modal-pedido">
           <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-pedido')"></i>
@@ -348,25 +357,27 @@
           </div>
         </div>
         <!-- fecha modal valor pedido (pra quem ta pedidno) -->
-        <!-- modal entregar pedido (depois que o comprador aceitou) -->
-        <div class="md-ct-pos" id="modal-entregar-pedido">
-          <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('modal-pedido')"></i>
-          <h1>Pedido nº <span id="idPed"></span></h1>
-          <p hidden class="form-message">
+        <!-- modal entregar comissao (depois que o comprador aceitou) -->
+        <div class="md-ct-pos" id="entregar-comissao">
+          <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('entregar-comissao')"></i>
+          <h1>Pedido nº <span id="idProd"></span></h1>
+          <p hidden id="respproduto" class="form-message">
             <i class="fas fa-exclamation-triangle"></i>
           </p>
           </br>
-          <h2>Serviço:</h2>
-          <p id="titServ"></p>
+          <h3>Serviço:</h3>
+          <p id="titServProd"></p>
           </br>
-          <h2>Título do pedido:</h2>
-          <p id="titPed"></p>
+          <h3>Título do Pedido:</h3>
+          <p id="titProd"></p>
           </br>
           <p>Insira o pedido pronto:</p>
-          <label for="imagem" id="escolha">Escolher arquivo</label>
-          <input type="file" id="imagem" name="servfile" accept="image/jpeg, image/png">
+          <label for="imagemProd" id="escolhaProd">Escolher arquivo</label>
+          <input type="file" id="imagemProd" name="prodfile" accept="image/jpeg, image/png">
+          </br></br>
+          <span class="file-name"></span>
           </br>
-          <button class="botao" id="entregaPedido">Enviar</button>
+          <button class="botao" id="entregaComissao">Enviar</button>
         </div>
       </div>
       <!--  fecha modal entregar pedido (depois que o comprador aceitou) -->
@@ -398,14 +409,20 @@
             <p id="atualUsername">Pedido feito por @{{comissao.username}}.</p>
             <p style="color:#00a800">Status: aguardando sua resposta</p>
           </div> <!-- edit_text -->
-          {% elseif comissao.valorpedido != null and comissao.indicadorconf == 0 %}
-          <div class="edit_text " id="{{comissao.idpedido|e}}">
+          {% elseif comissao.valorpedido != null and comissao.indicadorcancel == 1 and comissao.indicadorconf == 0 %}
+          <div class="edit_text vermelhinho" id="{{comissao.idpedido|e}}">
             <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
-            <p id="atualUsername">Pedido feito por @{{comissao.username}}.</p>
-            <p style="color:#F53446">Status: aguardando confirmação do comprador</p>
+            <p id="atualUsername">Pedido feito por <span class="usernome">@{{comissao.username}}</span>.</p>
+            <p style="color:#F53446">Status: <span class="statusreal">pedido cancelado</span>.</p>
+          </div> <!-- edit_text -->
+          {% elseif comissao.valorpedido != null and comissao.indicadorconf == 0 %}
+          <div class="edit_text vermelhinho" id="{{comissao.idpedido|e}}">
+            <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
+            <p id="atualUsername">Pedido feito por <span class="usernome">@{{comissao.username}}</span>.</p>
+            <p style="color:#F53446">Status: <span class="statusreal">aguardando confirmação do comprador</span>.</p>
           </div> <!-- edit_text -->
           {% elseif comissao.valorpedido != null and comissao.indicadorconf == 1 %}
-          <div class="edit_text " id="{{comissao.idpedido|e}}">
+          <div class="edit_text entregaProd" id="{{comissao.idpedido|e}}">
             <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
             <p id="atualUsername">Pedido feito por @{{comissao.username}}</p>
             <p style="color:#00a800">Status: aguardando produto</p>
@@ -427,32 +444,32 @@
         {% for pedido in pedidos_feitos %}
         <div class="abrir_pedidos">
           {% if pedido.valorpedido == null %}
-          <div class="edit_text" id="{{pedido.idpedido|e}}">
+          <div class="edit_text vermelhinho" id="{{pedido.idpedido|e}}">
             <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
-            <p id="atualUsername">pedido feito para @{{pedido.username}}.</p>
-            <p style="color:#F53446">Status: aguardando resposta do artista</p>
+            <p id="atualUsername">pedido feito para <span class="usernome">@{{pedido.username}}</span>.</p>
+            <p style="color:#F53446">Status: <span class="statusreal">aguardando resposta do artista</span>.</p>
           </div> <!-- edit_text -->
 
           {% elseif pedido.valorpedido != null and pedido.indicadorcancel == 1 and pedido.indicadorconf == 0 %}
-          <div class="edit_text" id="{{pedido.idpedido|e}}">
+          <div class="edit_text vermelhinho" id="{{pedido.idpedido|e}}">
             <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
-            <p id="atualUsername">pedido feito por @{{pedido.username}}.</p>
-            <p style="color:#F53446">Status: pedido cancelado.</p>
+            <p id="atualUsername">pedido feito para <span class="usernome">@{{pedido.username}}</span>.</p>
+            <p style="color:#F53446">Status: <span class="statusreal">pedido cancelado</span>.</p>
           </div>
           <!-- edit_text -->
 
           {% elseif pedido.valorpedido != null and pedido.indicadorconf == 0 %}
           <div class="edit_text confPed" id="{{pedido.idpedido|e}}">
             <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
-            <p id="atualUsername">pedido feito por @{{pedido.username}}</p>
+            <p id="atualUsername">pedido feito para @{{pedido.username}}</p>
             <p style="color:#00a800">Status: aguardando sua confirmação</p>
           </div> <!-- edit_text -->
 
           {% elseif pedido.valorpedido != null and pedido.indicadorconf == 1 %}
-          <div class="edit_text" id="{{pedido.idpedido|e}}">
+          <div class="edit_text vermelhinho" id="{{pedido.idpedido|e}}">
             <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
-            <p id="atualUsername">pedido feito por @{{pedido.username}}.</p>
-            <p style="color:#F53446">Status: em produção</p>
+            <p id="atualUsername">pedido feito para <span class="usernome">@{{pedido.username}}</span>.</p>
+            <p style="color:#F53446">Status: <span class="statusreal">em produção</span>.</p>
           </div>
           <!-- edit_text -->
 
@@ -463,33 +480,7 @@
         <p>Você ainda não fez nenhum pedido de comissão. :(</p>
         {% endif %}
 
-
-        <div class="comission-bg">
-          <div class="comission-modal">
-            <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
-            <h1>Titulo da comissao</h1>
-            <div class="txtarea">
-              <p>Descricao aqui</p>
-            </div>
-            <div class="grid_button">
-              <button class="botao">Aceitar</button>
-              <button class="botao">Negar</button>
-              <div class="acc">
-                <input type="number" placeholder="insira o valor para aceitar" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="pedidos-modal">
-          <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('add')"></i>
-            <h1>Titulo do pedido</h1>
-            <p>Status do servico: aceito</p>
-            <p>Preco: 200</p>
-            <p>email para contato: carlinhosmaia@outlook.com</p>
-        </div>
-      </div>
-      <!--pedidos_realizados-->
+      </div> <!--pedidos_realizados-->
     </div> <!-- Fecha Comissao -->
 
 
@@ -518,6 +509,9 @@
 
       $(function () {
         $('#imagem').change(function () {
+          $('.file-name').html($(this).val().substr(12));
+        });
+        $('#imagemProd').change(function () {
           $('.file-name').html($(this).val().substr(12));
         });
       });

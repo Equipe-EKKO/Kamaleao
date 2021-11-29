@@ -4,6 +4,7 @@ define('DIR_ROOT', $_SERVER['DOCUMENT_ROOT']); # essa constante serve pra pegar 
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php');
 require_once (DIR_ROOT . '/Github/Kamaleao/app/private/Model/main-PesquisaAbertaBanco.php');
 require_once (DIR_ROOT . '/Github/Kamaleao/app/private/Model/main-Perfil.php');
+require_once (DIR_ROOT . '/Github/Kamaleao/app/private/Model/main-Pedido.php');
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -62,6 +63,8 @@ else:
         $slc_servic = pesquisaServPerf();
         $slc_comissao = pesquisaComisPerf($username);
         $slc_pedido = pesquisaPedidosPerf($username);
+        cancelaPedidoFeito();
+        cancelaComissaoPedida();
         if (!isset($_SESSION['fototoPerfil']) || empty($_SESSION['fototoPerfil']) || $_SESSION['fototoPerfil'] == "" || $_SESSION['fototoPerfil'] == null) {
             $urlfotoperf = null;
         }

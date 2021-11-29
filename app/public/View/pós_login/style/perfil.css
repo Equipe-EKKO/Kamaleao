@@ -311,7 +311,7 @@
     transition: .3s;
   }
 
-  .comission-modal i#iconfecha, .pedidos-modal i#iconfecha {
+  .pedidos-status i#iconfecha {
     position: relative;
     top: 5px;
     right: 5px;
@@ -480,7 +480,7 @@
   
 }
 
-#imagem {
+#imagem, #imagemProd {
   display: none;
 }
 
@@ -492,12 +492,24 @@
   outline: 0;
 }
 
-#escolha{
+#escolha, #escolhaProd{
   border: 1px solid #363636;
   padding: 0.3rem 1rem;
   cursor: pointer;
   border-radius: 5px;
   margin-left: -2rem;;
+}
+
+#escolhaProd {
+  margin-left: 0;
+}
+
+div#entregar-comissao p {
+  margin-bottom: 1rem;
+}
+
+div#entregar-comissao button {
+  margin-top: 1rem;
 }
 
 select {
@@ -1112,7 +1124,7 @@ span#liSub, span#catSub {
   display: none;
 }
 
-.comission-modal .botao, .pedidos-modal .botao {
+.pedidos-status .botao {
   border: 1px solid #363636;
   width: 90%;
   height: 3rem;
@@ -1126,7 +1138,7 @@ span#liSub, span#catSub {
   margin-top: 5em;
 }
 
-.comission-modal .botao:hover, .pedidos-modal .botao:hover {
+.pedidos-status .botao:hover {
   color: rgb(255, 255, 255);
   cursor: pointer;
   background-image: url("/GitHub/Kamaleao/app/public/View/assets/img/botao.jpg");
@@ -1165,31 +1177,34 @@ span#liSub, span#catSub {
   background-color: rgba(0, 0, 0, .5);
 }
 
-.pedidos-modal {
+.pedidos-status {
   display: block;
   margin: 0 auto;
-  margin-top: 10%;
   z-index: 2000;
   background: #fff;
   width: 30%;
-  height: 20%;
+  height: 30%;
   border-radius: 40px 5px 40px 5px;
   padding: 10px;
   text-align: center;
 }
 
-.pedidos-modal p:first-of-type {
+.pedidos-status p:first-of-type {
   margin-top: 2em;
 }
 
-.pedidos-modal h1, .pedidos-modal p {
-  margin-top: .5em;
-  font-weight: 800;
-  font-size: 16px;
+.pedidos-status p:last-of-type {
+  padding-bottom: 2em;
 }
 
-.pedidos-modal h1 {
+.pedidos-status h1, .pedidos-status p {
+  margin-top: .5em;
+  font-size: 18px;
+}
+
+.pedidos-status h1 {
   font-size: 23px;
+  font-weight: 800;
 }
 
 @media screen and (max-width: 1070px) {

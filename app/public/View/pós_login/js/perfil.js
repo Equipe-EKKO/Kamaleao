@@ -314,10 +314,22 @@ function abreModal(modal) {
   } else if (modal == "valor-pedido") {
     $("#md-pr4").removeClass("md-ct-pos").addClass("md-ct");
     $("#valor-pedido").removeClass("md-ct-pos").addClass("form_anuncio");
+    $("p#respValAceita").empty();
+    $("p#respValAceita").removeClass("sucesso");
+    $("p#respValAceita").removeClass("erro");
   } else if (modal == "valor-comissao") {
     $("#md-pr5").removeClass("md-ct-pos").addClass("md-ct");
     $("#valor-comissao").removeClass("md-ct-pos").addClass("form_anuncio");
-  }
+  } else if (modal == "pedidos-status") {
+    $("#md-pr4").removeClass("md-ct-pos").addClass("md-ct");
+    $("#pedidos-status").removeClass("md-ct-pos").addClass("pedidos-status");
+  } else if (modal == "entregar-comissao") {
+    $("#md-pr4").removeClass("md-ct-pos").addClass("md-ct");
+    $("#entregar-comissao").removeClass("md-ct-pos").addClass("form_anuncio");
+    $("p#respproduto").empty();
+    $("p#respproduto").removeClass("sucesso");
+    $("p#respproduto").removeClass("erro");
+  } 
 
 }
 
@@ -361,17 +373,23 @@ function fechaModal(modal) {
     $("#md-pr3").removeClass("md-ct").addClass("md-ct-pos");
     $("#md-pr2").removeClass("md-ct").addClass("md-ct-pos");
     $("#md-pr").removeClass("md-ct").addClass("md-ct-pos");
-    $("#modal-pedido").addClass("md-ct-pos").removeClass("form_edit");
+    $("#modal-pedido").addClass("md-ct-pos").removeClass("form_anuncio");
     $("p#modalpedidoResp").empty();
     $("p#modalpedidoResp").removeClass("sucesso");
     $("p#modalpedidoResp").removeClass("erro");
     $("p#modalpedidoResp").attr("hidden", "hidden");
   } else if (modal == "valor-pedido") {
     $("#md-pr4").addClass("md-ct-pos").removeClass("md-ct");
-    $("#valor-pedido").addClass("md-ct-pos").removeClass("form_edit");
+    $("#valor-pedido").addClass("md-ct-pos").removeClass("form_anuncio");
   } else if (modal == "valor-comissao") {
     $("#md-pr5").addClass("md-ct-pos").removeClass("md-ct");
-    $("#valor-comissao").addClass("md-ct-pos").removeClass("form_edit");
+    $("#valor-comissao").addClass("md-ct-pos").removeClass("form_anuncio");
+  } else if (modal == "pedidos-status") {
+    $("#md-pr4").addClass("md-ct-pos").removeClass("md-ct");
+    $("#pedidos-status").addClass("md-ct-pos").removeClass("pedidos-status");
+  } else if (modal == "entregar-comissao") {
+    $("#md-pr4").addClass("md-ct-pos").removeClass("md-ct");
+    $("#entregar-comissao").addClass("md-ct-pos").removeClass("form_anuncio");
   }
 }
 
@@ -393,6 +411,24 @@ $(document).ready(function () {
       $("span#idPed").text(idSelector);
       $("p#hiddenenvia1").text(idSelector);
       abreModal("modal-pedido");
+    });
+  });
+
+  $("div.entregaProd").click(function (e) {
+
+    e.preventDefault();
+
+    var idSelector = this.id;
+    
+    $.post("/GitHub/Kamaleao/app/private/Controller/controllerInfoPedido.php", { idpedido: idSelector }, function (resposta) {
+
+      var a = jQuery.parseJSON(resposta);
+
+      $("p#titProd").text(a.tituloped);
+      $("p#titServProd").text(a.tituloserv);
+      $("span#idProd").text(idSelector);
+      $("p#hiddenenvia1").text(idSelector);
+      abreModal("entregar-comissao");
     });
   });
 
@@ -435,6 +471,37 @@ $(document).ready(function () {
       abreModal("editar-excluir");
       $(".cdhidden").text(a.cdServ);
     });
+  });
+
+  $("div.vermelhinho").click(function (e) {
+
+    e.preventDefault();
+    
+    var idSelector = this.id,
+        status = $("div#" + idSelector + " span.statusreal").text(),
+        userA = $("div#" + idSelector + " span.usernome").text(),
+        username = userA.replace("@", "");
+
+    $.post("/GitHub/Kamaleao/app/private/Controller/controllerInfoPedidoStatus.php", { cdpedido: idSelector, usernm: username}, function (resposta) {
+      var a = jQuery.parseJSON(resposta);
+
+      function capitalizeFirstLetter(string){
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+      var statuscapitalized = capitalizeFirstLetter(status);
+      
+      $("h1#pedti").text(a.tituloped);
+      $("p span#statusped").text(statuscapitalized).css("font-weight", "850");
+      $("p span#pedprec").text("R$" + a.valorpedido).css("font-weight", "850");
+      if (a.valorpedido == null) {
+        $("p span#pedprec").text("A definir").css("font-weight", "850");
+        $("p span#pedemail").text("Aguardando confirmação").css("font-weight", "850");
+      } else {
+        $("p span#pedprec").text("R$" + a.valorpedido).css("font-weight", "850");
+        $("p span#pedemail").text(a.emailuser).css("font-weight", "850");
+      }
+      abreModal("pedidos-status");
+    })
   });
 
   $("button#exclui").click(function (e) {
@@ -611,6 +678,64 @@ $(document).ready(function () {
           }
         }
       });
+  });
+
+  $("button#entregaComissao").click(function (e) {
+    e.preventDefault();
+
+    var form_data = new FormData();
+      form_data.append('prodfile', $('input#imagemProd').prop('files')[0]);
+      form_data.append('idpedido', $('span#idProd').text());
+
+    // desabilitar o botão de "submit" para evitar multiplos envios até receber uma resposta
+    $("input.botao").prop("disabled", true);
+    // processar
+    $.ajax({
+      type: "POST",
+      enctype: 'multipart/form-data',
+      url: "/GitHub/Kamaleao/app/private/Controller/controllerEntregaProduto.php",
+      data: form_data,
+      processData: false, // impedir que o jQuery tranforma a "data" em querystring
+      contentType: false, // desabilitar o cabeçalho "Content-Type"
+      cache: false, // desabilitar o "cache"
+      // manipular o sucesso da requisição
+      success: function (resposta) {
+        if (resposta == 1) {
+          $("p#respproduto").removeClass("sucesso");
+          $("p#respproduto").removeClass("erro");
+          $("p#respproduto").removeAttr("hidden");
+          $("p#respproduto").addClass("sucesso");
+          $("p#respproduto").empty();
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> Seu novo anúncio foi adicionado!</span>";
+          $(sucesso).appendTo("p#respproduto");
+          
+          setTimeout(function () {  
+            fechaModal('add');
+            location.reload(true);
+          }, 1000);
+
+        } else {  
+          $("p#respproduto").removeClass("sucesso");  
+          $("p#respproduto").removeClass("erro");  
+          $("p#respproduto").removeAttr("hidden");
+          $("p#respproduto").addClass("erro");
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";
+          var mes = $("p#respproduto").html();
+          if (mes.includes("atualizado") == false) {
+            $("p#respproduto").empty();
+            $(erro).appendTo("p#respproduto");
+            }
+          }
+          // reativar o botão de "submit"
+          $("input.botao").prop("disabled", false);
+        },
+      // manipular erros da requisição
+      error: function (e) {
+        alert(e);
+        // reativar o botão de "submit"
+        $("input.botao").prop("disabled", false);
+      }
+    });
   });
 });
 

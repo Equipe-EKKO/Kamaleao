@@ -49,10 +49,54 @@ function pesquisaPedidoInfo(int $cdpedidoid):mixed {
     }
 }
 
+// Função chamada no controller para ver as informações do pedido feito
+function pesquisaPedidoInfoStatus(int $cdpedidoid, string $username):mixed {
+    $pedido = new \Pedido();
+
+    $rsltSelect =  $pedido->searchPedidoStatus($cdpedidoid, $username);
+
+    if ($rsltSelect == false) {
+        echo "Houve um problema na conexão. Perdão.";
+        return "Houve um problema na conexão. Perdão.";
+    } else {
+        $servReturn = unserialize($rsltSelect);
+        return $servReturn;
+    }
+}
+
+// Função chamada no controller para cancelar pedidos feitos sem resposta a mais de 5 dias
+function cancelaPedidoFeito():bool {
+    $pedido = new \Pedido();
+
+    $usuario = unserialize($_SESSION['usuario']);
+    $cdcancel = $usuario->getCdUpdate() - 1;
+    
+    if ($pedido->cancelaPedidoAutomatic($cdcancel)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// Função chamada no controller para cancelar comisoes pedidas sem resposta a mais de 5 dias
+function cancelaComissaoPedida():bool {
+    $pedido = new \Pedido();
+
+    $usuario = unserialize($_SESSION['usuario']);
+    $cdcancel = $usuario->getCdUpdate() - 1;
+    
+    if ($pedido->cancelaComissaoAutomatic($cdcancel)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function recebePedidoValAceitaPost(int $cd_pedido):bool {
     $pedido = new \Pedido();
-    
-    if ($pedido->aceitaValPedido($cd_pedido)) {
+    $usuario = unserialize($_SESSION['usuario']);
+    $cdins = $usuario->getCdUpdate() - 1;
+    if ($pedido->aceitaValPedido($cd_pedido, $cdins)) {
         return true;
     } else {
         return false;
@@ -63,6 +107,21 @@ function recebePedidoValNegaPost(int $cd_pedido):bool {
     $pedido = new \Pedido();
     
     if ($pedido->negaValPedido($cd_pedido)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// Função chamada no controller para entregar o produto
+function recebeProdutoPost(int $cdpedido, string $imgType, $imgtmpName):bool {
+    $temp = explode("/", $imgType);
+    $extension = end($temp);
+    $serviço = new \Pedido($titulo, $descriçao, $preçoMedio, $licença, $optionCategoria);
+    $usuario = unserialize($_SESSION['usuario']);
+    $resulUser = unserialize($_SESSION['userinfo']);
+    $usuario->perfil->setServiço($serviço);
+    if ($usuario->perfil->criarServiço($titulo, $resulUser['cd_usuario'], $extension, $imgtmpName)) {
         return true;
     } else {
         return false;
