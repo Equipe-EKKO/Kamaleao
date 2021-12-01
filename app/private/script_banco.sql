@@ -237,7 +237,7 @@ CREATE table IF NOT EXISTS tb_produto (
 	-- atributos
 	cd_produto INT UNSIGNED NOT NULL auto_increment,
 	nm_produto VARCHAR(45) NOT NULL,
-	im_url_produto VARCHAR(300),
+	cd_url_produto VARCHAR(300),
 	cd_publicid_img VARCHAR(300),
 	`dt_criação` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	cd_pedido INT UNSIGNED NOT NULL,
