@@ -83,7 +83,7 @@ class PerfilProprio extends Perfil {
         }
 
 
-        $sql = "SELECT pe.cd_pedido AS 'idpedido', pe.vl_pedido AS 'valorpedido', date(pe.dt_criação) as 'datapedido', (SELECT nm_username FROM tb_login JOIN tb_usuario ON tb_login.cd_login = tb_usuario.cd_login JOIN `tb_serviço` AS s ON s.cd_usuario = tb_usuario.cd_usuario WHERE s.cd_usuario != :cdus) AS 'username', pe.ic_cancelado as 'indicadorcancel', pe.ic_confirmado as 'indicadorconf', pro.cd_url_produto AS 'url_produto', (SELECT statuspag.nm_status FROM tb_status_pagamento statuspag JOIN tb_pagamento pag ON statuspag.cd_status = pag.cd_status JOIN tb_produto prod ON prod.cd_produto = pag.cd_produto JOIN tb_pedido pe ON pe.cd_pedido = prod.cd_produto LIMIT 1) AS 'statuspag'  FROM `tb_pedido` AS pe JOIN tb_usuario AS us ON us.cd_usuario = pe.cd_usuario JOIN tb_login AS l ON l.cd_login = us.cd_login JOIN `tb_serviço` AS s ON s.cd_serviço = pe.cd_serviço LEFT JOIN tb_produto AS pro ON pe.cd_pedido = pro.cd_pedido WHERE pe.cd_usuario = :cdus"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $sql = "SELECT pe.cd_pedido AS 'idpedido', pe.vl_pedido AS 'valorpedido', date(pe.dt_criação) as 'datapedido', (SELECT nm_username FROM tb_login JOIN tb_usuario ON tb_login.cd_login = tb_usuario.cd_login JOIN `tb_serviço` AS s ON s.cd_usuario = tb_usuario.cd_usuario WHERE s.cd_usuario != :cdus LIMIT 1) AS 'username', pe.ic_cancelado as 'indicadorcancel', pe.ic_confirmado as 'indicadorconf', pro.cd_url_produto AS 'url_produto', (SELECT statuspag.nm_status FROM tb_status_pagamento statuspag JOIN tb_pagamento pag ON statuspag.cd_status = pag.cd_status JOIN tb_produto prod ON prod.cd_produto = pag.cd_produto JOIN tb_pedido pe ON pe.cd_pedido = prod.cd_produto LIMIT 1) AS 'statuspag'  FROM `tb_pedido` AS pe JOIN tb_usuario AS us ON us.cd_usuario = pe.cd_usuario JOIN tb_login AS l ON l.cd_login = us.cd_login JOIN `tb_serviço` AS s ON s.cd_serviço = pe.cd_serviço LEFT JOIN tb_produto AS pro ON pe.cd_pedido = pro.cd_pedido WHERE pe.cd_usuario = :cdus"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
         $stmt = $banco->prepare($sql); # prepara o select para execução
         $stmt->bindValue(':cdus', $cdDono);
 
@@ -101,8 +101,37 @@ class PerfilProprio extends Perfil {
     }
 
     #Métodos da Classe PerfilPróprio em Si
-    function baixarInventario() {
+    function listarInventario(string $nmDono) {
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
 
+        $sql = "SELECT cd_usuario FROM tb_usuario AS us JOIN tb_login AS l ON l.cd_login = us.cd_login WHERE l.nm_username = :nmusername "; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara o select para execução
+        $stmt->bindValue(':nmusername', $nmDono);
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $cdDono = $stmt->fetchColumn();           
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+
+
+        $sql = "SELECT pe.cd_pedido AS 'idpedido', (SELECT nm_username FROM tb_login JOIN tb_usuario ON tb_login.cd_login = tb_usuario.cd_login JOIN `tb_serviço` AS s ON s.cd_usuario = tb_usuario.cd_usuario WHERE s.cd_usuario != :cdus LIMIT 1) AS 'username', pro.cd_produto, pro.cd_url_produto AS 'url_produto', pro.nm_produto AS 'nome_produto',(SELECT statuspag.nm_status FROM tb_status_pagamento statuspag JOIN tb_pagamento pag ON statuspag.cd_status = pag.cd_status JOIN tb_produto prod ON prod.cd_produto = pag.cd_produto JOIN tb_pedido pe ON pe.cd_pedido = prod.cd_produto WHERE pag.cd_status = 2 AND pag.vl_pagamento IS NOT NULL LIMIT 1) AS 'statuspag'  FROM `tb_pedido` AS pe JOIN tb_usuario AS us ON us.cd_usuario = pe.cd_usuario JOIN tb_login AS l ON l.cd_login = us.cd_login JOIN `tb_serviço` AS s ON s.cd_serviço = pe.cd_serviço LEFT JOIN tb_produto AS pro ON pe.cd_pedido = pro.cd_pedido WHERE pe.cd_usuario = :cdus AND pro.cd_url_produto IS NOT NULL"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara o select para execução
+        $stmt->bindValue(':cdus', $cdDono);
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $rsltPedidoFeito = $stmt->fetchAll(PDO::FETCH_ASSOC);           
+            $rsltStrPedidoFeito = serialize($rsltPedidoFeito); # transforma o array em string
+            return $rsltStrPedidoFeito; # retorna a string
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
     }
     function excluiFotoPerfil(string $username) {
         /* Pra ver se já existe uma foto de perfil prévia */

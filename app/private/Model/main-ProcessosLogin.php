@@ -77,7 +77,7 @@ function fazLogOff(object $objUsuario):void {
     unset($objUsuario);
     unset($usuario);
     session_destroy();
-    header("Location: /Github/Kamaleao/app/public/view/acesso_livre/index/index"); # envia header que redireciona a pessoa para a header
+    header("Location: /Github/Kamaleao/app/public/view/pré_login/login/login" ); # envia header que redireciona a pessoa para a header
 }
 // Função chamada no controller para validar a senha, que posteriormente permitirá edição de dados
 function confirmaSenha(string $senha):bool {

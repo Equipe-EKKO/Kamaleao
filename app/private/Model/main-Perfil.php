@@ -76,4 +76,20 @@ function pesquisaServPerfAlheio():mixed {
         return $servReturn;
     }
 }
+
+// Função chamada no view para realizar pesquisa na tabela pedido
+function pesquisaPerfInventario(string $nmuser):mixed {
+    $usuario = unserialize($_SESSION['usuario']);
+
+    $rsltSelect = $usuario->perfil->listarInventario($nmuser);
+
+    if ($rsltSelect == false) {
+        echo "Houve um problema na conexão. Perdão.";
+        return "Houve um problema na conexão. Perdão.";
+    } else {
+        $servReturn = unserialize($rsltSelect);
+        return $servReturn;
+    }
+}
+
 ?>

@@ -29,15 +29,23 @@
       font-size: 125px;
     }
 
+    .foto_perf {
+      display: block;
+      margin: 0 auto;
+      padding-top: 2%;
+      width: 125px;
+      height: 125px;
+    }
+
     .icone_perf:hover {
       color: #fff;
     }
   
-     .perfil_icon h1 {
-       color: #fff;
-       font-size: 40px;
-       text-transform: lowercase;
-    }
+    .perfil_icon h1 {
+      color: #fff;
+      font-size: 40px;
+      text-transform: lowercase;
+   }
   
     .perfil_icon p {
       padding: 1rem 0rem 2rem 0rem;
@@ -297,6 +305,12 @@
   #imagem {
     display: none;
   }
+
+  .perf_img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+  }
   
   .grid_anuncio textarea:focus {
     outline: 0;
@@ -391,6 +405,7 @@
     transition: .6s;
     display: grid;
     grid-template-rows: 68% 12% 8% 12%;
+    margin-top: 1em;
   }
   
   .item:hover {
@@ -402,10 +417,11 @@
   }
   
   .anuncio_img {
+      display: block;
+      margin: 0 auto;
       width: 100%;
       height: 100%;
       border-radius: 10px 10px 0 0;
-      background-color: powderblue;
   }
   
   .anuncio_text {
@@ -419,10 +435,17 @@
       margin-top: 0.7rem;
   }
   
+  .anuncio_titulo {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: "ellipsis";
+  }
+  
   .anuncio_titulo h1 {
       font-size: 12pt;
       color: #363636;
       margin: 0.5rem;
+      overflow: hidden;
   }
   
   .anuncio_preço h2 {
@@ -437,7 +460,6 @@
       color: #808080;
       font-size: 10pt;
       margin: 0.2rem 0.5rem;
-  
   }
   
   #adicionar {

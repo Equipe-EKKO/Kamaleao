@@ -63,6 +63,7 @@ else:
         $slc_servic = pesquisaServPerf();
         $slc_comissao = pesquisaComisPerf($username);
         $slc_pedido = pesquisaPedidosPerf($username);
+        $slc_produto = pesquisaPerfInventario($username);
         cancelaPedidoFeito();
         cancelaComissaoPedida();
         if (!isset($_SESSION['fototoPerfil']) || empty($_SESSION['fototoPerfil']) || $_SESSION['fototoPerfil'] == "" || $_SESSION['fototoPerfil'] == null) {
@@ -72,10 +73,10 @@ else:
             $urlfotoperf = $_SESSION['fototoPerfil'];
         }
         if ($urlfotoperf == null || $urlfotoperf == "" || empty($urlfotoperf)) {
-            echo $twig->render('perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'sltCategoria' => $slc_categoria, 'servicos' => $slc_servic, 'comissoes' => $slc_comissao, 'pedidos_feitos' => $slc_pedido,'username' => $username]);
+            echo $twig->render('perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'sltCategoria' => $slc_categoria, 'servicos' => $slc_servic, 'comissoes' => $slc_comissao, 'pedidos_feitos' => $slc_pedido, 'produtos' => $slc_produto,'username' => $username]);
             ob_end_flush();
         } else {
-            echo $twig->render('perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'url_foto_perfil' => $urlfotoperf,'sltCategoria' => $slc_categoria, 'servicos' => $slc_servic, 'comissoes' => $slc_comissao, 'pedidos_feitos' => $slc_pedido,'username' => $username]);
+            echo $twig->render('perfil.html.twig', ['Usuario' => $username, 'Descricao' => $sobre, 'url_foto_perfil' => $urlfotoperf,'sltCategoria' => $slc_categoria, 'servicos' => $slc_servic, 'comissoes' => $slc_comissao, 'produtos' => $slc_produto,'pedidos_feitos' => $slc_pedido,'username' => $username]);
             ob_end_flush();
         }
        

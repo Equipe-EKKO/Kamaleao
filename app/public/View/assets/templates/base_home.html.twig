@@ -42,14 +42,6 @@
                      <div class="line3"></div>
                   </div>
                   <ul class="dropdown"> <!--ENGLOBA TD-->
-                     <li class="icone">
-                        <a onclick="mostraNoti()" onmouseover="escondePerf()" class="dropbtn"><i class='bx bx-bell' id="icon_nav"></i></a>
-                        <ul onmouseleave="escondeNoti()" id="noti" class="noti">
-                           <li><a href="#" class="opt">notificacao 1</a></li>
-                           <li><a href="#" class="opt">notificacao 2</a></li>
-                           <li><a href="#" class="opt">notificacao 3</a></li>
-                        </ul>
-                     </li>
 
                      <li class="icone">
                         <a onclick="mostraPerf()" class="bt2"><i class='bx bx-user-circle' id="icon_nav"></i></a>
@@ -123,7 +115,9 @@
                            <li class="li-icons"><i class='bx bxl-instagram'></i></li>
                            <li class="li-icons"><i class='bx bxl-twitter' ></i></li>
                            <li class="li-icons"><i class='bx bxl-facebook' ></i></li>
-                           <li class="li-icons"><i class='bx bx-envelope'></i></li>
+                           <li class="li-icons" onclick="navigator.clipboard.writeText('kamaleaoctt@gmail.com'); navigator.clipboard.readText().then((text)=> {
+                              alert('text');
+                          });"><i class='bx bx-envelope'></i></li>
                         </ul>
                   </div> <!--coluna-->
                </div> <!--linha-->

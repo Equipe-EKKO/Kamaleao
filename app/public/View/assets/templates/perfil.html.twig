@@ -42,19 +42,21 @@
     <!-- Inventario -->
     <div id="Inventário" class="tabcontent">
       <section class="grid_home">
-        {% if servicos is defined %}
-        {% for servico in servicos %}
+        {% if produtos is defined %}
+        {% for produto in produtos %}
+        <a href={{produto.url_produto|e}} download="yourproduct" target="_blank"> 
         <div class="item_inv">
-          <img class="anuncio_img"></img>
+          <img class="anuncio_img" src={{produto.url_produto|e}}></img>
           <div class="anuncio_titulo">
-            <h1 name="titulo-item">Exemplo</h1>
+            <h1 name="titulo-item">{{produto.nome_produto|e}}</h1>
           </div>
           <!--anuncio_titulo-->
           <div class="anuncio_user">
-            <h3 name="username-item">feito por: @Sérgio</h3>
+            <h3 name="username-item">feito por: @{{produto.username}}.</h3>
           </div>
           <!--user-->
         </div> <!-- item -->
+        </a>
         {% endfor %}
         {% endif %}
       </section>

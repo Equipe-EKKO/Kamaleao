@@ -558,6 +558,10 @@ select option {
   box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
 }
 
+#md-pr3 .grid_button{
+  margin-left: 0; 
+}
+
 .grid_button{
   display: grid;
   grid-template-columns: 10rem 10rem;

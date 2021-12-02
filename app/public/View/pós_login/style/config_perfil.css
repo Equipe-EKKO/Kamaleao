@@ -88,12 +88,45 @@ h1, h6 {
 }
 
 #conf-excluir .grid_button {
-  width: 100%;
+  display: grid;
+  grid-template-columns: 10rem 10rem;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  position: relative;
+}
+
+.botao:first-of-type {
+  margin-top: 0;
 }
 
 #conf-excluir .botao {
-  display: inline-block;
-  width: 49.2%;
+  /* display: inline-block; */
+  /* width: 49.2%; */
+}
+
+.btmd {
+  position: relative;
+  width: 4rem;
+  height: 3rem;
+  background: rgb(255, 255, 255);
+  float: center;
+  border: 1px solid rgba(54, 54, 54, 1);
+  border-radius: 20px;
+  font-size: 1.5rem; 
+  font-weight: bold;
+  color: rgba(54, 54, 54, 1);
+  margin-top: 5%;
+}
+
+.btmd:hover {
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  background-image: url('/GitHub/Kamaleao/app/public/View/assets/img/botao.jpg');
+  background-size: 100%;
+  border: none;
+  box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
+  transform: 3.0s;
+  transition: 0.3s;
 }
 
 .md-ct-pos, .main-initial {

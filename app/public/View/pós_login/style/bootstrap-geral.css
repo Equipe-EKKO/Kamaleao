@@ -92,16 +92,12 @@ ul{
   padding-right: 5px;
 }
 
-#noti {
+#perf {
   right: 11.2rem;
 }
 
-#perf {
-  right: 6rem;
-}
-
 #menu {
-  right: 0.75rem;
+  right: 6rem;
 }
 
 .perfil {
@@ -405,7 +401,7 @@ hr:last-of-type {
   }
 
   #noti {
-    top: 0;
+    display: none;
   }
 
   #perf {
