@@ -4,7 +4,11 @@ ob_start();
 require_once 'clConexaoBanco.php'; # requere a classe ConexaoBanco usada nos filhos
 require_once (DIR_ROOT . '/GitHub/Kamaleao/config.php'); # requere a Config usada nos filhos
 use Cloudinary\Api\Upload\UploadApi;
-
+use Cloudinary\Tag\ImageTag;
+use Cloudinary\Transformation\Overlay;
+use Cloudinary\Transformation\Source;
+use Cloudinary\Transformation\Transformation;
+use Cloudinary\Transformation\Resize;
 //Classe cuja função é representar um ou mais objetos de Serviço
 class Produto {
     #Atributos
@@ -32,7 +36,7 @@ class Produto {
         $newname = $cd_pedido . "_product_" . $partnewname . "." . $extimagem;    
         $newfullpath = realpath(dirname(__FILE__, 2));
         if (move_uploaded_file($tmpImg, $newfullpath."/image/product/" . $newname)) {
-            if ($objeto = (new UploadApi())->upload($newfullpath."/image/product/" . $newname , ["folder" => "img_product", "use_filename" => true, "unique_filename" => true, "overwrite" => false, "type" => "private"])) {
+            if ($objeto = (new UploadApi())->upload($newfullpath."/image/product/" . $newname , ["folder" => "img_product", "use_filename" => true, "unique_filename" => true, "overwrite" => false])) {
                 $arrayResult = (array) $objeto;
                 if ($this->entregaProduto($cd_pedido, $arrayResult['url'], $arrayResult['public_id'])) {
                     $old = getcwd(); // Save the current directory
@@ -44,7 +48,7 @@ class Produto {
                         chdir($old); // Restore the old working directory
                         return false;
                     }
-                    
+                        
                 } else {
                     (new UploadApi())->destroy($arrayResult['public_id']);
                     $old = getcwd(); // Save the current directory
@@ -56,7 +60,7 @@ class Produto {
                         echo "Erro ao salvar o produto no banco de dados. <br> " . $resposta;
                         return false;
                     }
-                }
+                }   
             } else {    
                 $old = getcwd(); // Save the current directory
                 chdir($newfullpath."/image/product/");
