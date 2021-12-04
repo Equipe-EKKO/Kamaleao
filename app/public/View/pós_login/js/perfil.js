@@ -329,8 +329,13 @@ function abreModal(modal) {
     $("p#respproduto").empty();
     $("p#respproduto").removeClass("sucesso");
     $("p#respproduto").removeClass("erro");
-  } 
-
+  } else if (modal == "pagar-pedido") {
+    $("#md-pr4").removeClass("md-ct-pos").addClass("md-ct");
+    $("#pagar-pedido").removeClass("md-ct-pos").addClass("form_anuncio");
+    $("p#resppagamento").empty();
+    $("p#resppagamento").removeClass("sucesso");
+    $("p#resppagamento").removeClass("erro");
+  }
 }
 
 function fechaModal(modal) {
@@ -390,6 +395,9 @@ function fechaModal(modal) {
   } else if (modal == "entregar-comissao") {
     $("#md-pr4").addClass("md-ct-pos").removeClass("md-ct");
     $("#entregar-comissao").addClass("md-ct-pos").removeClass("form_anuncio");
+  } else if (modal == "pagar-pedido") {
+    $("#md-pr4").addClass("md-ct-pos").removeClass("md-ct");
+    $("#pagar-pedido").addClass("md-ct-pos").removeClass("form_anuncio");
   }
 }
 
@@ -429,6 +437,26 @@ $(document).ready(function () {
       $("span#idProd").text(idSelector);
       $("p#hiddenenvia1").text(idSelector);
       abreModal("entregar-comissao");
+    });
+  });
+
+  $("div.fazPag").click(function (e) {
+
+    e.preventDefault();
+
+    var idSelector = this.id;
+
+    
+    
+    $.post("/GitHub/Kamaleao/app/private/Controller/controllerInfoComissao.php", { idpedido: idSelector }, function (resposta) {
+
+      var a = jQuery.parseJSON(resposta);
+
+      $("p#tituPed").text(a.tituloped);
+      $("p#tituPagServ").text(a.tituloserv);
+      $("textarea#descriPed").text(a.descped);
+      $("span#idPagped").text(idSelector);
+      abreModal("pagar-pedido");
     });
   });
 
@@ -706,11 +734,11 @@ $(document).ready(function () {
           $("p#respproduto").removeAttr("hidden");
           $("p#respproduto").addClass("sucesso");
           $("p#respproduto").empty();
-          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> Seu novo anúncio foi adicionado!</span>";
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> Seu produto foi entregue. Aguarde o pagamento! </span>";
           $(sucesso).appendTo("p#respproduto");
           
           setTimeout(function () {  
-            fechaModal('add');
+            fechaModal('entregar-comissao');
             location.reload(true);
           }, 1000);
 
@@ -736,6 +764,40 @@ $(document).ready(function () {
         $("input.botao").prop("disabled", false);
       }
     });
+  });
+
+  $("button#pagarPedido").click(function (e) {
+    e.preventDefault();
+
+    var idpedpag = $("span#idPagped").text();
+
+    $.get("/GitHub/Kamaleao/app/private/Controller/controllerFazPagamento.php", { pedidopag: idpedpag },
+      function (data) {
+        if (data == true) {
+          $("p#resppagamento").removeClass("sucesso");
+          $("p#resppagamento").removeClass("erro");
+          $("p#resppagamento").removeAttr("hidden");
+          $("p#resppagamento").addClass("sucesso");
+          $("p#resppagamento").empty();
+          var sucesso = "<i class='fas fa-exclamation-triangle'></i> <span> O pagamento foi enviado. Aguarde o produto no inventário! </span>";
+          $(sucesso).appendTo("p#resppagamento");
+          setTimeout(function () {
+            fechaModal('valor-pedido');
+            location.reload(true)
+          }, 1000);
+        } else {
+          $("p#resppagamento").removeClass("sucesso");
+          $("p#resppagamento").removeClass("erro");
+          $("p#resppagamento").removeAttr("hidden");
+          $("p#resppagamento").addClass("erro");
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + data + "</span>";
+          var mes = $("p#resppagamento").html();
+          if (mes.includes("enviado") == false) {
+            $("p#resppagamento").empty();
+            $(erro).appendTo("p#resppagamento");
+          }
+        }
+      });
   });
 });
 

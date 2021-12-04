@@ -562,8 +562,9 @@ select option {
   display: grid;
   grid-template-columns: 10rem 10rem;
   margin-bottom: 1rem;
-  margin-left: 1.5rem;
   padding-top: 1rem;
+  position: relative;
+  margin-left: 25%;
 }
 
 
@@ -1083,7 +1084,7 @@ span#liSub, span#catSub {
   width: 25rem;
 }
 
-#descPed{
+#descPed, #descriPed{
   resize: none;
   padding: 0.5rem;
   width: 20rem;
@@ -1147,13 +1148,13 @@ span#liSub, span#catSub {
   border: none;
   box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
 }
-
+/*
 .grid_button{
   display: block;
   margin: 0 auto;
   margin-bottom: 1rem;
   padding-top: 1rem;
-}
+}*/
 
 .txtarea {
   display: block;

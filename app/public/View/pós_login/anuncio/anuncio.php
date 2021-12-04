@@ -28,6 +28,11 @@ if ($username === "userIndefinido"):
     $_SESSION["error"] = 'Você precisa estar logado para acessar esta página!';
     header("Location: /Github/Kamaleao/app/public/view/pré_login/login/login.php");
 else:
+    if (!isset($_GET['username']) || !isset($username)):
+        ob_end_clean();
+        $_SESSION["error"] = 'Você precisa estar logado para acessar esta página!';
+        header("Location: /Github/Kamaleao/app/public/view/pré_login/login/login.php");
+    endif;
     ob_end_clean();
     if (!empty($_GET)) { #verifica se o formulário está enviando algo ao controller
         $titulo = $_GET['titulo'];

@@ -6,8 +6,6 @@
   text-decoration: none;
 }
 
-
-
 ::-webkit-scrollbar { 
   width: 20px;
 }
@@ -182,12 +180,9 @@ ul ul li:first-of-type {
 } 
 
 .search {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  width: 20rem;
+  width: 23rem;
   height: 1.5rem;
-  display: inline-block;
+  display: flex;
   text-align: center;
   margin-top: 1.2rem;
 }
@@ -200,6 +195,39 @@ ul ul li:first-of-type {
   text-align: left;
   margin-bottom: 10px;
   background-image: transparent;
+}
+
+.botao {
+  flex-shrink: 0;
+  border: 0.5px solid #363636;
+  width: 2.5rem;
+  height: 2.5rem;
+  max-width: 50px;
+  background-color: transparent;
+  border-radius: 100PX;
+  padding: 0.5px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #363636;
+  margin-left: 5px;
+}
+
+.botao:hover {
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  background-image: url("/GitHub/Kamaleao/app/public/View/assets/img/botao.jpg");
+  background-size: 100%;
+  transition: 0.3s;
+  border: none;
+  box-shadow: 6px 8px 15px -3px rgba(0,0,0,0.2);
+}
+
+.search input[name="barrapesquisa"] {
+  padding: 0.5rem;
+  height: 100%;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  width: 95%;
 }
 
 input:focus {

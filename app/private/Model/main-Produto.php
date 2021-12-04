@@ -14,3 +14,14 @@ function recebeProdutoPost(int $cdpedido,string $imgType, $imgtmpName):bool {
         return false;
     }
 }
+
+// Função chamada no controller para entregar o produto
+function recebeProdutoPagamentoPost(int $cdpedido):bool {
+    $produto = new \Produto("", $cdpedido);
+    if ($produto->fazPagamento($cdpedido)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+

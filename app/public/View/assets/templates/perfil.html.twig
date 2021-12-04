@@ -322,10 +322,10 @@
           <h2>Serviço:</h2>
           <p id="titServ"></p>
           </br>
-          <h2>Título do pedido:</h2>
+          <h2>Título do Pedido:</h2>
           <p id="titPed"></p>
           </br>
-          <h2>Descrição do pedido:</h2>
+          <h2>Descrição do Pedido:</h2>
           <textarea id="descPed" readonly></textarea>
           </br>
           <div class="grid_button">
@@ -345,13 +345,13 @@
           <h2>Serviço:</h2>
           <p id="titValServ"></p>
           </br>
-          <h2>Título do pedido:</h2>
+          <h2>Título do Pedido:</h2>
           <p id="titValPed"></p>
           </br>
-          <h2>Valor do pedido:</h2>
+          <h2>Valor do Pedido:</h2>
           <p>R$<span id="valeValPed"></span></p>
           </br>
-          <div class="grid_button">
+          <div class="grid_button" style="margin-left: 1.5rem;">
             <button class="botao" id="aceitaValor">Aceitar</button>
             <button class="botao" id="negaValor">Negar</button>
           </div>
@@ -371,7 +371,7 @@
           <h3>Título do Pedido:</h3>
           <p id="titProd"></p>
           </br>
-          <p>Insira o pedido pronto:</p>
+          <p>Insira o produto do pedido feito:</p>
           <label for="imagemProd" id="escolhaProd">Escolher arquivo</label>
           <input type="file" id="imagemProd" name="prodfile" accept="image/jpeg, image/png">
           </br></br>
@@ -379,25 +379,47 @@
           </br>
           <button class="botao" id="entregaComissao">Enviar</button>
         </div>
-      </div>
-      <!--  fecha modal entregar pedido (depois que o comprador aceitou) -->
-      <!-- abre valor pedido (para o artista aceitar a comissao) -->
-      <div id="md-pr5" class="md-ct-pos">
-        <div class="md-ct-pos" id="valor-comissao">
-          <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('valor-comissao')"></i>
-          <h1>Pedido nº <span id="idPed"></span></h1>
+        <!--  fecha modal entregar pedido (depois que o comprador aceitou) -->
+        <!-- modal pagar pedido (depois que o artista entregou o produto) -->
+        <div class="md-ct-pos" id="pagar-pedido">
+          <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('pagar-pedido')"></i>
+          <h1>Pedido nº <span id="idPagped"></span></h1>
           </br>
-          <p>Insira abaixo o valor que irá cobrar: </p>
-          <p hidden id="result16" class="form-message">
+          <p hidden id="resppagamento" class="form-message">
             <i class="fas fa-exclamation-triangle"></i>
           </p>
-          <p class="cdhidden" id="hiddenenvia1" hidden></p>
-          <input type="number" min="0" max="10000" step=0.01 id="preco-pedido" placeholder="preço" />
-          <button id="enviaValorFinal" class="botao">Enviar</button>
+          <h3>Título do Pedido:</h3>
+          <p id="tituPed"></p>
           </br>
+          <h3>Título do Serviço:</h3>
+          <p id="tituPagServ"></p>
+          </br>
+          <h3>Descrição do Pedido:</h3>
+          <textarea id="descriPed" readonly></textarea>
+          </br></br>
+          <p><strong>Cuidado,</strong> reveja as informações e faça o pagamento para receber o produto.</p>
+          </br>
+          <button class="botao" id="pagarPedido">Pagar</button>
         </div>
-      </div>
-      <!-- fecha valor pedido (para o artista aceitar a comissao) -->
+        <!--  fecha modal pagar pedido (depois que o artista entregou o produto) -->
+        <div id="md-pr5" class="md-ct-pos"> <!-- mdpr-5 -->
+          <!-- abre valor pedido (para o artista aceitar a comissao) -->
+          <div class="md-ct-pos" id="valor-comissao">
+            <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('valor-comissao')"></i>
+            <h1>Pedido nº <span id="idPed"></span></h1>
+            </br>
+            <p>Insira abaixo o valor que irá cobrar: </p>
+            <p hidden id="result16" class="form-message">
+              <i class="fas fa-exclamation-triangle"></i>
+            </p>
+            <p class="cdhidden" id="hiddenenvia1" hidden></p>
+            <input type="number" min="0" max="10000" step=0.01 id="preco-pedido" placeholder="preço" />
+            <button id="enviaValorFinal" class="botao">Enviar</button>
+            </br>
+          </div>
+          <!-- fecha valor pedido (para o artista aceitar a comissao) -->
+        </div> <!-- mdpr-5 -->
+      </div> <!-- fecha md-pr4 -->
       <h1>Comissões recebidas</h1>
       <div class="comissoes_recebidas">
         {% if comissoes is defined %}
@@ -409,18 +431,35 @@
             <p id="atualUsername">Pedido feito por @{{comissao.username}}.</p>
             <p style="color:#00a800">Status: aguardando sua resposta</p>
           </div> <!-- edit_text -->
+
           {% elseif comissao.valorpedido != null and comissao.indicadorcancel == 1 and comissao.indicadorconf == 0 %}
           <div class="edit_text vermelhinho" id="{{comissao.idpedido|e}}">
             <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
             <p id="atualUsername">Pedido feito por <span class="usernome">@{{comissao.username}}</span>.</p>
             <p style="color:#F53446">Status: <span class="statusreal">pedido cancelado</span>.</p>
           </div> <!-- edit_text -->
+
+          {% elseif comissao.url_produto != null and comissao.statuspag == "Pendente" and comissao.valorpedido != null and comissao.indicadorconf == 1 %}
+          <div class="edit_text vermelinho" id="{{comissao.idpedido|e}}">
+            <h3>Pedido recebido em {{comissao.datapedido}} | id: {{comissao.idpedido}}</h3>
+            <p id="atualUsername">pedido feito por <span class="usernome">@{{comissao.username}}</span>.</p>
+            <p style="color:#F53446">Status: <span class="statusreal">aguardando pagamento</span>.</p>
+          </div><!-- edit_text -->
+
+          {% elseif comissao.url_produto != null and comissao.statuspag == "Confirmado" and comissao.valorpedido != null and comissao.indicadorconf == 1 %}
+          <div class="edit_text" id="{{comissao.idpedido|e}}">
+            <h3>Pedido recebido em {{comissao.datapedido}} | id: {{comissao.idpedido}}</h3>
+            <p id="atualUsername">pedido feito por <span class="usernome">@{{comissao.username}}</span>.</p>
+            <p style="color:#00a800">Status: <span class="statusreal">pagamento finalizado</span>.</p>
+          </div><!-- edit_text -->
+
           {% elseif comissao.valorpedido != null and comissao.indicadorconf == 0 %}
           <div class="edit_text vermelhinho" id="{{comissao.idpedido|e}}">
             <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
             <p id="atualUsername">Pedido feito por <span class="usernome">@{{comissao.username}}</span>.</p>
             <p style="color:#F53446">Status: <span class="statusreal">aguardando confirmação do comprador</span>.</p>
           </div> <!-- edit_text -->
+
           {% elseif comissao.valorpedido != null and comissao.indicadorconf == 1 %}
           <div class="edit_text entregaProd" id="{{comissao.idpedido|e}}">
             <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
@@ -465,14 +504,26 @@
             <p style="color:#00a800">Status: aguardando sua confirmação</p>
           </div> <!-- edit_text -->
 
+          {% elseif pedido.url_produto != null and pedido.statuspag == "Pendente" and pedido.valorpedido != null and pedido.indicadorconf == 1 %}
+          <div class="edit_text fazPag" id="{{pedido.idpedido|e}}">
+            <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
+            <p id="atualUsername">pedido feito para <span class="usernome">@{{pedido.username}}</span>.</p>
+            <p style="color:#00a800">Status: <span class="statusreal">aguardando pagamento</span>.</p>
+          </div><!-- edit_text -->
+
+          {% elseif pedido.url_produto != null and pedido.statuspag == "Confirmado" and pedido.valorpedido != null and pedido.indicadorconf == 1 %}
+          <div class="edit_text" id="{{pedido.idpedido|e}}">
+            <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
+            <p id="atualUsername">pedido feito para <span class="usernome">@{{pedido.username}}</span>.</p>
+            <p style="color:#00a800">Status: <span class="statusreal">pagamento finalizado</span>.</p>
+          </div><!-- edit_text -->
+
           {% elseif pedido.valorpedido != null and pedido.indicadorconf == 1 %}
           <div class="edit_text vermelhinho" id="{{pedido.idpedido|e}}">
             <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
             <p id="atualUsername">pedido feito para <span class="usernome">@{{pedido.username}}</span>.</p>
             <p style="color:#F53446">Status: <span class="statusreal">em produção</span>.</p>
-          </div>
-          <!-- edit_text -->
-
+          </div> <!-- edit_text -->
           {% endif %}
         </div> <!-- abrir_pedidos -->
         {% endfor %}
@@ -481,10 +532,9 @@
         {% endif %}
 
       </div> <!--pedidos_realizados-->
+    
+      
     </div> <!-- Fecha Comissao -->
-
-
-
 
     <div class="clearfix"></div>
 

@@ -73,6 +73,39 @@ class Produto {
         }
     }
 
+    public function fazPagamento(string $cd_pedido):bool {
+        /*Conexão com o Banco*/
+        $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL
+
+        /*Para saber o id do produto*/
+        $sql = "SELECT cd_produto FROM `tb_produto` WHERE cd_pedido = :cdped"; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara o select para execução
+        $stmt->bindValue(':cdped', $cd_pedido);
+
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $cd_produto = $stmt->fetchColumn();
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+
+        $sql = "UPDATE tb_pagamento SET cd_status = 2 WHERE cd_produto = :cdprod";  # declara a query do insert na tabela imagem do banco de dados, que só é feito após o insert na tabela serviço
+        $stmt = $banco->prepare($sql); # prepara a query com o insert para a execução
+        /*Substitui os placeholders da query preparada*/
+        $stmt->bindValue(':cdprod', $cd_produto);
+
+        /*Faz um try catch que tentará executar o insert e se não der certo, irá capturar o erro*/
+        try {
+            $stmt->execute(); # executa a query preparada anteriormente
+            return true; # retorna true se o processo dos dois inserts forem verdadeiros
+        } catch (\PDOException $e) {
+            exit("Houve um erro. #Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); #se houver um erro, sai do script e exibe o problema
+            return false;
+        }
+    }
+
     private function entregaProduto(string $cd_pedido, string $URLProdImg, string $publicid):bool {
         /*Conexão com o Banco*/
         $banco = ConexaoBanco::abreConexao(); # chama a função estática da classe ConexaoBanco para abrir a conexão com o servidor MYSQL
