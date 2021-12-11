@@ -100,6 +100,25 @@ class PesquisaAberta {
             return false;
         }
     }
+    public function searchListServ(string $conteudo){
+        $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
+
+        $sql = "SELECT s.cd_serviço as 'codigoserv',s.nm_serviço AS 'titulo', s.vl_serviço AS 'preço', img.cd_url_serviço as 'url_da_imagem',l.nm_username AS 'usernameserv' FROM `tb_serviço` AS s JOIN tb_usuario AS us ON us.cd_usuario = s.cd_usuario JOIN tb_login AS l ON l.cd_login = us.cd_login JOIN tb_imagem AS img ON s.cd_serviço = img.cd_serviço WHERE s.nm_serviço LIKE :conteudo ORDER BY s.dt_criação DESC "; # declara query do select que irá retornar todos os valores da tabela categoria divididos nas colunas id e nome da categoria
+        $stmt = $banco->prepare($sql); # prepara a query para execução
+        /*Substitui os valores de cada placeholder na query preparada*/
+        $stmt->bindValue(':conteudo', "%$conteudo%");
+    
+        /*Try catch que tentará executar o select, guardar num array associado (associa o nome das colunas com os resultados) que o select retornou*/
+        try {
+            $stmt->execute(); # executa a query preparada 
+            $listAll = $stmt->fetchALL(PDO::FETCH_ASSOC);         
+            $resultstr = serialize($listAll); # transforma o array em string
+            return $resultstr; # retorna a string
+        } catch (\PDOException $e) {
+            exit("Houve um erro. Error Num: " . $e->getCode() . ". Mensagem do Erro: " . $e->getMessage()); # retorna erro, caso houver, e sai do script
+            return false;
+        }
+    }
     public function searchComissaoEsp(int $cdpedido):mixed {
         $banco = ConexaoBanco::abreConexao(); # faz a conexão com o banco de dados através do método estático
 

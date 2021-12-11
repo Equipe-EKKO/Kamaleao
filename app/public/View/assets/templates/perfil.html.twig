@@ -408,7 +408,7 @@
           <!-- abre valor pedido (para o artista aceitar a comissao) -->
           <div class="md-ct-pos" id="valor-comissao">
             <i class="fas fa-times-circle" id="iconfecha" onclick="fechaModal('valor-comissao')"></i>
-            <h1>Pedido nº <span id="idPed"></span></h1>
+            <h1>Pedido nº <span id="idPedAceita"></span></h1>
             </br>
             <p>Insira abaixo o valor que irá cobrar: </p>
             <p hidden id="result16" class="form-message">
@@ -427,14 +427,14 @@
         {% if comissoes is defined %}
         {% for comissao in comissoes %}
         <div class="abrir_comissao">
-          {% if comissao.valorpedido == null and comissao.indicadorconf == 0 %}
+          {% if comissao.valorpedido == null and comissao.indicadorcancel == 0 and comissao.indicadorconf == 0 %}
           <div class="edit_text aceitaCon" id="{{comissao.idpedido|e}}">
             <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
             <p id="atualUsername">Pedido feito por @{{comissao.username}}.</p>
             <p style="color:#00a800">Status: aguardando sua resposta</p>
           </div> <!-- edit_text -->
 
-          {% elseif comissao.valorpedido != null and comissao.indicadorcancel == 1 and comissao.indicadorconf == 0 %}
+          {% elseif comissao.indicadorcancel == 1 %}
           <div class="edit_text vermelhinho" id="{{comissao.idpedido|e}}">
             <h3>Pedido recebido em {{comissao.datapedido}} | id:{{comissao.idpedido}}</h3>
             <p id="atualUsername">Pedido feito por <span class="usernome">@{{comissao.username}}</span>.</p>
@@ -484,14 +484,14 @@
         {% if pedidos_feitos is defined %}
         {% for pedido in pedidos_feitos %}
         <div class="abrir_pedidos">
-          {% if pedido.valorpedido == null %}
+          {% if pedido.valorpedido == null and pedido.indicadorcancel == 0 and pedido.indicadorconf == 0 %}
           <div class="edit_text vermelhinho" id="{{pedido.idpedido|e}}">
             <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
             <p id="atualUsername">pedido feito para <span class="usernome">@{{pedido.username}}</span>.</p>
             <p style="color:#F53446">Status: <span class="statusreal">aguardando resposta do artista</span>.</p>
           </div> <!-- edit_text -->
 
-          {% elseif pedido.valorpedido != null and pedido.indicadorcancel == 1 and pedido.indicadorconf == 0 %}
+          {% elseif pedido.indicadorcancel == 1 and pedido.indicadorconf == 0 %}
           <div class="edit_text vermelhinho" id="{{pedido.idpedido|e}}">
             <h3>Pedido realizado dia {{pedido.datapedido}} | id: {{pedido.idpedido}}</h3>
             <p id="atualUsername">pedido feito para <span class="usernome">@{{pedido.username}}</span>.</p>

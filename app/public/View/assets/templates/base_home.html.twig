@@ -32,8 +32,28 @@
             <nav class="header"> <!--<i class='bx bx-bell' id="icon_nav"></i>-->
                <a href="/Github/Kamaleao/app/public/view/acesso_livre/home/home.php"><img class="logo" src="/GitHub/Kamaleao/app/public/View/assets/img/LogoKamaleao1.png" alt="logo"></a>
                <div class="search">
-                  <input type="text" name="barrapesquisa" placeholder="Pesquisar anúncios..." />
-                  <button type="button" class="botao"><i class="fas fa-search"></i></button>
+                  <input type="text" id="pesquisaContent" name="barrapesquisa" placeholder="Pesquisar anúncios..." />
+                  <button type="button" id="pesquisaBut" onclick="fazPesquisa();" class="botao"><i class="fas fa-search"></i></button>
+                  <script>
+                     function fazPesquisa () {
+                        var contentSearch = $('#pesquisaContent').val();
+
+                        window.location.href="/Github/Kamaleao/app/public/view/acesso_livre/search/search?pesquisa=" + contentSearch;
+                        /*
+                        $.post("/GitHub/Kamaleao/app/private/Controller/controllerInfoComissao.php", { idpedido: idSelector }, function (resposta) {
+                    
+                          var a = jQuery.parseJSON(resposta);
+                    
+                          $("p#titPed").text(a.tituloped);
+                          $("p#titServ").text(a.tituloserv);
+                          $("textarea#descPed").text(a.descped);
+                          $("span#idPed").text(idSelector);
+                          $("span#idPedAceita").text(idSelector);
+                          $("p#hiddenenvia1").text(idSelector);
+                          abreModal("modal-pedido");
+                     }*/
+                  }  
+                  </script>
                </div>
                {% block menu %}
                   <div class="mobile-menu">

@@ -417,6 +417,7 @@ $(document).ready(function () {
       $("p#titServ").text(a.tituloserv);
       $("textarea#descPed").text(a.descped);
       $("span#idPed").text(idSelector);
+      $("span#idPedAceita").text(idSelector);
       $("p#hiddenenvia1").text(idSelector);
       abreModal("modal-pedido");
     });
@@ -557,7 +558,7 @@ $(document).ready(function () {
           $("#exclui-anuncio.form-message").removeClass("erro");
           $("#exclui-anuncio.form-message").removeAttr("hidden");
           $("#exclui-anuncio.form-message").addClass("erro");
-          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + resposta + "</span>";
+          var erro = "<i class='fas fa-exclamation-triangle'></i> <span> " + data + "</span>";
           var mes = $("#exclui-anuncio.form-message").html();
           if (mes.includes("excluído") == false) {
             $("#exclui-anuncio.form-message").empty();

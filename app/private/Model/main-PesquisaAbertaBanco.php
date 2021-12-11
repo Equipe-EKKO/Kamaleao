@@ -75,4 +75,18 @@ function pesquisaAllServRec():mixed {
     }
 }
 
+function pesquisaServSearch(string $pesquisa):mixed {
+    $serviço= new \PesquisaAberta("tb_serviço");
+
+    $rsltSelect =  $serviço->searchListServ($pesquisa);
+
+    if ($rsltSelect == false) {
+        echo "Houve um problema na conexão. Perdão.";
+        return "Houve um problema na conexão. Perdão.";
+    } else {
+        $servAllReturn = unserialize($rsltSelect);
+        return $servAllReturn;
+    }
+}
+
 ?>

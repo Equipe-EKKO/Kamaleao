@@ -112,18 +112,3 @@ function recebePedidoValNegaPost(int $cd_pedido):bool {
         return false;
     }
 }
-
-// Função chamada no controller para entregar o produto
-function recebeProdutoPost(int $cdpedido, string $imgType, $imgtmpName):bool {
-    $temp = explode("/", $imgType);
-    $extension = end($temp);
-    $serviço = new \Pedido($titulo, $descriçao, $preçoMedio, $licença, $optionCategoria);
-    $usuario = unserialize($_SESSION['usuario']);
-    $resulUser = unserialize($_SESSION['userinfo']);
-    $usuario->perfil->setServiço($serviço);
-    if ($usuario->perfil->criarServiço($titulo, $resulUser['cd_usuario'], $extension, $imgtmpName)) {
-        return true;
-    } else {
-        return false;
-    }
-}
